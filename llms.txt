@@ -1,0 +1,52 @@
+# Jambo Masai Tours — Luxury Safari Tanzania
+> Award-winning, Maasai-founded luxury safari operator based in Arusha, Tanzania (est. 2010). Specializes in wildlife safaris, Kilimanjaro trekking, Zanzibar beach holidays, cultural tours, and custom East Africa itineraries. Rated 4.9/5 with 150+ reviews.
+
+## Core pages
+- [Home](https://jambomasaitours.com/): Hero video/slideshow, featured tours, testimonials, gallery preview, latest blog posts
+- [Safari Tours](https://jambomasaitours.com/tours): All tour listings with filtering by type, destination, price, duration, rating
+- [Destinations](https://jambomasaitours.com/destinations): Serengeti, Ngorongoro, Kilimanjaro, Zanzibar, Tarangire, Maasai Heartland — with wildlife, activities, seasonal calendars
+- [About Us](https://jambomasaitours.com/about): Brand story, founder (Raphael Salewa), stats, values, team
+- [Gallery](https://jambomasaitours.com/gallery): Photo gallery with categories — wildlife, landscapes, culture, safari-life, zanzibar, birds
+- [Blog](https://jambomasaitours.com/blog): Safari tips, wildlife guides, travel guides, conservation stories
+- [FAQ](https://jambomasaitours.com/faq): Frequently asked safari questions
+- [Mountain Trekking](https://jambomasaitours.com/mountain-trekking): Kilimanjaro and mountain trekking information
+- [Contact](https://jambomasaitours.com/contact): Contact form, location, phone, email, WhatsApp
+- [Book a Safari](https://jambomasaitours.com/booking): Multi-step booking form — select tour, personal details, special requests
+
+## Tours
+- [Serengeti Great Migration Safari](https://jambomasaitours.com/tour/serengeti-great-migration-safari): 7 Days / 6 Nights — $4,200 — Witness 1.5M wildebeest crossings, Big Five sightings
+- [Ngorongoro Crater Expedition](https://jambomasaitours.com/tour/ngorongoro-crater-expedition): 4 Days / 3 Nights — $3,100 — UNESCO caldera, dense wildlife, black rhinos
+- [Kilimanjaro Summit Trek](https://jambomasaitours.com/tour/kilimanjaro-summit-trek): 8 Days / 7 Nights — $2,850 — Machame Route, Uhuru Peak (5,895m)
+- [Zanzibar Beach & Spice Holiday](https://jambomasaitours.com/tour/zanzibar-beach-spice-holiday): 5 Days / 4 Nights — $1,900 — Stone Town, spice farms, snorkeling, dhow cruise
+- [Maasai Cultural Immersion Tour](https://jambomasaitours.com/tour/maasai-cultural-immersion-tour): 3 Days / 2 Nights — $1,650 — Boma stay, warrior training, beadwork, cattle walk
+- [Tarangire Elephant Safari](https://jambomasaitours.com/tour/tarangire-elephant-safari): 4 Days / 3 Nights — $2,400 — Africa's highest elephant concentration, baobab trees
+
+## Tour types
+Wildlife Safari, Great Migration Safari, Trekking, Beach Holiday, Cultural Tour, Honeymoon Safari, Family Safari, Balloon Safari, Walking Safari, Bird Watching, Photography Safari, Adventure Tour, Camping Safari, Luxury Safari, Budget Safari, Group Safari, Day Trip
+
+## Key features
+- **Booking system**: Multi-step form with CSRF protection, email notifications (admin + customer), status management (pending → confirmed → completed → cancelled)
+- **Hero system**: Video background + configurable slideshow with CTAs, managed via admin panel
+- **SEO**: JSON-LD structured data (TravelAgency, TouristTrip, BlogPosting, FAQPage, BreadcrumbList), OG tags, Twitter Cards, per-page meta, canonical URLs, sitemap.xml
+- **Email**: PHPMailer SMTP with 4 branded templates (booking admin, booking customer, contact admin, modal enquiry)
+- **Live chat**: Tawk.to integration (configurable widget ID)
+- **Analytics**: Google Analytics 4 (configurable measurement ID)
+- **Security**: CSRF tokens, input sanitization, prepared statements, session auth with 1hr timeout, security headers (CSP, HSTS, X-Frame-Options)
+- **WhatsApp**: Floating button + direct enquiry links throughout
+
+## Contact
+- **Phone**: +255 659 667 271
+- **Email**: info@jambomasaitours.com
+- **WhatsApp**: +255 659 667 271
+- **Location**: Arusha, Tanzania
+- **Hours**: Mon–Sun, 7:00 AM – 8:00 PM
+
+## Tech stack
+- **Backend**: PHP 8, MySQL (utf8mb4), PDO
+- **Frontend**: Tailwind CSS (CDN), Font Awesome 6, Google Fonts, AOS.js
+- **Email**: PHPMailer
+- **Server**: Apache with mod_rewrite
+- **Admin**: Custom admin panel with CRUD for tours, bookings, blog, gallery, destinations, hero settings, site settings
+
+## Sitemap
+- [XML Sitemap](https://jambomasaitours.com/sitemap.xml)

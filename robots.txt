@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /database/
+Disallow: /config/
+Disallow: /ajax/
+
+Sitemap: https://jambomasaitours.com/sitemap.xml

@@ -1,0 +1,27 @@
+# ===== Siri / Config (HAZIENDI GitHub) =====
+config/config.php
+
+# ===== Backups & Archives =====
+*.zip
+*.tar
+*.tar.gz
+*.rar
+
+# ===== Logs & Cache =====
+error_log
+*.log
+Iscache/
+*.cache
+
+# ===== Faili za watumiaji (zinabadilika kila wakati) =====
+uploads/*
+!uploads/.gitkeep
+
+# ===== Mfumo / OS =====
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# ===== Vendor (kama unatumia Composer) =====
+# Ondoa # hapa chini kama hutaki vendor/ iende GitHub:
+# vendor/

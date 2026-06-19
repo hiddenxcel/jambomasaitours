@@ -1,0 +1,95 @@
+Options -Indexes
+ServerSignature Off
+
+# ─── URL Rewriting ──────────────────────────────────
+RewriteEngine On
+
+# HTTPS redirect
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP_HOST} !^localhost [NC]
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+# Admin: internally rewrite clean URLs back to .php (fixes cached 301s)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^admin/([a-zA-Z0-9_-]+)/?$ admin/$1.php [L,QSA]
+
+# Redirect .php → clean URLs for PUBLIC pages ONLY
+RewriteRule ^tours\.php$              /tours              [R=301,L]
+RewriteRule ^about\.php$              /about              [R=301,L]
+RewriteRule ^contact\.php$            /contact            [R=301,L]
+RewriteRule ^gallery\.php$            /gallery            [R=301,L]
+RewriteRule ^blog\.php$               /blog               [R=301,L]
+RewriteRule ^booking\.php$            /booking            [R=301,L]
+RewriteRule ^faq\.php$                /faq                [R=301,L]
+RewriteRule ^destinations\.php$       /destinations       [R=301,L]
+RewriteRule ^mountain-trekking\.php$  /mountain-trekking  [R=301,L]
+
+# Dynamic sitemap
+RewriteRule ^sitemap\.xml$ sitemap.php [L]
+
+# Clean URLs — static pages
+RewriteRule ^tours/?$               tours.php              [L]
+RewriteRule ^about/?$               about.php              [L]
+RewriteRule ^contact/?$             contact.php            [L]
+RewriteRule ^gallery/?$             gallery.php            [L]
+RewriteRule ^blog/?$                blog.php               [L]
+RewriteRule ^booking/?$             booking.php            [L]
+RewriteRule ^faq/?$                 faq.php                [L]
+RewriteRule ^destinations/?$        destinations.php        [L]
+RewriteRule ^mountain-trekking/?$   mountain-trekking.php  [L]
+
+# Clean URLs — dynamic pages
+RewriteRule ^tour/([a-z0-9-]+)/?$          tour-detail.php?slug=$1         [L,QSA]
+RewriteRule ^blog/([a-z0-9-]+)/?$          blog-single.php?slug=$1         [L,QSA]
+RewriteRule ^destination/([a-z0-9-]+)/?$   destination-detail.php?slug=$1  [L,QSA]
+
+# ─── Custom error pages ─────────────────────────────
+ErrorDocument 404 /index.php
+ErrorDocument 403 /index.php
+
+# ─── Cache Control ──────────────────────────────────
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/jpeg             "access plus 1 month"
+  ExpiresByType image/png              "access plus 1 month"
+  ExpiresByType image/webp             "access plus 1 month"
+  ExpiresByType image/gif              "access plus 1 month"
+  ExpiresByType image/svg+xml          "access plus 1 month"
+  ExpiresByType text/css               "access plus 1 week"
+  ExpiresByType application/javascript "access plus 1 week"
+  ExpiresByType application/x-font-woff2 "access plus 1 year"
+</IfModule>
+
+# ─── Gzip Compression ───────────────────────────────
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html
+  AddOutputFilterByType DEFLATE text/css
+  AddOutputFilterByType DEFLATE application/javascript
+  AddOutputFilterByType DEFLATE application/json
+  AddOutputFilterByType DEFLATE image/svg+xml
+  AddOutputFilterByType DEFLATE text/xml
+</IfModule>
+
+# ─── Security Headers ───────────────────────────────
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options  "nosniff"
+  Header set X-Frame-Options         "SAMEORIGIN"
+  Header set X-XSS-Protection        "1; mode=block"
+  Header set Referrer-Policy         "strict-origin-when-cross-origin"
+  Header unset X-Powered-By
+</IfModule>
+
+# ─── Block sensitive files ───────────────────────────
+<FilesMatch "^\.">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
+
+<FilesMatch "\.(sql|log|env|ini|bak)$">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
+
+php_flag display_errors Off
+php_flag log_errors On
