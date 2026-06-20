@@ -214,7 +214,7 @@ if (empty($testimonials)) {
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&family=Montserrat:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -852,7 +852,7 @@ try {
         </div>
 
         <!-- Heading — scroll-driven word reveal -->
-        <h2 class="font-heading leading-[1.08] mb-2 scroll-reveal" style="font-size:clamp(2rem,4vw,3.1rem)">
+        <h2 class="leading-[1.12] mb-2 scroll-reveal" style="font-family:'Poppins',sans-serif;font-weight:700;font-size:clamp(2rem,4vw,3.1rem)">
           Tanzania's Most Trusted Safari Experience
         </h2>
 
@@ -1423,10 +1423,10 @@ try {
   .ftr-link:hover{color:#c17a3a;transform:translateX(4px)}
   .ftr-social{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;transition:all .3s;text-decoration:none;flex-shrink:0}
   .ftr-social:hover{transform:translateY(-3px) scale(1.08)}
-  .trust-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:.5rem .75rem;transition:all .3s;cursor:default}
-  .trust-badge:hover{border-color:rgba(160,94,34,.25);background:rgba(160,94,34,.04)}
-  .pay-icon{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:.4rem .65rem;display:flex;align-items:center;justify-content:center;transition:all .25s}
-  .pay-icon:hover{border-color:rgba(255,255,255,.18);transform:scale(1.08)}
+  .trust-badge{display:inline-flex;align-items:center;gap:.55rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:.55rem .8rem;transition:all .3s;cursor:default}
+  .trust-badge:hover{border-color:rgba(160,94,34,.4);background:rgba(160,94,34,.08);transform:translateY(-2px);box-shadow:0 8px 22px rgba(0,0,0,.25)}
+  .pay-icon{background:rgba(255,255,255,.92);border:1px solid rgba(255,255,255,.12);border-radius:9px;padding:.4rem .65rem;display:flex;align-items:center;justify-content:center;transition:all .25s;min-width:46px}
+  .pay-icon:hover{transform:translateY(-2px) scale(1.05);box-shadow:0 8px 20px rgba(0,0,0,.3)}
   .safari-mini{position:relative;border-radius:16px;overflow:hidden;height:130px;border:1px solid rgba(255,255,255,.06);transition:all .35s;text-decoration:none;display:block}
   .safari-mini:hover{transform:translateY(-4px);border-color:rgba(160,94,34,.2);box-shadow:0 12px 32px rgba(0,0,0,.5)}
   .safari-mini img{width:100%;height:100%;object-fit:cover;opacity:.5;transition:transform .6s,opacity .3s}
@@ -1435,6 +1435,22 @@ try {
   .nl-input:focus{border-color:rgba(160,94,34,.5);box-shadow:0 0 0 3px rgba(160,94,34,.1)}
   .nl-input::placeholder{color:rgba(255,255,255,.25)}
   .footer-glow{position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:600px;height:160px;background:radial-gradient(ellipse,rgba(160,94,34,.07) 0%,transparent 70%);pointer-events:none}
+  /* Footer bottom bar */
+  .ftr-bottom-inner{width:100%;max-width:1280px;margin:0 auto;padding:.95rem 2rem;box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+  .ftr-legal{display:flex;align-items:center;gap:1.25rem;flex-wrap:wrap;order:2}
+  .ftr-legal a{font-family:'Montserrat',sans-serif;font-size:.68rem;color:rgba(255,255,255,.3);text-decoration:none;transition:color .2s;white-space:nowrap}
+  .ftr-legal a:hover{color:#c17a3a}
+  .ftr-copy{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;font-family:'Montserrat',sans-serif;font-size:.7rem;color:rgba(255,255,255,.3);order:1}
+  .ftr-dot{color:rgba(255,255,255,.15)}
+  .ftr-totop{display:inline-flex;align-items:center;gap:.4rem;font-family:'Montserrat',sans-serif;font-size:.68rem;color:rgba(255,255,255,.35);background:rgba(160,94,34,.1);border:1px solid rgba(160,94,34,.2);border-radius:999px;padding:.45rem 1rem;cursor:pointer;transition:all .25s;order:3;white-space:nowrap}
+  .ftr-totop:hover{color:#fff;background:rgba(160,94,34,.25);border-color:rgba(160,94,34,.4)}
+  @media(max-width:767px){
+    .ftr-bottom-inner{flex-direction:column;text-align:center;gap:1.1rem;padding:1.4rem 1.25rem}
+    .ftr-legal{justify-content:center;gap:.5rem 1.1rem;order:1}
+    .ftr-copy{flex-direction:column;gap:.35rem;order:2}
+    .ftr-copy .ftr-dot{display:none}
+    .ftr-totop{order:3;width:100%;max-width:240px;justify-content:center}
+  }
 </style>
 
 <footer id="site-footer" class="relative border-t border-white/[.06] pt-20 pb-0 overflow-hidden">
@@ -1647,7 +1663,7 @@ try {
 
   <!-- -- Trust & Payments -- -->
   <div style="width:100%;padding:0 2rem 0;margin-bottom:2.5rem">
-    <div style="background:rgba(14,14,14,.7);border-top:1px solid rgba(255,255,255,.07);border-bottom:1px solid rgba(255,255,255,.07);padding:1.5rem 0">
+    <div style="background:linear-gradient(180deg,rgba(28,44,38,.6),rgba(20,33,28,.6));border-top:1px solid rgba(160,94,34,.12);border-bottom:1px solid rgba(160,94,34,.12);border-radius:16px;padding:1.5rem;margin-top:1rem">
       <div class="grid md:grid-cols-3 gap-6 items-center">
         <!-- Certifications -->
         <div>
@@ -1673,17 +1689,17 @@ try {
           <p style="font-family:'Montserrat',sans-serif;font-size:.58rem;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:rgba(255,255,255,.25);margin-bottom:.65rem">We Accept</p>
           <div style="display:flex;flex-wrap:wrap;gap:.4rem">
             <?php foreach ([
-              ['fab fa-cc-visa',       'text-blue-300',   ''],
-              ['fab fa-cc-mastercard', 'text-red-300',    ''],
-              ['fab fa-cc-amex',       'text-blue-400',   ''],
-              ['fab fa-cc-paypal',     'text-blue-300',   ''],
-              ['fab fa-cc-stripe',     'text-purple-300', ''],
+              ['fab fa-cc-visa',       '#1a1f71'],
+              ['fab fa-cc-mastercard', '#eb001b'],
+              ['fab fa-cc-amex',       '#2e77bc'],
+              ['fab fa-cc-paypal',     '#003087'],
+              ['fab fa-cc-stripe',     '#635bff'],
             ] as $p): ?>
-            <div class="pay-icon"><i class="<?= $p[0] ?> <?= $p[1] ?>" style="font-size:1.3rem"></i></div>
+            <div class="pay-icon"><i class="<?= $p[0] ?>" style="font-size:1.3rem;color:<?= $p[1] ?>"></i></div>
             <?php endforeach; ?>
-            <div class="pay-icon" style="background:rgba(160,94,34,.06);border-color:rgba(160,94,34,.15)">
-              <i class="fas fa-mobile-alt" style="color:#a05e22;font-size:.78rem;margin-right:.25rem"></i>
-              <span style="font-family:'Montserrat',sans-serif;font-size:.62rem;font-weight:700;color:#a05e22">M-Pesa</span>
+            <div class="pay-icon" style="background:#a05e22;border-color:#a05e22">
+              <i class="fas fa-mobile-alt" style="color:#fff;font-size:.78rem;margin-right:.25rem"></i>
+              <span style="font-family:'Montserrat',sans-serif;font-size:.62rem;font-weight:700;color:#fff">M-Pesa</span>
             </div>
           </div>
         </div>
@@ -1711,25 +1727,26 @@ try {
   </div>
 
   <!-- -- Bottom bar -- -->
-  <div style="border-top:1px solid rgba(255,255,255,.06);background:rgba(0,0,0,.3)">
-    <div style="width:100%;padding:.85rem 2rem;box-sizing:border-box">
-      <div class="flex flex-col md:flex-row items-center justify-between gap-4">
-        <div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap">
-          <span style="font-family:'Montserrat',sans-serif;font-size:.7rem;color:rgba(255,255,255,.3)">&copy; <?= date('Y') ?> <?= e($siteName) ?>. All rights reserved.</span>
-          <span style="color:rgba(255,255,255,.12);display:none" class="md:inline">·</span>
-          <span style="font-family:'Montserrat',sans-serif;font-size:.7rem;color:rgba(255,255,255,.2)" class="hidden md:inline">Made with <i class="fas fa-heart" style="color:rgba(239,68,68,.45);font-size:.6rem"></i> in Tanzania</span>
-          <span style="color:rgba(255,255,255,.12);display:none" class="md:inline">·</span>
-          <span style="font-family:'Montserrat',sans-serif;font-size:.7rem;color:rgba(255,255,255,.2)">Built by <span style="color:#a05e22">hiddenxcel</span></span>
-        </div>
-        <div style="display:flex;align-items:center;gap:1.25rem;flex-wrap:wrap">
-          <?php foreach (['Privacy Policy','Terms of Service','Cookie Policy','Sitemap'] as $l): ?>
-          <a href="#" style="font-family:'Montserrat',sans-serif;font-size:.68rem;color:rgba(255,255,255,.25);text-decoration:none;transition:color .2s" onmouseover="this.style.color='rgba(255,255,255,.55)'" onmouseout="this.style.color='rgba(255,255,255,.25)'"><?= $l ?></a>
-          <?php endforeach; ?>
-        </div>
-        <button onclick="window.scrollTo({top:0,behavior:'smooth'})" style="display:flex;align-items:center;gap:.4rem;font-family:'Montserrat',sans-serif;font-size:.68rem;color:rgba(255,255,255,.3);background:none;border:none;cursor:pointer;transition:color .2s" onmouseover="this.style.color='#a05e22'" onmouseout="this.style.color='rgba(255,255,255,.3)'">
-          Back to top <i class="fas fa-arrow-up" style="font-size:.55rem"></i>
-        </button>
+  <div class="ftr-bottom" style="border-top:1px solid rgba(160,94,34,.15);background:linear-gradient(180deg,rgba(20,33,28,.5),rgba(28,44,38,.8))">
+    <div class="ftr-bottom-inner">
+      <!-- Links -->
+      <div class="ftr-legal">
+        <?php foreach (['Privacy Policy','Terms of Service','Cookie Policy','Sitemap'] as $l): ?>
+        <a href="#"><?= $l ?></a>
+        <?php endforeach; ?>
       </div>
+      <!-- Copyright -->
+      <div class="ftr-copy">
+        <span>&copy; <?= date('Y') ?> <?= e($siteName) ?>. All rights reserved.</span>
+        <span class="ftr-dot">·</span>
+        <span>Made with <i class="fas fa-heart" style="color:rgba(239,68,68,.55);font-size:.6rem"></i> in Tanzania</span>
+        <span class="ftr-dot">·</span>
+        <span>Built by <span style="color:#c17a3a">hiddenxcel</span></span>
+      </div>
+      <!-- Back to top -->
+      <button class="ftr-totop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+        Back to top <i class="fas fa-arrow-up" style="font-size:.55rem"></i>
+      </button>
     </div>
   </div>
 </footer>

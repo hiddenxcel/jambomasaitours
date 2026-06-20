@@ -304,9 +304,9 @@ $_name2      = $_nameParts[1] ?? 'Masai';
       <!-- Mobile hamburger -->
       <button id="p-mob-toggle" aria-label="Menu"
               style="width:42px;height:42px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;cursor:pointer">
-        <span style="width:18px;height:1.5px;background:#fff;display:block;transition:all .3s" id="p-tog-1"></span>
-        <span style="width:18px;height:1.5px;background:#fff;display:block;transition:all .3s" id="p-tog-2"></span>
-        <span style="width:14px;height:1.5px;background:#fff;display:block;transition:all .3s" id="p-tog-3"></span>
+        <span style="width:20px;height:2px;border-radius:2px;background:#fff;display:block;transition:all .3s" id="p-tog-1"></span>
+        <span style="width:20px;height:2px;border-radius:2px;background:#fff;display:block;transition:all .3s" id="p-tog-2"></span>
+        <span style="width:20px;height:2px;border-radius:2px;background:#fff;display:block;transition:all .3s" id="p-tog-3"></span>
       </button>
     </div>
   </div>
@@ -420,6 +420,8 @@ $_name2      = $_nameParts[1] ?? 'Masai';
 }
 @media(max-width:1023px){
   .hidden-mobile{display:none}
+  /* On mobile: when scrolled (pill), show only the logo/icon — hide the brand name */
+  #p-nav.solid #p-logo-text{display:none !important}
 }
 </style>
 

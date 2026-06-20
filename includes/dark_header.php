@@ -175,6 +175,13 @@ try {
     .section-light .border-white\/10,.section-light .border-white\/\[\.1\],.section-light .border-white\/5{border-color:rgba(44,70,61,.14) !important}
     .section-light .tour-card{background:#faf3e6;border-color:rgba(44,70,61,.1)}
     .section-light .section-tag{background:rgba(160,94,34,.14);border-color:rgba(160,94,34,.35);color:#7d4817}
+    /* Form fields inside a cream section → readable on light bg */
+    .section-light .f-label{color:#3b5c51 !important}
+    .section-light .f-label span{color:#c0392b !important}
+    .section-light .f-input,.section-light .f-select,.section-light .f-textarea{background:#fffdf8 !important;border:1px solid rgba(44,70,61,.18) !important;color:#233a32 !important}
+    .section-light .f-input::placeholder,.section-light .f-textarea::placeholder{color:rgba(44,70,61,.45) !important}
+    .section-light .f-input:focus,.section-light .f-select:focus,.section-light .f-textarea:focus{border-color:rgba(160,94,34,.55) !important;background:#fff !important}
+    .section-light .f-select option{background:#fffdf8;color:#233a32}
     <?= $extraCss ?? '' ?>
   </style>
   <?= $headExtra ?? '' ?>

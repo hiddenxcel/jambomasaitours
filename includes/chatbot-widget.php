@@ -67,6 +67,8 @@ $_jmtChatCsrf = generateCsrfToken();
 #jmt-chat *{box-sizing:border-box}
 /* lift the back-to-top button so it doesn't overlap the chat toggler */
 #back-top{bottom:5.5rem !important}
+/* hide back-to-top on mobile */
+@media(max-width:767px){#back-top{display:none !important}}
 
 #jmt-chat-toggler{
   position:fixed;bottom:1.5rem;right:1.5rem;z-index:9997;width:56px;height:56px;border-radius:50%;
