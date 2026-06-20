@@ -1,0 +1,20 @@
+# Uploads are user-supplied content — NEVER execute code here.
+# This is the single most important defense against an uploaded web shell.
+
+# 1) Refuse to serve / execute any script-like file even if it slips in.
+#    Denying access means Apache will not hand it to the PHP handler at all.
+<FilesMatch "\.(php|php3|php4|php5|php7|php8|phtml|phar|pht|cgi|pl|py|asp|aspx|sh|exe|htaccess)$">
+  Require all denied
+</FilesMatch>
+
+# 2) Stop the PHP handler from running .php here (works without mod_php flags)
+<IfModule mod_mime.c>
+  RemoveHandler .php .phtml .php3 .php4 .php5 .php7 .php8 .phar .pht
+  RemoveType    .php .phtml .php3 .php4 .php5 .php7 .php8 .phar .pht
+  AddType text/plain .php .phtml .php3 .php4 .php5 .php7 .php8 .phar .pht
+</IfModule>
+
+# 3) Never let the browser sniff a file into HTML/script
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+</IfModule>

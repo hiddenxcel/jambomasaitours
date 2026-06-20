@@ -23,7 +23,7 @@ $_jmtChatCsrf = generateCsrfToken();
       <div class="jmt-chat-hinfo">
         <div class="jmt-chat-logo"><i class="fas fa-robot"></i></div>
         <div>
-          <h3>Safari Assistant</h3>
+          <h3>Jambo Masai Assistant</h3>
           <span class="jmt-chat-status"><span class="dot"></span> Online</span>
         </div>
       </div>
@@ -38,7 +38,7 @@ $_jmtChatCsrf = generateCsrfToken();
       <div class="jmt-msg bot">
         <div class="jmt-avatar"><i class="fas fa-robot"></i></div>
         <div class="jmt-bubble">
-          <span class="jmt-bot-name">Safari Assistant</span>
+          <span class="jmt-bot-name">Jambo Masai Assistant</span>
           <div class="jmt-text">Jambo! 👋 Welcome to <strong>Jambo Masai Tours</strong>. I can help you plan a safari, suggest tours, or answer questions about Tanzania. How can I help?</div>
         </div>
       </div>
@@ -183,7 +183,7 @@ body.jmt-chat-open .jmt-chat-popup{opacity:1;transform:translateY(0) scale(1);po
   function addThinking(){
     const d = document.createElement('div');
     d.className = 'jmt-msg bot thinking';
-    d.innerHTML = '<div class="jmt-avatar"><i class="fas fa-robot"></i></div><div class="jmt-bubble"><span class="jmt-bot-name">Safari Assistant</span><div class="jmt-text"><span class="jmt-dot"></span><span class="jmt-dot"></span><span class="jmt-dot"></span></div></div>';
+    d.innerHTML = '<div class="jmt-avatar"><i class="fas fa-robot"></i></div><div class="jmt-bubble"><span class="jmt-bot-name">Jambo Masai Assistant</span><div class="jmt-text"><span class="jmt-dot"></span><span class="jmt-dot"></span><span class="jmt-dot"></span></div></div>';
     chatBody.appendChild(d); scrollDown();
     return d;
   }

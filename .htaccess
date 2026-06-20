@@ -37,9 +37,20 @@ RewriteRule ^destination/([a-z0-9-]+)/?$   destination-detail.php?slug=$1  [L,QS
   ExpiresByType image/webp             "access plus 1 month"
   ExpiresByType image/gif              "access plus 1 month"
   ExpiresByType image/svg+xml          "access plus 1 month"
-  ExpiresByType text/css               "access plus 1 week"
-  ExpiresByType application/javascript "access plus 1 week"
+  ExpiresByType text/css               "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
   ExpiresByType application/x-font-woff2 "access plus 1 year"
+  ExpiresByType font/woff2             "access plus 1 year"
+  ExpiresByType application/font-woff  "access plus 1 year"
+  ExpiresByType application/x-font-ttf "access plus 1 year"
+  ExpiresByType image/x-icon           "access plus 1 year"
+</IfModule>
+
+# Long-cache static assets via Cache-Control too (CDN/browser friendly)
+<IfModule mod_headers.c>
+  <FilesMatch "\.(css|js|jpg|jpeg|png|webp|gif|svg|ico|woff2?|ttf)$">
+    Header set Cache-Control "public, max-age=2592000"
+  </FilesMatch>
 </IfModule>
 
 # Gzip
@@ -59,18 +70,28 @@ RewriteRule ^destination/([a-z0-9-]+)/?$   destination-detail.php?slug=$1  [L,QS
   Header set X-XSS-Protection        "1; mode=block"
   Header set Referrer-Policy         "strict-origin-when-cross-origin"
   Header unset X-Powered-By
+  Header unset Server
+  # HSTS — only sent over HTTPS connections (safe to leave on; ignored on http)
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains" "expr=%{HTTPS} == 'on'"
 </IfModule>
 
-# Block sensitive files
+# Block sensitive files (dotfiles: .git, .env, .htaccess, etc.)
 <FilesMatch "^\.">
-  Order allow,deny
-  Deny from all
+  Require all denied
 </FilesMatch>
 
-<FilesMatch "\.(sql|log|env|ini|bak)$">
-  Order allow,deny
-  Deny from all
+# Block the bare cPanel error_log (no extension) and common secret/config files
+<FilesMatch "(^error_log$|\.(sql|log|env|ini|bak|sh|md|lock|dist|example|json)$)">
+  Require all denied
 </FilesMatch>
+
+# Allow manifest.json / browserconfig back through (needed by the PWA)
+<FilesMatch "^(manifest|browserconfig)\.json$">
+  Require all granted
+</FilesMatch>
+
+# Block the entire .git directory if it ever gets uploaded
+RedirectMatch 404 /\.git
 
 php_flag display_errors Off
 php_flag log_errors On

@@ -125,7 +125,7 @@ $_name2      = $_nameParts[1] ?? 'Masai';
 #pnav-s-input:focus{border-color:rgba(160,94,34,.5)}
 #pnav-s-input::placeholder{color:rgba(255,255,255,.3)}
 /* Mobile drawer with enhanced entrance */
-#p-mob-menu{position:fixed;top:0;right:0;bottom:0;width:min(320px,88vw);background:#0e0e0e;z-index:1001;transform:translateX(100%);transition:transform .42s cubic-bezier(.22,1,.36,1);border-left:1px solid rgba(255,255,255,.08);overflow-y:auto;box-shadow:-8px 0 40px rgba(0,0,0,.5)}
+#p-mob-menu{position:fixed;top:0;right:0;bottom:0;width:min(320px,88vw);background:linear-gradient(180deg,#23362f,#1c2c26);z-index:1001;transform:translateX(100%);transition:transform .42s cubic-bezier(.22,1,.36,1);border-left:1px solid rgba(160,94,34,.18);overflow-y:auto;box-shadow:-8px 0 40px rgba(0,0,0,.5)}
 #p-mob-menu.open{transform:translateX(0)}
 /* Staggered link entrance on drawer open */
 #p-mob-menu.open .pmob-link{opacity:1;transform:translateX(0)}
@@ -144,8 +144,8 @@ $_name2      = $_nameParts[1] ?? 'Masai';
 .mob-footer-section{opacity:0;transform:translateY(8px);transition:opacity .35s cubic-bezier(.22,1,.36,1),transform .35s cubic-bezier(.22,1,.36,1);transition-delay:300ms}
 #p-mob-bd{position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.65);display:none;opacity:0;transition:opacity .35s ease}
 #p-mob-bd.show{display:block;opacity:1}
-.pmob-link{display:flex;align-items:center;justify-content:space-between;padding:.82rem 1rem;border-radius:12px;font-family:'Montserrat',sans-serif;font-size:.82rem;font-weight:500;text-decoration:none;transition:background .2s;color:rgba(255,255,255,.6);margin-bottom:.12rem}
-.pmob-link:hover{background:rgba(255,255,255,.05);color:#fff}
+.pmob-link{display:flex;align-items:center;justify-content:space-between;padding:.82rem 1rem;border-radius:12px;font-family:'Montserrat',sans-serif;font-size:.82rem;font-weight:500;text-decoration:none;transition:background .2s,color .2s;color:rgba(255,255,255,.7);margin-bottom:.18rem}
+.pmob-link:hover{background:rgba(160,94,34,.12);color:#fff}
 .pmob-link.act{background:rgba(160,94,34,.1);color:#a05e22}
 </style>
 
@@ -340,7 +340,7 @@ $_name2      = $_nameParts[1] ?? 'Masai';
 <div id="p-mob-menu" role="dialog" aria-label="Navigation">
   <!-- Drag handle indicator -->
   <div style="position:absolute;top:8px;left:50%;transform:translateX(-50%);z-index:3;width:32px;height:3.5px;border-radius:3px;background:rgba(255,255,255,.12);pointer-events:none"></div>
-  <div style="padding:1.25rem;border-bottom:1px solid rgba(255,255,255,.07);display:flex;align-items:center;justify-content:space-between;background:#0e0e0e;position:sticky;top:0;z-index:2">
+  <div style="padding:1.25rem;border-bottom:1px solid rgba(160,94,34,.18);display:flex;align-items:center;justify-content:space-between;background:#23362f;position:sticky;top:0;z-index:2">
     <a href="<?= url() ?>" style="display:flex;align-items:center;gap:.65rem;text-decoration:none">
       <img src="<?= e($logoUrl ?: (SITE_URL . '/uploads/logo-husika.png')) ?>" alt="<?= e($siteName) ?>"
            style="height:38px;width:auto;max-width:160px;object-fit:contain;display:block">

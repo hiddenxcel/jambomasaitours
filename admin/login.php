@@ -10,8 +10,18 @@ if (!empty($_SESSION['admin_id'])) { redirect(url('admin/index.php')); }
 $error     = '';
 $csrfToken = generateCsrfToken();
 
+// â”€â”€â”€ Brute-force lockout: 5 failed attempts â†’ 15-minute cool-off â”€â”€â”€
+$LOCK_MAX     = 5;
+$LOCK_WINDOW  = 900; // 15 minutes
+$lp = $_SESSION['login_attempts'] ?? ['count' => 0, 'first' => time()];
+if (time() - $lp['first'] > $LOCK_WINDOW) { $lp = ['count' => 0, 'first' => time()]; } // window reset
+$lockedOut = $lp['count'] >= $LOCK_MAX;
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  if (!validateCsrfToken($_POST[CSRF_TOKEN_NAME] ?? '')) {
+  if ($lockedOut) {
+    $wait  = ceil(($LOCK_WINDOW - (time() - $lp['first'])) / 60);
+    $error = "Too many failed attempts. Please try again in {$wait} minute(s).";
+  } elseif (!validateCsrfToken($_POST[CSRF_TOKEN_NAME] ?? '')) {
     $error = 'Security error. Please try again.';
   } else {
     $username = sanitizeInput($_POST['username'] ?? '');
@@ -23,13 +33,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($admin && password_verify($password, $admin['password_hash'])) {
       session_regenerate_id(true);
+      unset($_SESSION['login_attempts']); // clear on success
       $_SESSION['admin_id']         = $admin['id'];
       $_SESSION['admin_user']       = $admin['username'];
       $_SESSION['admin_login_time'] = time();
       redirect(url('admin/index.php'));
     } else {
       sleep(1); // slow brute force
-      $error = 'Invalid username or password.';
+      $lp['count']++;
+      $_SESSION['login_attempts'] = $lp;
+      $remaining = max(0, $LOCK_MAX - $lp['count']);
+      $error = 'Invalid username or password.'
+             . ($remaining > 0 && $remaining <= 2 ? " {$remaining} attempt(s) left." : '');
       unset($_SESSION[CSRF_TOKEN_NAME]);
       $csrfToken = generateCsrfToken();
     }
@@ -92,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <label class="f-label" for="password">Password</label>
         <div style="position:relative">
           <i class="fas fa-lock" style="position:absolute;left:.9rem;top:50%;transform:translateY(-50%);color:rgba(255,255,255,.25);font-size:.78rem;pointer-events:none"></i>
-          <input type="password" class="f-input" id="password" name="password" required autocomplete="current-password" placeholder="••••••••" style="padding-left:2.5rem">
+          <input type="password" class="f-input" id="password" name="password" required autocomplete="current-password" placeholder="ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" style="padding-left:2.5rem">
         </div>
       </div>
       <button type="submit" class="btn btn-adm btn-adm-primary w-full" style="justify-content:center;padding:.85rem;font-size:.82rem;margin-top:.5rem;border-radius:12px">

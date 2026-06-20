@@ -2,12 +2,17 @@
 require_once __DIR__ . '/../config/config.php';
 
 if (session_status() === PHP_SESSION_NONE) {
+    // Auto-detect HTTPS so the cookie is "secure" on production but still works on localhost/.local.
+    $isHttps = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+        || (($_SERVER['SERVER_PORT'] ?? '') === '443')
+        || (($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '') === 'https');
+
     session_name(SESSION_NAME);
     session_set_cookie_params([
         'lifetime' => 0,
         'path'     => '/',
         'domain'   => '',
-        'secure'   => false,
+        'secure'   => $isHttps,
         'httponly' => true,
         'samesite' => 'Lax',
     ]);

@@ -18,6 +18,7 @@ Iscache/
 # ===== Faili za watumiaji (zinabadilika kila wakati) =====
 uploads/*
 !uploads/.gitkeep
+!uploads/.htaccess
 
 # ===== Mfumo / OS =====
 Thumbs.db
