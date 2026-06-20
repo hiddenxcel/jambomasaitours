@@ -146,9 +146,9 @@ $waMsg = urlencode('Hi! I am interested in the ' . $tour['name'] . ' tour. Pleas
   <script>
     tailwind.config = {
       theme: { extend: {
-        colors:{ brand:'#10b981', safari:'#10b981', dark:'#0a0a0a' },
+        colors:{ brand:'#a05e22', safari:'#a05e22', dark:'#23362f' },
         fontFamily:{
-          heading:['Playfair Display','Georgia','serif'],
+          heading:['Nanum Myeongjo','Georgia','serif'],
           sans:   ['Inter','Poppins','sans-serif'],
           nav:    ['Montserrat','sans-serif'],
         }
@@ -157,7 +157,7 @@ $waMsg = urlencode('Hi! I am interested in the ' . $tour['name'] . ' tour. Pleas
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <?php $_fav = getSetting('favicon_url') ?: getSetting('logo_url') ?: (SITE_URL . '/uploads/logo-husika.png'); ?>
   <link rel="icon" type="image/png" href="<?= e($_fav) ?>">
@@ -166,24 +166,24 @@ $waMsg = urlencode('Hi! I am interested in the ' . $tour['name'] . ' tour. Pleas
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     html{scroll-behavior:smooth}
-    body{background:#0a0a0a;color:#e5e7eb;font-family:'Inter',sans-serif;overflow-x:hidden}
-    ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:#111}::-webkit-scrollbar-thumb{background:#10b981;border-radius:2px}
+    body{background:#23362f;color:#e5e7eb;font-family:'Inter',sans-serif;overflow-x:hidden}
+    ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:#2c463d}::-webkit-scrollbar-thumb{background:#a05e22;border-radius:2px}
     .glass-card{background:rgba(255,255,255,.04);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.08);border-radius:16px}
-    .hero-grad{background:linear-gradient(135deg,#34d399,#059669,#10b981);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .hero-grad{background:linear-gradient(135deg,#c17a3a,#7d4817,#a05e22);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
     .wa-float{position:fixed;bottom:1.5rem;left:1.5rem;z-index:998;width:52px;height:52px;border-radius:50%;background:#25D366;color:#fff;font-size:1.4rem;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 8px 30px rgba(37,211,102,.4);opacity:0;transform:scale(.7);transition:all .4s cubic-bezier(.34,1.56,.64,1)}
     .wa-float.visible{opacity:1;transform:scale(1)}
     .wa-float::before{content:'';position:absolute;inset:0;border-radius:50%;background:#25D366;animation:waPulse 2s ease-in-out infinite}
     @keyframes waPulse{0%,100%{transform:scale(1);opacity:.5}50%{transform:scale(1.35);opacity:0}}
-    #back-top{position:fixed;bottom:2rem;right:2rem;z-index:999;width:44px;height:44px;border-radius:50%;background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3);color:#10b981;font-size:1rem;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;transform:translateY(20px);transition:all .3s}
+    #back-top{position:fixed;bottom:2rem;right:2rem;z-index:999;width:44px;height:44px;border-radius:50%;background:rgba(160,94,34,.15);border:1px solid rgba(160,94,34,.3);color:#a05e22;font-size:1rem;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;transform:translateY(20px);transition:all .3s}
     #back-top.visible{opacity:1;transform:translateY(0)}
     .reveal{opacity:0;transform:translateY(20px);transition:all .6s cubic-bezier(.4,0,.2,1)}
     .reveal.visible{opacity:1;transform:translateY(0)}
-    .related-card{background:#111;border:1px solid rgba(255,255,255,.07);border-radius:14px;overflow:hidden;transition:all .3s}
-    .related-card:hover{transform:translateY(-4px);border-color:rgba(16,185,129,.25)}
+    .related-card{background:#2c463d;border:1px solid rgba(255,255,255,.07);border-radius:14px;overflow:hidden;transition:all .3s}
+    .related-card:hover{transform:translateY(-4px);border-color:rgba(160,94,34,.25)}
     .related-card img{width:100%;height:180px;object-fit:cover;transition:transform .5s}
     .related-card:hover img{transform:scale(1.05)}
     .glow-orb{position:fixed;pointer-events:none;z-index:0}
-    .glow-orb-1{top:68px;left:0;width:500px;height:500px;background:radial-gradient(circle,rgba(16,185,129,0.08) 0%,transparent 70%)}
+    .glow-orb-1{top:68px;left:0;width:500px;height:500px;background:radial-gradient(circle,rgba(160,94,34,0.08) 0%,transparent 70%)}
   </style>
 
 </head>
@@ -199,7 +199,7 @@ $photoCount = count($tourPhotos);
 $totalAll   = $photoCount + 1; // +1 main tour image
 ?>
 <style>
-  .th-wrap{position:relative;background:#0a0a0a}
+  .th-wrap{position:relative;background:#23362f}
   /* Single image (no extras) */
   .th-single{height:460px;overflow:hidden;position:relative}
   .th-single img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
@@ -282,7 +282,7 @@ $totalAll   = $photoCount + 1; // +1 main tour image
       <span class="text-white/60"><?= e($tour['name']) ?></span>
     </nav>
     <div class="flex flex-wrap gap-2 mb-3">
-      <span class="font-nav text-[.62rem] font-semibold px-3 py-1 rounded-full" style="background:rgba(16,185,129,.15);color:#34d399;border:1px solid rgba(16,185,129,.25)"><?= e($tour['tour_type']) ?></span>
+      <span class="font-nav text-[.62rem] font-semibold px-3 py-1 rounded-full" style="background:rgba(160,94,34,.15);color:#c17a3a;border:1px solid rgba(160,94,34,.25)"><?= e($tour['tour_type']) ?></span>
       <span class="font-nav text-[.62rem] font-semibold px-3 py-1 rounded-full" style="background:rgba(255,255,255,.08);color:rgba(255,255,255,.7)"><?= e($tour['destination']) ?></span>
       <span class="font-nav text-[.62rem] font-semibold px-3 py-1 rounded-full flex items-center gap-1" style="background:rgba(245,158,11,.12);color:#fbbf24">
         <i class="fas fa-star text-[.55rem]"></i><?= e($tour['rating']) ?>/5
@@ -341,7 +341,7 @@ function galleryGoTo(idx) {
   document.getElementById('glb-caption').textContent = galleryImages[galCur].caption || '';
   document.querySelectorAll('.glb-thumb').forEach((t,i) => {
     t.style.opacity = i===galCur ? '1' : '.5';
-    t.style.borderColor = i===galCur ? '#10b981' : 'transparent';
+    t.style.borderColor = i===galCur ? '#a05e22' : 'transparent';
   });
 }
 function galleryNav(dir) { galleryGoTo(galCur + dir); }
@@ -366,7 +366,7 @@ document.addEventListener('keydown', e => {
       <!-- Quick meta bar -->
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-10 reveal">
         <?php foreach ([
-          ['fa-clock',         '#34d399', 'Duration',    e($tour['duration'])],
+          ['fa-clock',         '#c17a3a', 'Duration',    e($tour['duration'])],
           ['fa-users',         '#fbbf24', 'Group Size',  'Max '.e($tour['max_travelers'])],
           ['fa-map-marker-alt','#60a5fa', 'Destination', e($tour['destination'])],
           ['fa-compass',       '#f97316', 'Type',        e($tour['tour_type'])],
@@ -391,7 +391,7 @@ document.addEventListener('keydown', e => {
         <h3 class="font-heading text-white text-xl font-bold mb-5">Tour Highlights</h3>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <?php foreach ($highlights as $h): ?>
-          <div class="flex items-start gap-3 p-4 rounded-xl" style="background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.12)">
+          <div class="flex items-start gap-3 p-4 rounded-xl" style="background:rgba(160,94,34,.06);border:1px solid rgba(160,94,34,.12)">
             <i class="fas fa-check-circle text-emerald-400 mt-0.5 flex-shrink-0 text-sm"></i>
             <span class="text-white/75 text-[.88rem]"><?= e(trim($h)) ?></span>
           </div>
@@ -485,7 +485,7 @@ document.addEventListener('keydown', e => {
       } catch (\Throwable $e) { $dbItin = []; }
 
       $dcPalette = [
-          ['#10b981','rgba(16,185,129,.18)'],['#f59e0b','rgba(245,158,11,.18)'],
+          ['#a05e22','rgba(160,94,34,.18)'],['#f59e0b','rgba(245,158,11,.18)'],
           ['#3b82f6','rgba(59,130,246,.18)'],['#8b5cf6','rgba(139,92,246,.18)'],
           ['#f97316','rgba(249,115,22,.18)'],['#ec4899','rgba(236,72,153,.18)'],
           ['#06b6d4','rgba(6,182,212,.18)'],
@@ -669,7 +669,7 @@ document.addEventListener('keydown', e => {
             <p class="font-nav font-bold text-[.62rem] uppercase tracking-widest text-white/25 mb-2">Activities</p>
             <div class="flex flex-wrap gap-1.5">
               <?php foreach ($hls as $hl): ?>
-              <span class="inline-flex items-center gap-1 text-[.7rem] font-nav px-2.5 py-1 rounded-full" style="background:rgba(16,185,129,.08);color:#34d399;border:1px solid rgba(16,185,129,.15)">
+              <span class="inline-flex items-center gap-1 text-[.7rem] font-nav px-2.5 py-1 rounded-full" style="background:rgba(160,94,34,.08);color:#c17a3a;border:1px solid rgba(160,94,34,.15)">
                 <i class="fas fa-check text-[.5rem]"></i><?= e(trim($hl)) ?>
               </span>
               <?php endforeach; ?>
@@ -690,7 +690,7 @@ document.addEventListener('keydown', e => {
       </div>
 
       <style>
-        .itin-tab.active{color:#fff !important;border-color:rgba(16,185,129,.5) !important;background:rgba(16,185,129,.1) !important}
+        .itin-tab.active{color:#fff !important;border-color:rgba(160,94,34,.5) !important;background:rgba(160,94,34,.1) !important}
         .itin-tab:hover:not(.active){color:rgba(255,255,255,.7) !important;border-color:rgba(255,255,255,.18) !important}
       </style>
       <script>
@@ -729,11 +729,11 @@ document.addEventListener('keydown', e => {
         <!-- Quick inclusions -->
         <div class="space-y-2.5 mb-5">
           <?php foreach ([
-            ['fa-check',         '#34d399', 'Expert guides included'],
-            ['fa-check',         '#34d399', 'All meals (full board)'],
-            ['fa-check',         '#34d399', 'Park entrance fees'],
-            ['fa-check',         '#34d399', 'Accommodation included'],
-            ['fa-check',         '#34d399', 'Airport transfers'],
+            ['fa-check',         '#c17a3a', 'Expert guides included'],
+            ['fa-check',         '#c17a3a', 'All meals (full board)'],
+            ['fa-check',         '#c17a3a', 'Park entrance fees'],
+            ['fa-check',         '#c17a3a', 'Accommodation included'],
+            ['fa-check',         '#c17a3a', 'Airport transfers'],
           ] as $inc): ?>
           <div class="flex items-center gap-2.5 text-[.83rem] text-white/55">
             <i class="fas <?= $inc[0] ?> text-[.65rem] flex-shrink-0" style="color:<?= $inc[1] ?>"></i>
@@ -745,7 +745,7 @@ document.addEventListener('keydown', e => {
         <!-- CTA buttons -->
         <a href="<?= url('booking.php?tour='.e($tour['slug'])) ?>"
            class="flex items-center justify-center gap-2 font-nav font-bold text-sm text-white w-full py-3.5 rounded-xl mb-3 transition-all hover:scale-[1.02] hover:shadow-lg"
-           style="background:linear-gradient(135deg,#059669,#10b981);box-shadow:0 4px 18px rgba(16,185,129,.25)">
+           style="background:linear-gradient(135deg,#7d4817,#a05e22);box-shadow:0 4px 18px rgba(160,94,34,.25)">
           <i class="fas fa-calendar-check text-xs"></i> Book This Safari
         </a>
         <a href="https://wa.me/<?= e(WHATSAPP_NUMBER) ?>?text=<?= $waMsg ?>" target="_blank" rel="noopener"
@@ -770,7 +770,7 @@ document.addEventListener('keydown', e => {
         <div class="grid grid-cols-3 gap-2 text-center">
           <?php foreach ([
             ['fa-star',         '#fbbf24', '4.9/5',     'Rated'],
-            ['fa-certificate',  '#34d399', 'TATO',      'Certified'],
+            ['fa-certificate',  '#c17a3a', 'TATO',      'Certified'],
             ['fa-shield-alt',   '#60a5fa', 'Secure',    'Booking'],
           ] as $b): ?>
           <div>
@@ -820,7 +820,7 @@ document.addEventListener('keydown', e => {
           <!-- Card -->
           <a href="<?= url('tour-detail.php?slug='.e($r['slug'])) ?>"
              class="block rounded-2xl overflow-hidden transition-all duration-300 group-hover:transform group-hover:-translate-y-1.5"
-             style="background:#111;border:1px solid rgba(255,255,255,.07);text-decoration:none">
+             style="background:#2c463d;border:1px solid rgba(255,255,255,.07);text-decoration:none">
 
             <!-- Image -->
             <div class="relative overflow-hidden" style="height:155px">
@@ -868,7 +868,7 @@ document.addEventListener('keydown', e => {
 
       <!-- Fade edges -->
       <div class="absolute top-0 right-0 bottom-0 w-16 pointer-events-none"
-           style="background:linear-gradient(to right,transparent,#0a0a0a)"></div>
+           style="background:linear-gradient(to right,transparent,#23362f)"></div>
     </div>
 
   </div>
@@ -911,6 +911,8 @@ document.addEventListener('keydown', e => {
 
 <a href="https://wa.me/<?= e(WHATSAPP_NUMBER) ?>" id="wa-float" class="wa-float" target="_blank" rel="noopener"><i class="fab fa-whatsapp text-2xl relative z-10"></i></a>
 <button id="back-top" aria-label="Back to top"><i class="fas fa-chevron-up text-sm"></i></button>
+
+<?php require_once 'includes/chatbot-widget.php'; ?>
 
 <script>
 (function(){

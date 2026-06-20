@@ -105,7 +105,7 @@ require_once 'includes/dark_header.php';
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 reveal">
       <?php foreach ([
         ['fab fa-whatsapp',      '#25D366','rgba(37,211,102,.12)', 'Chat on WhatsApp',  'Instant reply',        'https://wa.me/'.WHATSAPP_NUMBER.'?text='.urlencode('Hello! I\'d like to plan a safari.'), true],
-        ['fas fa-phone',         '#34d399','rgba(16,185,129,.12)', 'Call Us',           e(SITE_PHONE),          'tel:'.e(SITE_PHONE), false],
+        ['fas fa-phone',         '#c17a3a','rgba(160,94,34,.12)', 'Call Us',           e(SITE_PHONE),          'tel:'.e(SITE_PHONE), false],
         ['fas fa-envelope',      '#60a5fa','rgba(96,165,250,.12)', 'Email Us',          e(SITE_EMAIL),          'mailto:'.e(SITE_EMAIL), false],
         ['fas fa-map-marker-alt','#f59e0b','rgba(245,158,11,.12)', 'Our Office',        'Arusha, Tanzania',     'https://maps.app.goo.gl/s6Qvyg9nqs3ucMmj6', true],
       ] as $card): ?>
@@ -125,7 +125,7 @@ require_once 'includes/dark_header.php';
 </section>
 
 <!-- CONTENT -->
-<section class="py-16 px-4 lg:px-0">
+<section class="section-light py-16 px-4 lg:px-0">
   <div class="max-w-7xl mx-auto">
     <div class="grid lg:grid-cols-[1fr_1.4fr] gap-12">
 
@@ -139,7 +139,7 @@ require_once 'includes/dark_header.php';
 
         <div class="space-y-4 mb-8">
           <?php foreach ([
-            ['fa-map-marker-alt','#34d399', 'Our Office',     'Arusha, Tanzania, 12105<br><a href="https://maps.app.goo.gl/cqcERfdGpABg9xo49" target="_blank" rel="noopener" style="color:#10b981;font-size:.78rem">View on Google Maps →</a>'],
+            ['fa-map-marker-alt','#c17a3a', 'Our Office',     'Arusha, Tanzania, 12105<br><a href="https://maps.app.goo.gl/cqcERfdGpABg9xo49" target="_blank" rel="noopener" style="color:#a05e22;font-size:.78rem">View on Google Maps →</a>'],
             ['fa-phone',         '#fbbf24', 'Phone',          '<a href="tel:'.e(SITE_PHONE).'" class="hover:text-emerald-400 transition-colors">'.e(SITE_PHONE).'</a>'],
             ['fa-envelope',      '#60a5fa', 'Email',          '<a href="mailto:'.e(SITE_EMAIL).'" class="hover:text-emerald-400 transition-colors">'.e(SITE_EMAIL).'</a>'],
             ['fa-clock',         '#f97316', 'Response Time',  'We reply within 24 hours (usually much faster)'],
@@ -168,7 +168,7 @@ require_once 'includes/dark_header.php';
         <h3 class="font-heading text-white text-xl font-bold mb-6">Send Us a Message</h3>
 
         <?php if ($success): ?>
-        <div class="rounded-xl p-5 mb-6 flex items-start gap-3" style="background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2)">
+        <div class="rounded-xl p-5 mb-6 flex items-start gap-3" style="background:rgba(160,94,34,.08);border:1px solid rgba(160,94,34,.2)">
           <i class="fas fa-check-circle text-emerald-400 text-lg flex-shrink-0"></i>
           <div>
             <p class="font-semibold text-emerald-400 text-sm">Message sent successfully!</p>
@@ -243,10 +243,10 @@ require_once 'includes/dark_header.php';
         <h2 class="font-heading text-white text-2xl font-bold mb-8 mt-1">Why Book With <span class="hero-grad">Jambo Masai?</span></h2>
         <div class="space-y-4">
           <?php foreach ([
-            ['fa-user-shield', '#10b981', 'Local Maasai Experts',      'Born and raised in Tanzania — unmatched wildlife instincts and cultural depth.'],
+            ['fa-user-shield', '#a05e22', 'Local Maasai Experts',      'Born and raised in Tanzania — unmatched wildlife instincts and cultural depth.'],
             ['fa-medal',       '#f59e0b', 'Best Price Guarantee',       'Direct booking, no middlemen. Transparent pricing with no hidden fees.'],
             ['fa-headset',     '#60a5fa', '24/7 Safari Support',        'We\'re with you from the moment you land to your safe departure home.'],
-            ['fa-leaf',        '#34d399', 'Eco & Community First',       'Every booking supports Maasai education and wildlife conservation.'],
+            ['fa-leaf',        '#c17a3a', 'Eco & Community First',       'Every booking supports Maasai education and wildlife conservation.'],
           ] as $w): ?>
           <div class="flex items-start gap-4 glass-card p-4 reveal">
             <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style="background:<?= $w[1] ?>15">
@@ -276,7 +276,7 @@ require_once 'includes/dark_header.php';
           <div class="glass-card overflow-hidden faq-item">
             <button class="w-full flex items-center justify-between gap-4 p-4 text-left" onclick="toggleFaqC(this)">
               <span class="font-nav font-semibold text-[.82rem] text-white/80"><?= $q ?></span>
-              <span class="faq-icon-c w-7 h-7 rounded-full flex items-center justify-center text-emerald-400 font-bold flex-shrink-0 text-lg transition-all" style="background:rgba(16,185,129,.12)">+</span>
+              <span class="faq-icon-c w-7 h-7 rounded-full flex items-center justify-center text-emerald-400 font-bold flex-shrink-0 text-lg transition-all" style="background:rgba(160,94,34,.12)">+</span>
             </button>
             <div class="faq-ans-c" style="max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.16,1,.3,1)">
               <p class="px-4 pb-4 text-white/50 text-[.83rem] leading-relaxed"><?= $a ?></p>
@@ -313,7 +313,7 @@ require_once 'includes/dark_header.php';
 </section>
 
 <style>
-.faq-item:hover{border-color:rgba(16,185,129,.2)}
+.faq-item:hover{border-color:rgba(160,94,34,.2)}
 </style>
 <script>
 function toggleFaqC(btn) {

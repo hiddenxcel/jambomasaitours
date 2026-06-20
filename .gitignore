@@ -6,6 +6,8 @@ config/config.php
 *.tar
 *.tar.gz
 *.rar
+*.bak
+.bak_palette/
 
 # ===== Logs & Cache =====
 error_log

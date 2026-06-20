@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 require_once '../config/config.php';
 require_once '../includes/functions.php';
 require_once '../includes/security.php';
@@ -8,7 +8,7 @@ require_once 'includes/upload_helper.php';
 
 $db = getDB();
 
-/* ─── Create / upgrade table ─── */
+/* --- Create / upgrade table --- */
 $db->exec("CREATE TABLE IF NOT EXISTS tour_itinerary (
     id                  INT AUTO_INCREMENT PRIMARY KEY,
     tour_id             INT NOT NULL,
@@ -39,7 +39,7 @@ foreach ([
     "ALTER TABLE tour_itinerary ADD COLUMN IF NOT EXISTS notes              TEXT         DEFAULT ''",
 ] as $sql) { try { $db->exec($sql); } catch (\Throwable $e) {} }
 
-/* ─── Get tour ─── */
+/* --- Get tour --- */
 $tourId = sanitizeInt($_GET['tour_id'] ?? 0, 1);
 if (!$tourId) { redirect(SITE_URL . '/admin/tours.php'); }
 $tStmt = $db->prepare("SELECT * FROM tours WHERE id = ? LIMIT 1");
@@ -49,7 +49,7 @@ if (!$tour) { redirect(SITE_URL . '/admin/tours.php'); }
 
 $errors = [];
 
-/* ─── POST handlers ─── */
+/* --- POST handlers --- */
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!validateCsrfToken($_POST[CSRF_TOKEN_NAME] ?? '')) {
         http_response_code(403); die('Invalid CSRF token.');
@@ -154,7 +154,7 @@ function dc(int $n): array {
   <title>Itinerary: <?= e($tour['name']) ?> | Admin</title>
   <meta name="robots" content="noindex,nofollow">
   <link rel="icon" type="image/png" href="<?= e(getSetting('favicon_url', SITE_URL.'/assets/images/favicon.ico')) ?>">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Nanum+Myeongjo:wght@700&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"><link rel="stylesheet" href="<?= SITE_URL ?>/admin/assets/admin.css">
   <style>
@@ -226,7 +226,7 @@ function dc(int $n): array {
             <span class="chip chip-gray"><i class="fas fa-map-marker-alt" style="font-size:.5rem"></i><?= e($tour['destination']) ?></span>
             <span class="chip chip-gray"><i class="fas fa-clock" style="font-size:.5rem"></i><?= e($tour['duration']) ?></span>
           </div>
-          <h1 style="font-family:'Playfair Display',serif;font-size:1.4rem;color:#fff;line-height:1.25"><?= e($tour['name']) ?></h1>
+          <h1 style="font-family:'Nanum Myeongjo',serif;font-size:1.4rem;color:#fff;line-height:1.25"><?= e($tour['name']) ?></h1>
           <p style="font-size:.78rem;color:rgba(255,255,255,.3);margin-top:.2rem"><?= count($days) ?> day<?= count($days)!==1?'s':'' ?> in itinerary</p>
         </div>
       </div>
@@ -245,14 +245,14 @@ function dc(int $n): array {
 
     <?php if (!empty($errors)): ?>
     <div style="background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.18);color:#f87171;padding:.8rem 1.2rem;border-radius:10px;margin-bottom:1.2rem;font-size:.875rem">
-      <?php foreach($errors as $err): ?><div>· <?= e($err) ?></div><?php endforeach; ?>
+      <?php foreach($errors as $err): ?><div>� <?= e($err) ?></div><?php endforeach; ?>
     </div>
     <?php endif; ?>
 
-    <!-- ═══ ADD / EDIT FORM ═══ -->
+    <!-- --- ADD / EDIT FORM --- -->
     <?php if (isset($_GET['edit'])): ?>
     <div class="card highlight" style="padding:1.75rem;margin-bottom:1.5rem">
-      <h2 style="font-family:'Playfair Display',serif;font-size:1.1rem;color:#fff;margin-bottom:1.5rem;display:flex;align-items:center;gap:.7rem">
+      <h2 style="font-family:'Nanum Myeongjo',serif;font-size:1.1rem;color:#fff;margin-bottom:1.5rem;display:flex;align-items:center;gap:.7rem">
         <span style="width:30px;height:30px;border-radius:50%;background:rgba(16,185,129,.13);color:#34d399;display:flex;align-items:center;justify-content:center;font-size:.75rem">
           <i class="fas <?= $editing ? 'fa-pen' : 'fa-plus' ?>"></i>
         </span>
@@ -277,13 +277,13 @@ function dc(int $n): array {
           </div>
         </div>
 
-        <!-- Row 2: Departure → Arrival -->
+        <!-- Row 2: Departure ? Arrival -->
         <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:.75rem;align-items:end;margin-bottom:1rem">
           <div>
             <label class="f-label">Departure Location</label>
             <input type="text" class="f-input" name="departure_location" placeholder="e.g. Arusha Airport" value="<?= e($editing['departure_location'] ?? '') ?>">
           </div>
-          <div style="padding-bottom:.75rem;color:rgba(255,255,255,.2);font-size:1.2rem;text-align:center">→</div>
+          <div style="padding-bottom:.75rem;color:rgba(255,255,255,.2);font-size:1.2rem;text-align:center">?</div>
           <div>
             <label class="f-label">Arrival Location</label>
             <input type="text" class="f-input" name="arrival_location" placeholder="e.g. Serengeti Central" value="<?= e($editing['arrival_location'] ?? '') ?>">
@@ -324,7 +324,7 @@ function dc(int $n): array {
             <div>
               <label class="f-label" style="font-size:.58rem">Upload from computer</label>
               <input type="file" class="f-input" name="hotel_image_file" accept="image/jpeg,image/png,image/webp" id="hotel-file">
-              <div class="f-hint">JPG/PNG/WebP · Max 8MB</div>
+              <div class="f-hint">JPG/PNG/WebP � Max 8MB</div>
             </div>
             <div>
               <label class="f-label" style="font-size:.58rem">Or paste image URL</label>
@@ -348,7 +348,7 @@ function dc(int $n): array {
         <div style="margin-bottom:1rem">
           <label class="f-label">Day Description <span>*</span></label>
           <textarea class="f-textarea" name="description" rows="4"
-                    placeholder="Describe what happens this day — activities, landscapes, wildlife sightings, cultural moments..."><?= e($editing['description'] ?? '') ?></textarea>
+                    placeholder="Describe what happens this day � activities, landscapes, wildlife sightings, cultural moments..."><?= e($editing['description'] ?? '') ?></textarea>
         </div>
 
         <!-- Meals + Highlights -->
@@ -380,11 +380,11 @@ function dc(int $n): array {
     </div>
     <?php endif; ?>
 
-    <!-- ═══ ITINERARY CARDS ═══ -->
+    <!-- --- ITINERARY CARDS --- -->
     <?php if (empty($days)): ?>
     <div class="empty">
-      <div style="font-size:2.8rem;margin-bottom:.75rem">📅</div>
-      <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:#fff;margin-bottom:.4rem">No itinerary yet</h3>
+      <div style="font-size:2.8rem;margin-bottom:.75rem">??</div>
+      <h3 style="font-family:'Nanum Myeongjo',serif;font-size:1.15rem;color:#fff;margin-bottom:.4rem">No itinerary yet</h3>
       <p style="color:rgba(255,255,255,.3);font-size:.85rem;margin-bottom:1.25rem">Add day-by-day details to help travellers understand what to expect.</p>
       <a href="tour-itinerary.php?tour_id=<?= $tourId ?>&edit=new" class="ab ab-em"><i class="fas fa-plus" style="font-size:.6rem"></i> Add First Day</a>
     </div>
@@ -429,7 +429,7 @@ function dc(int $n): array {
                   <?php endif; ?>
                 </div>
                 <?php endif; ?>
-                <h3 style="font-family:'Playfair Display',serif;font-size:1rem;color:#fff;line-height:1.3;margin-bottom:.3rem"><?= e($day['title']) ?></h3>
+                <h3 style="font-family:'Nanum Myeongjo',serif;font-size:1rem;color:#fff;line-height:1.3;margin-bottom:.3rem"><?= e($day['title']) ?></h3>
                 <!-- Meals + accommodation chips -->
                 <div style="display:flex;flex-wrap:wrap;gap:.35rem">
                   <?php if ($day['meals']): foreach(array_filter(array_map('trim',explode(',',$day['meals']))) as $m): ?>
@@ -474,7 +474,7 @@ function dc(int $n): array {
                    style="width:160px;height:100px;object-fit:cover;border-radius:9px;border:1px solid rgba(255,255,255,.07)">
               <?php endif; ?>
               <?php if ($day['description']): ?>
-              <p style="color:rgba(255,255,255,.45);font-size:.85rem;line-height:1.7;margin:0"><?= e(mb_substr($day['description'],0,200)).(mb_strlen($day['description'])>200?'…':'') ?></p>
+              <p style="color:rgba(255,255,255,.45);font-size:.85rem;line-height:1.7;margin:0"><?= e(mb_substr($day['description'],0,200)).(mb_strlen($day['description'])>200?'�':'') ?></p>
               <?php endif; ?>
             </div>
             <?php endif; ?>
@@ -503,7 +503,7 @@ function dc(int $n): array {
     <!-- Add next day -->
     <div style="margin-top:1rem;padding:1.1rem;background:#1a1d27;border-radius:12px;border:1.5px dashed rgba(16,185,129,.18);text-align:center">
       <a href="tour-itinerary.php?tour_id=<?= $tourId ?>&edit=new" class="ab ab-em" style="display:inline-flex"><i class="fas fa-plus" style="font-size:.6rem"></i> Add Day <?= $nextDay ?></a>
-      <p style="color:rgba(255,255,255,.2);font-size:.72rem;margin-top:.5rem"><?= count($days) ?> day<?= count($days)!==1?'s':'' ?> · Next will be Day <?= $nextDay ?></p>
+      <p style="color:rgba(255,255,255,.2);font-size:.72rem;margin-top:.5rem"><?= count($days) ?> day<?= count($days)!==1?'s':'' ?> � Next will be Day <?= $nextDay ?></p>
     </div>
     <?php endif; ?>
 

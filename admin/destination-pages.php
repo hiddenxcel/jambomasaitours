@@ -56,7 +56,7 @@ $csrfToken = generateCsrfToken();
   <title>Destination Pages | Admin</title>
   <meta name="robots" content="noindex,nofollow">
   <link rel="icon" type="image/png" href="<?= e(getSetting('favicon_url', SITE_URL.'/assets/images/favicon.ico')) ?>">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@700&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Nanum+Myeongjo:wght@700&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="<?= SITE_URL ?>/admin/assets/admin.css">
 </head>
@@ -67,7 +67,7 @@ $csrfToken = generateCsrfToken();
 
     <div class="admin-header">
       <div>
-        <h1 style="font-family:'Playfair Display',serif;font-size:1.4rem;color:#fff;display:flex;align-items:center;gap:.5rem">
+        <h1 style="font-family:'Nanum Myeongjo',serif;font-size:1.4rem;color:#fff;display:flex;align-items:center;gap:.5rem">
           <i class="fas fa-map-marker-alt" style="color:#10b981;font-size:1.1rem"></i>
           <?= $editSlug ? 'Edit: ' . e($destSlugs[$editSlug]) : 'Destination Pages' ?>
         </h1>

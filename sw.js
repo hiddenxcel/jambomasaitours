@@ -1,5 +1,5 @@
 /* Jambo Masai Tours — service worker (installable PWA + light offline support) */
-const CACHE_NAME = 'jmt-cache-v1';
+const CACHE_NAME = 'jmt-cache-v3';
 const STATIC_RE = /\.(css|js|png|jpe?g|gif|svg|webp|ico|woff2?|ttf)$/i;
 
 self.addEventListener('install', () => {
@@ -21,16 +21,12 @@ self.addEventListener('fetch', (event) => {
 
   const url = new URL(req.url);
 
-  /* Pages: network-first so tours/prices/bookings stay fresh; fall back to cache offline */
-  if (req.mode === 'navigate' || url.pathname.endsWith('.php') || url.pathname.endsWith('/')) {
+  /* Pages: ALWAYS network (never serve a stale cached page) — only fall back to
+     cache when truly offline. This avoids stale links/markup during development. */
+  if (req.mode === 'navigate' || url.pathname.endsWith('.php') || url.pathname.endsWith('/')
+      || !STATIC_RE.test(url.pathname)) {
     event.respondWith(
-      fetch(req)
-        .then((res) => {
-          const copy = res.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(req, copy));
-          return res;
-        })
-        .catch(() => caches.match(req))
+      fetch(req).catch(() => caches.match(req))
     );
     return;
   }

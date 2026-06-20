@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 require_once '../config/config.php';
 require_once '../includes/functions.php';
 require_once '../includes/security.php';
@@ -8,7 +8,7 @@ require_once 'includes/upload_helper.php';
 
 $db = getDB();
 
-/* ─── Helpers ─────────────────────────────────────── */
+/* --- Helpers --------------------------------------- */
 function destSlug(string $s): string {
     $s = strtolower(trim($s));
     $s = preg_replace('/[^a-z0-9\s\-]/', '', $s);
@@ -16,7 +16,7 @@ function destSlug(string $s): string {
     return trim($s, '-');
 }
 
-/* ─── POST handler ────────────────────────────────── */
+/* --- POST handler ---------------------------------- */
 $msg = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!isset($_POST[CSRF_TOKEN_NAME]) || !hash_equals($_SESSION[CSRF_TOKEN_NAME] ?? '', $_POST[CSRF_TOKEN_NAME])) {
@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $sort_order  = (int)($_POST['sort_order'] ?? 0);
         $active      = isset($_POST['active']) ? 1 : 0;
 
-        // highlights: one per line → pipe-separated
+        // highlights: one per line ? pipe-separated
         $hlRaw   = trim($_POST['highlights'] ?? '');
         $highlights = implode('|', array_filter(array_map('trim', explode("\n", str_replace("\r", '', $hlRaw)))));
 
@@ -83,12 +83,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-/* ─── Flash message from redirect ────────────────── */
+/* --- Flash message from redirect ------------------ */
 if (!$msg && isset($_GET['msg'])) {
     $msg = '<div class="admin-alert admin-alert--success">' . e($_GET['msg']) . '</div>';
 }
 
-/* ─── Load for edit ───────────────────────────────── */
+/* --- Load for edit --------------------------------- */
 $editing = null;
 if (isset($_GET['edit'])) {
     $editing = $db->prepare("SELECT * FROM destinations WHERE id = ?")->execute([(int)$_GET['edit']]) ? $db->prepare("SELECT * FROM destinations WHERE id = ?")->execute([(int)$_GET['edit']]) : null;
@@ -97,12 +97,12 @@ if (isset($_GET['edit'])) {
     $editing = $stmt2->fetch();
 }
 
-/* ─── List all ────────────────────────────────────── */
+/* --- List all -------------------------------------- */
 $destinations = $db->query("SELECT * FROM destinations ORDER BY sort_order ASC, id ASC")->fetchAll();
 
-/* ─── CSRF token ──────────────────────────────────── */
+/* --- CSRF token ------------------------------------ */
 $csrf = generateCsrfToken();
-$pageTitle = 'Destinations — Admin';
+$pageTitle = 'Destinations � Admin';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -112,13 +112,13 @@ $pageTitle = 'Destinations — Admin';
 <title><?= e($pageTitle) ?> | Jambo Masai Admin</title>
 <link rel="icon" type="image/png" href="<?= e(getSetting('favicon_url', SITE_URL.'/assets/images/favicon.ico')) ?>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Nanum+Myeongjo:wght@700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link rel="stylesheet" href="<?= SITE_URL ?>/admin/assets/admin.css">
 <style>
   /* Destination-specific overrides */
   .form-section{background:#1a1d27;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:1.5rem;margin-bottom:1.25rem}
-  .form-section h3{font-family:'Playfair Display',serif;font-size:1rem;color:#fff;font-weight:700;margin:0 0 1.1rem;padding-bottom:.85rem;border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:center;gap:.5rem}
+  .form-section h3{font-family:'Nanum Myeongjo',serif;font-size:1rem;color:#fff;font-weight:700;margin:0 0 1.1rem;padding-bottom:.85rem;border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:center;gap:.5rem}
   .field-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
   .field-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem}
   @media(max-width:639px){.field-grid,.field-grid-3{grid-template-columns:1fr}}
@@ -151,7 +151,7 @@ $pageTitle = 'Destinations — Admin';
   <main class="admin-main">
     <div class="admin-header">
       <div>
-        <h1 style="font-family:'Playfair Display',serif;font-size:1.4rem;color:#fff;font-weight:700;display:flex;align-items:center;gap:.5rem">
+        <h1 style="font-family:'Nanum Myeongjo',serif;font-size:1.4rem;color:#fff;font-weight:700;display:flex;align-items:center;gap:.5rem">
           <i class="fas fa-map-marked-alt" style="color:#10b981;font-size:1.1rem"></i>
           Destinations
         </h1>
@@ -165,7 +165,7 @@ $pageTitle = 'Destinations — Admin';
     <?= $msg ?>
 
     <?php if (isset($_GET['add']) || $editing): ?>
-    <!-- ─── ADD / EDIT FORM ─────────────────────────── -->
+    <!-- --- ADD / EDIT FORM --------------------------- -->
     <form method="POST" enctype="multipart/form-data">
       <input type="hidden" name="<?= CSRF_TOKEN_NAME ?>" value="<?= e($csrf) ?>">
       <input type="hidden" name="action" value="save">
@@ -173,7 +173,7 @@ $pageTitle = 'Destinations — Admin';
       <input type="hidden" name="existing_image" value="<?= e($editing['image'] ?? '') ?>">
 
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;flex-wrap:wrap;gap:.65rem">
-        <h2 style="font-family:'Playfair Display',serif;font-size:1.1rem;color:#fff;font-weight:700;margin:0">
+        <h2 style="font-family:'Nanum Myeongjo',serif;font-size:1.1rem;color:#fff;font-weight:700;margin:0">
           <?= $editing ? 'Edit: '.e($editing['title']) : 'Add New Destination' ?>
         </h2>
         <a href="destinations.php" class="btn btn--outline btn--sm" style="display:inline-flex;align-items:center;gap:.35rem;text-decoration:none">
@@ -210,7 +210,7 @@ $pageTitle = 'Destinations — Admin';
         </div>
         <div style="margin-bottom:1rem;">
           <label class="f-label">Description <span>*</span></label>
-          <textarea name="description" class="f-input" rows="5" placeholder="Describe this destination — landscape, wildlife, culture, unique features..."><?= e($editing['description'] ?? '') ?></textarea>
+          <textarea name="description" class="f-input" rows="5" placeholder="Describe this destination � landscape, wildlife, culture, unique features..."><?= e($editing['description'] ?? '') ?></textarea>
         </div>
         <div style="display:flex;align-items:center;gap:var(--space-3);">
           <input type="checkbox" name="active" id="dest-active" value="1" <?= ($editing['active'] ?? 1) ? 'checked' : '' ?>>
@@ -223,11 +223,11 @@ $pageTitle = 'Destinations — Admin';
         <div class="field-grid" style="margin-bottom:1rem;">
           <div>
             <label class="f-label">Best Season to Visit</label>
-            <input type="text" name="best_season" class="f-input" value="<?= e($editing['best_season'] ?? '') ?>" placeholder="e.g. June – October">
+            <input type="text" name="best_season" class="f-input" value="<?= e($editing['best_season'] ?? '') ?>" placeholder="e.g. June � October">
           </div>
           <div>
             <label class="f-label">Climate</label>
-            <input type="text" name="climate" class="f-input" value="<?= e($editing['climate'] ?? '') ?>" placeholder="e.g. Warm and dry. Average 26°C.">
+            <input type="text" name="climate" class="f-input" value="<?= e($editing['climate'] ?? '') ?>" placeholder="e.g. Warm and dry. Average 26�C.">
           </div>
         </div>
         <div>
@@ -253,14 +253,14 @@ $pageTitle = 'Destinations — Admin';
         <?php endif; ?>
         <label class="f-label">Upload New Image</label>
         <div class="upload-area" id="img-drop" onclick="document.getElementById('image_file').click()">
-          <div style="font-size:2rem;margin-bottom:var(--space-2);">📷</div>
+          <div style="font-size:2rem;margin-bottom:var(--space-2);">??</div>
           <p style="font-size:.85rem;color:rgba(255,255,255,.45);margin:0;">Click to upload or drag & drop</p>
-          <p style="font-size:.75rem;color:rgba(255,255,255,.45);margin:var(--space-1) 0 0;">JPG, PNG, WebP — max 8MB</p>
+          <p style="font-size:.75rem;color:rgba(255,255,255,.45);margin:var(--space-1) 0 0;">JPG, PNG, WebP � max 8MB</p>
           <img id="img-preview" src="" alt="" class="thumb-preview" style="display:none;">
         </div>
         <input type="file" name="image_file" id="image_file" accept="image/*" style="display:none;">
         <div style="margin-top:1rem;">
-          <label class="f-label">— OR paste an image URL —</label>
+          <label class="f-label">� OR paste an image URL �</label>
           <input type="text" name="image_url" id="image_url" class="f-input" value="" placeholder="https://images.unsplash.com/...">
           <small style="color:rgba(255,255,255,.45);font-size:.75rem;">Uploading a file takes priority over the URL field.</small>
         </div>
@@ -275,13 +275,13 @@ $pageTitle = 'Destinations — Admin';
     </form>
 
     <?php else: ?>
-    <!-- ─── DESTINATIONS LIST ─────────────────────────── -->
+    <!-- --- DESTINATIONS LIST --------------------------- -->
     <div class="adm-card">
       <?php if (empty($destinations)): ?>
       <div style="padding:3rem;text-align:center;color:rgba(255,255,255,.3)">
         <i class="fas fa-map-marked-alt" style="font-size:2.5rem;margin-bottom:.75rem;display:block;color:rgba(255,255,255,.12)"></i>
         <p style="margin-bottom:.75rem">No destinations yet.</p>
-        <a href="?add=1" style="color:#10b981;font-weight:600;font-family:'Montserrat',sans-serif;font-size:.82rem">Add your first destination →</a>
+        <a href="?add=1" style="color:#10b981;font-weight:600;font-family:'Montserrat',sans-serif;font-size:.82rem">Add your first destination ?</a>
       </div>
       <?php else: ?>
       <table class="adm-table" style="min-width:900px;">
@@ -305,12 +305,12 @@ $pageTitle = 'Destinations — Admin';
               <?php if ($dest['image']): ?>
               <img src="<?= e($dest['image']) ?>" alt="" class="dest-thumb">
               <?php else: ?>
-              <div style="width:64px;height:44px;background:rgba(255,255,255,.04);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:1.2rem;">🗺️</div>
+              <div style="width:64px;height:44px;background:rgba(255,255,255,.04);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:1.2rem;">???</div>
               <?php endif; ?>
             </td>
             <td>
               <strong style="font-family:var(--font-heading);color:#10b981;"><?= e($dest['title']) ?></strong>
-              <div style="font-size:.75rem;color:rgba(255,255,255,.45);"><?= e($dest['country']) ?> <?= $dest['region'] ? '· '.e($dest['region']) : '' ?></div>
+              <div style="font-size:.75rem;color:rgba(255,255,255,.45);"><?= e($dest['country']) ?> <?= $dest['region'] ? '� '.e($dest['region']) : '' ?></div>
               <div style="font-size:.72rem;color:rgba(255,255,255,.45);font-family:var(--font-nav);">/<?= e($dest['slug']) ?></div>
             </td>
             <td style="font-size:.85rem;"><?= e($dest['region']) ?></td>
@@ -331,20 +331,20 @@ $pageTitle = 'Destinations — Admin';
             </td>
             <td>
               <div style="display:flex;gap:var(--space-2);flex-wrap:wrap;">
-                <a href="?edit=<?= $dest['id'] ?>" class="btn-sm btn-edit">✏️ Edit</a>
+                <a href="?edit=<?= $dest['id'] ?>" class="btn-sm btn-edit">?? Edit</a>
                 <form method="POST" style="display:inline;">
                   <input type="hidden" name="<?= CSRF_TOKEN_NAME ?>" value="<?= e($csrf) ?>">
                   <input type="hidden" name="action" value="toggle">
                   <input type="hidden" name="id" value="<?= $dest['id'] ?>">
                   <button type="submit" class="btn-sm btn-toggle <?= $dest['active'] ? '' : 'inactive' ?>">
-                    <?= $dest['active'] ? '⏸ Deactivate' : '▶ Activate' ?>
+                    <?= $dest['active'] ? '? Deactivate' : '? Activate' ?>
                   </button>
                 </form>
-                <form method="POST" onsubmit="return confirm('Delete «<?= e(addslashes($dest['title'])) ?>»? This cannot be undone.');">
+                <form method="POST" onsubmit="return confirm('Delete �<?= e(addslashes($dest['title'])) ?>�? This cannot be undone.');">
                   <input type="hidden" name="<?= CSRF_TOKEN_NAME ?>" value="<?= e($csrf) ?>">
                   <input type="hidden" name="action" value="delete">
                   <input type="hidden" name="id" value="<?= $dest['id'] ?>">
-                  <button type="submit" class="btn-sm btn-delete">🗑</button>
+                  <button type="submit" class="btn-sm btn-delete">??</button>
                 </form>
               </div>
             </td>

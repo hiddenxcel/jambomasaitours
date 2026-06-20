@@ -130,7 +130,7 @@ $destData = [
         'map'     => [200, 195],
     ],
     'maasai' => [
-        'badge'   => ['Cultural',    '#10b981','rgba(16,185,129,.85)','#fff','fa-users'],
+        'badge'   => ['Cultural',    '#a05e22','rgba(160,94,34,.85)','#fff','fa-users'],
         'tagline' => 'Soul of Africa — Living Culture',
         'region'  => 'Arusha, Manyara & Kilimanjaro Regions',
         'wildlife'=> [['🦁','Lions','Maasai Land'],['🦒','Giraffe','Savannahs'],['🦓','Zebra','Open Plains'],['🐘','Elephant','Corridors'],['🐃','Wildebeest','Migration Route'],['🐦','Maasai Ostrich','Grasslands'],['🐄','Maasai Cattle','Cultural'],['🌿','Medicinal Plants','Traditional']],
@@ -162,16 +162,16 @@ $canonicalUrl = SITE_URL . '/destinations.php';
 $extraCss = '
   /* Destination cards */
   .dest-card-main{background:rgba(17,17,17,.9);border:1px solid rgba(255,255,255,.06);border-radius:24px;overflow:hidden;transition:all .4s}
-  .dest-card-main:hover{border-color:rgba(16,185,129,.2);box-shadow:0 30px 80px rgba(0,0,0,.5)}
+  .dest-card-main:hover{border-color:rgba(160,94,34,.2);box-shadow:0 30px 80px rgba(0,0,0,.5)}
   .dest-hero-link{display:block;cursor:pointer}
   .dest-hero-link:hover .dest-hero-img{transform:scale(1.04)}
   .dest-hero-img{transition:transform .6s cubic-bezier(.4,0,.2,1)}
   /* Wildlife cards */
   .wl-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:.75rem .5rem;text-align:center;transition:all .3s}
-  .wl-card:hover{transform:scale(1.06);border-color:rgba(16,185,129,.2)}
+  .wl-card:hover{transform:scale(1.06);border-color:rgba(160,94,34,.2)}
   /* Activity tags */
   .act-tag{display:inline-flex;align-items:center;gap:.5rem;font-size:.72rem;font-family:"Montserrat",sans-serif;font-weight:600;padding:.5rem 1rem;border-radius:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);color:rgba(255,255,255,.6);cursor:default;transition:all .25s}
-  .act-tag:hover{background:rgba(16,185,129,.08);border-color:rgba(16,185,129,.2);color:rgba(255,255,255,.85)}
+  .act-tag:hover{background:rgba(160,94,34,.08);border-color:rgba(160,94,34,.2);color:rgba(255,255,255,.85)}
   /* Season bars */
   .s-bar{height:7px;border-radius:4px;background:rgba(255,255,255,.05);overflow:hidden;margin-top:.35rem}
   .s-fill{height:100%;border-radius:4px;transition:width 1.2s cubic-bezier(.4,0,.2,1)}
@@ -188,7 +188,7 @@ $extraCss = '
   /* Dest tab */
   .dtab{display:inline-flex;align-items:center;gap:.4rem;font-size:.68rem;font-family:"Montserrat",sans-serif;font-weight:600;padding:.55rem 1.1rem;border-radius:10px;border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.04);color:rgba(255,255,255,.5);cursor:pointer;white-space:nowrap;transition:all .25s}
   .dtab:hover{background:rgba(255,255,255,.08);color:#fff}
-  .dtab.active{background:linear-gradient(135deg,#047857,#10b981);color:#fff;border-color:transparent;box-shadow:0 4px 14px rgba(16,185,129,.3)}
+  .dtab.active{background:linear-gradient(135deg,#5e3611,#a05e22);color:#fff;border-color:transparent;box-shadow:0 4px 14px rgba(160,94,34,.3)}
   /* SVG map dot */
   .mdot{cursor:pointer}
   .mdot .mdot-main{transition:r .3s,filter .3s}
@@ -197,10 +197,10 @@ $extraCss = '
   .mdot:hover text{fill:#fff}
   /* Scroll fade right */
   .sfade-r{position:relative}
-  .sfade-r::after{content:"";position:absolute;top:0;right:0;bottom:0;width:40px;background:linear-gradient(to right,transparent,#0a0a0a);pointer-events:none}
+  .sfade-r::after{content:"";position:absolute;top:0;right:0;bottom:0;width:40px;background:linear-gradient(to right,transparent,#23362f);pointer-events:none}
   /* FAQ filter */
   .f-input,.f-select,.f-textarea{width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#e5e7eb;border-radius:10px;padding:.75rem 1rem;font-family:"Inter",sans-serif;font-size:.88rem;outline:none;transition:border-color .2s;-webkit-appearance:none}
-  .f-input:focus,.f-select:focus,.f-textarea:focus{border-color:rgba(16,185,129,.5)}
+  .f-input:focus,.f-select:focus,.f-textarea:focus{border-color:rgba(160,94,34,.5)}
   .f-textarea{resize:vertical;min-height:100px}
   .f-select option{background:#1a1a1a}
   .f-label{display:block;font-family:"Montserrat",sans-serif;font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.38);margin-bottom:.4rem}
@@ -256,27 +256,27 @@ require_once 'includes/dark_header.php';
               </defs>
               <!-- Tanzania outline (simplified) -->
               <path d="M100,60 L190,40 L310,35 L400,50 L460,85 L480,130 L470,180 L490,240 L465,295 L430,335 L370,358 L290,362 L210,348 L150,310 L110,260 L90,200 L88,140 Z"
-                    fill="rgba(16,185,129,.04)" stroke="rgba(16,185,129,.25)" stroke-width="1.5" stroke-dasharray="5,4"/>
+                    fill="rgba(160,94,34,.04)" stroke="rgba(160,94,34,.25)" stroke-width="1.5" stroke-dasharray="5,4"/>
               <!-- Zanzibar island -->
               <ellipse cx="498" cy="272" rx="16" ry="22" fill="rgba(6,182,212,.06)" stroke="rgba(6,182,212,.3)" stroke-width="1.2"/>
 
               <!-- Serengeti -->
               <g class="mdot" onclick="scrollToDest('serengeti')">
-                <circle cx="155" cy="138" r="3" fill="#10b981" opacity=".6">
+                <circle cx="155" cy="138" r="3" fill="#a05e22" opacity=".6">
                   <animate attributeName="r" values="3;13" dur="2.6s" begin="0s" repeatCount="indefinite"/>
                   <animate attributeName="opacity" values=".6;0" dur="2.6s" begin="0s" repeatCount="indefinite"/>
                 </circle>
-                <circle class="mdot-main" cx="155" cy="138" r="8" fill="rgba(16,185,129,.12)" stroke="#10b981" stroke-width="1.5" filter="url(#mglow)"/>
+                <circle class="mdot-main" cx="155" cy="138" r="8" fill="rgba(160,94,34,.12)" stroke="#a05e22" stroke-width="1.5" filter="url(#mglow)"/>
                 <circle cx="155" cy="138" r="3.5" fill="#fff"/>
                 <text x="170" y="143" fill="#d4d4d4" font-size="10" font-family="Inter,sans-serif">Serengeti</text>
               </g>
               <!-- Ngorongoro -->
               <g class="mdot" onclick="scrollToDest('ngorongoro')">
-                <circle cx="195" cy="168" r="3" fill="#10b981" opacity=".6">
+                <circle cx="195" cy="168" r="3" fill="#a05e22" opacity=".6">
                   <animate attributeName="r" values="3;12" dur="2.6s" begin=".6s" repeatCount="indefinite"/>
                   <animate attributeName="opacity" values=".6;0" dur="2.6s" begin=".6s" repeatCount="indefinite"/>
                 </circle>
-                <circle class="mdot-main" cx="195" cy="168" r="7" fill="rgba(16,185,129,.12)" stroke="#10b981" stroke-width="1.5" filter="url(#mglow)"/>
+                <circle class="mdot-main" cx="195" cy="168" r="7" fill="rgba(160,94,34,.12)" stroke="#a05e22" stroke-width="1.5" filter="url(#mglow)"/>
                 <circle cx="195" cy="168" r="3" fill="#fff"/>
                 <text x="210" y="173" fill="#d4d4d4" font-size="10" font-family="Inter,sans-serif">Ngorongoro</text>
               </g>
@@ -313,7 +313,7 @@ require_once 'includes/dark_header.php';
               </g>
               <!-- Maasai Heartland -->
               <g class="mdot" onclick="scrollToDest('maasai')">
-                <circle class="mdot-main" cx="185" cy="235" r="5.5" fill="#10b981" filter="url(#mglow)"/>
+                <circle class="mdot-main" cx="185" cy="235" r="5.5" fill="#a05e22" filter="url(#mglow)"/>
                 <text x="130" y="252" fill="#d4d4d4" font-size="9" font-family="Inter,sans-serif">Maasai Heartland</text>
               </g>
               <!-- Arusha (hub) -->
@@ -341,7 +341,7 @@ require_once 'includes/dark_header.php';
           ] as $s): ?>
           <div class="flex items-center gap-3 rounded-xl p-3.5" style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06)">
             <div class="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0" style="background:rgba(<?= $s[1]==='emerald'?'16,185,129':($s[1]==='amber'?'245,158,11':($s[1]==='blue'?'59,130,246':'6,182,212')) ?>,.12)">
-              <i class="fas <?= $s[0] ?>" style="color:<?= $s[1]==='emerald'?'#34d399':($s[1]==='amber'?'#fbbf24':($s[1]==='blue'?'#60a5fa':'#22d3ee')) ?>"></i>
+              <i class="fas <?= $s[0] ?>" style="color:<?= $s[1]==='emerald'?'#c17a3a':($s[1]==='amber'?'#fbbf24':($s[1]==='blue'?'#60a5fa':'#22d3ee')) ?>"></i>
             </div>
             <div>
               <div class="text-base font-bold text-white leading-tight"><?= $s[2] ?></div>
@@ -366,7 +366,7 @@ require_once 'includes/dark_header.php';
         <?php foreach ($destinations as $i => $d):
           $slug = $d['slug'] ?? strtolower(str_replace(' ','-',$d['title']));
           $dd   = $destData[$slug] ?? $destData['serengeti'];
-          $clr  = ['#10b981','#f59e0b','#3b82f6','#06b6d4','#f97316','#8b5cf6'][$i % 6];
+          $clr  = ['#a05e22','#f59e0b','#3b82f6','#06b6d4','#f97316','#8b5cf6'][$i % 6];
         ?>
         <button class="dtab <?= $i===0?'active':'' ?>" onclick="scrollToDest('<?= e($slug) ?>')" id="tab-<?= e($slug) ?>">
           <span style="width:6px;height:6px;border-radius:50%;background:<?= $clr ?>;flex-shrink:0"></span>
@@ -382,7 +382,7 @@ require_once 'includes/dark_header.php';
 <?php foreach ($destinations as $idx => $d):
   $slug       = $d['slug'] ?? strtolower(str_replace(' ','-',$d['title']));
   $dd         = $destData[$slug] ?? null;
-  $badge      = $dd['badge']     ?? ['Featured','#10b981','rgba(16,185,129,.85)','#fff','fa-star'];
+  $badge      = $dd['badge']     ?? ['Featured','#a05e22','rgba(160,94,34,.85)','#fff','fa-star'];
   $dTours     = $toursByDest[strtolower($d['title'])] ?? $toursByDest[$slug] ?? [];
   $hls        = array_filter(explode('|', $d['highlights'] ?? ''));
   $img        = $d['image'] ?: IMG_SERENGETI;
@@ -446,7 +446,7 @@ require_once 'includes/dark_header.php';
               <?php if (!empty($hls)): ?>
               <div class="flex flex-wrap gap-2 mt-4">
                 <?php foreach($hls as $hl): ?>
-                <span class="inline-flex items-center gap-1 text-[.68rem] font-nav font-semibold px-3 py-1 rounded-full" style="background:rgba(16,185,129,.08);color:#34d399;border:1px solid rgba(16,185,129,.15)">
+                <span class="inline-flex items-center gap-1 text-[.68rem] font-nav font-semibold px-3 py-1 rounded-full" style="background:rgba(160,94,34,.08);color:#c17a3a;border:1px solid rgba(160,94,34,.15)">
                   <i class="fas fa-check text-[.5rem]"></i><?= e(trim($hl)) ?>
                 </span>
                 <?php endforeach; ?>
@@ -466,7 +466,7 @@ require_once 'includes/dark_header.php';
                 <div class="wl-card">
                   <div class="text-2xl mb-1"><?= $w[0] ?></div>
                   <div style="font-size:.62rem;color:rgba(255,255,255,.45)"><?= $w[1] ?></div>
-                  <div style="font-size:.58rem;font-family:'Montserrat',sans-serif;font-weight:700;margin-top:.2rem;color:<?= in_array($w[2],['Abundant','Year-round','Common']) ? '#34d399' : (str_contains($w[2],'Rare')||str_contains($w[2],'Unique') ? '#a78bfa' : '#fbbf24') ?>"><?= $w[2] ?></div>
+                  <div style="font-size:.58rem;font-family:'Montserrat',sans-serif;font-weight:700;margin-top:.2rem;color:<?= in_array($w[2],['Abundant','Year-round','Common']) ? '#c17a3a' : (str_contains($w[2],'Rare')||str_contains($w[2],'Unique') ? '#a78bfa' : '#fbbf24') ?>"><?= $w[2] ?></div>
                 </div>
                 <?php endforeach; ?>
               </div>
@@ -482,7 +482,7 @@ require_once 'includes/dark_header.php';
               </h3>
               <div class="flex flex-wrap gap-2">
                 <?php foreach($dd['activities'] as $a):
-                  $aclr = ['emerald'=>'#34d399','amber'=>'#fbbf24','blue'=>'#60a5fa','purple'=>'#a78bfa','rose'=>'#fb7185','cyan'=>'#22d3ee','yellow'=>'#fde047','green'=>'#4ade80','pink'=>'#f472b6'][$a[1]] ?? '#34d399';
+                  $aclr = ['emerald'=>'#c17a3a','amber'=>'#fbbf24','blue'=>'#60a5fa','purple'=>'#a78bfa','rose'=>'#fb7185','cyan'=>'#22d3ee','yellow'=>'#fde047','green'=>'#4ade80','pink'=>'#f472b6'][$a[1]] ?? '#c17a3a';
                 ?>
                 <span class="act-tag"><i class="fas <?= $a[0] ?> text-xs" style="color:<?= $aclr ?>"></i><?= $a[2] ?></span>
                 <?php endforeach; ?>
@@ -540,8 +540,8 @@ require_once 'includes/dark_header.php';
               <div class="space-y-3">
                 <?php foreach($dd['seasons'] as $s):
                   $ispeak = str_contains($s[2],'Peak') || str_contains($s[2],'Best');
-                  $clr = $ispeak ? '#10b981' : (str_contains($s[2],'Avoid')||str_contains($s[2],'Rain') ? '#f87171' : '#f59e0b');
-                  $bg  = $ispeak ? 'rgba(16,185,129,.3)' : (str_contains($s[2],'Avoid') ? 'rgba(248,113,113,.3)' : 'rgba(245,158,11,.3)');
+                  $clr = $ispeak ? '#a05e22' : (str_contains($s[2],'Avoid')||str_contains($s[2],'Rain') ? '#f87171' : '#f59e0b');
+                  $bg  = $ispeak ? 'rgba(160,94,34,.3)' : (str_contains($s[2],'Avoid') ? 'rgba(248,113,113,.3)' : 'rgba(245,158,11,.3)');
                 ?>
                 <div>
                   <div class="flex items-center justify-between mb-1">
@@ -580,7 +580,7 @@ require_once 'includes/dark_header.php';
               </h4>
               <div class="space-y-2.5">
                 <?php foreach($dd['accom'] as $a):
-                  $ac = ['amber'=>'#fbbf24','emerald'=>'#34d399','blue'=>'#60a5fa'][$a[0]] ?? '#34d399';
+                  $ac = ['amber'=>'#fbbf24','emerald'=>'#c17a3a','blue'=>'#60a5fa'][$a[0]] ?? '#c17a3a';
                 ?>
                 <div class="flex items-center gap-2 text-xs">
                   <div class="w-2 h-2 rounded-full flex-shrink-0" style="background:<?= $ac ?>"></div>
@@ -652,7 +652,7 @@ require_once 'includes/dark_header.php';
           <?php foreach($row[2] as $c): ?>
           <td style="padding:.65rem .3rem;text-align:center">
             <?php if($c==='best'): ?>
-            <span style="width:11px;height:11px;border-radius:50%;background:#10b981;display:inline-block"></span>
+            <span style="width:11px;height:11px;border-radius:50%;background:#a05e22;display:inline-block"></span>
             <?php elseif($c==='ok'): ?>
             <span style="width:11px;height:11px;border-radius:50%;background:#f59e0b;display:inline-block"></span>
             <?php else: ?>
@@ -665,7 +665,7 @@ require_once 'includes/dark_header.php';
         </tbody>
       </table>
       <div class="flex flex-wrap items-center gap-5 mt-5 pt-4" style="border-top:1px solid rgba(255,255,255,.06)">
-        <span class="flex items-center gap-2 text-white/40 text-xs font-nav"><span style="width:11px;height:11px;border-radius:50%;background:#10b981;display:inline-block"></span> Peak / Excellent</span>
+        <span class="flex items-center gap-2 text-white/40 text-xs font-nav"><span style="width:11px;height:11px;border-radius:50%;background:#a05e22;display:inline-block"></span> Peak / Excellent</span>
         <span class="flex items-center gap-2 text-white/40 text-xs font-nav"><span style="width:11px;height:11px;border-radius:50%;background:#f59e0b;display:inline-block"></span> Good</span>
         <span class="flex items-center gap-2 text-white/40 text-xs font-nav"><span style="width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.15);display:inline-block"></span> Not Recommended</span>
       </div>
@@ -694,7 +694,7 @@ require_once 'includes/dark_header.php';
       <div class="glass-card p-6 reveal" style="transition-delay:100ms">
         <?php if ($formSuccess): ?>
         <div class="text-center py-8">
-          <div class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style="background:rgba(16,185,129,.12)">
+          <div class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style="background:rgba(160,94,34,.12)">
             <i class="fas fa-check text-emerald-400 text-xl"></i>
           </div>
           <h3 class="font-heading text-white text-xl font-bold mb-2">Enquiry Sent!</h3>

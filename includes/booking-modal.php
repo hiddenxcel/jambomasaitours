@@ -26,14 +26,14 @@ if (empty($_bmDests)) {
               background:#111;border:1px solid rgba(255,255,255,.1);
               box-shadow:0 32px 80px rgba(0,0,0,.7),0 0 0 1px rgba(201,168,76,.08);
               transform:translateY(24px) scale(.97);transition:transform .35s cubic-bezier(.16,1,.3,1),opacity .35s;
-              opacity:0;scrollbar-width:thin;scrollbar-color:#10b981 #111"
+              opacity:0;scrollbar-width:thin;scrollbar-color:#a05e22 #111"
        onclick="event.stopPropagation()">
 
     <!-- Header -->
     <div style="padding:1.6rem 1.6rem 0;display:flex;align-items:flex-start;justify-content:space-between;gap:1rem">
       <div>
-        <h2 style="font-family:'Playfair Display',Georgia,serif;font-size:1.45rem;font-weight:700;color:#fff;line-height:1.2;margin-bottom:.25rem">
-          Book Your <span style="background:linear-gradient(135deg,#34d399,#10b981);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Safari</span>
+        <h2 style="font-family:'Nanum Myeongjo',Georgia,serif;font-size:1.45rem;font-weight:700;color:#fff;line-height:1.2;margin-bottom:.25rem">
+          Book Your <span style="background:linear-gradient(135deg,#c17a3a,#a05e22);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Safari</span>
         </h2>
         <p style="font-size:.8rem;color:rgba(255,255,255,.45);font-family:'Inter',sans-serif">We'll get back within 24 hours.</p>
       </div>
@@ -121,18 +121,18 @@ if (empty($_bmDests)) {
 
         <!-- Submit -->
         <button type="submit" id="bm-submit"
-                style="width:100%;background:linear-gradient(135deg,#10b981,#059669);color:#fff;
+                style="width:100%;background:linear-gradient(135deg,#a05e22,#7d4817);color:#fff;
                        font-family:'Montserrat',sans-serif;font-weight:700;font-size:.85rem;letter-spacing:.06em;
                        text-transform:uppercase;padding:.95rem 1.5rem;border-radius:12px;border:none;cursor:pointer;
                        display:flex;align-items:center;justify-content:center;gap:.6rem;
-                       transition:all .3s;box-shadow:0 4px 20px rgba(16,185,129,.3)">
+                       transition:all .3s;box-shadow:0 4px 20px rgba(160,94,34,.3)">
           <i class="fas fa-compass text-xs" style="font-size:.75rem"></i>
           Request Booking
         </button>
 
         <!-- Trust note -->
         <p style="text-align:center;font-size:.7rem;color:rgba(255,255,255,.2);margin-top:.85rem;font-family:'Montserrat',sans-serif">
-          <i class="fas fa-shield-alt" style="color:#10b981;margin-right:.3rem;font-size:.65rem"></i>
+          <i class="fas fa-shield-alt" style="color:#a05e22;margin-right:.3rem;font-size:.65rem"></i>
           No payment required · Free cancellation · TATO Licensed
         </p>
       </form>
@@ -140,11 +140,11 @@ if (empty($_bmDests)) {
 
     <!-- Success state (hidden initially) -->
     <div id="bm-success" style="display:none;padding:2.5rem 1.6rem;text-align:center">
-      <div style="width:64px;height:64px;border-radius:50%;background:rgba(16,185,129,.12);
+      <div style="width:64px;height:64px;border-radius:50%;background:rgba(160,94,34,.12);
                   display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem">
-        <i class="fas fa-check" style="font-size:1.5rem;color:#10b981"></i>
+        <i class="fas fa-check" style="font-size:1.5rem;color:#a05e22"></i>
       </div>
-      <h3 style="font-family:'Playfair Display',Georgia,serif;font-size:1.25rem;color:#fff;margin-bottom:.5rem">
+      <h3 style="font-family:'Nanum Myeongjo',Georgia,serif;font-size:1.25rem;color:#fff;margin-bottom:.5rem">
         Booking Request Sent!
       </h3>
       <p style="font-size:.85rem;color:rgba(255,255,255,.5);line-height:1.7;margin-bottom:1.5rem">
@@ -171,12 +171,12 @@ if (empty($_bmDests)) {
 <style>
 .bm-label{display:block;font-family:'Montserrat',sans-serif;font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.38);margin-bottom:.4rem}
 .bm-input{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#e5e7eb;border-radius:10px;padding:.72rem 1rem;font-family:'Inter',sans-serif;font-size:.88rem;outline:none;transition:border-color .2s,background .2s;-webkit-appearance:none;box-sizing:border-box}
-.bm-input:focus{border-color:rgba(16,185,129,.5);background:rgba(16,185,129,.04)}
+.bm-input:focus{border-color:rgba(160,94,34,.5);background:rgba(160,94,34,.04)}
 .bm-input::placeholder{color:rgba(255,255,255,.22)}
 .bm-input option{background:#1a1a1a;color:#e5e7eb}
 #bm-card::-webkit-scrollbar{width:3px}
-#bm-card::-webkit-scrollbar-thumb{background:#10b981;border-radius:2px}
-#bm-submit:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(16,185,129,.4)}
+#bm-card::-webkit-scrollbar-thumb{background:#a05e22;border-radius:2px}
+#bm-submit:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(160,94,34,.4)}
 #bm-submit:disabled{opacity:.6;cursor:not-allowed;transform:none}
 #bm-close:hover{background:rgba(255,255,255,.14);color:#fff}
 </style>

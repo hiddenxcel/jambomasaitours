@@ -96,18 +96,18 @@ function emailWrap(string $content, string $preheader = ''): string {
   body{margin:0;padding:0;background:#f4f4f4;font-family:'Segoe UI',Arial,sans-serif;color:#333}
   .wrap{max-width:600px;margin:0 auto;background:#fff}
   .header{background:#0a1a0f;padding:28px 32px;text-align:center}
-  .header h1{margin:0;color:#10b981;font-size:22px;letter-spacing:1px}
+  .header h1{margin:0;color:#a05e22;font-size:22px;letter-spacing:1px}
   .header p{margin:4px 0 0;color:rgba(255,255,255,.5);font-size:12px;letter-spacing:2px;text-transform:uppercase}
   .body{padding:32px}
   .footer{background:#0a1a0f;padding:20px 32px;text-align:center}
   .footer p{margin:4px 0;color:rgba(255,255,255,.45);font-size:11px}
-  .footer a{color:#10b981;text-decoration:none}
+  .footer a{color:#a05e22;text-decoration:none}
   .divider{border:none;border-top:1px solid #e8e8e8;margin:24px 0}
-  .btn{display:inline-block;background:#10b981;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600;font-size:14px;margin:8px 0}
+  .btn{display:inline-block;background:#a05e22;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600;font-size:14px;margin:8px 0}
   .info-row{display:flex;padding:10px 0;border-bottom:1px solid #f0f0f0}
   .info-label{color:#888;font-size:13px;width:140px;flex-shrink:0}
   .info-value{color:#333;font-size:13px;font-weight:600}
-  .badge{display:inline-block;background:#e8faf4;color:#059669;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:600}
+  .badge{display:inline-block;background:#e8faf4;color:#7d4817;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:600}
   @media(max-width:600px){.body{padding:20px}.info-row{flex-direction:column}.info-label{margin-bottom:2px}}
 </style>
 </head>
@@ -151,10 +151,10 @@ function emailBookingAdmin(array $data): bool {
     $ts         = date('d M Y H:i');
 
     $content = <<<HTML
-<h2 style="color:#059669;margin:0 0 4px">🦁 New Booking Request</h2>
+<h2 style="color:#7d4817;margin:0 0 4px">🦁 New Booking Request</h2>
 <p style="color:#888;margin:0 0 24px;font-size:13px">Received: {$ts}</p>
 
-<div style="background:#f8fffe;border-left:4px solid #10b981;padding:16px;border-radius:0 8px 8px 0;margin-bottom:24px">
+<div style="background:#f8fffe;border-left:4px solid #a05e22;padding:16px;border-radius:0 8px 8px 0;margin-bottom:24px">
   <strong style="font-size:15px">{$tourName}</strong>
 </div>
 
@@ -195,8 +195,8 @@ function emailBookingCustomer(array $data): bool {
     $waLink   = 'https://wa.me/' . WHATSAPP_NUMBER . '?text=' . urlencode('Hi! I\'d like to confirm my booking for ' . ($data['tour_name'] ?? 'a safari tour') . '.');
 
     $content = <<<HTML
-<h2 style="color:#059669;margin:0 0 8px">Booking Request Received! 🎉</h2>
-<p style="color:#555;margin:0 0 24px">Hi {$fname}, thank you for choosing <strong>Jambo Masai Tours</strong>. We've received your booking request and our team will contact you within <strong style="color:#059669">24 hours</strong> to confirm your itinerary.</p>
+<h2 style="color:#7d4817;margin:0 0 8px">Booking Request Received! 🎉</h2>
+<p style="color:#555;margin:0 0 24px">Hi {$fname}, thank you for choosing <strong>Jambo Masai Tours</strong>. We've received your booking request and our team will contact you within <strong style="color:#7d4817">24 hours</strong> to confirm your itinerary.</p>
 
 <div style="background:#f8fffe;border:1px solid #d1fae5;border-radius:10px;padding:20px;margin-bottom:24px">
   <h3 style="margin:0 0 12px;color:#333;font-size:15px">📋 Your Booking Summary</h3>
@@ -236,10 +236,10 @@ function emailContactAdmin(array $data): bool {
     $adminUrl= SITE_URL . '/admin/contacts.php';
 
     $content = <<<HTML
-<h2 style="color:#059669;margin:0 0 4px">📩 New Contact Message</h2>
+<h2 style="color:#7d4817;margin:0 0 4px">📩 New Contact Message</h2>
 <p style="color:#888;margin:0 0 24px;font-size:13px">Received: {$ts}</p>
 
-<div style="background:#f8fffe;border-left:4px solid #10b981;padding:12px 16px;border-radius:0 8px 8px 0;margin-bottom:24px">
+<div style="background:#f8fffe;border-left:4px solid #a05e22;padding:12px 16px;border-radius:0 8px 8px 0;margin-bottom:24px">
   <strong style="font-size:14px">Subject: {$subject}</strong>
 </div>
 
@@ -281,7 +281,7 @@ function emailModalBookingAdmin(array $data): bool {
     $adminUrl    = SITE_URL . '/admin/contacts.php';
 
     $content = <<<HTML
-<h2 style="color:#059669;margin:0 0 4px">🦁 New Safari Booking Enquiry</h2>
+<h2 style="color:#7d4817;margin:0 0 4px">🦁 New Safari Booking Enquiry</h2>
 <p style="color:#888;margin:0 0 24px;font-size:13px">Via website booking modal · {$ts}</p>
 
 <div>

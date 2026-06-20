@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 require_once '../config/config.php';
 require_once '../includes/functions.php';
 require_once '../includes/security.php';
@@ -9,16 +9,16 @@ require_once 'includes/upload_helper.php';
 $db     = getDB();
 $errors = [];
 
-/* ── Add included/not_included columns if missing ── */
+/* -- Add included/not_included columns if missing -- */
 foreach (["ALTER TABLE tours ADD COLUMN IF NOT EXISTS included TEXT DEFAULT ''",
           "ALTER TABLE tours ADD COLUMN IF NOT EXISTS not_included TEXT DEFAULT ''"]
          as $sql) { try { $db->exec($sql); } catch (\Throwable $e) {} }
 
-/* ── Ensure itinerary + photos tables exist ── */
+/* -- Ensure itinerary + photos tables exist -- */
 $db->exec("CREATE TABLE IF NOT EXISTS tour_itinerary (id INT AUTO_INCREMENT PRIMARY KEY,tour_id INT NOT NULL,day_number INT NOT NULL,title VARCHAR(255) NOT NULL,description TEXT,departure_location VARCHAR(200) DEFAULT '',arrival_location VARCHAR(200) DEFAULT '',distance VARCHAR(50) DEFAULT '',travel_time VARCHAR(50) DEFAULT '',accommodation VARCHAR(200) DEFAULT '',hotel_url VARCHAR(500) DEFAULT '',hotel_image VARCHAR(500) DEFAULT '',meals VARCHAR(200) DEFAULT '',highlights TEXT DEFAULT '',notes TEXT DEFAULT '',created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,UNIQUE KEY unique_day(tour_id,day_number))");
 $db->exec("CREATE TABLE IF NOT EXISTS tour_photos (id INT AUTO_INCREMENT PRIMARY KEY,tour_id INT NOT NULL,image VARCHAR(500) NOT NULL,caption VARCHAR(255) DEFAULT '',sort_order INT DEFAULT 0,created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP)");
 
-/* ── slugify helper ─────────────────────── */
+/* -- slugify helper ----------------------- */
 function makeSlug(string $str): string {
     $str = strtolower(trim($str));
     $str = preg_replace('/[^a-z0-9\s-]/', '', $str);
@@ -26,14 +26,14 @@ function makeSlug(string $str): string {
     return trim($str, '-');
 }
 
-/* ── POST handlers ──────────────────────── */
+/* -- POST handlers ------------------------ */
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!validateCsrfToken($_POST[CSRF_TOKEN_NAME] ?? '')) {
         http_response_code(403); die('Invalid CSRF token.');
     }
     $action = $_POST['action'] ?? '';
 
-    /* ── Save (add or edit) ── */
+    /* -- Save (add or edit) -- */
     if ($action === 'save') {
         $id          = sanitizeInt($_POST['id'] ?? 0, 0);
         $name        = sanitizeInput($_POST['name']        ?? '');
@@ -91,21 +91,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    /* ── Delete ── */
+    /* -- Delete -- */
     if ($action === 'delete') {
         $id = sanitizeInt($_POST['id'] ?? 0, 1);
         if ($id) $db->prepare("DELETE FROM tours WHERE id=?")->execute([$id]);
         redirect(SITE_URL . '/admin/tours.php?msg=Tour+deleted.');
     }
 
-    /* ── Toggle featured ── */
+    /* -- Toggle featured -- */
     if ($action === 'toggle_featured') {
         $id = sanitizeInt($_POST['id'] ?? 0, 1);
         if ($id) $db->prepare("UPDATE tours SET featured = 1 - featured WHERE id=?")->execute([$id]);
         redirect(SITE_URL . '/admin/tours.php');
     }
 
-    /* ── ITINERARY: save day ── */
+    /* -- ITINERARY: save day -- */
     if ($action === 'save_day') {
         $tourId  = sanitizeInt($_POST['tour_id']  ?? 0, 1);
         $dayId   = sanitizeInt($_POST['day_id']   ?? 0, 0);
@@ -139,7 +139,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         redirect(SITE_URL.'/admin/tours.php?edit='.$tourId.'&tab=itinerary&msg='.urlencode($dayId?'Day updated.':'Day added.'));
     }
 
-    /* ── ITINERARY: delete day ── */
+    /* -- ITINERARY: delete day -- */
     if ($action === 'delete_day') {
         $tourId = sanitizeInt($_POST['tour_id'] ?? 0, 1);
         $dayId  = sanitizeInt($_POST['day_id']  ?? 0, 1);
@@ -147,7 +147,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         redirect(SITE_URL.'/admin/tours.php?edit='.$tourId.'&tab=itinerary&msg=Day+deleted.');
     }
 
-    /* ── ITINERARY: move day ── */
+    /* -- ITINERARY: move day -- */
     if ($action === 'move_day') {
         $tourId = sanitizeInt($_POST['tour_id'] ?? 0, 1);
         $dayId  = sanitizeInt($_POST['day_id']  ?? 0, 1);
@@ -162,7 +162,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         redirect(SITE_URL.'/admin/tours.php?edit='.$tourId.'&tab=itinerary');
     }
 
-    /* ── PHOTOS: upload ── */
+    /* -- PHOTOS: upload -- */
     if ($action === 'upload_photos') {
         $tourId  = sanitizeInt($_POST['tour_id'] ?? 0, 1);
         $urls    = array_filter(array_map('trim', explode("\n", $_POST['image_urls'] ?? '')));
@@ -179,7 +179,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         redirect(SITE_URL.'/admin/tours.php?edit='.$tourId.'&tab=photos&msg='.urlencode($uploaded.' photo(s) added.'));
     }
 
-    /* ── PHOTOS: delete ── */
+    /* -- PHOTOS: delete -- */
     if ($action === 'delete_photo') {
         $tourId  = sanitizeInt($_POST['tour_id']  ?? 0, 1);
         $photoId = sanitizeInt($_POST['photo_id'] ?? 0, 1);
@@ -234,7 +234,7 @@ function dayClr(int $n):array{$c=[['#10b981','rgba(16,185,129,.15)'],['#f59e0b',
   <title>Tours | Jambo Masai Admin</title>
   <meta name="robots" content="noindex,nofollow">
   <link rel="icon" type="image/png" href="<?= e(getSetting('favicon_url', SITE_URL.'/assets/images/favicon.ico')) ?>">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Playfair+Display:wght@700&family=Montserrat:wght@600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Nanum+Myeongjo:wght@700&family=Montserrat:wght@600;700&display=swap">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"><link rel="stylesheet" href="<?= SITE_URL ?>/admin/assets/admin.css">
 </head>
 <body>
@@ -245,7 +245,7 @@ function dayClr(int $n):array{$c=[['#10b981','rgba(16,185,129,.15)'],['#f59e0b',
     <!-- Page Header -->
     <div class="admin-header">
       <div>
-        <h1 style="font-family:'Playfair Display',serif;font-size:1.4rem;color:#fff;font-weight:700">
+        <h1 style="font-family:'Nanum Myeongjo',serif;font-size:1.4rem;color:#fff;font-weight:700">
           <?= isset($_GET['edit']) ? ($editing ? 'Edit: '.e($editing['name']) : 'Add New Tour') : 'Safari Tours' ?>
         </h1>
         <p style="color:rgba(255,255,255,.4);font-size:.78rem;font-family:'Montserrat',sans-serif;margin-top:.1rem">
@@ -276,9 +276,9 @@ function dayClr(int $n):array{$c=[['#10b981','rgba(16,185,129,.15)'],['#f59e0b',
     <?php endif; ?>
 
     <?php if (isset($_GET['edit'])): ?>
-    <!-- ════════════════════════════════════════
+    <!-- ----------------------------------------
          TABBED TOUR EDITOR
-    ════════════════════════════════════════ -->
+    ---------------------------------------- -->
     <div class="adm-card" style="margin-bottom:1.5rem">
 
       <!-- Tab bar -->
@@ -309,14 +309,14 @@ function dayClr(int $n):array{$c=[['#10b981','rgba(16,185,129,.15)'],['#f59e0b',
       <div class="alert alert-error" style="margin:1rem 1.25rem 0">
         <i class="fas fa-exclamation-circle"></i>
         <ul style="list-style:none;margin:0">
-          <?php foreach ($errors as $e_): ?><li>· <?= e($e_) ?></li><?php endforeach; ?>
+          <?php foreach ($errors as $e_): ?><li>� <?= e($e_) ?></li><?php endforeach; ?>
         </ul>
       </div>
       <?php endif; ?>
 
       <div class="adm-card-body">
 
-        <!-- ══ TAB: TOUR DETAILS ══ -->
+        <!-- -- TAB: TOUR DETAILS -- -->
         <?php if ($activeTab === 'details'): ?>
         <form method="POST" enctype="multipart/form-data">
           <input type="hidden" name="<?= CSRF_TOKEN_NAME ?>" value="<?= e($csrfToken) ?>">
@@ -338,7 +338,7 @@ function dayClr(int $n):array{$c=[['#10b981','rgba(16,185,129,.15)'],['#f59e0b',
             <div class="f-group">
               <label class="f-label">Destination <span>*</span></label>
               <select class="f-select" name="destination">
-                <option value="">— Select —</option>
+                <option value="">� Select �</option>
                 <?php foreach ($destinations as $d): ?>
                 <option value="<?= $d ?>" <?= ($editing['destination'] ?? '') === $d ? 'selected' : '' ?>><?= $d ?></option>
                 <?php endforeach; ?>
@@ -347,7 +347,7 @@ function dayClr(int $n):array{$c=[['#10b981','rgba(16,185,129,.15)'],['#f59e0b',
             <div class="f-group">
               <label class="f-label">Tour Type <span>*</span></label>
               <select class="f-select" name="tour_type">
-                <option value="">— Select —</option>
+                <option value="">� Select �</option>
                 <?php foreach ($tourTypes as $tt): ?>
                 <option value="<?= $tt ?>" <?= ($editing['tour_type'] ?? '') === $tt ? 'selected' : '' ?>><?= $tt ?></option>
                 <?php endforeach; ?>
@@ -369,7 +369,7 @@ function dayClr(int $n):array{$c=[['#10b981','rgba(16,185,129,.15)'],['#f59e0b',
                      value="<?= e($editing['max_travelers'] ?? 12) ?>">
             </div>
             <div class="f-group">
-              <label class="f-label">Rating (0–5)</label>
+              <label class="f-label">Rating (0�5)</label>
               <input type="number" class="f-input" name="rating" min="0" max="5" step="0.1"
                      value="<?= e($editing['rating'] ?? '4.8') ?>">
             </div>
@@ -421,7 +421,7 @@ function dayClr(int $n):array{$c=[['#10b981','rgba(16,185,129,.15)'],['#f59e0b',
               <div>
                 <label class="f-label" style="font-size:.58rem">Upload file</label>
                 <input type="file" class="f-input" name="image_file" accept="image/jpeg,image/png,image/webp" id="img-file-input">
-                <div class="f-hint">JPG/PNG/WebP · Max 8MB</div>
+                <div class="f-hint">JPG/PNG/WebP � Max 8MB</div>
               </div>
               <div>
                 <label class="f-label" style="font-size:.58rem">Or paste image URL</label>
@@ -450,24 +450,24 @@ function dayClr(int $n):array{$c=[['#10b981','rgba(16,185,129,.15)'],['#f59e0b',
           <div style="display:flex;gap:.65rem;flex-wrap:wrap">
             <button type="submit" class="btn btn--primary btn--lg" style="display:inline-flex;align-items:center;gap:.4rem">
               <i class="fas fa-save" style="font-size:.72rem"></i>
-              <?= $editing ? 'Save Changes' : 'Add Tour & Continue to Itinerary →' ?>
+              <?= $editing ? 'Save Changes' : 'Add Tour & Continue to Itinerary ?' ?>
             </button>
             <a href="tours.php" class="btn btn--outline btn--lg">Cancel</a>
           </div>
         </form>
 
 
-        <!-- ══ TAB: ITINERARY ══ -->
+        <!-- -- TAB: ITINERARY -- -->
         <?php elseif ($activeTab === 'itinerary' && $editing): ?>
 
         <!-- Add / Edit Day Form -->
         <?php $showDayForm = isset($_GET['add_day']) || $editingDay; ?>
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.1rem;flex-wrap:wrap;gap:.65rem">
           <div>
-            <h3 style="font-family:'Playfair Display',serif;font-size:1rem;color:#fff;font-weight:700">
-              Day-by-Day Itinerary — <?= e($editing['name']) ?>
+            <h3 style="font-family:'Nanum Myeongjo',serif;font-size:1rem;color:#fff;font-weight:700">
+              Day-by-Day Itinerary � <?= e($editing['name']) ?>
             </h3>
-            <p style="font-size:.72rem;color:rgba(255,255,255,.35);font-family:'Montserrat',sans-serif;margin-top:.15rem"><?= count($itineraryDays) ?> day<?= count($itineraryDays)!==1?'s':'' ?> · Next: Day <?= $nextDay ?></p>
+            <p style="font-size:.72rem;color:rgba(255,255,255,.35);font-family:'Montserrat',sans-serif;margin-top:.15rem"><?= count($itineraryDays) ?> day<?= count($itineraryDays)!==1?'s':'' ?> � Next: Day <?= $nextDay ?></p>
           </div>
           <a href="tours.php?edit=<?= $editId ?>&tab=itinerary&add_day=1"
              class="btn btn--primary btn--sm" style="display:inline-flex;align-items:center;gap:.35rem">
@@ -477,7 +477,7 @@ function dayClr(int $n):array{$c=[['#10b981','rgba(16,185,129,.15)'],['#f59e0b',
 
         <?php if ($showDayForm): ?>
         <div style="background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.2);border-radius:var(--radius-lg);padding:1.25rem;margin-bottom:1.25rem">
-          <h4 style="font-family:'Playfair Display',serif;font-size:.95rem;color:#fff;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem">
+          <h4 style="font-family:'Nanum Myeongjo',serif;font-size:.95rem;color:#fff;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem">
             <i class="fas <?= $editingDay ? 'fa-pen' : 'fa-plus' ?>" style="color:#10b981;font-size:.78rem"></i>
             <?= $editingDay ? 'Edit Day '.$editingDay['day_number'] : 'Add Day '.$nextDay ?>
           </h4>
@@ -530,11 +530,11 @@ function dayClr(int $n):array{$c=[['#10b981','rgba(16,185,129,.15)'],['#f59e0b',
             <!-- Hotel image -->
             <div class="f-grid-2" style="margin-bottom:1rem">
               <div class="f-group" style="margin-bottom:0">
-                <label class="f-label">Hotel Image — Upload</label>
+                <label class="f-label">Hotel Image � Upload</label>
                 <input type="file" class="f-input" name="hotel_image_file" accept="image/jpeg,image/png,image/webp">
               </div>
               <div class="f-group" style="margin-bottom:0">
-                <label class="f-label">Hotel Image — URL</label>
+                <label class="f-label">Hotel Image � URL</label>
                 <input type="url" class="f-input" name="hotel_image_url" placeholder="https://..." value="<?= e($editingDay['hotel_image'] ?? '') ?>">
               </div>
             </div>
@@ -600,13 +600,13 @@ function dayClr(int $n):array{$c=[['#10b981','rgba(16,185,129,.15)'],['#f59e0b',
                 <!-- Route line -->
                 <?php if ($day['departure_location']||$day['arrival_location']): ?>
                 <div style="display:flex;flex-wrap:wrap;align-items:center;gap:.35rem;margin-bottom:.4rem">
-                  <?php if($day['departure_location']): ?><span style="font-family:'Montserrat',sans-serif;font-size:.62rem;color:rgba(255,255,255,.4);background:rgba(255,255,255,.06);padding:.18rem .55rem;border-radius:4px"><?= e($day['departure_location']) ?></span><span style="color:rgba(255,255,255,.2);font-size:.7rem">→</span><?php endif; ?>
+                  <?php if($day['departure_location']): ?><span style="font-family:'Montserrat',sans-serif;font-size:.62rem;color:rgba(255,255,255,.4);background:rgba(255,255,255,.06);padding:.18rem .55rem;border-radius:4px"><?= e($day['departure_location']) ?></span><span style="color:rgba(255,255,255,.2);font-size:.7rem">?</span><?php endif; ?>
                   <?php if($day['distance']): ?><span style="font-family:'Montserrat',sans-serif;font-size:.6rem;color:rgba(255,255,255,.3)"><?= e($day['distance']) ?></span><?php endif; ?>
-                  <?php if($day['travel_time']): ?><span style="font-family:'Montserrat',sans-serif;font-size:.6rem;color:rgba(255,255,255,.3)">· <?= e($day['travel_time']) ?></span><?php endif; ?>
-                  <?php if($day['arrival_location']): ?><span style="font-size:.7rem;color:rgba(255,255,255,.2)">→</span><span style="font-family:'Montserrat',sans-serif;font-size:.62rem;color:<?= $clr ?>;background:<?= $clrBg ?>;padding:.18rem .55rem;border-radius:4px"><?= e($day['arrival_location']) ?></span><?php endif; ?>
+                  <?php if($day['travel_time']): ?><span style="font-family:'Montserrat',sans-serif;font-size:.6rem;color:rgba(255,255,255,.3)">� <?= e($day['travel_time']) ?></span><?php endif; ?>
+                  <?php if($day['arrival_location']): ?><span style="font-size:.7rem;color:rgba(255,255,255,.2)">?</span><span style="font-family:'Montserrat',sans-serif;font-size:.62rem;color:<?= $clr ?>;background:<?= $clrBg ?>;padding:.18rem .55rem;border-radius:4px"><?= e($day['arrival_location']) ?></span><?php endif; ?>
                 </div>
                 <?php endif; ?>
-                <h4 style="font-family:'Playfair Display',serif;color:#fff;font-size:.95rem;font-weight:700;margin-bottom:.3rem"><?= e($day['title']) ?></h4>
+                <h4 style="font-family:'Nanum Myeongjo',serif;color:#fff;font-size:.95rem;font-weight:700;margin-bottom:.3rem"><?= e($day['title']) ?></h4>
                 <!-- Meals + accommodation chips -->
                 <div style="display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:.4rem">
                   <?php if($day['meals']): foreach(array_filter(array_map('trim',explode(',',$day['meals']))) as $m): ?>
@@ -617,7 +617,7 @@ function dayClr(int $n):array{$c=[['#10b981','rgba(16,185,129,.15)'],['#f59e0b',
                   <?php endif; ?>
                 </div>
                 <?php if($day['description']): ?>
-                <p style="font-size:.78rem;color:rgba(255,255,255,.4);line-height:1.6;margin-bottom:.35rem"><?= e(mb_substr($day['description'],0,120)).(mb_strlen($day['description'])>120?'…':'') ?></p>
+                <p style="font-size:.78rem;color:rgba(255,255,255,.4);line-height:1.6;margin-bottom:.35rem"><?= e(mb_substr($day['description'],0,120)).(mb_strlen($day['description'])>120?'�':'') ?></p>
                 <?php endif; ?>
                 <?php if(!empty($hls)): ?>
                 <div style="display:flex;flex-wrap:wrap;gap:.2rem">
@@ -671,12 +671,12 @@ function dayClr(int $n):array{$c=[['#10b981','rgba(16,185,129,.15)'],['#f59e0b',
         <?php endif; ?>
 
 
-        <!-- ══ TAB: PHOTOS ══ -->
+        <!-- -- TAB: PHOTOS -- -->
         <?php elseif ($activeTab === 'photos' && $editing): ?>
 
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.1rem;flex-wrap:wrap;gap:.65rem">
-          <h3 style="font-family:'Playfair Display',serif;font-size:1rem;color:#fff;font-weight:700">
-            Tour Photos — <?= e($editing['name']) ?>
+          <h3 style="font-family:'Nanum Myeongjo',serif;font-size:1rem;color:#fff;font-weight:700">
+            Tour Photos � <?= e($editing['name']) ?>
           </h3>
           <span style="font-family:'Montserrat',sans-serif;font-size:.72rem;color:rgba(255,255,255,.35)"><?= count($tourPhotos) ?> photo<?= count($tourPhotos)!==1?'s':'' ?> uploaded</span>
         </div>
@@ -692,7 +692,7 @@ function dayClr(int $n):array{$c=[['#10b981','rgba(16,185,129,.15)'],['#f59e0b',
               <div class="f-group" style="margin-bottom:0">
                 <label class="f-label">Upload files (multiple allowed)</label>
                 <input type="file" class="f-input" name="photos[]" multiple accept="image/jpeg,image/png,image/webp">
-                <div class="f-hint">JPG/PNG/WebP · Max 8MB each</div>
+                <div class="f-hint">JPG/PNG/WebP � Max 8MB each</div>
               </div>
               <div class="f-group" style="margin-bottom:0">
                 <label class="f-label">Or paste image URLs <span class="f-hint" style="text-transform:none;letter-spacing:0">(one per line)</span></label>
@@ -718,7 +718,7 @@ function dayClr(int $n):array{$c=[['#10b981','rgba(16,185,129,.15)'],['#f59e0b',
             <img src="<?= e($p['image']) ?>" alt="" style="width:100%;height:110px;object-fit:cover;display:block">
             <div style="padding:.5rem .65rem">
               <div style="font-size:.62rem;color:rgba(255,255,255,.28);font-family:'Montserrat',sans-serif;margin-bottom:.3rem">
-                Photo #<?= $i+1 ?><?= $i===0?' · <span style="color:#10b981">Cover</span>':'' ?>
+                Photo #<?= $i+1 ?><?= $i===0?' � <span style="color:#10b981">Cover</span>':'' ?>
               </div>
               <form method="POST" style="display:inline">
                 <input type="hidden" name="<?= CSRF_TOKEN_NAME ?>" value="<?= e($csrfToken) ?>">
@@ -745,7 +745,7 @@ function dayClr(int $n):array{$c=[['#10b981','rgba(16,185,129,.15)'],['#f59e0b',
     </div><!-- /adm-card -->
     <?php endif; ?>
 
-    <!-- ══ TOURS TABLE ══ -->
+    <!-- -- TOURS TABLE -- -->
     <?php if (!isset($_GET['edit'])): ?>
     <div class="adm-card">
       <div class="adm-card-header">
@@ -781,7 +781,7 @@ function dayClr(int $n):array{$c=[['#10b981','rgba(16,185,129,.15)'],['#f59e0b',
                   <input type="hidden" name="action" value="toggle_featured">
                   <input type="hidden" name="id" value="<?= $t['id'] ?>">
                   <button type="submit" class="btn btn--sm" style="font-size:.62rem;padding:.28rem .65rem;background:<?= $t['featured']?'rgba(251,191,36,.15)':'rgba(255,255,255,.06)' ?>;color:<?= $t['featured']?'#fbbf24':'rgba(255,255,255,.4)' ?>;border:1px solid <?= $t['featured']?'rgba(251,191,36,.25)':'rgba(255,255,255,.1)' ?>">
-                    <?= $t['featured'] ? '★ Featured' : '☆ Feature' ?>
+                    <?= $t['featured'] ? '? Featured' : '? Feature' ?>
                   </button>
                 </form>
               </td>

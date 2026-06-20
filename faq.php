@@ -72,7 +72,7 @@ require_once 'includes/dark_header.php';
 <div class="page-hero pt-[68px]" style="min-height:320px">
   <img src="<?= IMG_SERENGETI ?>" alt="Tanzania Safari FAQ" fetchpriority="high"
        class="absolute inset-0 w-full h-full object-cover ken-burns" style="opacity:.35" width="1920" height="600">
-  <div class="absolute inset-0" style="background:linear-gradient(to top,#0a0a0a 0%,rgba(10,10,10,.6) 50%,rgba(10,10,10,.2) 100%)"></div>
+  <div class="absolute inset-0" style="background:linear-gradient(to top,#23362f 0%,rgba(10,10,10,.6) 50%,rgba(10,10,10,.2) 100%)"></div>
   <div class="relative z-10 max-w-4xl mx-auto px-4 lg:px-8 pb-14 pt-32">
     <nav class="flex items-center gap-2 font-nav text-[.62rem] text-white/35 mb-4">
       <a href="<?= url() ?>" class="hover:text-white transition-colors">Home</a><span>›</span>
@@ -94,7 +94,7 @@ require_once 'includes/dark_header.php';
   <!-- Category nav -->
   <div class="flex flex-wrap gap-2 mb-10 reveal">
     <?php $ci = 0; foreach ($faqs as $cat => $items): ?>
-    <a href="#cat-<?= $ci ?>" style="font-family:'Montserrat',sans-serif;font-size:.65rem;font-weight:600;padding:.4rem .9rem;border-radius:999px;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);color:#10b981;text-decoration:none;transition:all .2s" class="cat-link">
+    <a href="#cat-<?= $ci ?>" style="font-family:'Montserrat',sans-serif;font-size:.65rem;font-weight:600;padding:.4rem .9rem;border-radius:999px;background:rgba(160,94,34,.08);border:1px solid rgba(160,94,34,.2);color:#a05e22;text-decoration:none;transition:all .2s" class="cat-link">
       <?= e($cat) ?>
     </a>
     <?php $ci++; endforeach; ?>
@@ -103,18 +103,18 @@ require_once 'includes/dark_header.php';
   <?php $ci = 0; foreach ($faqs as $cat => $items): $fi = 0; ?>
   <section class="mb-12 reveal" id="cat-<?= $ci ?>">
     <h2 class="font-heading text-2xl font-bold text-white mb-6 flex items-center gap-3">
-      <span style="width:6px;height:24px;background:linear-gradient(135deg,#10b981,#059669);border-radius:3px;display:inline-block;flex-shrink:0"></span>
+      <span style="width:6px;height:24px;background:linear-gradient(135deg,#a05e22,#7d4817);border-radius:3px;display:inline-block;flex-shrink:0"></span>
       <?= e($cat) ?>
     </h2>
     <div style="display:flex;flex-direction:column;gap:.55rem">
       <?php foreach ($items as $faq): $fid = 'f'.$ci.'_'.$fi; ?>
-      <div style="background:#111;border:1px solid rgba(255,255,255,.07);border-radius:14px;overflow:hidden">
+      <div style="background:#2c463d;border:1px solid rgba(255,255,255,.07);border-radius:14px;overflow:hidden">
         <button onclick="toggleQ('<?= $fid ?>')"
                 style="width:100%;display:flex;align-items:center;justify-content:space-between;padding:1.1rem 1.25rem;background:none;border:none;cursor:pointer;text-align:left;gap:1rem">
           <span style="font-family:'Montserrat',sans-serif;font-size:.85rem;font-weight:600;color:#fff;line-height:1.4">
             <?= e($faq['q']) ?>
           </span>
-          <i id="qi-<?= $fid ?>" class="fas fa-chevron-down" style="color:#10b981;font-size:.65rem;flex-shrink:0;transition:transform .3s"></i>
+          <i id="qi-<?= $fid ?>" class="fas fa-chevron-down" style="color:#a05e22;font-size:.65rem;flex-shrink:0;transition:transform .3s"></i>
         </button>
         <div id="qa-<?= $fid ?>" style="display:none;padding:0 1.25rem 1.1rem">
           <p style="font-size:.85rem;color:rgba(255,255,255,.5);line-height:1.8"><?= e($faq['a']) ?></p>
@@ -150,8 +150,8 @@ function toggleQ(id) {
   icon.style.transform = open ? '' : 'rotate(180deg)';
 }
 document.querySelectorAll('.cat-link').forEach(function(a){
-  a.addEventListener('mouseover', function(){ this.style.background='rgba(16,185,129,.15)'; });
-  a.addEventListener('mouseout',  function(){ this.style.background='rgba(16,185,129,.08)'; });
+  a.addEventListener('mouseover', function(){ this.style.background='rgba(160,94,34,.15)'; });
+  a.addEventListener('mouseout',  function(){ this.style.background='rgba(160,94,34,.08)'; });
 });
 </script>
 

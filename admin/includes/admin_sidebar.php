@@ -11,7 +11,7 @@ try {
 ?>
 <style>
 /* Sidebar font */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@500;600;700&family=Playfair+Display:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@500;600;700&family=Nanum+Myeongjo:wght@700&display=swap');
 .adm-sidebar *{box-sizing:border-box}
 </style>
 
@@ -21,7 +21,7 @@ try {
           style="width:38px;height:38px;border-radius:9px;background:#10b981;border:none;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.9rem;box-shadow:0 3px 12px rgba(16,185,129,.35);flex-shrink:0">
     <i class="fas fa-bars"></i>
   </button>
-  <span style="font-family:'Playfair Display',serif;font-weight:700;color:#fff;font-size:.95rem">
+  <span style="font-family:'Nanum Myeongjo',serif;font-weight:700;color:#fff;font-size:.95rem">
     Jambo <span style="background:linear-gradient(135deg,#34d399,#10b981);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Masai</span> Admin
   </span>
 </div>
@@ -39,7 +39,7 @@ try {
         <i class="fas fa-tree" style="color:#fff;font-size:.85rem"></i>
       </div>
       <div>
-        <div style="font-family:'Playfair Display',serif;font-weight:700;color:#fff;font-size:.92rem;line-height:1.2">Jambo <span style="background:linear-gradient(135deg,#34d399,#10b981);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Masai</span></div>
+        <div style="font-family:'Nanum Myeongjo',serif;font-weight:700;color:#fff;font-size:.92rem;line-height:1.2">Jambo <span style="background:linear-gradient(135deg,#34d399,#10b981);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Masai</span></div>
         <div style="font-family:'Montserrat',sans-serif;font-size:.52rem;color:#10b981;letter-spacing:.15em;text-transform:uppercase">Admin Panel</div>
       </div>
     </a>

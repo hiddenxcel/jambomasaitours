@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 require_once '../config/config.php';
 require_once '../includes/functions.php';
 require_once '../includes/security.php';
@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!validateCsrfToken($_POST[CSRF_TOKEN_NAME] ?? '')) { die('Invalid token.'); }
     $action = $_POST['action'] ?? '';
 
-    /* ── Add image ── */
+    /* -- Add image -- */
     if ($action === 'add') {
         $title    = sanitizeInput($_POST['title']    ?? '');
         $urlInput = sanitizeInput($_POST['image_url'] ?? '');
@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    /* ── Delete ── */
+    /* -- Delete -- */
     if ($action === 'delete') {
         $id = sanitizeInt($_POST['id'] ?? 0, 1);
         if ($id) $db->prepare("DELETE FROM gallery WHERE id=?")->execute([$id]);
@@ -53,7 +53,7 @@ $csrfToken = generateCsrfToken();
   <title>Gallery | Jambo Masai Admin</title>
   <meta name="robots" content="noindex,nofollow">
   <link rel="icon" type="image/png" href="<?= e(getSetting('favicon_url', SITE_URL.'/assets/images/favicon.ico')) ?>">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Playfair+Display:wght@700&family=Montserrat:wght@600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Nanum+Myeongjo:wght@700&family=Montserrat:wght@600;700&display=swap">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"><link rel="stylesheet" href="<?= SITE_URL ?>/admin/assets/admin.css">
 </head>
 <body>
@@ -78,7 +78,7 @@ $csrfToken = generateCsrfToken();
 
       <?php if (!empty($errors)): ?>
       <div style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);color:#991b1b;padding:var(--space-4) var(--space-5);border-radius:var(--radius-md);margin-bottom:var(--space-5);">
-        <?php foreach ($errors as $e_): ?><div>• <?= e($e_) ?></div><?php endforeach; ?>
+        <?php foreach ($errors as $e_): ?><div>� <?= e($e_) ?></div><?php endforeach; ?>
       </div>
       <?php endif; ?>
 

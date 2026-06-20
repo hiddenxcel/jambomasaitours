@@ -72,12 +72,12 @@ require_once 'includes/dark_header.php';
                class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
         </div>
         <!-- 15+ badge -->
-        <div class="absolute -top-4 -left-4 lg:-left-8 rounded-2xl px-5 py-4 shadow-2xl" style="background:linear-gradient(135deg,#047857,#10b981)">
+        <div class="absolute -top-4 -left-4 lg:-left-8 rounded-2xl px-5 py-4 shadow-2xl" style="background:linear-gradient(135deg,#5e3611,#a05e22)">
           <div class="text-3xl font-bold text-white font-heading leading-none">15+</div>
           <div class="text-emerald-100 text-[.7rem] mt-1 font-nav uppercase tracking-wider leading-tight">Years of<br>Adventure</div>
         </div>
         <!-- Floating about-small image -->
-        <div class="absolute -bottom-6 -right-3 lg:-right-8 w-44 h-36 rounded-2xl overflow-hidden shadow-2xl hidden md:block" style="border:3px solid #0a0a0a">
+        <div class="absolute -bottom-6 -right-3 lg:-right-8 w-44 h-36 rounded-2xl overflow-hidden shadow-2xl hidden md:block" style="border:3px solid #23362f">
           <img src="<?= IMG_MAASAI ?>" alt="Maasai culture" loading="lazy" class="w-full h-full object-cover">
           <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
           <p class="absolute bottom-2 left-3 text-white text-[.6rem] font-nav font-semibold tracking-wider uppercase">Maasai Heritage</p>
@@ -122,7 +122,7 @@ require_once 'includes/dark_header.php';
 </section>
 
 <!-- CORE VALUES -->
-<section class="py-20 px-4 lg:px-0" style="background:linear-gradient(180deg,transparent,rgba(16,185,129,.03),transparent)">
+<section class="section-light py-20 px-4 lg:px-0">
   <div class="max-w-7xl mx-auto">
     <div class="text-center max-w-2xl mx-auto mb-14 reveal">
       <div class="section-tag">What Drives Us</div>
@@ -130,7 +130,7 @@ require_once 'includes/dark_header.php';
     </div>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
       <?php foreach ([
-        ['fa-leaf',        '#34d399', 'Responsible Tourism',  'Every booking contributes to local schools, anti-poaching units and wildlife corridors. We measure success in impact, not just profit.'],
+        ['fa-leaf',        '#c17a3a', 'Responsible Tourism',  'Every booking contributes to local schools, anti-poaching units and wildlife corridors. We measure success in impact, not just profit.'],
         ['fa-handshake',   '#fbbf24', 'Cultural Respect',     'We are custodians of Maasai traditions. Cultural tours are designed with community elders and profits flow back to the villages.'],
         ['fa-shield-alt',  '#60a5fa', 'Conservation First',   'We follow strict no-off-road driving policies, maintain low vehicle ratios at sightings, and fund the ecosystems we operate within.'],
         ['fa-star',        '#f59e0b', 'Excellence Always',    'From camp linens to sunrise positioning, we obsess over every detail because you deserve nothing less than extraordinary.'],
@@ -150,10 +150,10 @@ require_once 'includes/dark_header.php';
 </section>
 
 <!-- STATS COUNTER -->
-<section class="py-16 px-4 lg:px-0" style="background:linear-gradient(135deg,#0d0d0d,#111)">
+<section class="py-16 px-4 lg:px-0" style="background:linear-gradient(135deg,#0d0d0d,#2c463d)">
   <div class="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-5">
     <?php foreach ([
-      ['fa-users',         '#34d399', 1200, '+', 'Happy Travellers'],
+      ['fa-users',         '#c17a3a', 1200, '+', 'Happy Travellers'],
       ['fa-binoculars',    '#fbbf24', 850,  '+', 'Safaris Run'],
       ['fa-calendar-alt',  '#60a5fa', 15,   '+', 'Years Experience'],
       ['fa-map-marked-alt','#f97316', 12,   '',  'Destinations'],

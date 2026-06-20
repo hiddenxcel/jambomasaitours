@@ -1,4 +1,4 @@
-ï»¿<?php
+<?php
 require_once '../config/config.php';
 require_once '../includes/functions.php';
 require_once '../includes/security.php';
@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     'error'    => $_FILES['photos']['error'][$i],
                     'size'     => $_FILES['photos']['size'][$i],
                 ];
-                /* Upload single via helper â€” temporarily set $_FILES */
+                /* Upload single via helper — temporarily set $_FILES */
                 $_FILES['_single_photo'] = $singleFile;
                 $res = handleImageUpload('_single_photo', '');
                 if (isset($res['url'])) {
@@ -126,7 +126,7 @@ $csrfToken = generateCsrfToken();
   <title>Photos: <?= e($tour['name']) ?> | Admin</title>
   <meta name="robots" content="noindex,nofollow">
   <link rel="icon" type="image/png" href="<?= e(getSetting('favicon_url', SITE_URL.'/assets/images/favicon.ico')) ?>">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Nanum+Myeongjo:wght@700&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"><link rel="stylesheet" href="<?= SITE_URL ?>/admin/assets/admin.css">
   <style>
@@ -190,7 +190,7 @@ $csrfToken = generateCsrfToken();
             <span class="chip chip-em"><?= e($tour['tour_type']) ?></span>
             <span class="chip chip-gray"><i class="fas fa-map-marker-alt" style="font-size:.5rem"></i><?= e($tour['destination']) ?></span>
           </div>
-          <h1 style="font-family:'Playfair Display',serif;font-size:1.4rem;color:#fff;line-height:1.25"><?= e($tour['name']) ?></h1>
+          <h1 style="font-family:'Nanum Myeongjo',serif;font-size:1.4rem;color:#fff;line-height:1.25"><?= e($tour['name']) ?></h1>
           <p style="font-size:.78rem;color:rgba(255,255,255,.3);margin-top:.2rem"><?= count($photos) ?> photo<?= count($photos)!==1?'s':'' ?> uploaded</p>
         </div>
       </div>
@@ -211,7 +211,7 @@ $csrfToken = generateCsrfToken();
       <!-- Left: current photos -->
       <div>
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem">
-          <h2 style="font-family:'Playfair Display',serif;font-size:1.1rem;color:#fff">
+          <h2 style="font-family:'Nanum Myeongjo',serif;font-size:1.1rem;color:#fff">
             <i class="fas fa-images text-emerald-400 mr-2" style="color:#34d399;font-size:.85rem"></i>
             Tour Photos (<?= count($photos) ?>)
           </h2>
@@ -226,8 +226,8 @@ $csrfToken = generateCsrfToken();
 
         <?php if (empty($photos)): ?>
         <div style="text-align:center;padding:3rem 2rem;background:#1a1d27;border-radius:14px;border:2px dashed rgba(255,255,255,.07)">
-          <div style="font-size:2.5rem;margin-bottom:.75rem">ðŸ“·</div>
-          <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;color:#fff;margin-bottom:.4rem">No photos yet</h3>
+          <div style="font-size:2.5rem;margin-bottom:.75rem">??</div>
+          <h3 style="font-family:'Nanum Myeongjo',serif;font-size:1.1rem;color:#fff;margin-bottom:.4rem">No photos yet</h3>
           <p style="color:rgba(255,255,255,.3);font-size:.85rem">Upload photos to show visitors what this destination looks like.</p>
         </div>
         <?php else: ?>
@@ -259,13 +259,13 @@ $csrfToken = generateCsrfToken();
                 <input type="hidden" name="action" value="update_caption">
                 <input type="hidden" name="photo_id" value="<?= $p['id'] ?>">
                 <input type="text" name="caption" value="<?= e($p['caption']) ?>"
-                       placeholder="Add captionâ€¦"
+                       placeholder="Add caption…"
                        style="flex:1;background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.6);font-size:.72rem;padding:.2rem .1rem;outline:none;font-family:'Inter',sans-serif"
                        onfocus="this.style.borderColor='rgba(16,185,129,.5)'"
                        onblur="this.style.borderColor='rgba(255,255,255,.1)'">
                 <button type="submit" style="background:transparent;border:none;color:#34d399;cursor:pointer;padding:.1rem .3rem;font-size:.65rem" title="Save"><i class="fas fa-check"></i></button>
               </form>
-              <div style="font-size:.58rem;color:rgba(255,255,255,.2);margin-top:.25rem;font-family:'Montserrat',sans-serif">Photo #<?= $idx+1 ?> Â· <?= $idx===0?'<span style="color:#34d399">Main / Hero</span>':'Position '.$p['sort_order'] ?></div>
+              <div style="font-size:.58rem;color:rgba(255,255,255,.2);margin-top:.25rem;font-family:'Montserrat',sans-serif">Photo #<?= $idx+1 ?> · <?= $idx===0?'<span style="color:#34d399">Main / Hero</span>':'Position '.$p['sort_order'] ?></div>
             </div>
           </div>
           <?php endforeach; ?>
@@ -298,7 +298,7 @@ $csrfToken = generateCsrfToken();
       <!-- Right: upload form -->
       <div>
         <div class="card" style="padding:1.5rem">
-          <h2 style="font-family:'Playfair Display',serif;font-size:1.05rem;color:#fff;margin-bottom:1.25rem;display:flex;align-items:center;gap:.6rem">
+          <h2 style="font-family:'Nanum Myeongjo',serif;font-size:1.05rem;color:#fff;margin-bottom:1.25rem;display:flex;align-items:center;gap:.6rem">
             <span style="width:28px;height:28px;border-radius:50%;background:rgba(16,185,129,.13);color:#34d399;display:flex;align-items:center;justify-content:center;font-size:.7rem"><i class="fas fa-plus"></i></span>
             Add Photos
           </h2>
@@ -311,7 +311,7 @@ $csrfToken = generateCsrfToken();
             <div class="drop-zone" id="drop-zone" onclick="document.getElementById('file-input').click()">
               <i class="fas fa-cloud-upload-alt" style="font-size:2rem;color:rgba(16,185,129,.5);margin-bottom:.65rem"></i>
               <p style="font-size:.85rem;color:rgba(255,255,255,.5);margin-bottom:.3rem">Click or drag & drop photos here</p>
-              <p style="font-size:.72rem;color:rgba(255,255,255,.25)">JPG, PNG, WebP Â· Multiple allowed Â· Max 8MB each</p>
+              <p style="font-size:.72rem;color:rgba(255,255,255,.25)">JPG, PNG, WebP · Multiple allowed · Max 8MB each</p>
               <input type="file" name="photos[]" id="file-input" multiple accept="image/jpeg,image/png,image/webp">
             </div>
 
@@ -339,10 +339,10 @@ $csrfToken = generateCsrfToken();
           <div style="margin-top:1.25rem;padding:1rem;background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.12);border-radius:10px">
             <p style="font-family:'Montserrat',sans-serif;font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#34d399;margin-bottom:.6rem">Tips</p>
             <ul style="space-y:0.3rem;color:rgba(255,255,255,.4);font-size:.75rem;line-height:1.7">
-              <li>Â· First photo becomes the <strong style="color:rgba(255,255,255,.6)">hero image</strong> in the mosaic</li>
-              <li>Â· Upload at least 5 photos for the full mosaic grid</li>
-              <li>Â· Landscape photos (16:9) look best</li>
-              <li>Â· Add captions to describe each photo</li>
+              <li>· First photo becomes the <strong style="color:rgba(255,255,255,.6)">hero image</strong> in the mosaic</li>
+              <li>· Upload at least 5 photos for the full mosaic grid</li>
+              <li>· Landscape photos (16:9) look best</li>
+              <li>· Add captions to describe each photo</li>
             </ul>
           </div>
         </div>

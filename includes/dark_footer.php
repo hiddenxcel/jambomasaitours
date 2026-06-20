@@ -49,7 +49,7 @@
       <div>
         <h4 class="font-nav font-700 text-white text-sm uppercase tracking-widest mb-4">Contact Us</h4>
         <ul class="space-y-3">
-          <li class="flex items-start gap-3 text-white/45 text-sm"><i class="fas fa-map-marker-alt text-emerald-400 mt-0.5 text-xs"></i><a href="https://maps.app.goo.gl/cqcERfdGpABg9xo49" target="_blank" rel="noopener" style="color:rgba(255,255,255,.45);text-decoration:none" onmouseover="this.style.color='#10b981'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Arusha, Tanzania 12105</a></li>
+          <li class="flex items-start gap-3 text-white/45 text-sm"><i class="fas fa-map-marker-alt text-emerald-400 mt-0.5 text-xs"></i><a href="https://maps.app.goo.gl/cqcERfdGpABg9xo49" target="_blank" rel="noopener" style="color:rgba(255,255,255,.45);text-decoration:none" onmouseover="this.style.color='#a05e22'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Arusha, Tanzania 12105</a></li>
           <li class="flex items-start gap-3 text-sm"><a href="tel:<?= e(SITE_PHONE) ?>" class="text-white/45 hover:text-emerald-400 transition-colors flex items-start gap-3"><i class="fas fa-phone text-emerald-400 mt-0.5 text-xs"></i><?= e(SITE_PHONE) ?></a></li>
           <li class="flex items-start gap-3 text-sm"><a href="mailto:<?= e(SITE_EMAIL) ?>" class="text-white/45 hover:text-emerald-400 transition-colors flex items-start gap-3"><i class="fas fa-envelope text-emerald-400 mt-0.5 text-xs"></i><?= e(SITE_EMAIL) ?></a></li>
         </ul>
@@ -77,6 +77,8 @@
 
 <!-- Back to top -->
 <button id="back-top" aria-label="Back to top"><i class="fas fa-chevron-up text-sm"></i></button>
+
+<?php require_once __DIR__ . '/chatbot-widget.php'; ?>
 
 <!-- Shared JS (navbar handled by public_navbar.php) -->
 <script>

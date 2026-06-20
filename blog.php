@@ -47,7 +47,7 @@ function readTime(string $content): int {
 /* Category colours */
 function catStyle(string $cat): array {
     return match(strtolower($cat)) {
-        'wildlife'     => ['#34d399','rgba(16,185,129,.15)','fa-paw'],
+        'wildlife'     => ['#c17a3a','rgba(160,94,34,.15)','fa-paw'],
         'culture'      => ['#a78bfa','rgba(139,92,246,.15)','fa-users'],
         'trekking'     => ['#60a5fa','rgba(59,130,246,.15)','fa-mountain'],
         'conservation' => ['#4ade80','rgba(74,222,128,.15)','fa-leaf'],
@@ -61,37 +61,37 @@ $canonicalUrl = SITE_URL . '/blog.php' . ($catFilter ? '?cat=' . urlencode($catF
 
 $extraCss = '
   /* Blog card */
-  .bc{background:#111;border:1px solid rgba(255,255,255,.07);border-radius:16px;overflow:hidden;transition:all .4s;display:block;text-decoration:none}
-  .bc:hover{transform:translateY(-5px);border-color:rgba(16,185,129,.25);box-shadow:0 20px 50px rgba(0,0,0,.5)}
+  .bc{background:#2c463d;border:1px solid rgba(255,255,255,.07);border-radius:16px;overflow:hidden;transition:all .4s;display:block;text-decoration:none}
+  .bc:hover{transform:translateY(-5px);border-color:rgba(160,94,34,.25);box-shadow:0 20px 50px rgba(0,0,0,.5)}
   .bc-img{width:100%;height:200px;object-fit:cover;transition:transform .6s;display:block}
   .bc:hover .bc-img{transform:scale(1.05)}
   /* Featured card */
-  .fc{background:#111;border:1px solid rgba(255,255,255,.07);border-radius:20px;overflow:hidden;transition:all .4s;text-decoration:none;display:block}
-  .fc:hover{border-color:rgba(16,185,129,.25);box-shadow:0 24px 60px rgba(0,0,0,.6)}
+  .fc{background:#2c463d;border:1px solid rgba(255,255,255,.07);border-radius:20px;overflow:hidden;transition:all .4s;text-decoration:none;display:block}
+  .fc:hover{border-color:rgba(160,94,34,.25);box-shadow:0 24px 60px rgba(0,0,0,.6)}
   .fc:hover .fc-img{transform:scale(1.03)}
   .fc-img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
   /* Filter tabs */
   .ftab{transition:all .25s;cursor:pointer;font-family:"Montserrat",sans-serif;font-size:.68rem;font-weight:600;padding:.55rem 1rem;border-radius:999px;border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.04);color:rgba(255,255,255,.5);text-decoration:none;display:inline-flex;align-items:center;gap:.35rem}
   .ftab:hover{background:rgba(255,255,255,.08);color:#fff}
-  .ftab.active{background:rgba(16,185,129,.15);border-color:rgba(16,185,129,.35);color:#10b981}
+  .ftab.active{background:rgba(160,94,34,.15);border-color:rgba(160,94,34,.35);color:#a05e22}
   /* Sidebar widgets */
-  .sw{background:#111;border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:1.25rem;margin-bottom:1rem}
+  .sw{background:#2c463d;border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:1.25rem;margin-bottom:1rem}
   .sw h3{font-family:"Montserrat",sans-serif;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:rgba(255,255,255,.4);margin-bottom:.85rem;display:flex;align-items:center;gap:.45rem}
   /* Search input */
   .s-inp{width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:10px;padding:.65rem 1rem .65rem 2.35rem;font-family:"Inter",sans-serif;font-size:.82rem;color:#fff;outline:none;transition:border-color .2s;box-sizing:border-box}
-  .s-inp:focus{border-color:rgba(16,185,129,.45)}
+  .s-inp:focus{border-color:rgba(160,94,34,.45)}
   .s-inp::placeholder{color:rgba(255,255,255,.2)}
   /* Category badge */
   .cbadge{display:inline-flex;align-items:center;gap:.3rem;font-family:"Montserrat",sans-serif;font-size:.58rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:.22rem .65rem;border-radius:999px}
   /* Recent post item */
   .rp{display:flex;align-items:center;gap:.75rem;text-decoration:none;padding:.55rem .5rem;border-radius:10px;transition:background .2s}
   .rp:hover{background:rgba(255,255,255,.04)}
-  .rp:hover .rp-title{color:#10b981}
+  .rp:hover .rp-title{color:#a05e22}
   .rp-title{font-size:.78rem;font-weight:600;color:rgba(255,255,255,.75);line-height:1.3;transition:color .2s}
   .rp-date{font-family:"Montserrat",sans-serif;font-size:.6rem;color:rgba(255,255,255,.28);margin-top:.15rem}
   /* Tag pills */
   .tpill{display:inline-flex;font-family:"Montserrat",sans-serif;font-size:.62rem;font-weight:600;padding:.28rem .75rem;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.45);text-decoration:none;transition:all .2s;cursor:pointer}
-  .tpill:hover{background:rgba(16,185,129,.1);border-color:rgba(16,185,129,.25);color:#10b981}
+  .tpill:hover{background:rgba(160,94,34,.1);border-color:rgba(160,94,34,.25);color:#a05e22}
 ';
 require_once 'includes/dark_header.php';
 ?>
@@ -144,7 +144,7 @@ require_once 'includes/dark_header.php';
   <div class="max-w-7xl mx-auto">
 
     <?php if ($search): ?>
-    <div style="margin-bottom:1.25rem;padding:.65rem 1rem;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);border-radius:12px;font-family:'Montserrat',sans-serif;font-size:.78rem;color:#34d399;display:flex;align-items:center;gap:.5rem">
+    <div style="margin-bottom:1.25rem;padding:.65rem 1rem;background:rgba(160,94,34,.08);border:1px solid rgba(160,94,34,.2);border-radius:12px;font-family:'Montserrat',sans-serif;font-size:.78rem;color:#c17a3a;display:flex;align-items:center;gap:.5rem">
       <i class="fas fa-search text-xs"></i>
       Showing results for "<strong><?= e($search) ?></strong>" · <?= count($posts) ?> article<?= count($posts)!==1?'s':'' ?> found
       <a href="<?= url('blog.php') ?>" style="margin-left:auto;color:rgba(255,255,255,.4);font-size:.7rem;text-decoration:none">Clear ×</a>
@@ -180,7 +180,7 @@ require_once 'includes/dark_header.php';
               </p>
               <div style="display:flex;align-items:center;justify-content:space-between">
                 <div style="display:flex;align-items:center;gap:.65rem">
-                  <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#10b981,#059669);display:flex;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif;font-size:.6rem;font-weight:700;color:#fff;flex-shrink:0">
+                  <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#a05e22,#7d4817);display:flex;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif;font-size:.6rem;font-weight:700;color:#fff;flex-shrink:0">
                     <?= strtoupper(substr($featured['author']??'A',0,2)) ?>
                   </div>
                   <div>
@@ -188,7 +188,7 @@ require_once 'includes/dark_header.php';
                     <div style="font-family:'Montserrat',sans-serif;font-size:.6rem;color:rgba(255,255,255,.3)"><?= formatDate($featured['created_at']) ?> · <?= readTime($featured['content']??'') ?> min read</div>
                   </div>
                 </div>
-                <span style="font-family:'Montserrat',sans-serif;font-size:.72rem;font-weight:700;color:#10b981;display:flex;align-items:center;gap:.3rem">
+                <span style="font-family:'Montserrat',sans-serif;font-size:.72rem;font-weight:700;color:#a05e22;display:flex;align-items:center;gap:.3rem">
                   Read <i class="fas fa-arrow-right" style="font-size:.6rem"></i>
                 </span>
               </div>
@@ -213,7 +213,7 @@ require_once 'includes/dark_header.php';
             <?= $search ? 'No articles found for "'.e($search).'".' : 'No articles yet. Check back soon!' ?>
           </p>
           <?php if ($search || $catFilter): ?>
-          <a href="<?= url('blog.php') ?>" style="font-family:'Montserrat',sans-serif;font-size:.72rem;font-weight:600;color:#10b981;text-decoration:none">← View all articles</a>
+          <a href="<?= url('blog.php') ?>" style="font-family:'Montserrat',sans-serif;font-size:.72rem;font-weight:600;color:#a05e22;text-decoration:none">← View all articles</a>
           <?php endif; ?>
         </div>
         <?php else: ?>
@@ -245,7 +245,7 @@ require_once 'includes/dark_header.php';
               <p style="color:rgba(255,255,255,.4);font-size:.78rem;line-height:1.6;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:.85rem">
                 <?= e($post['excerpt']??'') ?>
               </p>
-              <span style="font-family:'Montserrat',sans-serif;font-size:.65rem;font-weight:700;color:#10b981;display:flex;align-items:center;gap:.3rem">
+              <span style="font-family:'Montserrat',sans-serif;font-size:.65rem;font-weight:700;color:#a05e22;display:flex;align-items:center;gap:.3rem">
                 Read More <i class="fas fa-arrow-right" style="font-size:.55rem"></i>
               </span>
             </div>
@@ -260,7 +260,7 @@ require_once 'includes/dark_header.php';
       <aside>
         <!-- Search -->
         <div class="sw reveal">
-          <h3><i class="fas fa-search" style="color:#10b981"></i> Search</h3>
+          <h3><i class="fas fa-search" style="color:#a05e22"></i> Search</h3>
           <form action="<?= url('blog.php') ?>" method="GET" style="position:relative">
             <i class="fas fa-search" style="position:absolute;left:.75rem;top:50%;transform:translateY(-50%);color:rgba(255,255,255,.22);font-size:.72rem;pointer-events:none"></i>
             <input type="text" name="search" class="s-inp" placeholder="Search articles…"
@@ -276,7 +276,7 @@ require_once 'includes/dark_header.php';
             <?php foreach ($categories as $cat):
               [$clr] = catStyle($cat);
             ?>
-            <a href="<?= url('blog.php?cat='.urlencode($cat)) ?>" class="tpill" style="<?= $catFilter===$cat?'background:rgba(16,185,129,.12);border-color:rgba(16,185,129,.3);color:#10b981':'' ?>">
+            <a href="<?= url('blog.php?cat='.urlencode($cat)) ?>" class="tpill" style="<?= $catFilter===$cat?'background:rgba(160,94,34,.12);border-color:rgba(160,94,34,.3);color:#a05e22':'' ?>">
               <?= $cat ?>
             </a>
             <?php endforeach; ?>
@@ -284,14 +284,14 @@ require_once 'includes/dark_header.php';
         </div>
 
         <!-- Newsletter -->
-        <div class="sw reveal" style="background:linear-gradient(135deg,rgba(16,185,129,.08),rgba(10,10,10,.5));border-color:rgba(16,185,129,.15)">
-          <h3><i class="fas fa-envelope" style="color:#10b981"></i> Newsletter</h3>
+        <div class="sw reveal" style="background:linear-gradient(135deg,rgba(160,94,34,.08),rgba(10,10,10,.5));border-color:rgba(160,94,34,.15)">
+          <h3><i class="fas fa-envelope" style="color:#a05e22"></i> Newsletter</h3>
           <p style="font-size:.75rem;color:rgba(255,255,255,.4);margin-bottom:.85rem;line-height:1.6">
             Weekly safari tips, wildlife stories & exclusive deals.
           </p>
           <form id="blog-nl-form" onsubmit="blogNlSubmit(event)" style="display:flex;flex-direction:column;gap:.5rem">
             <input type="email" required placeholder="your@email.com" class="s-inp">
-            <button type="submit" style="width:100%;padding:.72rem;border-radius:10px;background:linear-gradient(135deg,#059669,#10b981);border:none;color:#fff;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.75rem;cursor:pointer;transition:all .25s" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform=''">
+            <button type="submit" style="width:100%;padding:.72rem;border-radius:10px;background:linear-gradient(135deg,#7d4817,#a05e22);border:none;color:#fff;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.75rem;cursor:pointer;transition:all .25s" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform=''">
               <i class="fas fa-paper-plane" style="font-size:.7rem;margin-right:.35rem"></i> Subscribe Free
             </button>
           </form>
@@ -319,11 +319,11 @@ require_once 'includes/dark_header.php';
         </div>
 
         <!-- Write for us / CTA -->
-        <div class="sw reveal" style="background:linear-gradient(135deg,rgba(16,185,129,.06),rgba(10,10,10,.6));text-align:center;border-color:rgba(16,185,129,.12)">
+        <div class="sw reveal" style="background:linear-gradient(135deg,rgba(160,94,34,.06),rgba(10,10,10,.6));text-align:center;border-color:rgba(160,94,34,.12)">
           <div style="font-size:2rem;margin-bottom:.5rem">🦁</div>
-          <h3 style="font-family:'Playfair Display',serif;font-size:.95rem;font-weight:700;color:#fff;margin-bottom:.5rem;justify-content:center">Plan Your Safari</h3>
+          <h3 style="font-family:'Nanum Myeongjo',serif;font-size:.95rem;font-weight:700;color:#fff;margin-bottom:.5rem;justify-content:center">Plan Your Safari</h3>
           <p style="font-size:.75rem;color:rgba(255,255,255,.4);margin-bottom:.85rem;line-height:1.6">Ready to experience Tanzania? Our experts are here to help.</p>
-          <button onclick="openBookingModal()" style="width:100%;padding:.75rem;border-radius:10px;background:linear-gradient(135deg,#059669,#10b981);border:none;color:#fff;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.75rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.45rem">
+          <button onclick="openBookingModal()" style="width:100%;padding:.75rem;border-radius:10px;background:linear-gradient(135deg,#7d4817,#a05e22);border:none;color:#fff;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.75rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.45rem">
             <i class="fas fa-compass" style="font-size:.7rem"></i> Book Safari
           </button>
         </div>
@@ -353,9 +353,9 @@ function blogNlSubmit(e) {
   e.preventDefault();
   var btn = e.target.querySelector('button[type=submit]');
   btn.textContent = '✓ Subscribed!';
-  btn.style.background = 'rgba(16,185,129,.2)';
-  btn.style.color = '#10b981';
-  btn.style.border = '1px solid rgba(16,185,129,.3)';
+  btn.style.background = 'rgba(160,94,34,.2)';
+  btn.style.color = '#a05e22';
+  btn.style.border = '1px solid rgba(160,94,34,.3)';
   btn.disabled = true;
   e.target.querySelector('input').value = '';
   setTimeout(function(){

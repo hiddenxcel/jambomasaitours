@@ -27,7 +27,7 @@ $extraCss = '
   #lightbox img{max-width:100%;max-height:90vh;border-radius:10px;object-fit:contain}
   #lb-close{position:absolute;top:1.5rem;right:1.5rem;color:#fff;background:rgba(255,255,255,.1);width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:none;cursor:pointer;font-size:1.2rem;transition:background .2s}
   #lb-close:hover{background:rgba(255,255,255,.2)}
-  .filter-btn.active{background:linear-gradient(135deg,#047857,#10b981) !important;color:#fff !important;border-color:transparent !important;box-shadow:0 4px 14px rgba(16,185,129,.3)}
+  .filter-btn.active{background:linear-gradient(135deg,#5e3611,#a05e22) !important;color:#fff !important;border-color:transparent !important;box-shadow:0 4px 14px rgba(160,94,34,.3)}
 ';
 require_once 'includes/dark_header.php';
 ?>

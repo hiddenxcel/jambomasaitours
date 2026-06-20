@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 require_once '../config/config.php';
 require_once '../includes/functions.php';
 require_once '../includes/security.php';
@@ -9,7 +9,7 @@ require_once 'includes/upload_helper.php';
 $db     = getDB();
 $errors = [];
 
-/* ── Video upload handler ─────────────────────── */
+/* -- Video upload handler ----------------------- */
 function handleVideoUpload(string $fieldName, string $existingUrl = ''): array {
     if (empty($_FILES[$fieldName]['name'])) {
         return ['url' => $existingUrl];
@@ -29,7 +29,7 @@ function handleVideoUpload(string $fieldName, string $existingUrl = ''): array {
     $finfo = finfo_open(FILEINFO_MIME_TYPE);
     $mime  = finfo_file($finfo, $file['tmp_name']);
     finfo_close($finfo);
-    /* some systems detect mp4 as application/octet-stream — fall back to extension check */
+    /* some systems detect mp4 as application/octet-stream � fall back to extension check */
     $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
     $allowedExts = ['mp4', 'webm', 'ogv', 'ogg', 'mov'];
     if (!in_array($mime, $allowedMimes) && !in_array($ext, $allowedExts)) {
@@ -45,7 +45,7 @@ function handleVideoUpload(string $fieldName, string $existingUrl = ''): array {
     return ['url' => UPLOADS_URL . $filename];
 }
 
-/* ── POST handler ─────────────────────────────── */
+/* -- POST handler ------------------------------- */
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!validateCsrfToken($_POST[CSRF_TOKEN_NAME] ?? '')) {
         http_response_code(403); die('Invalid CSRF token.');
@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $urlFB         = sanitizeInput($_POST['fallback_image']    ?? '');
     $clearVideo    = isset($_POST['clear_video']);
 
-    /* Handle video — file upload takes priority, then URL, then existing (or clear) */
+    /* Handle video � file upload takes priority, then URL, then existing (or clear) */
     if ($clearVideo) {
         $videoUrl = '';
     } else {
@@ -101,7 +101,7 @@ $phpUploadLimit = ini_get('upload_max_filesize');
   <meta name="robots" content="noindex,nofollow">
   <link rel="icon" type="image/png" href="<?= e(getSetting('favicon_url', SITE_URL.'/assets/images/favicon.ico')) ?>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Nanum+Myeongjo:wght@700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"><link rel="stylesheet" href="<?= SITE_URL ?>/admin/assets/admin.css">
 </head>
 <body>
@@ -120,12 +120,12 @@ $phpUploadLimit = ini_get('upload_max_filesize');
 
     <?php if ($msg): ?>
     <div style="background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);color:#166534;padding:var(--space-4) var(--space-6);border-radius:var(--radius-md);margin-bottom:var(--space-6);">
-      ✓ <?= e($msg) ?>
+      ? <?= e($msg) ?>
     </div>
     <?php endif; ?>
     <?php if ($errors): ?>
     <div style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);color:#991b1b;padding:var(--space-4) var(--space-6);border-radius:var(--radius-md);margin-bottom:var(--space-6);">
-      <?php foreach ($errors as $err): ?><div>• <?= e($err) ?></div><?php endforeach; ?>
+      <?php foreach ($errors as $err): ?><div>� <?= e($err) ?></div><?php endforeach; ?>
     </div>
     <?php endif; ?>
 
@@ -135,7 +135,7 @@ $phpUploadLimit = ini_get('upload_max_filesize');
         <input type="hidden" name="existing_video"    value="<?= e($settings['video_url']      ?? '') ?>">
         <input type="hidden" name="existing_fallback" value="<?= e($settings['fallback_image'] ?? '') ?>">
 
-        <!-- ═══ VIDEO SECTION ════════════════════════════════════════ -->
+        <!-- --- VIDEO SECTION ---------------------------------------- -->
         <div style="background:var(--color-white);border-radius:var(--radius-xl);padding:var(--space-8);box-shadow:var(--shadow-md);margin-bottom:var(--space-6);">
           <h2 style="font-family:var(--font-heading);font-size:1.1rem;color:var(--color-brown);margin-bottom:var(--space-2);">Background Video <span style="font-family:var(--font-body);font-size:.8rem;color:var(--text-muted);font-weight:400;">(optional)</span></h2>
           <p style="color:var(--text-muted);font-size:.85rem;margin-bottom:var(--space-6);">If no video is set, the fallback image will fill the full hero. Video plays muted and loops automatically.</p>
@@ -148,7 +148,7 @@ $phpUploadLimit = ini_get('upload_max_filesize');
             </video>
             <div style="padding:var(--space-3) var(--space-4);font-size:.78rem;color:rgba(255,255,255,.5);">
               Current: <?= e(basename($settings['video_url'])) ?>
-              &nbsp;·&nbsp;
+              &nbsp;�&nbsp;
               <a href="<?= e($settings['video_url']) ?>" target="_blank" style="color:var(--color-gold);">Open</a>
             </div>
           </div>
@@ -156,9 +156,9 @@ $phpUploadLimit = ini_get('upload_max_filesize');
 
           <!-- Upload -->
           <div style="border:2px dashed rgba(201,168,76,.4);border-radius:var(--radius-lg);padding:var(--space-8);text-align:center;margin-bottom:var(--space-5);cursor:pointer;" id="video-drop-zone">
-            <div style="font-size:2rem;margin-bottom:var(--space-3);">🎥</div>
+            <div style="font-size:2rem;margin-bottom:var(--space-3);">??</div>
             <div style="font-weight:600;color:var(--text-dark);margin-bottom:var(--space-2);">Upload video from your computer</div>
-            <div style="font-size:.82rem;color:var(--text-muted);margin-bottom:var(--space-4);">MP4, WebM or MOV · Max <?= $phpUploadLimit ?></div>
+            <div style="font-size:.82rem;color:var(--text-muted);margin-bottom:var(--space-4);">MP4, WebM or MOV � Max <?= $phpUploadLimit ?></div>
             <input type="file" name="video_file" id="video-file-input"
                    accept="video/mp4,video/webm,video/ogg,.mp4,.webm,.mov,.ogv"
                    style="display:none;">
@@ -173,10 +173,10 @@ $phpUploadLimit = ini_get('upload_max_filesize');
             <div style="height:6px;background:var(--color-beige-dark);border-radius:3px;overflow:hidden;">
               <div id="upload-bar" style="height:100%;width:0%;background:var(--color-gold);transition:width .2s;"></div>
             </div>
-            <div style="font-size:.78rem;color:var(--text-muted);margin-top:var(--space-2);">Uploading… please wait</div>
+            <div style="font-size:.78rem;color:var(--text-muted);margin-top:var(--space-2);">Uploading� please wait</div>
           </div>
 
-          <div style="text-align:center;color:var(--text-muted);font-size:.82rem;margin:var(--space-4) 0;">— OR —</div>
+          <div style="text-align:center;color:var(--text-muted);font-size:.82rem;margin:var(--space-4) 0;">� OR �</div>
 
           <div class="form-group" style="margin-bottom:0;">
             <label class="form-label">Paste Video URL (MP4 direct link)</label>
@@ -195,10 +195,10 @@ $phpUploadLimit = ini_get('upload_max_filesize');
           <?php endif; ?>
         </div>
 
-        <!-- ═══ FALLBACK IMAGE SECTION ══════════════════════════════ -->
+        <!-- --- FALLBACK IMAGE SECTION ------------------------------ -->
         <div style="background:var(--color-white);border-radius:var(--radius-xl);padding:var(--space-8);box-shadow:var(--shadow-md);margin-bottom:var(--space-6);">
           <h2 style="font-family:var(--font-heading);font-size:1.1rem;color:var(--color-brown);margin-bottom:var(--space-2);">Fallback Image <span style="color:#ef4444;font-size:.8rem;">*</span></h2>
-          <p style="color:var(--text-muted);font-size:.85rem;margin-bottom:var(--space-6);">Shown immediately while video loads, on mobile, or when no video is set. Min 1920×1080px recommended.</p>
+          <p style="color:var(--text-muted);font-size:.85rem;margin-bottom:var(--space-6);">Shown immediately while video loads, on mobile, or when no video is set. Min 1920�1080px recommended.</p>
 
           <?php if (!empty($settings['fallback_image'])): ?>
           <div style="margin-bottom:var(--space-5);">
@@ -213,7 +213,7 @@ $phpUploadLimit = ini_get('upload_max_filesize');
               <label class="form-label" style="font-size:.85rem;">Upload from computer</label>
               <input type="file" class="form-control" name="fallback_file" id="fb-file"
                      accept="image/jpeg,image/png,image/webp,image/gif">
-              <small style="color:var(--text-muted);font-size:.72rem;">JPG/PNG/WebP · Max 8MB</small>
+              <small style="color:var(--text-muted);font-size:.72rem;">JPG/PNG/WebP � Max 8MB</small>
             </div>
             <div>
               <label class="form-label" style="font-size:.85rem;">Or paste image URL</label>
@@ -232,10 +232,10 @@ $phpUploadLimit = ini_get('upload_max_filesize');
       <div style="margin-top:var(--space-6);background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);border-radius:var(--radius-md);padding:var(--space-5);">
         <h3 style="font-size:.9rem;font-weight:600;color:var(--color-brown);margin-bottom:var(--space-3);">Tips for Best Results</h3>
         <ul style="font-size:.83rem;color:var(--text-muted);line-height:1.9;margin:0;padding-left:1.2rem;">
-          <li><strong>Duration:</strong> 10–30 second loop works best for hero backgrounds.</li>
+          <li><strong>Duration:</strong> 10�30 second loop works best for hero backgrounds.</li>
           <li><strong>File size:</strong> Keep under 20MB for fast page loads (current PHP limit: <?= $phpUploadLimit ?>).</li>
           <li><strong>Format:</strong> MP4 (H.264) is supported by all browsers.</li>
-          <li><strong>Resolution:</strong> 1280×720px is enough — video is blurred by the overlay anyway.</li>
+          <li><strong>Resolution:</strong> 1280�720px is enough � video is blurred by the overlay anyway.</li>
           <li><strong>Audio:</strong> Video plays muted automatically (browser requirement).</li>
           <li><strong>Large files:</strong> If upload fails, host the video on Google Drive or Dropbox and paste the direct link.</li>
         </ul>
@@ -245,7 +245,7 @@ $phpUploadLimit = ini_get('upload_max_filesize');
 </div>
 
 <script>
-/* File chosen — show filename, clear URL field */
+/* File chosen � show filename, clear URL field */
 const vfi = document.getElementById('video-file-input');
 const vui = document.getElementById('video-url-input');
 const vch = document.getElementById('video-chosen');
@@ -255,7 +255,7 @@ if (vfi) {
   vfi.addEventListener('change', () => {
     if (vfi.files.length) {
       const f = vfi.files[0];
-      vch.textContent = '✓ ' + f.name + ' (' + (f.size / 1024 / 1024).toFixed(1) + ' MB)';
+      vch.textContent = '? ' + f.name + ' (' + (f.size / 1024 / 1024).toFixed(1) + ' MB)';
       vch.style.display = 'block';
       vui.value = '';
     }
@@ -283,7 +283,7 @@ document.querySelector('form').addEventListener('submit', function() {
   if (vfi && vfi.files.length) {
     document.getElementById('upload-progress').style.display = 'block';
     document.getElementById('save-btn').disabled = true;
-    document.getElementById('save-btn').textContent = 'Uploading…';
+    document.getElementById('save-btn').textContent = 'Uploading�';
     let w = 0;
     const bar = document.getElementById('upload-bar');
     const t = setInterval(() => { w = Math.min(w + Math.random() * 8, 90); bar.style.width = w + '%'; }, 300);

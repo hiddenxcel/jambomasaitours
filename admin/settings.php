@@ -150,7 +150,7 @@ $csrf = generateCsrfToken();
 <title>Site Settings — Jambo Masai Admin</title>
 <link rel="icon" type="image/png" href="<?= e(getSetting('favicon_url', SITE_URL.'/assets/images/favicon.ico')) ?>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;500;600&family=Montserrat:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@700&family=Poppins:wght@400;500;600&family=Montserrat:wght@400;600;700&display=swap">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link rel="stylesheet" href="<?= SITE_URL ?>/admin/assets/admin.css">
 <style>
@@ -241,7 +241,7 @@ $csrf = generateCsrfToken();
               <?php else: ?>
                 <span style="font-size:1.5rem;">🦁</span>
                 <div>
-                  <div id="preview-name" style="font-family:'Playfair Display',serif;font-size:1rem;color:#fff;line-height:1.2;"><?= e($currentName) ?></div>
+                  <div id="preview-name" style="font-family:'Nanum Myeongjo',serif;font-size:1rem;color:#fff;line-height:1.2;"><?= e($currentName) ?></div>
                   <div id="preview-tag"  style="font-family:'Montserrat',sans-serif;font-size:.62rem;color:var(--color-gold);letter-spacing:.1em;text-transform:uppercase;"><?= e($currentTagline) ?></div>
                 </div>
               <?php endif; ?>
@@ -338,7 +338,7 @@ $csrf = generateCsrfToken();
 
       <!-- ══ EMAIL NOTIFICATION SETTINGS ════════════════ -->
       <div class="form-section" style="margin-top:1.5rem">
-        <h3 style="font-family:'Playfair Display',serif;font-size:1.05rem;color:#fff;font-weight:700;margin:0 0 1.1rem;padding-bottom:.85rem;border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:center;gap:.5rem">
+        <h3 style="font-family:'Nanum Myeongjo',serif;font-size:1.05rem;color:#fff;font-weight:700;margin:0 0 1.1rem;padding-bottom:.85rem;border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:center;gap:.5rem">
           <i class="fas fa-envelope" style="color:#10b981;font-size:.9rem"></i> Email Notifications
         </h3>
 

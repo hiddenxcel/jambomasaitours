@@ -103,7 +103,7 @@ $siteHost  = parse_url(SITE_URL, PHP_URL_HOST) ?: 'jambomasaitours.com';
   <title>Blog Posts | Jambo Masai Admin</title>
   <meta name="robots" content="noindex,nofollow">
   <link rel="icon" type="image/png" href="<?= e(getSetting('favicon_url', SITE_URL.'/assets/images/favicon.ico')) ?>">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Nanum+Myeongjo:wght@700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="<?= SITE_URL ?>/admin/assets/admin.css">
   <style>
@@ -119,7 +119,7 @@ $siteHost  = parse_url(SITE_URL, PHP_URL_HOST) ?: 'jambomasaitours.com';
 
     /* ── Content live preview (matches public blog .prose styles) ── */
     #content-preview{display:none;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.1rem 1.3rem;min-height:340px;color:rgba(255,255,255,.6);line-height:1.9;font-size:.95rem}
-    #content-preview h2,#content-preview h3{font-family:'Playfair Display',serif;color:#fff;margin:1.4rem 0 .7rem}
+    #content-preview h2,#content-preview h3{font-family:'Nanum Myeongjo',serif;color:#fff;margin:1.4rem 0 .7rem}
     #content-preview h2{font-size:1.35rem}
     #content-preview h3{font-size:1.1rem}
     #content-preview p{margin-bottom:1rem}
@@ -184,7 +184,7 @@ $siteHost  = parse_url(SITE_URL, PHP_URL_HOST) ?: 'jambomasaitours.com';
     <!-- Header -->
     <div class="admin-header">
       <div>
-        <h1 style="font-family:'Playfair Display',serif;font-size:1.4rem;color:#fff;font-weight:700;display:flex;align-items:center;gap:.5rem">
+        <h1 style="font-family:'Nanum Myeongjo',serif;font-size:1.4rem;color:#fff;font-weight:700;display:flex;align-items:center;gap:.5rem">
           <i class="fas fa-newspaper" style="color:#10b981;font-size:1.1rem"></i>
           <?= isset($_GET['edit']) ? ($editing ? 'Edit Post' : 'New Blog Post') : 'Blog Posts' ?>
         </h1>
@@ -246,7 +246,7 @@ $siteHost  = parse_url(SITE_URL, PHP_URL_HOST) ?: 'jambomasaitours.com';
                 <input type="text" class="f-input" name="title" id="blog-title" required
                        value="<?= e($editing['title'] ?? '') ?>"
                        placeholder="e.g. Best Time to Visit Serengeti — A Complete Guide"
-                       style="font-size:1.05rem;font-family:'Playfair Display',serif">
+                       style="font-size:1.05rem;font-family:'Nanum Myeongjo',serif">
               </div>
               <div class="f-group" style="margin-bottom:0">
                 <label class="f-label">URL Slug <span style="font-weight:400;text-transform:none;letter-spacing:0;font-size:.65rem">(auto-generated)</span></label>

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 require_once 'config/config.php';
 require_once 'includes/functions.php';
 require_once 'includes/security.php';
@@ -46,19 +46,19 @@ function tdiff(string $type): array {
         'trekking'               => ['Challenging', 'rgba(239,68,68,.15)',    '#f87171'],
         'adventure tour'         => ['Challenging', 'rgba(239,68,68,.15)',    '#f87171'],
         'walking safari'         => ['Moderate',    'rgba(245,158,11,.15)',   '#fbbf24'],
-        'bird watching safari'   => ['Easy',        'rgba(16,185,129,.15)',   '#34d399'],
-        'beach holiday'          => ['Easy',        'rgba(16,185,129,.15)',   '#34d399'],
-        'cultural tour'          => ['Easy',        'rgba(16,185,129,.15)',   '#34d399'],
-        'honeymoon safari'       => ['Easy',        'rgba(16,185,129,.15)',   '#34d399'],
-        'family safari'          => ['Easy',        'rgba(16,185,129,.15)',   '#34d399'],
-        'balloon safari'         => ['Easy',        'rgba(16,185,129,.15)',   '#34d399'],
-        'day trip'               => ['Easy',        'rgba(52,211,153,.15)',   '#34d399'],
+        'bird watching safari'   => ['Easy',        'rgba(160,94,34,.15)',   '#c17a3a'],
+        'beach holiday'          => ['Easy',        'rgba(160,94,34,.15)',   '#c17a3a'],
+        'cultural tour'          => ['Easy',        'rgba(160,94,34,.15)',   '#c17a3a'],
+        'honeymoon safari'       => ['Easy',        'rgba(160,94,34,.15)',   '#c17a3a'],
+        'family safari'          => ['Easy',        'rgba(160,94,34,.15)',   '#c17a3a'],
+        'balloon safari'         => ['Easy',        'rgba(160,94,34,.15)',   '#c17a3a'],
+        'day trip'               => ['Easy',        'rgba(52,211,153,.15)',   '#c17a3a'],
         'photography safari'     => ['Moderate',    'rgba(96,165,250,.15)',   '#60a5fa'],
         'luxury safari'          => ['Easy',        'rgba(251,191,36,.15)',   '#fbbf24'],
         'budget safari'          => ['Easy',        'rgba(245,158,11,.15)',   '#fbbf24'],
         'camping safari'         => ['Moderate',    'rgba(245,158,11,.15)',   '#fbbf24'],
         'group safari'           => ['Moderate',    'rgba(245,158,11,.15)',   '#fbbf24'],
-        'great migration safari' => ['Moderate',    'rgba(16,185,129,.15)',   '#34d399'],
+        'great migration safari' => ['Moderate',    'rgba(160,94,34,.15)',   '#c17a3a'],
         default                  => ['Moderate',    'rgba(245,158,11,.15)',   '#fbbf24'],
     };
 }
@@ -134,9 +134,9 @@ function cardBadge(array $tour, int $idx): ?array {
   <script>
     tailwind.config = {
       theme: { extend: {
-        colors: { brand:'#10b981', brandd:'#059669', safari:'#10b981', dark:'#0a0a0a' },
+        colors: { brand:'#a05e22', brandd:'#7d4817', safari:'#a05e22', dark:'#23362f' },
         fontFamily: {
-          heading: ['Playfair Display','Georgia','serif'],
+          heading: ['Nanum Myeongjo','Georgia','serif'],
           sans:    ['Inter','Poppins','sans-serif'],
           nav:     ['Montserrat','sans-serif'],
         }
@@ -145,7 +145,7 @@ function cardBadge(array $tour, int $idx): ?array {
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <?php $_fav = getSetting('favicon_url') ?: getSetting('logo_url') ?: (SITE_URL . '/uploads/logo-husika.png'); ?>
   <link rel="icon" type="image/png" href="<?= e($_fav) ?>">
@@ -154,11 +154,11 @@ function cardBadge(array $tour, int $idx): ?array {
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     html{scroll-behavior:smooth}
-    body{background:#0a0a0a;color:#e5e7eb;font-family:'Inter',sans-serif;overflow-x:hidden}
-    ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:#111}::-webkit-scrollbar-thumb{background:#10b981;border-radius:2px}
+    body{background:#23362f;color:#e5e7eb;font-family:'Inter',sans-serif;overflow-x:hidden}
+    ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:#2c463d}::-webkit-scrollbar-thumb{background:#a05e22;border-radius:2px}
 
     .glass-card{background:rgba(255,255,255,.04);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.08);border-radius:16px}
-    .hero-grad{background:linear-gradient(135deg,#34d399,#059669,#10b981);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .hero-grad{background:linear-gradient(135deg,#c17a3a,#7d4817,#a05e22);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 
     /* Navbar */
 
@@ -172,7 +172,7 @@ function cardBadge(array $tour, int $idx): ?array {
 
     /* Cards */
     .safari-card{background:rgba(23,23,23,.85);border:1px solid rgba(255,255,255,.06);border-radius:24px;overflow:hidden;transition:all .4s cubic-bezier(.4,0,.2,1)}
-    .safari-card:hover{transform:translateY(-5px);box-shadow:0 24px 60px rgba(0,0,0,.6);border-color:rgba(16,185,129,.25)}
+    .safari-card:hover{transform:translateY(-5px);box-shadow:0 24px 60px rgba(0,0,0,.6);border-color:rgba(160,94,34,.25)}
     .card-img{transition:transform .65s cubic-bezier(.4,0,.2,1);width:100%;height:100%;object-fit:cover}
     .safari-card:hover .card-img{transform:scale(1.06)}
     .img-overlay{position:relative;overflow:hidden}
@@ -180,13 +180,13 @@ function cardBadge(array $tour, int $idx): ?array {
 
     /* Filter buttons */
     .filter-btn{transition:all .3s cubic-bezier(.4,0,.2,1);cursor:pointer}
-    .filter-btn.active{background:linear-gradient(135deg,#047857,#10b981) !important;color:#fff !important;border-color:transparent !important;box-shadow:0 4px 15px rgba(16,185,129,.3)}
+    .filter-btn.active{background:linear-gradient(135deg,#5e3611,#a05e22) !important;color:#fff !important;border-color:transparent !important;box-shadow:0 4px 15px rgba(160,94,34,.3)}
 
     /* Itinerary toggle */
     .safari-detail{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.16,1,.3,1)}
     .safari-detail.expanded{max-height:800px}
     .itinerary-line{position:relative;padding-left:2rem;padding-bottom:1rem}
-    .itinerary-line::before{content:'';position:absolute;left:.69rem;top:1.6rem;bottom:0;width:1.5px;background:rgba(16,185,129,.2)}
+    .itinerary-line::before{content:'';position:absolute;left:.69rem;top:1.6rem;bottom:0;width:1.5px;background:rgba(160,94,34,.2)}
     .itinerary-line:last-child::before{display:none}
 
     /* WhatsApp float */
@@ -196,7 +196,7 @@ function cardBadge(array $tour, int $idx): ?array {
     @keyframes waPulse{0%,100%{transform:scale(1);opacity:.5}50%{transform:scale(1.35);opacity:0}}
 
     /* Back to top */
-    #back-top{position:fixed;bottom:2rem;right:2rem;z-index:999;width:44px;height:44px;border-radius:50%;background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3);color:#10b981;font-size:1rem;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;transform:translateY(20px);transition:all .3s}
+    #back-top{position:fixed;bottom:2rem;right:2rem;z-index:999;width:44px;height:44px;border-radius:50%;background:rgba(160,94,34,.15);border:1px solid rgba(160,94,34,.3);color:#a05e22;font-size:1rem;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;transform:translateY(20px);transition:all .3s}
     #back-top.visible{opacity:1;transform:translateY(0)}
 
     /* Reveal animation */
@@ -205,16 +205,16 @@ function cardBadge(array $tour, int $idx): ?array {
 
     /* Form inputs */
     .search-input,.search-select{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#e5e7eb;border-radius:10px;padding:.7rem 1rem;font-family:'Inter',sans-serif;font-size:.85rem;width:100%;outline:none;transition:border-color .2s;-webkit-appearance:none}
-    .search-input:focus,.search-select:focus{border-color:rgba(16,185,129,.5)}
+    .search-input:focus,.search-select:focus{border-color:rgba(160,94,34,.5)}
     .search-select option{background:#1a1a1a}
 
     /* Glow orbs */
     .glow-orb{position:fixed;pointer-events:none;z-index:0}
-    .glow-orb-1{top:68px;left:0;width:500px;height:500px;background:radial-gradient(circle,rgba(16,185,129,0.1) 0%,transparent 70%)}
-    .glow-orb-2{bottom:-5%;right:0;width:500px;height:500px;background:radial-gradient(circle,rgba(16,185,129,0.06) 0%,transparent 70%)}
+    .glow-orb-1{top:68px;left:0;width:500px;height:500px;background:radial-gradient(circle,rgba(160,94,34,0.1) 0%,transparent 70%)}
+    .glow-orb-2{bottom:-5%;right:0;width:500px;height:500px;background:radial-gradient(circle,rgba(160,94,34,0.06) 0%,transparent 70%)}
 
     /* Scroll progress */
-    .scroll-progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,#10b981,#059669);z-index:9999;width:0;transition:width .1s}
+    .scroll-progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,#a05e22,#7d4817);z-index:9999;width:0;transition:width .1s}
 
     /* Badge highlight */
     .highlight-box{background:rgba(255,255,255,.03);border-radius:12px;padding:.75rem;text-align:center;border:1px solid rgba(255,255,255,.05)}
@@ -231,7 +231,7 @@ function cardBadge(array $tour, int $idx): ?array {
 
 <?php require_once 'includes/public_navbar.php'; ?>
 
-<!-- ═══════════════ HERO ═══════════════ -->
+<!-- --------------- HERO --------------- -->
 <section class="relative overflow-hidden" style="min-height:320px;display:flex;align-items:center">
   <div class="absolute inset-0 z-0">
     <img src="<?= IMG_SERENGETI ?>" alt="Safari Tours Tanzania" fetchpriority="high"
@@ -267,7 +267,7 @@ function cardBadge(array $tour, int $idx): ?array {
         ] as $st): ?>
         <div class="flex items-center gap-3">
           <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:rgba(<?= $st[1]==='emerald'?'16,185,129':($st[1]==='amber'?'245,158,11':'59,130,246') ?>,.1)">
-            <i class="fas <?= $st[0] ?> text-sm" style="color:<?= $st[1]==='emerald'?'#34d399':($st[1]==='amber'?'#fbbf24':'#60a5fa') ?>"></i>
+            <i class="fas <?= $st[0] ?> text-sm" style="color:<?= $st[1]==='emerald'?'#c17a3a':($st[1]==='amber'?'#fbbf24':'#60a5fa') ?>"></i>
           </div>
           <div>
             <div class="text-sm font-semibold text-white"><?= $st[2] ?></div>
@@ -280,7 +280,7 @@ function cardBadge(array $tour, int $idx): ?array {
   </div>
 </section>
 
-<!-- ═══════════════ FILTER BAR ═══════════════ -->
+<!-- --------------- FILTER BAR --------------- -->
 <section class="relative z-20 -mt-6 px-4 lg:px-0">
   <div class="max-w-7xl mx-auto">
     <div class="glass-card p-4 lg:p-5">
@@ -331,8 +331,8 @@ function cardBadge(array $tour, int $idx): ?array {
         <!-- Sort -->
         <select id="sort-select" class="search-select" style="width:auto;min-width:160px" onchange="applyFilters()">
           <option value="popular">Most Popular</option>
-          <option value="price-low">Price: Low → High</option>
-          <option value="price-high">Price: High → Low</option>
+          <option value="price-low">Price: Low &rarr; High</option>
+          <option value="price-high">Price: High &rarr; Low</option>
           <option value="duration-short">Duration: Shortest</option>
           <option value="duration-long">Duration: Longest</option>
         </select>
@@ -348,7 +348,7 @@ function cardBadge(array $tour, int $idx): ?array {
   </div>
 </section>
 
-<!-- ═══════════════ TOUR CARDS — 3-Column Grid ═══════════════ -->
+<!-- --------------- TOUR CARDS - 3-Column Grid --------------- -->
 <section class="relative z-10 py-12 px-4 xl:px-8">
 
   <div id="tours-list" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:1600px;margin:0 auto">
@@ -370,9 +370,9 @@ function cardBadge(array $tour, int $idx): ?array {
          data-price="<?= (int)$tour['price'] ?>"
          data-duration="<?= $days ?>"
          data-rating="<?= (float)$tour['rating'] ?>"
-         style="transition-delay:<?= ($i % 3) * 80 ?>ms;background:#111;border:1px solid rgba(255,255,255,.07);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;transition:all .4s cubic-bezier(.4,0,.2,1)">
+         style="transition-delay:<?= ($i % 3) * 80 ?>ms;background:#2c463d;border:1px solid rgba(255,255,255,.07);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;transition:all .4s cubic-bezier(.4,0,.2,1)">
 
-      <!-- ── IMAGE ── -->
+      <!-- -- IMAGE -- -->
       <div style="position:relative;height:230px;overflow:hidden;flex-shrink:0">
         <img src="<?= e($tour['image']) ?>" alt="<?= e($tour['name']) ?>"
              loading="<?= $i < 3 ? 'eager' : 'lazy' ?>" width="600" height="400"
@@ -390,7 +390,7 @@ function cardBadge(array $tour, int $idx): ?array {
 
         <!-- Duration pill top-right -->
         <div style="position:absolute;top:.85rem;right:.85rem;z-index:2;display:flex;align-items:center;gap:.35rem;font-family:'Montserrat',sans-serif;font-size:.6rem;color:#fff;padding:.3rem .7rem;border-radius:999px;background:rgba(0,0,0,.55);backdrop-filter:blur(8px)">
-          <i class="fas fa-clock" style="color:#10b981;font-size:.52rem"></i><?= e($tour['duration']) ?>
+          <i class="fas fa-clock" style="color:#a05e22;font-size:.52rem"></i><?= e($tour['duration']) ?>
         </div>
 
         <!-- Rating bottom-right on image -->
@@ -400,25 +400,25 @@ function cardBadge(array $tour, int $idx): ?array {
 
         <!-- Tour type bottom-left on image -->
         <div style="position:absolute;bottom:.85rem;left:.85rem;z-index:2">
-          <span style="display:inline-flex;align-items:center;gap:.3rem;font-family:'Montserrat',sans-serif;font-size:.58rem;font-weight:700;padding:.25rem .65rem;border-radius:999px;background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3);color:#34d399">
+          <span style="display:inline-flex;align-items:center;gap:.3rem;font-family:'Montserrat',sans-serif;font-size:.58rem;font-weight:700;padding:.25rem .65rem;border-radius:999px;background:rgba(160,94,34,.15);border:1px solid rgba(160,94,34,.3);color:#c17a3a">
             <i class="fas <?= ticon($tour['tour_type'] ?? '') ?>" style="font-size:.5rem"></i>
             <?= e($tour['tour_type'] ?? 'Safari') ?>
           </span>
         </div>
       </div>
 
-      <!-- ── CONTENT ── -->
+      <!-- -- CONTENT -- -->
       <div style="padding:1.25rem;display:flex;flex-direction:column;flex:1">
 
         <!-- Destination -->
         <div style="display:flex;align-items:center;gap:.4rem;margin-bottom:.6rem">
-          <i class="fas fa-map-marker-alt" style="color:#10b981;font-size:.6rem"></i>
+          <i class="fas fa-map-marker-alt" style="color:#a05e22;font-size:.6rem"></i>
           <span style="font-family:'Montserrat',sans-serif;font-size:.65rem;font-weight:600;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.08em"><?= e($tour['destination']) ?></span>
           <span style="margin-left:auto;font-family:'Montserrat',sans-serif;font-size:.6rem;color:rgba(255,255,255,.25);padding:.15rem .5rem;border-radius:6px;background:<?= $diffBg ?>;color:<?= $diffColor ?>"><?= $diff ?></span>
         </div>
 
         <!-- Title -->
-        <h2 style="font-family:'Playfair Display',Georgia,serif;font-size:1.08rem;font-weight:700;color:#fff;line-height:1.3;margin-bottom:.65rem">
+        <h2 style="font-family:'Nanum Myeongjo',Georgia,serif;font-size:1.08rem;font-weight:700;color:#fff;line-height:1.3;margin-bottom:.65rem">
           <?= e($tour['name']) ?>
         </h2>
 
@@ -432,7 +432,7 @@ function cardBadge(array $tour, int $idx): ?array {
         <div style="display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:.9rem">
           <?php foreach (array_slice($hls, 0, 3) as $hl): ?>
           <span style="display:inline-flex;align-items:center;gap:.25rem;font-family:'Montserrat',sans-serif;font-size:.58rem;font-weight:600;padding:.18rem .6rem;border-radius:999px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.45)">
-            <i class="fas fa-check" style="color:#10b981;font-size:.45rem"></i><?= e(trim($hl)) ?>
+            <i class="fas fa-check" style="color:#a05e22;font-size:.45rem"></i><?= e(trim($hl)) ?>
           </span>
           <?php endforeach; ?>
         </div>
@@ -446,7 +446,7 @@ function cardBadge(array $tour, int $idx): ?array {
             ['fa-car','4WD vehicle'],
           ] as $qi): ?>
           <div style="display:flex;align-items:center;gap:.35rem;font-family:'Montserrat',sans-serif;font-size:.6rem;color:rgba(255,255,255,.35);flex:1">
-            <i class="fas <?= $qi[0] ?>" style="color:#10b981;font-size:.55rem;flex-shrink:0"></i><?= $qi[1] ?>
+            <i class="fas <?= $qi[0] ?>" style="color:#a05e22;font-size:.55rem;flex-shrink:0"></i><?= $qi[1] ?>
           </div>
           <?php endforeach; ?>
         </div>
@@ -455,14 +455,14 @@ function cardBadge(array $tour, int $idx): ?array {
         <div style="display:flex;align-items:center;justify-content:space-between;padding-top:.85rem;border-top:1px solid rgba(255,255,255,.06)">
           <div>
             <div style="font-family:'Montserrat',sans-serif;font-size:.55rem;color:rgba(255,255,255,.28);text-transform:uppercase;letter-spacing:.08em">From</div>
-            <div style="font-family:'Playfair Display',serif;font-size:1.45rem;font-weight:700;color:#10b981;line-height:1.1">
+            <div style="font-family:'Nanum Myeongjo',serif;font-size:1.45rem;font-weight:700;color:#a05e22;line-height:1.1">
               <?= formatPrice($tour['price']) ?>
               <span style="font-family:'Montserrat',sans-serif;font-size:.55rem;font-weight:400;color:rgba(255,255,255,.3)">/person</span>
             </div>
           </div>
           <div style="display:flex;gap:.5rem">
             <a href="<?= url('tour/' . $slug) ?>"
-               style="display:inline-flex;align-items:center;gap:.4rem;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;padding:.6rem 1.1rem;border-radius:10px;background:linear-gradient(135deg,#059669,#10b981);color:#fff;text-decoration:none;transition:all .25s;box-shadow:0 4px 14px rgba(16,185,129,.2)"
+               style="display:inline-flex;align-items:center;gap:.4rem;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;padding:.6rem 1.1rem;border-radius:10px;background:linear-gradient(135deg,#7d4817,#a05e22);color:#fff;text-decoration:none;transition:all .25s;box-shadow:0 4px 14px rgba(160,94,34,.2)"
                class="tc-btn-view">
               <i class="fas fa-binoculars" style="font-size:.6rem"></i> View
             </a>
@@ -481,12 +481,12 @@ function cardBadge(array $tour, int $idx): ?array {
 
   <!-- Empty state -->
   <div id="empty-state" class="text-center py-20" style="max-width:1600px;margin:0 auto">
-    <div class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style="background:rgba(16,185,129,.1)">
+    <div class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style="background:rgba(160,94,34,.1)">
       <i class="fas fa-search text-emerald-400 text-xl"></i>
     </div>
     <h3 class="font-heading text-white text-xl mb-2">No safaris found</h3>
     <p class="text-white/40 text-sm mb-5">Try a different search or filter</p>
-    <button onclick="resetFilters()" class="inline-flex items-center gap-2 font-nav font-semibold text-sm text-white px-6 py-2.5 rounded-xl" style="background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.2)">
+    <button onclick="resetFilters()" class="inline-flex items-center gap-2 font-nav font-semibold text-sm text-white px-6 py-2.5 rounded-xl" style="background:rgba(160,94,34,.15);border:1px solid rgba(160,94,34,.2)">
       <i class="fas fa-rotate-left text-xs text-emerald-400"></i> Show All Safaris
     </button>
   </div>
@@ -494,15 +494,15 @@ function cardBadge(array $tour, int $idx): ?array {
 </section>
 
 <style>
-.safari-card-v:hover{border-color:rgba(16,185,129,.25)!important;transform:translateY(-5px);box-shadow:0 20px 50px rgba(0,0,0,.5)}
+.safari-card-v:hover{border-color:rgba(160,94,34,.25)!important;transform:translateY(-5px);box-shadow:0 20px 50px rgba(0,0,0,.5)}
 .safari-card-v:hover .tc-img{transform:scale(1.06)}
-.tc-btn-view:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(16,185,129,.3)!important}
+.tc-btn-view:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(160,94,34,.3)!important}
 .tc-btn-wa:hover{background:rgba(37,211,102,.2)!important;transform:translateY(-1px)}
 @media(max-width:1100px){#tours-list{grid-template-columns:repeat(2,1fr)!important}}
 @media(max-width:640px){#tours-list{grid-template-columns:1fr!important}}
 </style>
 
-<!-- ═══════════════ FAQ ═══════════════ -->
+<!-- --------------- FAQ --------------- -->
 <section class="py-20 px-4 lg:px-0">
   <div class="max-w-3xl mx-auto">
     <div class="text-center mb-12">
@@ -533,7 +533,7 @@ function cardBadge(array $tour, int $idx): ?array {
         <button class="faq-btn w-full flex items-center justify-between gap-4 p-5 text-left" onclick="toggleFaq(this)">
           <span class="font-nav font-semibold text-[.9rem] text-white/85"><?= $q ?></span>
           <span class="faq-icon w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 text-emerald-400 font-bold text-lg transition-all duration-300"
-                style="background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.2)">+</span>
+                style="background:rgba(160,94,34,.12);border:1px solid rgba(160,94,34,.2)">+</span>
         </button>
         <div class="faq-answer" style="max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.16,1,.3,1)">
           <p class="px-5 pb-5 text-white/50 text-[.88rem] leading-relaxed"><?= $a ?></p>
@@ -544,7 +544,7 @@ function cardBadge(array $tour, int $idx): ?array {
   </div>
 </section>
 
-<!-- ═══════════════ CTA BANNER ═══════════════ -->
+<!-- --------------- CTA BANNER --------------- -->
 <section class="py-6 px-4 lg:px-6">
   <div class="max-w-7xl mx-auto">
     <div class="relative rounded-3xl overflow-hidden" style="min-height:220px">
@@ -565,7 +565,7 @@ function cardBadge(array $tour, int $idx): ?array {
         <div class="flex flex-wrap gap-3 flex-shrink-0">
           <a href="<?= url('contact.php') ?>"
              class="inline-flex items-center gap-2 font-nav font-bold text-sm text-white px-6 py-3 rounded-xl transition-all hover:scale-105 hover:shadow-lg"
-             style="background:linear-gradient(135deg,#059669,#10b981);box-shadow:0 4px 16px rgba(16,185,129,.3)">
+             style="background:linear-gradient(135deg,#7d4817,#a05e22);box-shadow:0 4px 16px rgba(160,94,34,.3)">
             <i class="fas fa-compass text-xs"></i> Get Custom Quote
           </a>
           <a href="https://wa.me/<?= e(WHATSAPP_NUMBER) ?>?text=<?= urlencode('Hi! I need help choosing the right safari for me.') ?>"
@@ -580,7 +580,7 @@ function cardBadge(array $tour, int $idx): ?array {
   </div>
 </section>
 
-<!-- ═══════════════ FOOTER ═══════════════ -->
+<!-- --------------- FOOTER --------------- -->
 <footer class="border-t border-white/[.07] py-14 px-4 lg:px-0 mt-4">
   <div class="max-w-7xl mx-auto">
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
@@ -651,6 +651,8 @@ function cardBadge(array $tour, int $idx): ?array {
 </a>
 <button id="back-top" aria-label="Back to top"><i class="fas fa-chevron-up text-sm"></i></button>
 
+<?php require_once 'includes/chatbot-widget.php'; ?>
+
 <script>
 (function(){
   'use strict';
@@ -667,7 +669,7 @@ function cardBadge(array $tour, int $idx): ?array {
     if (!navEl) return;
     navEl.style.background = scrollY > 60 ? 'rgba(10,10,10,.96)' : '';
     navEl.style.backdropFilter = scrollY > 60 ? 'blur(20px)' : '';
-    navEl.style.borderBottom = scrollY > 60 ? '1px solid rgba(16,185,129,.1)' : '';
+    navEl.style.borderBottom = scrollY > 60 ? '1px solid rgba(160,94,34,.1)' : '';
     navEl.style.boxShadow = scrollY > 60 ? '0 4px 24px rgba(0,0,0,.4)' : '';
   }, { passive: true });
   /* Search overlay */
@@ -728,7 +730,7 @@ function cardBadge(array $tour, int $idx): ?array {
   }, { threshold: 0.08 });
   document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
 
-  /* ── Filtering & sorting ── */
+  /* -- Filtering & sorting -- */
   let activeFilter = 'all';
   const cards  = Array.from(document.querySelectorAll('.safari-card-v'));
   const countEl= document.getElementById('result-count');
@@ -792,7 +794,7 @@ function cardBadge(array $tour, int $idx): ?array {
     });
     if (!isOpen) {
       answer.style.maxHeight = answer.scrollHeight + 'px';
-      icon.textContent = '−';
+      icon.textContent = '-';
       icon.style.transform = 'rotate(45deg)';
     }
   };

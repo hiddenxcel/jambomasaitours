@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 require_once '../config/config.php';
 require_once '../includes/functions.php';
 require_once '../includes/security.php';
@@ -26,7 +26,7 @@ $recentBookings = $db->query("SELECT b.*, t.name as tour_name FROM bookings b JO
   <meta name="robots" content="noindex,nofollow">
   <link rel="icon" type="image/png" href="<?= e(getSetting('favicon_url', SITE_URL.'/assets/images/favicon.ico')) ?>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Nanum+Myeongjo:wght@700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"><link rel="stylesheet" href="<?= SITE_URL ?>/admin/assets/admin.css">
 </head>
 <body>
@@ -40,7 +40,7 @@ $recentBookings = $db->query("SELECT b.*, t.name as tour_name FROM bookings b JO
     <!-- Header -->
     <div class="admin-header">
       <div>
-        <h1 style="font-family:'Playfair Display',serif;font-size:1.5rem;color:#fff;font-weight:700">Dashboard</h1>
+        <h1 style="font-family:'Nanum Myeongjo',serif;font-size:1.5rem;color:#fff;font-weight:700">Dashboard</h1>
         <p style="color:rgba(255,255,255,.4);font-size:.82rem;font-family:'Montserrat',sans-serif;margin-top:.15rem">Welcome back, <strong style="color:#10b981"><?= e($_SESSION['admin_user'] ?? 'Admin') ?></strong></p>
       </div>
       <div style="display:flex;gap:.5rem;flex-wrap:wrap">

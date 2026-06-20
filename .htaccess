@@ -1,29 +1,12 @@
 Options -Indexes
 ServerSignature Off
 
-# ─── URL Rewriting ──────────────────────────────────
 RewriteEngine On
 
-# HTTPS redirect
-RewriteCond %{HTTPS} off
-RewriteCond %{HTTP_HOST} !^localhost [NC]
-RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
-
-# Admin: internally rewrite clean URLs back to .php (fixes cached 301s)
+# Admin rewrites
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^admin/([a-zA-Z0-9_-]+)/?$ admin/$1.php [L,QSA]
-
-# Redirect .php → clean URLs for PUBLIC pages ONLY
-RewriteRule ^tours\.php$              /tours              [R=301,L]
-RewriteRule ^about\.php$              /about              [R=301,L]
-RewriteRule ^contact\.php$            /contact            [R=301,L]
-RewriteRule ^gallery\.php$            /gallery            [R=301,L]
-RewriteRule ^blog\.php$               /blog               [R=301,L]
-RewriteRule ^booking\.php$            /booking            [R=301,L]
-RewriteRule ^faq\.php$                /faq                [R=301,L]
-RewriteRule ^destinations\.php$       /destinations       [R=301,L]
-RewriteRule ^mountain-trekking\.php$  /mountain-trekking  [R=301,L]
 
 # Dynamic sitemap
 RewriteRule ^sitemap\.xml$ sitemap.php [L]
@@ -36,7 +19,7 @@ RewriteRule ^gallery/?$             gallery.php            [L]
 RewriteRule ^blog/?$                blog.php               [L]
 RewriteRule ^booking/?$             booking.php            [L]
 RewriteRule ^faq/?$                 faq.php                [L]
-RewriteRule ^destinations/?$        destinations.php        [L]
+RewriteRule ^destinations/?$        destinations.php       [L]
 RewriteRule ^mountain-trekking/?$   mountain-trekking.php  [L]
 
 # Clean URLs — dynamic pages
@@ -44,11 +27,9 @@ RewriteRule ^tour/([a-z0-9-]+)/?$          tour-detail.php?slug=$1         [L,QS
 RewriteRule ^blog/([a-z0-9-]+)/?$          blog-single.php?slug=$1         [L,QSA]
 RewriteRule ^destination/([a-z0-9-]+)/?$   destination-detail.php?slug=$1  [L,QSA]
 
-# ─── Custom error pages ─────────────────────────────
-ErrorDocument 404 /index.php
-ErrorDocument 403 /index.php
 
-# ─── Cache Control ──────────────────────────────────
+
+# Cache
 <IfModule mod_expires.c>
   ExpiresActive On
   ExpiresByType image/jpeg             "access plus 1 month"
@@ -61,7 +42,7 @@ ErrorDocument 403 /index.php
   ExpiresByType application/x-font-woff2 "access plus 1 year"
 </IfModule>
 
-# ─── Gzip Compression ───────────────────────────────
+# Gzip
 <IfModule mod_deflate.c>
   AddOutputFilterByType DEFLATE text/html
   AddOutputFilterByType DEFLATE text/css
@@ -71,7 +52,7 @@ ErrorDocument 403 /index.php
   AddOutputFilterByType DEFLATE text/xml
 </IfModule>
 
-# ─── Security Headers ───────────────────────────────
+# Security headers
 <IfModule mod_headers.c>
   Header set X-Content-Type-Options  "nosniff"
   Header set X-Frame-Options         "SAMEORIGIN"
@@ -80,7 +61,7 @@ ErrorDocument 403 /index.php
   Header unset X-Powered-By
 </IfModule>
 
-# ─── Block sensitive files ───────────────────────────
+# Block sensitive files
 <FilesMatch "^\.">
   Order allow,deny
   Deny from all

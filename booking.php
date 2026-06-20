@@ -1,4 +1,4 @@
-Ôªø<?php
+<?php
 require_once 'config/config.php';
 require_once 'includes/functions.php';
 require_once 'includes/security.php';
@@ -104,21 +104,21 @@ $navItems = [
   <link rel="apple-touch-icon" href="<?= e($_fav) ?>">
   <link rel="manifest" href="<?= e(SITE_URL) ?>/manifest.json">
   <link rel="preconnect" href="https://cdn.tailwindcss.com"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="dns-prefetch" href="https://images.unsplash.com"><script src="https://cdn.tailwindcss.com" fetchpriority="low"></script>
-  <script>tailwind.config={theme:{extend:{colors:{brand:'#10b981',safari:'#10b981',dark:'#0a0a0a'},fontFamily:{heading:['Playfair Display','Georgia','serif'],sans:['Inter','Poppins','sans-serif'],nav:['Montserrat','sans-serif']}}}}</script>
+  <script>tailwind.config={theme:{extend:{colors:{brand:'#a05e22',safari:'#a05e22',dark:'#23362f'},fontFamily:{heading:['Nanum Myeongjo','Georgia','serif'],sans:['Inter','Poppins','sans-serif'],nav:['Montserrat','sans-serif']}}}}</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     html{scroll-behavior:smooth}
-    body{background:#0a0a0a;color:#e5e7eb;font-family:'Inter',sans-serif;overflow-x:hidden}
-    ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:#111}::-webkit-scrollbar-thumb{background:#10b981;border-radius:2px}
+    body{background:#23362f;color:#e5e7eb;font-family:'Inter',sans-serif;overflow-x:hidden}
+    ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:#2c463d}::-webkit-scrollbar-thumb{background:#a05e22;border-radius:2px}
     .glass-card{background:rgba(255,255,255,.04);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.08);border-radius:16px}
 
     /* Form inputs */
     .f-input,.f-select,.f-textarea{width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#e5e7eb;border-radius:10px;padding:.8rem 1rem;font-family:'Inter',sans-serif;font-size:.88rem;outline:none;transition:border-color .25s,-webkit-backdrop-filter .25s;-webkit-appearance:none}
-    .f-input:focus,.f-select:focus,.f-textarea:focus{border-color:rgba(16,185,129,.5);background:rgba(16,185,129,.04)}
+    .f-input:focus,.f-select:focus,.f-textarea:focus{border-color:rgba(160,94,34,.5);background:rgba(160,94,34,.04)}
     .f-textarea{resize:vertical;min-height:110px}
     .f-select option{background:#1a1a1a}
     .f-label{display:block;font-family:'Montserrat',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:.5rem}
@@ -130,13 +130,13 @@ $navItems = [
 
     /* Step indicator */
     .step-dot{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif;font-size:.72rem;font-weight:700;transition:all .3s;flex-shrink:0}
-    .step-dot.done{background:rgba(16,185,129,.2);color:#34d399;border:1.5px solid rgba(16,185,129,.4)}
-    .step-dot.active{background:linear-gradient(135deg,#059669,#10b981);color:#fff;box-shadow:0 4px 14px rgba(16,185,129,.3)}
+    .step-dot.done{background:rgba(160,94,34,.2);color:#c17a3a;border:1.5px solid rgba(160,94,34,.4)}
+    .step-dot.active{background:linear-gradient(135deg,#7d4817,#a05e22);color:#fff;box-shadow:0 4px 14px rgba(160,94,34,.3)}
     .step-dot.pending{background:rgba(255,255,255,.05);color:rgba(255,255,255,.25);border:1.5px solid rgba(255,255,255,.08)}
 
     /* Glow */
     .glow-orb{position:fixed;pointer-events:none;z-index:0}
-    .glow-orb-1{top:68px;left:0;width:500px;height:500px;background:radial-gradient(circle,rgba(16,185,129,0.1) 0%,transparent 70%)}
+    .glow-orb-1{top:68px;left:0;width:500px;height:500px;background:radial-gradient(circle,rgba(160,94,34,0.1) 0%,transparent 70%)}
     .glow-orb-2{bottom:-5%;right:0;width:400px;height:400px;background:radial-gradient(circle,rgba(201,168,76,0.06) 0%,transparent 70%)}
 
     /* WhatsApp */
@@ -156,7 +156,7 @@ $navItems = [
 
 <?php require_once 'includes/public_navbar.php'; ?>
 
-<!-- BOOKING PAGE ‚Äî Split layout -->
+<!-- BOOKING PAGE ó Split layout -->
 <style>
   .bk-grid{display:grid;grid-template-columns:360px 1fr;gap:0;min-height:calc(100vh - 68px);margin-top:68px}
   @media(max-width:1023px){.bk-grid{grid-template-columns:1fr;margin-top:68px}}
@@ -168,10 +168,10 @@ $navItems = [
   .bk-steps{display:flex;align-items:center;margin-bottom:2rem}
   .bk-step-item{display:flex;flex-direction:column;align-items:center;flex:1;position:relative}
   .bk-step-item:not(:last-child)::after{content:'';position:absolute;top:18px;left:calc(50% + 22px);right:calc(-50% + 22px);height:1.5px;background:rgba(255,255,255,.1)}
-  .bk-step-item.done::after,.bk-step-item.active::after{background:rgba(16,185,129,.4)}
+  .bk-step-item.done::after,.bk-step-item.active::after{background:rgba(160,94,34,.4)}
   .bk-step-num{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif;font-size:.75rem;font-weight:700;transition:all .3s;z-index:1;border:2px solid transparent}
-  .bk-step-num.done{background:rgba(16,185,129,.2);color:#10b981;border-color:rgba(16,185,129,.4)}
-  .bk-step-num.active{background:linear-gradient(135deg,#059669,#10b981);color:#fff;box-shadow:0 4px 16px rgba(16,185,129,.35);border-color:transparent}
+  .bk-step-num.done{background:rgba(160,94,34,.2);color:#a05e22;border-color:rgba(160,94,34,.4)}
+  .bk-step-num.active{background:linear-gradient(135deg,#7d4817,#a05e22);color:#fff;box-shadow:0 4px 16px rgba(160,94,34,.35);border-color:transparent}
   .bk-step-num.pending{background:rgba(255,255,255,.05);color:rgba(255,255,255,.25);border-color:rgba(255,255,255,.08)}
   .bk-step-lbl{font-family:'Montserrat',sans-serif;font-size:.6rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;margin-top:.4rem;text-align:center}
   /* Panel transitions */
@@ -183,25 +183,25 @@ $navItems = [
   /* Price row */
   .bk-price-row{display:flex;justify-content:space-between;align-items:center;padding:.55rem 0;border-bottom:1px solid rgba(255,255,255,.06)}
   .bk-price-row:last-child{border-bottom:none}
-  .bk-price-row.total{border-top:1px solid rgba(16,185,129,.2);margin-top:.3rem;padding-top:.75rem}
+  .bk-price-row.total{border-top:1px solid rgba(160,94,34,.2);margin-top:.3rem;padding-top:.75rem}
 </style>
 
 <?php if (!empty($_GET['success'])): ?>
 <!-- SUCCESS PAGE -->
 <div style="min-height:calc(100vh - 68px);margin-top:68px;display:flex;align-items:center;justify-content:center;padding:2rem">
   <div style="max-width:480px;width:100%;background:#1a1d27;border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:3rem 2rem;text-align:center">
-    <div style="width:72px;height:72px;border-radius:50%;background:rgba(16,185,129,.12);border:2px solid rgba(16,185,129,.25);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem">
-      <i class="fas fa-check" style="font-size:1.8rem;color:#10b981"></i>
+    <div style="width:72px;height:72px;border-radius:50%;background:rgba(160,94,34,.12);border:2px solid rgba(160,94,34,.25);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem">
+      <i class="fas fa-check" style="font-size:1.8rem;color:#a05e22"></i>
     </div>
     <h1 class="font-heading text-white font-bold mb-3" style="font-size:1.6rem">Booking Request Received!</h1>
     <p class="text-white/55 leading-relaxed mb-2" style="font-size:.92rem">
       Thank you for choosing <strong style="color:rgba(255,255,255,.85)"><?= e($siteName) ?></strong>.
     </p>
     <p class="text-white/45 leading-relaxed mb-7" style="font-size:.88rem">
-      Our safari specialists will contact you within <strong style="color:#10b981">24 hours</strong> to confirm your itinerary and next steps.
+      Our safari specialists will contact you within <strong style="color:#a05e22">24 hours</strong> to confirm your itinerary and next steps.
     </p>
     <div style="display:flex;flex-direction:column;gap:.65rem">
-      <a href="<?= url() ?>" style="display:flex;align-items:center;justify-content:center;gap:.5rem;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.82rem;text-white;padding:.9rem;border-radius:12px;text-decoration:none;color:#fff;background:linear-gradient(135deg,#059669,#10b981)">
+      <a href="<?= url() ?>" style="display:flex;align-items:center;justify-content:center;gap:.5rem;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.82rem;text-white;padding:.9rem;border-radius:12px;text-decoration:none;color:#fff;background:linear-gradient(135deg,#7d4817,#a05e22)">
         <i class="fas fa-home text-xs"></i> Back to Home
       </a>
       <a href="https://wa.me/<?= e(WHATSAPP_NUMBER) ?>" target="_blank" rel="noopener"
@@ -216,7 +216,7 @@ $navItems = [
 <!-- SPLIT LAYOUT -->
 <div class="bk-grid">
 
-  <!-- == LEFT SIDEBAR ‚Äî Tour Summary == -->
+  <!-- == LEFT SIDEBAR ó Tour Summary == -->
   <aside class="bk-sidebar">
     <!-- Tour image -->
     <div id="bk-tour-img-wrap" style="margin-bottom:1rem">
@@ -225,7 +225,7 @@ $navItems = [
     <!-- Tour name -->
     <div id="bk-tour-name-wrap" style="margin-bottom:1.25rem">
       <p style="font-family:'Montserrat',sans-serif;font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.3);margin-bottom:.3rem">Selected Safari</p>
-      <p id="bk-tour-name" style="font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:#fff;line-height:1.3">
+      <p id="bk-tour-name" style="font-family:'Nanum Myeongjo',serif;font-size:1.05rem;font-weight:700;color:#fff;line-height:1.3">
         <?php
         /* Pre-select if tour slug given */
         $preT = null;
@@ -245,17 +245,17 @@ $navItems = [
       <p style="font-family:'Montserrat',sans-serif;font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.28);margin-bottom:.65rem">Price Summary</p>
       <div class="bk-price-row">
         <span style="font-size:.8rem;color:rgba(255,255,255,.5);font-family:'Montserrat',sans-serif">Per person</span>
-        <span id="sb-price" style="font-size:.88rem;font-weight:600;color:#fff;font-family:'Montserrat',sans-serif">‚Äî</span>
+        <span id="sb-price" style="font-size:.88rem;font-weight:600;color:#fff;font-family:'Montserrat',sans-serif">ó</span>
       </div>
       <div class="bk-price-row">
         <span style="font-size:.8rem;color:rgba(255,255,255,.5);font-family:'Montserrat',sans-serif">Travellers</span>
-        <span id="sb-travelers" style="font-size:.88rem;font-weight:600;color:#fff;font-family:'Montserrat',sans-serif">‚Äî</span>
+        <span id="sb-travelers" style="font-size:.88rem;font-weight:600;color:#fff;font-family:'Montserrat',sans-serif">ó</span>
       </div>
       <div class="bk-price-row total">
         <span style="font-size:.82rem;font-weight:700;font-family:'Montserrat',sans-serif;color:rgba(255,255,255,.65)">Estimated Total</span>
-        <span id="sb-total" style="font-size:1.25rem;font-weight:700;color:#10b981;font-family:'Playfair Display',serif">‚Äî</span>
+        <span id="sb-total" style="font-size:1.25rem;font-weight:700;color:#a05e22;font-family:'Nanum Myeongjo',serif">ó</span>
       </div>
-      <p style="font-family:'Montserrat',sans-serif;font-size:.62rem;color:rgba(255,255,255,.2);margin-top:.6rem">No payment now ¬∑ Final price confirmed within 24hrs</p>
+      <p style="font-family:'Montserrat',sans-serif;font-size:.62rem;color:rgba(255,255,255,.2);margin-top:.6rem">No payment now ∑ Final price confirmed within 24hrs</p>
     </div>
 
     <!-- What's included -->
@@ -263,7 +263,7 @@ $navItems = [
       <p style="font-family:'Montserrat',sans-serif;font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.28);margin-bottom:.6rem">What's Included</p>
       <?php foreach (['Expert guides & naturalists','All meals (full board)','Park entrance fees','4WD game vehicle','Airport transfers'] as $inc): ?>
       <div style="display:flex;align-items:center;gap:.55rem;margin-bottom:.4rem">
-        <i class="fas fa-check-circle" style="color:#10b981;font-size:.72rem;flex-shrink:0"></i>
+        <i class="fas fa-check-circle" style="color:#a05e22;font-size:.72rem;flex-shrink:0"></i>
         <span style="font-family:'Inter',sans-serif;font-size:.78rem;color:rgba(255,255,255,.5)"><?= $inc ?></span>
       </div>
       <?php endforeach; ?>
@@ -279,7 +279,7 @@ $navItems = [
     <!-- Trust badges -->
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem">
       <?php foreach ([
-        ['fa-lock',        '#34d399','SSL Secure'],
+        ['fa-lock',        '#c17a3a','SSL Secure'],
         ['fa-certificate', '#fbbf24','TATO Licensed'],
         ['fa-shield-alt',  '#60a5fa','No Payment Now'],
         ['fa-headset',     '#f97316','24/7 Support'],
@@ -297,10 +297,10 @@ $navItems = [
 
     <!-- Page title -->
     <div style="margin-bottom:1.75rem">
-      <h1 style="font-family:'Playfair Display',serif;font-weight:700;color:#fff;font-size:1.6rem;line-height:1.2">
-        Book Your <span style="background:linear-gradient(135deg,#34d399,#10b981);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Safari</span>
+      <h1 style="font-family:'Nanum Myeongjo',serif;font-weight:700;color:#fff;font-size:1.6rem;line-height:1.2">
+        Book Your <span style="background:linear-gradient(135deg,#c17a3a,#a05e22);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Safari</span>
       </h1>
-      <p style="font-family:'Montserrat',sans-serif;font-size:.78rem;color:rgba(255,255,255,.4);margin-top:.3rem">3 easy steps ¬∑ No payment required now</p>
+      <p style="font-family:'Montserrat',sans-serif;font-size:.78rem;color:rgba(255,255,255,.4);margin-top:.3rem">3 easy steps ∑ No payment required now</p>
     </div>
 
     <!-- Step progress -->
@@ -311,7 +311,7 @@ $navItems = [
           <i class="fas fa-check" id="step-ck-<?= $si ?>" style="display:none;font-size:.7rem"></i>
           <span id="step-n-<?= $si ?>"><?= $si+1 ?></span>
         </div>
-        <span class="bk-step-lbl" id="step-label-<?= $si ?>" style="color:<?= $si===0?'#10b981':'rgba(255,255,255,.25)' ?>"><?= $sl ?></span>
+        <span class="bk-step-lbl" id="step-label-<?= $si ?>" style="color:<?= $si===0?'#a05e22':'rgba(255,255,255,.25)' ?>"><?= $sl ?></span>
       </div>
       <?php endforeach; ?>
     </div>
@@ -322,7 +322,7 @@ $navItems = [
       <i class="fas fa-exclamation-circle" style="color:#f87171;font-size:.88rem;margin-top:.1rem;flex-shrink:0"></i>
       <ul style="list-style:none">
         <?php foreach ($errors as $err): ?>
-        <li style="font-size:.82rem;color:#f87171">¬∑ <?= e($err) ?></li>
+        <li style="font-size:.82rem;color:#f87171">∑ <?= e($err) ?></li>
         <?php endforeach; ?>
       </ul>
     </div>
@@ -336,14 +336,14 @@ $navItems = [
         <div style="margin-bottom:1rem">
           <label class="f-label" for="tour_id">Select Safari Tour <span>*</span></label>
           <select class="f-select" id="tour_id" name="tour_id" required onchange="bkUpdateSidebar()">
-            <option value="">‚Äî Choose your safari ‚Äî</option>
+            <option value="">ó Choose your safari ó</option>
             <?php foreach ($allTours as $t): ?>
             <option value="<?= e($t['id']) ?>" data-price="<?= e($t['price']) ?>" data-name="<?= e($t['name']) ?>"
-                    data-dest="<?= e($t['destination'].' ¬∑ '.$t['duration']) ?>"
+                    data-dest="<?= e($t['destination'].' ∑ '.$t['duration']) ?>"
                     data-img="<?= e($t['image'] ?? IMG_SERENGETI) ?>"
                     data-slug="<?= e($t['slug']) ?>"
                     <?= $preselectedSlug === $t['slug'] ? 'selected' : '' ?>>
-              <?= e($t['name']) ?> ‚Äî <?= e($t['destination']) ?> ¬∑ <?= formatPrice($t['price']) ?>/person
+              <?= e($t['name']) ?> ó <?= e($t['destination']) ?> ∑ <?= formatPrice($t['price']) ?>/person
             </option>
             <?php endforeach; ?>
           </select>
@@ -366,20 +366,20 @@ $navItems = [
           </div>
         </div>
 
-        <!-- Inline price calc (mobile only ‚Äî sidebar hidden on mobile) -->
-        <div id="mobile-price-calc" style="background:rgba(16,185,129,.07);border:1px solid rgba(16,185,129,.15);border-radius:12px;padding:1rem;margin-bottom:1rem;display:none">
+        <!-- Inline price calc (mobile only ó sidebar hidden on mobile) -->
+        <div id="mobile-price-calc" style="background:rgba(160,94,34,.07);border:1px solid rgba(160,94,34,.15);border-radius:12px;padding:1rem;margin-bottom:1rem;display:none">
           <div style="display:flex;justify-content:space-between;align-items:center">
             <span style="font-family:'Montserrat',sans-serif;font-size:.72rem;color:rgba(255,255,255,.5)">Estimated Total</span>
-            <span id="calc-total" style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:#10b981">‚Äî</span>
+            <span id="calc-total" style="font-family:'Nanum Myeongjo',serif;font-size:1.2rem;font-weight:700;color:#a05e22">ó</span>
           </div>
-          <p style="font-family:'Montserrat',sans-serif;font-size:.6rem;color:rgba(255,255,255,.2);margin-top:.25rem">No payment now ¬∑ Final price confirmed within 24hrs</p>
+          <p style="font-family:'Montserrat',sans-serif;font-size:.6rem;color:rgba(255,255,255,.2);margin-top:.25rem">No payment now ∑ Final price confirmed within 24hrs</p>
         </div>
         <!-- Hidden inputs for sidebar JS compat -->
         <input type="hidden" id="calc-price" value="">
         <input type="hidden" id="calc-travelers" value="">
 
         <div style="display:flex;justify-content:flex-end;margin-top:1.5rem">
-          <button type="button" onclick="goStep(1)" style="display:inline-flex;align-items:center;gap:.5rem;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.82rem;text-white;padding:.85rem 1.75rem;border-radius:12px;background:linear-gradient(135deg,#059669,#10b981);border:none;color:#fff;cursor:pointer;box-shadow:0 4px 18px rgba(16,185,129,.3);transition:all .25s" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform=''">
+          <button type="button" onclick="goStep(1)" style="display:inline-flex;align-items:center;gap:.5rem;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.82rem;text-white;padding:.85rem 1.75rem;border-radius:12px;background:linear-gradient(135deg,#7d4817,#a05e22);border:none;color:#fff;cursor:pointer;box-shadow:0 4px 18px rgba(160,94,34,.3);transition:all .25s" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform=''">
             Your Information <i class="fas fa-arrow-right" style="font-size:.72rem"></i>
           </button>
         </div>
@@ -414,27 +414,27 @@ $navItems = [
           $preSelected = $formData['country'] ?? '';
           ?>
           <select class="f-select" id="country" name="country" required onchange="toggleOtherCountry(this)">
-            <option value="">‚Äî Select your country ‚Äî</option>
+            <option value="">ó Select your country ó</option>
             <?php foreach ($countries as $c): ?>
             <option value="<?= e($c) ?>" <?= $preSelected === $c ? 'selected' : '' ?>><?= e($c) ?></option>
             <?php endforeach; ?>
             <option value="__other__" <?= (!empty($preSelected) && !in_array($preSelected, $countries)) ? 'selected' : '' ?>>Other (type manually)</option>
           </select>
           <input type="text" id="country_other" name="country_other" class="f-input"
-                 placeholder="Type your country name‚Ä¶"
+                 placeholder="Type your country nameÖ"
                  value="<?= (!empty($preSelected) && !in_array($preSelected, $countries)) ? e($preSelected) : '' ?>"
                  style="margin-top:.5rem;display:<?= (!empty($preSelected) && !in_array($preSelected, $countries)) ? 'block' : 'none' ?>">
         </div>
         <div style="margin-bottom:1.25rem">
           <label class="f-label" for="special_requests">Special Requests</label>
           <textarea class="f-textarea" id="special_requests" name="special_requests"
-                    placeholder="Dietary needs, accommodation preferences, special occasions, accessibility requirements‚Ä¶"><?= e($formData['special_requests'] ?? '') ?></textarea>
+                    placeholder="Dietary needs, accommodation preferences, special occasions, accessibility requirementsÖ"><?= e($formData['special_requests'] ?? '') ?></textarea>
         </div>
         <div style="display:flex;align-items:center;justify-content:space-between;gap:.65rem;flex-wrap:wrap">
           <button type="button" onclick="goStep(0)" style="display:inline-flex;align-items:center;gap:.4rem;font-family:'Montserrat',sans-serif;font-weight:600;font-size:.78rem;padding:.75rem 1.25rem;border-radius:10px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.6);cursor:pointer;transition:all .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.6)'">
             <i class="fas fa-arrow-left" style="font-size:.65rem"></i> Back
           </button>
-          <button type="button" onclick="goStep(2)" style="display:inline-flex;align-items:center;gap:.5rem;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.82rem;padding:.85rem 1.75rem;border-radius:12px;background:linear-gradient(135deg,#059669,#10b981);border:none;color:#fff;cursor:pointer;box-shadow:0 4px 18px rgba(16,185,129,.3);transition:all .25s" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform=''">
+          <button type="button" onclick="goStep(2)" style="display:inline-flex;align-items:center;gap:.5rem;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.82rem;padding:.85rem 1.75rem;border-radius:12px;background:linear-gradient(135deg,#7d4817,#a05e22);border:none;color:#fff;cursor:pointer;box-shadow:0 4px 18px rgba(160,94,34,.3);transition:all .25s" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform=''">
             Review Booking <i class="fas fa-arrow-right" style="font-size:.72rem"></i>
           </button>
         </div>
@@ -444,17 +444,17 @@ $navItems = [
       <div class="bk-panel" id="panel-2">
         <!-- Summary -->
         <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:1.1rem;margin-bottom:1.1rem">
-          <p style="font-family:'Montserrat',sans-serif;font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:#10b981;margin-bottom:.75rem">Booking Summary</p>
+          <p style="font-family:'Montserrat',sans-serif;font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:#a05e22;margin-bottom:.75rem">Booking Summary</p>
           <?php foreach ([['Safari Tour','s-tour'],['Travel Date','s-date'],['Travellers','s-travelers'],['Full Name','s-name'],['Email','s-email'],['Country','s-country'],['Est. Total','s-total']] as $sf): ?>
           <div style="display:flex;justify-content:space-between;align-items:center;padding:.55rem 0;border-bottom:1px solid rgba(255,255,255,.05)">
             <span style="font-family:'Montserrat',sans-serif;font-size:.75rem;color:rgba(255,255,255,.38)"><?= $sf[0] ?></span>
-            <span id="<?= $sf[1] ?>" style="font-family:'Montserrat',sans-serif;font-size:.78rem;font-weight:600;color:rgba(255,255,255,.85)">‚Äî</span>
+            <span id="<?= $sf[1] ?>" style="font-family:'Montserrat',sans-serif;font-size:.78rem;font-weight:600;color:rgba(255,255,255,.85)">ó</span>
           </div>
           <?php endforeach; ?>
         </div>
         <!-- Note -->
-        <div style="background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.18);border-radius:12px;padding:.85rem 1rem;margin-bottom:1.25rem;display:flex;align-items:flex-start;gap:.6rem">
-          <i class="fas fa-info-circle" style="color:#10b981;font-size:.82rem;margin-top:.1rem;flex-shrink:0"></i>
+        <div style="background:rgba(160,94,34,.06);border:1px solid rgba(160,94,34,.18);border-radius:12px;padding:.85rem 1rem;margin-bottom:1.25rem;display:flex;align-items:flex-start;gap:.6rem">
+          <i class="fas fa-info-circle" style="color:#a05e22;font-size:.82rem;margin-top:.1rem;flex-shrink:0"></i>
           <p style="font-family:'Inter',sans-serif;font-size:.8rem;color:rgba(255,255,255,.5);line-height:1.6">
             By submitting you agree to our Terms & Conditions. <strong style="color:rgba(255,255,255,.75)">No payment required</strong> at this stage. We'll confirm within 24 hours.
           </p>
@@ -463,7 +463,7 @@ $navItems = [
           <button type="button" onclick="goStep(1)" style="display:inline-flex;align-items:center;gap:.4rem;font-family:'Montserrat',sans-serif;font-weight:600;font-size:.78rem;padding:.75rem 1.25rem;border-radius:10px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.6);cursor:pointer;transition:all .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.6)'">
             <i class="fas fa-arrow-left" style="font-size:.65rem"></i> Back
           </button>
-          <button type="submit" style="display:inline-flex;align-items:center;gap:.5rem;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.88rem;padding:.9rem 2rem;border-radius:12px;background:linear-gradient(135deg,#059669,#10b981);border:none;color:#fff;cursor:pointer;box-shadow:0 6px 24px rgba(16,185,129,.35);transition:all .25s" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform=''">
+          <button type="submit" style="display:inline-flex;align-items:center;gap:.5rem;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.88rem;padding:.9rem 2rem;border-radius:12px;background:linear-gradient(135deg,#7d4817,#a05e22);border:none;color:#fff;cursor:pointer;box-shadow:0 6px 24px rgba(160,94,34,.35);transition:all .25s" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform=''">
             <i class="fas fa-paper-plane" style="font-size:.78rem"></i> Submit Booking Request
           </button>
         </div>
@@ -480,7 +480,7 @@ $navItems = [
     <span class="font-heading text-white/40 font-bold text-sm"><?= e($siteName) ?></span>
     <p class="text-white/20 text-xs font-nav">&copy; <?= date('Y') ?> <?= e($siteName) ?>. All rights reserved.</p>
     <div class="flex gap-4">
-      <a href="<?= url('tours.php') ?>" class="text-white/35 hover:text-emerald-400 text-xs font-nav transition-colors">‚Üê All Tours</a>
+      <a href="<?= url('tours.php') ?>" class="text-white/35 hover:text-emerald-400 text-xs font-nav transition-colors">? All Tours</a>
       <a href="<?= url('contact.php') ?>" class="text-white/35 hover:text-white text-xs font-nav transition-colors">Contact</a>
     </div>
   </div>
@@ -525,7 +525,7 @@ $navItems = [
       const state = i < target ? 'done' : i === target ? 'active' : 'pending';
       dot.className  = 'bk-step-num ' + state;
       if (item) item.className = 'bk-step-item ' + state;
-      if (lbl)  lbl.style.color = i <= target ? '#10b981' : 'rgba(255,255,255,.25)';
+      if (lbl)  lbl.style.color = i <= target ? '#a05e22' : 'rgba(255,255,255,.25)';
       if (chk)  chk.style.display = state === 'done' ? 'block' : 'none';
       if (num)  num.style.display = state === 'done' ? 'none' : 'block';
     }
@@ -565,22 +565,22 @@ $navItems = [
 
   function buildSummary() {
     const tourSel    = document.getElementById('tour_id');
-    const tourText   = tourSel.options[tourSel.selectedIndex]?.text || '‚Äî';
+    const tourText   = tourSel.options[tourSel.selectedIndex]?.text || 'ó';
     const date       = document.getElementById('travel_date').value;
     const trav       = document.getElementById('travelers').value;
     const fn         = document.getElementById('first_name').value;
     const ln         = document.getElementById('last_name').value;
     const em         = document.getElementById('email').value;
     const co         = document.getElementById('country').value;
-    const total      = document.getElementById('sb-total')?.textContent || document.getElementById('calc-total')?.textContent || '‚Äî';
+    const total      = document.getElementById('sb-total')?.textContent || document.getElementById('calc-total')?.textContent || 'ó';
 
-    const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val || '‚Äî'; };
-    set('s-tour',     tourText.split('‚Äî')[0].trim());
-    set('s-date',     date || '‚Äî');
+    const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val || 'ó'; };
+    set('s-tour',     tourText.split('ó')[0].trim());
+    set('s-date',     date || 'ó');
     set('s-travelers',trav + (trav == 1 ? ' Person' : ' People'));
-    set('s-name',     (fn + ' ' + ln).trim() || '‚Äî');
-    set('s-email',    em || '‚Äî');
-    set('s-country',  co || '‚Äî');
+    set('s-name',     (fn + ' ' + ln).trim() || 'ó');
+    set('s-email',    em || 'ó');
+    set('s-country',  co || 'ó');
     set('s-total',    total);
   }
 
@@ -604,8 +604,8 @@ $navItems = [
     const travelers= parseInt(document.getElementById('travelers')?.value) || 0;
     const opt      = tourSel ? tourSel.options[tourSel.selectedIndex] : null;
     const price    = opt ? parseFloat(opt.dataset.price) : 0;
-    const fmt = v => v > 0 ? '$' + v.toLocaleString('en-US',{minimumFractionDigits:0}) : '‚Äî';
-    const total    = (price > 0 && travelers > 0) ? fmt(price * travelers) : '‚Äî';
+    const fmt = v => v > 0 ? '$' + v.toLocaleString('en-US',{minimumFractionDigits:0}) : 'ó';
+    const total    = (price > 0 && travelers > 0) ? fmt(price * travelers) : 'ó';
 
     /* Sidebar elements */
     const sbPrice    = document.getElementById('sb-price');
@@ -615,9 +615,9 @@ $navItems = [
     const sbDest     = document.getElementById('bk-tour-dest');
     const sbImg      = document.getElementById('bk-tour-img');
     if (sbPrice)    sbPrice.textContent    = fmt(price);
-    if (sbTrav)     sbTrav.textContent     = travelers > 0 ? travelers + (travelers===1?' Person':' People') : '‚Äî';
+    if (sbTrav)     sbTrav.textContent     = travelers > 0 ? travelers + (travelers===1?' Person':' People') : 'ó';
     if (sbTotal)    sbTotal.textContent    = total;
-    if (sbName && opt && opt.value) sbName.textContent = opt.dataset.name || opt.text.split('‚Äî')[0].trim();
+    if (sbName && opt && opt.value) sbName.textContent = opt.dataset.name || opt.text.split('ó')[0].trim();
     if (sbDest && opt && opt.value) sbDest.textContent = opt.dataset.dest || '';
     if (sbImg  && opt && opt.dataset.img) sbImg.src = opt.dataset.img;
 
@@ -647,6 +647,8 @@ $navItems = [
 
 })();
 </script>
+
+<?php require_once 'includes/chatbot-widget.php'; ?>
 </body>
 </html>
 

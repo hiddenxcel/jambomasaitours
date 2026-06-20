@@ -1,10 +1,10 @@
-Ôªø<?php
+<?php
 require_once '../config/config.php';
 require_once '../includes/functions.php';
 require_once '../includes/security.php';
 require_once '../includes/db.php';
 
-// Already logged in ‚Üí dashboard
+// Already logged in ? dashboard
 if (!empty($_SESSION['admin_id'])) { redirect(url('admin/index.php')); }
 
 $error     = '';
@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <link rel="icon" type="image/png" href="<?= e(getSetting('favicon_url', SITE_URL.'/assets/images/favicon.ico')) ?>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Playfair+Display:wght@700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Nanum+Myeongjo:wght@700&display=swap">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"><link rel="stylesheet" href="<?= SITE_URL ?>/admin/assets/admin.css">
   <style>
     body{background:#0a0a0a;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:1rem}
@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <div style="width:56px;height:56px;border-radius:14px;background:linear-gradient(135deg,#10b981,#059669);display:flex;align-items:center;justify-content:center;margin:0 auto .85rem">
         <i class="fas fa-tree" style="color:#fff;font-size:1.4rem"></i>
       </div>
-      <div style="font-family:'Playfair Display',serif;font-weight:700;color:#fff;font-size:1.3rem">
+      <div style="font-family:'Nanum Myeongjo',serif;font-weight:700;color:#fff;font-size:1.3rem">
         Jambo <span style="background:linear-gradient(135deg,#34d399,#10b981);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Masai</span>
       </div>
       <div style="font-family:'Montserrat',sans-serif;font-size:.6rem;color:rgba(255,255,255,.3);letter-spacing:.18em;text-transform:uppercase;margin-top:.2rem">Admin Panel</div>
@@ -92,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <label class="f-label" for="password">Password</label>
         <div style="position:relative">
           <i class="fas fa-lock" style="position:absolute;left:.9rem;top:50%;transform:translateY(-50%);color:rgba(255,255,255,.25);font-size:.78rem;pointer-events:none"></i>
-          <input type="password" class="f-input" id="password" name="password" required autocomplete="current-password" placeholder="‚Ä¢‚Ä¢‚Ä¢‚Ä¢‚Ä¢‚Ä¢‚Ä¢‚Ä¢" style="padding-left:2.5rem">
+          <input type="password" class="f-input" id="password" name="password" required autocomplete="current-password" placeholder="ïïïïïïïï" style="padding-left:2.5rem">
         </div>
       </div>
       <button type="submit" class="btn btn-adm btn-adm-primary w-full" style="justify-content:center;padding:.85rem;font-size:.82rem;margin-top:.5rem;border-radius:12px">
@@ -102,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <div style="text-align:center;margin-top:1.25rem">
       <a href="<?= url() ?>" style="font-family:'Montserrat',sans-serif;font-size:.72rem;color:rgba(255,255,255,.3);text-decoration:none" onmouseover="this.style.color='#10b981'" onmouseout="this.style.color='rgba(255,255,255,.3)'">
-        ‚Üê Back to Website
+        ? Back to Website
       </a>
     </div>
   </div>

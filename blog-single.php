@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 require_once 'config/config.php';
 require_once 'includes/functions.php';
 require_once 'includes/security.php';
@@ -85,18 +85,18 @@ $headExtra = '
 
 $extraCss = '
   .prose{color:rgba(255,255,255,.6);line-height:1.9;font-size:.95rem}
-  .prose h2,.prose h3{font-family:"Playfair Display",Georgia,serif;color:#fff;margin:1.8rem 0 .9rem}
+  .prose h2,.prose h3{font-family:"Nanum Myeongjo",Georgia,serif;color:#fff;margin:1.8rem 0 .9rem}
   .prose h2{font-size:1.5rem} .prose h3{font-size:1.2rem}
   .prose p{margin-bottom:1.2rem}
-  .prose a{color:#34d399;text-decoration:underline}
-  .prose a:hover{color:#10b981}
+  .prose a{color:#c17a3a;text-decoration:underline}
+  .prose a:hover{color:#a05e22}
   .prose ul,.prose ol{margin:1rem 0 1rem 1.5rem;space-y:0.5rem}
   .prose li{margin-bottom:.4rem}
-  .prose blockquote{border-left:3px solid #10b981;padding-left:1.2rem;color:rgba(255,255,255,.5);font-style:italic;margin:1.5rem 0}
+  .prose blockquote{border-left:3px solid #a05e22;padding-left:1.2rem;color:rgba(255,255,255,.5);font-style:italic;margin:1.5rem 0}
   .prose img{border-radius:12px;width:100%;margin:1.5rem 0}
   .prose strong{color:rgba(255,255,255,.85);font-weight:600}
-  .related-card{background:#111;border:1px solid rgba(255,255,255,.07);border-radius:12px;overflow:hidden;transition:all .3s;text-decoration:none;display:block}
-  .related-card:hover{border-color:rgba(16,185,129,.25);transform:translateY(-3px)}
+  .related-card{background:#2c463d;border:1px solid rgba(255,255,255,.07);border-radius:12px;overflow:hidden;transition:all .3s;text-decoration:none;display:block}
+  .related-card:hover{border-color:rgba(160,94,34,.25);transform:translateY(-3px)}
   .related-card img{width:100%;height:140px;object-fit:cover;transition:transform .5s}
   .related-card:hover img{transform:scale(1.04)}
 
@@ -107,14 +107,14 @@ $extraCss = '
   .post-hero__inner{position:relative;z-index:1;width:100%;min-width:0;padding:clamp(5rem,13vw,7rem) 0 clamp(1.75rem,4vw,2.75rem)}
   .post-breadcrumb ol{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem;list-style:none;padding:0;margin:0 0 1.25rem}
   .post-breadcrumb a{color:rgba(255,255,255,.45);text-decoration:none;transition:color .2s}
-  .post-breadcrumb a:hover,.post-breadcrumb a:focus-visible{color:#34d399}
+  .post-breadcrumb a:hover,.post-breadcrumb a:focus-visible{color:#c17a3a}
   .post-breadcrumb li[aria-current]{color:rgba(255,255,255,.85);max-width:38ch;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .post-breadcrumb .sep{color:rgba(255,255,255,.2)}
   .post-hero__title{max-width:20ch;text-wrap:balance;overflow-wrap:break-word;text-shadow:0 4px 30px rgba(0,0,0,.4)}
-  .post-hero__avatar{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#10b981,#059669);color:#fff;font-family:"Montserrat",sans-serif;font-weight:700;font-size:.7rem;flex-shrink:0}
+  .post-hero__avatar{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#a05e22,#7d4817);color:#fff;font-family:"Montserrat",sans-serif;font-weight:700;font-size:.7rem;flex-shrink:0}
   .post-hero__dot{width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.25);flex-shrink:0}
   .post-hero__scroll{position:absolute;left:50%;bottom:.85rem;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.4rem;color:rgba(255,255,255,.4);text-decoration:none;z-index:2;transition:color .25s}
-  .post-hero__scroll:hover,.post-hero__scroll:focus-visible{color:#34d399}
+  .post-hero__scroll:hover,.post-hero__scroll:focus-visible{color:#c17a3a}
   .post-hero__scroll span{width:1px;height:22px;background:linear-gradient(to bottom,rgba(255,255,255,.5),transparent)}
   .post-hero__scroll i{font-size:.65rem;animation:heroBounce 2.4s ease-in-out infinite}
   @keyframes heroBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
@@ -216,7 +216,7 @@ require_once 'includes/dark_header.php';
       <aside class="sticky top-24 space-y-5">
         <!-- Book CTA -->
         <div class="glass-card p-6 text-center">
-          <div class="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4" style="background:rgba(16,185,129,.12)">
+          <div class="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4" style="background:rgba(160,94,34,.12)">
             <i class="fas fa-binoculars text-emerald-400 text-xl"></i>
           </div>
           <h3 class="font-heading text-white text-lg font-bold mb-2">Ready to Go?</h3>

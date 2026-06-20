@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 require_once 'config/config.php';
 require_once 'includes/functions.php';
 require_once 'includes/security.php';
@@ -48,7 +48,7 @@ if (empty($destinations)) {
     $destinations = [
         ['title'=>'Serengeti',       'slug'=>'serengeti',  'region'=>'Northern Tanzania',    'highlights'=>'Great Migration Country|Big Five|Hot Air Balloon', 'best_season'=>'Jun – Oct', 'image'=>IMG_SERENGETI],
         ['title'=>'Ngorongoro',      'slug'=>'ngorongoro', 'region'=>'Crater Highlands',     'highlights'=>'UNESCO World Heritage|Big Five|Ancient Caldera',   'best_season'=>'Year-round','image'=>IMG_NGORONGORO],
-        ['title'=>'Kilimanjaro',     'slug'=>'kilimanjaro','region'=>'Kilimanjaro Region',   'highlights'=>'Roof of Africa · 5,895m|Trekking Routes|Snow Cap',  'best_season'=>'Jan – Mar', 'image'=>IMG_KILIMANJARO],
+        ['title'=>'Kilimanjaro',     'slug'=>'kilimanjaro','region'=>'Kilimanjaro Region',   'highlights'=>'Roof of Africa – 5,895m|Trekking Routes|Snow Cap',  'best_season'=>'Jan – Mar', 'image'=>IMG_KILIMANJARO],
         ['title'=>'Zanzibar',        'slug'=>'zanzibar',   'region'=>'Zanzibar Archipelago', 'highlights'=>'Spice Island Paradise|White Sand Beaches|Snorkeling','best_season'=>'Jun – Mar', 'image'=>IMG_ZANZIBAR],
         ['title'=>'Tarangire',       'slug'=>'tarangire',  'region'=>'Manyara Region',       'highlights'=>'Elephant Sanctuary|Ancient Baobabs|Bird Watching',  'best_season'=>'Jun – Oct', 'image'=>IMG_TARANGIRE],
         ['title'=>'Maasai Heartland','slug'=>'maasai',     'region'=>'Arusha & Manyara',     'highlights'=>'Cultural Immersion|Traditional Villages|Warrior Life','best_season'=>'Year-round','image'=>IMG_MAASAI],
@@ -94,7 +94,7 @@ if (empty($testimonials)) {
   <meta property="og:url"         content="<?= e(SITE_URL) ?>/">
   <meta property="og:type"        content="website">
   <meta property="og:site_name"   content="Jambo Masai Tours">
-  <meta name="theme-color"        content="#10b981">
+  <meta name="theme-color"        content="#a05e22">
   <?php $_fav = getSetting('favicon_url') ?: getSetting('logo_url') ?: (SITE_URL . '/uploads/logo-husika.png'); ?>
   <link rel="icon" type="image/png" href="<?= e($_fav) ?>">
   <link rel="shortcut icon" href="<?= e($_fav) ?>">
@@ -184,15 +184,25 @@ if (empty($testimonials)) {
       theme: {
         extend: {
           colors: {
-            brand:  '#10b981',
-            brandd: '#059669',
-            safari: '#10b981',
-            dark:   '#0a0a0a',
-            card:   '#111111',
-            glass:  'rgba(255,255,255,0.04)',
+            brand:  '#a05e22',   /* burnt orange - primary */
+            brandd: '#7d4817',   /* darker orange */
+            safari: '#3b5c51',   /* forest green */
+            forest: '#3b5c51',
+            forestd:'#2c463d',   /* deeper green */
+            cream:  '#f4e1c3',   /* warm light bg */
+            creaml: '#faf3e6',   /* near-white cream for cards */
+            dark:   '#23362f',   /* dark = deep forest now */
+            card:   '#2c463d',
+            glass:  'rgba(255,255,255,0.05)',
+            /* Re-map Tailwind's emerald scale to our burnt-orange brand so any
+               leftover emerald-* utility classes pick up the new palette. */
+            emerald: {
+              100:'#f1ddc4', 200:'#e6c39b', 300:'#d9a36f',
+              400:'#c17a3a', 500:'#a05e22', 600:'#7d4817', 700:'#5e3611',
+            },
           },
           fontFamily: {
-            heading: ['Playfair Display','Georgia','serif'],
+            heading: ['Nanum Myeongjo','Georgia','serif'],
             sans:    ['Inter','Poppins','sans-serif'],
             nav:     ['Montserrat','sans-serif'],
           },
@@ -204,7 +214,7 @@ if (empty($testimonials)) {
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -215,30 +225,30 @@ if (empty($testimonials)) {
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     html{scroll-behavior:smooth}
-    body{background:#0a0a0a;color:#e5e7eb;font-family:'Inter','Poppins',sans-serif;line-height:1.6;overflow-x:hidden}
+    body{background:#23362f;color:#e9efe9;font-family:'Inter','Poppins',sans-serif;line-height:1.6;overflow-x:hidden}
     ::-webkit-scrollbar{width:4px}
-    ::-webkit-scrollbar-track{background:#111}
-    ::-webkit-scrollbar-thumb{background:#10b981;border-radius:2px}
+    ::-webkit-scrollbar-track{background:#2c463d}
+    ::-webkit-scrollbar-thumb{background:#a05e22;border-radius:2px}
 
     /* Ambient glow */
     .glow-orb{position:fixed;pointer-events:none;z-index:0}
-    .glow-orb-1{top:68px;left:-5%;width:500px;height:500px;background:radial-gradient(circle,rgba(16,185,129,0.12) 0%,transparent 70%)}
-    .glow-orb-2{bottom:-10%;right:-5%;width:600px;height:600px;background:radial-gradient(circle,rgba(16,185,129,0.08) 0%,transparent 70%)}
+    .glow-orb-1{top:68px;left:-5%;width:500px;height:500px;background:radial-gradient(circle,rgba(160,94,34,0.12) 0%,transparent 70%)}
+    .glow-orb-2{bottom:-10%;right:-5%;width:600px;height:600px;background:radial-gradient(circle,rgba(160,94,34,0.08) 0%,transparent 70%)}
 
     /* Glass card */
     .glass-card{background:rgba(255,255,255,.04);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.08);border-radius:16px}
 
     /* Gradient text */
-    .gradient-text{background:linear-gradient(135deg,#34d399,#10b981);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .gradient-text{background:linear-gradient(135deg,#c17a3a,#a05e22);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 
     /* Section tag */
-    .section-tag{display:inline-block;background:rgba(16,185,129,.12);color:#10b981;font-family:'Montserrat',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:.35rem 1rem;border-radius:999px;border:1px solid rgba(16,185,129,.2);margin-bottom:1.2rem}
+    .section-tag{display:inline-block;background:rgba(160,94,34,.12);color:#a05e22;font-family:'Montserrat',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:.35rem 1rem;border-radius:999px;border:1px solid rgba(160,94,34,.2);margin-bottom:1.2rem}
 
     /* Buttons */
-    .btn-gold{display:inline-flex;align-items:center;gap:.5rem;background:linear-gradient(135deg,#10b981,#059669);color:#fff;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;padding:.8rem 2rem;border-radius:8px;text-decoration:none;transition:all .3s;border:none;cursor:pointer}
-    .btn-gold:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(16,185,129,.4)}
-    .btn-outline{display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:#10b981;font-family:'Montserrat',sans-serif;font-weight:600;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;padding:.8rem 2rem;border-radius:8px;text-decoration:none;border:1px solid rgba(16,185,129,.4);transition:all .3s;cursor:pointer}
-    .btn-outline:hover{background:rgba(16,185,129,.08);border-color:#10b981;transform:translateY(-2px)}
+    .btn-gold{display:inline-flex;align-items:center;gap:.5rem;background:linear-gradient(135deg,#a05e22,#7d4817);color:#fff;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;padding:.8rem 2rem;border-radius:8px;text-decoration:none;transition:all .3s;border:none;cursor:pointer}
+    .btn-gold:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(160,94,34,.4)}
+    .btn-outline{display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:#a05e22;font-family:'Montserrat',sans-serif;font-weight:600;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;padding:.8rem 2rem;border-radius:8px;text-decoration:none;border:1px solid rgba(160,94,34,.4);transition:all .3s;cursor:pointer}
+    .btn-outline:hover{background:rgba(160,94,34,.08);border-color:#a05e22;transform:translateY(-2px)}
     .btn-wa{display:inline-flex;align-items:center;gap:.5rem;background:#25D366;color:#fff;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;padding:.8rem 2rem;border-radius:8px;text-decoration:none;transition:all .3s}
     .btn-wa:hover{background:#1da851;transform:translateY(-2px)}
     .btn-outline-white{display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:rgba(255,255,255,.8);font-family:'Montserrat',sans-serif;font-weight:600;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;padding:.8rem 2rem;border-radius:8px;text-decoration:none;border:1px solid rgba(255,255,255,.35);transition:all .3s;cursor:pointer}
@@ -251,12 +261,12 @@ if (empty($testimonials)) {
     .hero-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(to right,rgba(0,0,0,.88) 0%,rgba(0,0,0,.6) 50%,rgba(0,0,0,.25) 100%),linear-gradient(to top,rgba(0,0,0,.6) 0%,transparent 50%)}
 
     /* Scroll progress */
-    .scroll-progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,#10b981,#059669);z-index:9999;width:0%;transition:width .1s}
+    .scroll-progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,#a05e22,#7d4817);z-index:9999;width:0%;transition:width .1s}
 
     /* Back to top */
-    #back-top{position:fixed;bottom:2rem;right:2rem;z-index:999;width:44px;height:44px;border-radius:50%;background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3);color:#10b981;font-size:1.1rem;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;transform:translateY(20px);transition:all .3s}
+    #back-top{position:fixed;bottom:2rem;right:2rem;z-index:999;width:44px;height:44px;border-radius:50%;background:rgba(160,94,34,.15);border:1px solid rgba(160,94,34,.3);color:#a05e22;font-size:1.1rem;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;transform:translateY(20px);transition:all .3s}
     #back-top.visible{opacity:1;transform:translateY(0)}
-    #back-top:hover{background:rgba(16,185,129,.25)}
+    #back-top:hover{background:rgba(160,94,34,.25)}
 
     /* WhatsApp float */
     .wa-float{position:fixed;bottom:1.5rem;left:1.5rem;z-index:998;width:52px;height:52px;border-radius:50%;background:#25D366;color:#fff;font-size:1.4rem;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 8px 30px rgba(37,211,102,.4);opacity:0;transform:scale(0.7);transition:all .4s cubic-bezier(.34,1.56,.64,1)}
@@ -268,8 +278,8 @@ if (empty($testimonials)) {
     /* Nav */
 
     /* Tour card */
-    .tour-card{background:#111;border:1px solid rgba(255,255,255,.07);border-radius:16px;overflow:hidden;transition:all .4s;position:relative}
-    .tour-card:hover{transform:translateY(-6px);border-color:rgba(16,185,129,.3);box-shadow:0 20px 60px rgba(0,0,0,.5)}
+    .tour-card{background:#2c463d;border:1px solid rgba(255,255,255,.08);border-radius:16px;overflow:hidden;transition:all .4s;position:relative}
+    .tour-card:hover{transform:translateY(-6px);border-color:rgba(160,94,34,.3);box-shadow:0 20px 60px rgba(0,0,0,.5)}
     .tour-card img{width:100%;height:220px;object-fit:cover;transition:transform .6s}
     .tour-card:hover img{transform:scale(1.05)}
 
@@ -280,13 +290,20 @@ if (empty($testimonials)) {
     .dest-card:hover img{transform:scale(1.08)}
     .dest-card-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85) 0%,rgba(0,0,0,.2) 60%,transparent 100%)}
 
-    /* Gallery */
-    .gallery-grid{columns:3;column-gap:12px}
-    .gallery-item{break-inside:avoid;margin-bottom:12px;border-radius:10px;overflow:hidden;cursor:pointer;position:relative}
-    .gallery-item img{width:100%;display:block;transition:transform .4s}
-    .gallery-item:hover img{transform:scale(1.04)}
-    .gallery-item-overlay{position:absolute;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .3s;font-size:1.5rem}
+    /* Gallery - horizontal auto-sliding carousel (featured wide + portrait cards) */
+    .gallery-carousel{overflow:hidden;width:100%;border-radius:16px}
+    .gallery-track{display:flex;gap:16px;transition:transform .9s cubic-bezier(.65,0,.35,1);will-change:transform}
+    .gallery-item{flex:0 0 auto;width:300px;height:460px;border-radius:16px;overflow:hidden;cursor:pointer;position:relative;border:1px solid rgba(255,255,255,.06)}
+    .gallery-item.is-featured{width:620px}
+    .gallery-item img{width:100%;height:100%;display:block;object-fit:cover;transition:transform .5s}
+    .gallery-item:hover img{transform:scale(1.06)}
+    .gallery-item-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.6),transparent 55%);display:flex;align-items:flex-end;justify-content:flex-start;padding:1.1rem;opacity:0;transition:opacity .3s}
     .gallery-item:hover .gallery-item-overlay{opacity:1}
+    .gallery-item-overlay .ico{position:absolute;top:1rem;right:1rem;width:36px;height:36px;border-radius:50%;background:rgba(160,94,34,.85);display:flex;align-items:center;justify-content:center;color:#fff;font-size:.85rem}
+    /* Progress bar */
+    .gallery-progress{position:relative;height:3px;border-radius:3px;background:rgba(255,255,255,.08);margin-top:1.75rem;overflow:hidden}
+    .gallery-progress span{position:absolute;inset:0 auto 0 0;width:0;border-radius:3px;background:linear-gradient(90deg,#c17a3a,#a05e22,#7d4817)}
+    @media(max-width:767px){.gallery-item{width:220px;height:360px}.gallery-item.is-featured{width:300px}}
 
     /* Lightbox */
     #lightbox{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.95);display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .3s}
@@ -302,10 +319,10 @@ if (empty($testimonials)) {
 
     /* Slider dots */
     .slider-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.2);border:none;cursor:pointer;transition:all .3s;padding:0}
-    .slider-dot.active{background:#10b981;width:24px;border-radius:4px}
+    .slider-dot.active{background:#a05e22;width:24px;border-radius:4px}
 
     /* Star rating */
-    .stars{color:#10b981;letter-spacing:.1em;font-size:.85rem}
+    .stars{color:#a05e22;letter-spacing:.1em;font-size:.85rem}
 
     /* Mobile nav */
 
@@ -314,11 +331,11 @@ if (empty($testimonials)) {
     .reveal.visible{opacity:1;transform:translateY(0)}
 
     /* Section divider */
-    .section-divider{height:1px;background:linear-gradient(to right,transparent,rgba(16,185,129,.2),transparent)}
+    .section-divider{height:1px;background:linear-gradient(to right,transparent,rgba(160,94,34,.2),transparent)}
 
     /* Progress bar in search form */
     .search-select,.search-input{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#e5e7eb;border-radius:8px;padding:.75rem 1rem;font-family:'Inter',sans-serif;font-size:.85rem;width:100%;outline:none;transition:border-color .2s;-webkit-appearance:none}
-    .search-select:focus,.search-input:focus{border-color:rgba(16,185,129,.5)}
+    .search-select:focus,.search-input:focus{border-color:rgba(160,94,34,.5)}
     .search-label{display:block;font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#9ca3af;margin-bottom:.4rem;font-family:'Montserrat',sans-serif}
 
     @media(max-width:767px){
@@ -337,14 +354,14 @@ if (empty($testimonials)) {
     @keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
     .anim-float{animation:floatY 6s ease-in-out infinite}
     /* Hero emerald gradient text */
-    .hero-grad{background:linear-gradient(135deg,#34d399,#059669,#10b981);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .hero-grad{background:linear-gradient(135deg,#c17a3a,#7d4817,#a05e22);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
     /* Animated shimmering gradient headline */
-    .hero-grad-anim{background:linear-gradient(120deg,#6ee7b7,#10b981,#34d399,#059669,#6ee7b7);background-size:250% 100%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:gradShift 6s ease infinite}
+    .hero-grad-anim{background:linear-gradient(120deg,#d9a36f,#a05e22,#c17a3a,#7d4817,#d9a36f);background-size:250% 100%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:gradShift 6s ease infinite}
     @keyframes gradShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
     /* Hero badge with subtle glow */
-    .hero-badge{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.25);box-shadow:0 0 30px rgba(16,185,129,.12),inset 0 1px 0 rgba(255,255,255,.05);backdrop-filter:blur(8px)}
-    /* Stat numbers — gradient with glow */
-    .hero-stat{color:#fff;text-shadow:0 0 24px rgba(16,185,129,.25)}
+    .hero-badge{background:rgba(160,94,34,.1);border:1px solid rgba(160,94,34,.25);box-shadow:0 0 30px rgba(160,94,34,.12),inset 0 1px 0 rgba(255,255,255,.05);backdrop-filter:blur(8px)}
+    /* Stat numbers - gradient with glow */
+    .hero-stat{color:#fff;text-shadow:0 0 24px rgba(160,94,34,.25)}
     /* Primary button shine sweep */
     .btn-shine{position:relative;overflow:hidden}
     .btn-shine::after{content:'';position:absolute;top:0;left:-120%;width:60%;height:100%;background:linear-gradient(120deg,transparent,rgba(255,255,255,.35),transparent);transform:skewX(-20deg);transition:left .7s ease}
@@ -353,19 +370,99 @@ if (empty($testimonials)) {
     .hero-card-tilt{transition:transform .5s cubic-bezier(.16,1,.3,1)}
     .hero-card-tilt:hover{transform:perspective(1000px) rotateY(-4deg) rotateX(2deg)}
     @media(prefers-reduced-motion:reduce){.hero-grad-anim,.anim-float{animation:none}.hero-card-tilt:hover{transform:none}}
-    /* Partners strip */
-    .partners-strip{border-top:1px solid rgba(255,255,255,.05);border-bottom:1px solid rgba(255,255,255,.05)}
+
+    /* ── Hero vertical scrolling image columns — FULL-BLEED right edge ── */
+    /* Pinned to the top/right/bottom of the hero, spanning ~half the width. */
+    .hero-cols{position:absolute;top:0;right:0;bottom:0;width:48vw;max-width:720px;z-index:5;
+      grid-template-columns:1fr 1fr;gap:14px;padding:80px 14px 14px 0;overflow:hidden}
+    .hero-col{height:100%;overflow:hidden}
+    .hero-col-track{display:flex;flex-direction:column;gap:14px;will-change:transform}
+    /* up: starts at 0, moves to -50% (content is doubled, so it loops seamlessly) */
+    .hero-col-track.is-up{animation:heroColUp var(--dur,32s) linear infinite}
+    /* down: starts at -50%, moves to 0 */
+    .hero-col-track.is-down{animation:heroColDown var(--dur,32s) linear infinite}
+    @keyframes heroColUp{from{transform:translateY(0)}to{transform:translateY(-50%)}}
+    @keyframes heroColDown{from{transform:translateY(-50%)}to{transform:translateY(0)}}
+    .hero-col-card{position:relative;border-radius:16px;overflow:hidden;flex-shrink:0;border:1px solid rgba(255,255,255,.08);box-shadow:0 10px 30px rgba(0,0,0,.35)}
+    .hero-col-card img{width:100%;height:300px;object-fit:cover;display:block;transition:transform .5s}
+    .hero-col-card:hover img{transform:scale(1.06)}
+    .hero-col-cap{position:absolute;left:.6rem;bottom:.55rem;right:.6rem;color:#fff;font-family:'Montserrat',sans-serif;font-size:.62rem;font-weight:600;letter-spacing:.02em;text-shadow:0 1px 6px rgba(0,0,0,.7);opacity:0;transition:opacity .3s}
+    .hero-col-card::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.55),transparent 50%);opacity:0;transition:opacity .3s}
+    .hero-col-card:hover .hero-col-cap,.hero-col-card:hover::after{opacity:1}
+    @media(max-width:1023px){.hero-cols{width:42vw}.hero-col-card img{height:230px}}
+
+    /* ── Scroll-driven word reveal (Snippe-style) ── */
+    .scroll-reveal .w{
+      display:inline-block;
+      color:inherit;
+      opacity:.22;                 /* start faded */
+      transition:opacity .25s ease;
+      will-change:opacity;
+    }
+    .scroll-reveal .w.on{opacity:1} /* revealed */
+    /* keep natural spaces between words */
+    .scroll-reveal .sp{display:inline-block;width:.28em}
+    /* Partners strip - logo-brown background with green edges (matches the logo) */
+    .partners-strip{background:#5c3a21;border-top:4px solid #1f8a43;border-bottom:4px solid #1f8a43;box-shadow:inset 0 12px 30px rgba(0,0,0,.25),inset 0 -12px 30px rgba(0,0,0,.25)}
+    /* On brown bg, brighten the badges so they read well */
+    .partners-strip .partner-badge{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.14)}
+    .partners-strip .partner-badge:hover{background:rgba(255,255,255,.16) !important;border-color:rgba(255,255,255,.3) !important}
+    .partners-strip .partner-name{color:rgba(255,255,255,.85)}
+    .partners-strip .partner-badge:hover .partner-name{color:#fff}
 
     /* Scroll-down indicator (mouse + pulsing chevrons) */
-    .scrolldown{--color:#34d399;width:28px;height:46px;border:3px solid var(--color);border-radius:50px;box-sizing:border-box;position:relative;cursor:pointer;transition:border-color .3s,box-shadow .3s}
-    .scrolldown:hover{border-color:#10b981;box-shadow:0 0 18px rgba(16,185,129,.35)}
-    .scrolldown::before{content:'';position:absolute;top:6px;left:50%;width:6px;height:6px;margin-left:-3px;background:var(--color);border-radius:50%;box-shadow:0 0 6px rgba(16,185,129,.7);animation:scrolldownDot 2s infinite}
+    .scrolldown{--color:#c17a3a;width:28px;height:46px;border:3px solid var(--color);border-radius:50px;box-sizing:border-box;position:relative;cursor:pointer;transition:border-color .3s,box-shadow .3s}
+    .scrolldown:hover{border-color:#a05e22;box-shadow:0 0 18px rgba(160,94,34,.35)}
+    .scrolldown::before{content:'';position:absolute;top:6px;left:50%;width:6px;height:6px;margin-left:-3px;background:var(--color);border-radius:50%;box-shadow:0 0 6px rgba(160,94,34,.7);animation:scrolldownDot 2s infinite}
     @keyframes scrolldownDot{0%{opacity:0;height:6px}35%{opacity:1;height:9px}70%{transform:translateY(20px);height:9px;opacity:1}100%{transform:translateY(22px);height:4px;opacity:0}}
     .chevrons{display:flex;flex-direction:column;align-items:center;gap:4px}
     .chevrondown{width:9px;height:9px;border:solid var(--color);border-width:0 2px 2px 0;transform:rotate(45deg)}
     .chevrondown:nth-child(1){animation:chevronPulse .6s ease infinite alternate}
     .chevrondown:nth-child(2){animation:chevronPulse .6s ease infinite alternate .3s}
     @keyframes chevronPulse{from{opacity:.15}to{opacity:.85}}
+
+    /* ------------ LIGHT SECTIONS (cream background) ------------
+       Add class "section-light" to any <section> to flip it to a warm cream
+       theme. These rules re-map the white text / glass cards used elsewhere
+       so everything stays readable on the pale background. Palette:
+       cream #f4e1c3 bg, forest-green text #233a32, burnt-orange accents. */
+    .section-light{background:#f4e1c3;color:#2c463d}
+    /* Headings & body text ? forest green, readable */
+    .section-light h1,.section-light h2,.section-light h3,.section-light h4{color:#233a32}
+    .section-light .text-white{color:#233a32 !important}
+    .section-light .text-white\/90{color:#2c463d !important}
+    .section-light .text-white\/80,.section-light .text-white\/75{color:#3b5c51 !important}
+    .section-light .text-white\/60,.section-light .text-white\/55,.section-light .text-white\/50{color:#5a6f64 !important}
+    .section-light .text-white\/45,.section-light .text-white\/40,.section-light .text-white\/35,.section-light .text-white\/30{color:#7a8b80 !important}
+    /* Accent gradient/text ? burnt orange */
+    .section-light .hero-grad,.section-light .gradient-text{background:linear-gradient(135deg,#a05e22,#7d4817);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+    .section-light .text-emerald-400,.section-light .text-emerald-500{color:#a05e22 !important}
+    .section-light .text-emerald-100{color:#5e3611 !important}
+    /* Glass cards ? solid cream-white cards with soft shadow */
+    .section-light .glass-card{background:#faf3e6 !important;border:1px solid rgba(44,70,61,.1) !important;box-shadow:0 10px 30px rgba(44,70,61,.1) !important;backdrop-filter:none !important}
+    /* Generic translucent-white surfaces (bg-white/5 etc.) ? cream card */
+    .section-light .bg-white\/5,.section-light .bg-white\/\[\.05\]{background:#faf3e6 !important}
+    /* Translucent-white borders ? subtle green border */
+    .section-light .border-white\/10,.section-light .border-white\/\[\.1\],.section-light .border-white\/5{border-color:rgba(44,70,61,.14) !important}
+    /* Section pill (accent glass) ? light orange chip */
+    .section-light .bg-emerald-500\/10{background:rgba(160,94,34,.14) !important}
+    .section-light .border-emerald-500\/20{border-color:rgba(160,94,34,.35) !important}
+    /* Gallery progress track on cream bg */
+    .section-light .gallery-progress{background:rgba(44,70,61,.14)}
+    /* Card surfaces that hard-code #111 (tour cards etc.) */
+    .section-light .tour-card{background:#faf3e6;border-color:rgba(44,70,61,.1)}
+    .section-light .tour-card:hover{box-shadow:0 20px 50px rgba(44,70,61,.18)}
+    /* Section tag pill */
+    .section-light .section-tag{background:rgba(160,94,34,.14);border-color:rgba(160,94,34,.35);color:#7d4817}
+    /* Soft top hairline for light sections */
+    .section-light{border-top:1px solid rgba(44,70,61,.08)}
+    /* Dot grid on cream */
+    .section-light .about-dots{background-image:radial-gradient(rgba(44,70,61,.10) 1px,transparent 1px)}
+    /* Scroll-driven word highlight — gray → dark on scroll */
+    .section-light .scroll-word-reveal span{display:inline-block;transition:color .25s ease;color:#c5c5c5}
+    .section-light .scroll-word-reveal span.active{color:#1a1a1a}
+    /* "Book Your Safari" secondary button on light ? outlined green */
+    .section-light .hover\:bg-white\/10:hover{background:rgba(160,94,34,.1) !important}
   </style>
 </head>
 <body class="bg-dark text-gray-200">
@@ -378,7 +475,7 @@ if (empty($testimonials)) {
 <div class="glow-orb glow-orb-2" aria-hidden="true"></div>
 
 <?php
-/* Nav items — shorter labels for desktop, full for mobile */
+/* Nav items - shorter labels for desktop, full for mobile */
 $navItems = [
   'home'         => ['url'=>url(),                        'desk'=>'Home',       'mob'=>'Home',             'icon'=>'fa-home'],
   'tours'        => ['url'=>url('tours.php'),             'desk'=>'Safaris',    'mob'=>'Safari Tours',     'icon'=>'fa-compass'],
@@ -397,12 +494,12 @@ try {
 
 <?php require_once 'includes/public_navbar.php'; ?>
 
-<!-- ══════════════════════════════════════
-     HERO — 2-column with floating card
-══════════════════════════════════════ -->
+<!-- --------------------------------------
+     HERO - 2-column with floating card
+-------------------------------------- -->
 <section class="relative flex items-center overflow-hidden lg:min-h-screen" id="hero">
 
-  <!-- Ken Burns background -->
+  <!-- Ken Burns / video background -->
   <div class="absolute inset-0 z-0">
     <?php if (!empty($heroVideo['video_url'])): ?>
     <video autoplay muted loop playsinline class="w-full h-full object-cover opacity-50" aria-hidden="true">
@@ -413,13 +510,10 @@ try {
          alt="Tanzania Safari" width="1920" height="1080" fetchpriority="high"
          class="w-full h-full object-cover ken-burns" style="opacity:.42">
     <?php endif; ?>
-    <!-- Overlays -->
-    <div class="absolute inset-0" style="background:linear-gradient(to bottom,rgba(10,10,10,.82) 0%,rgba(10,10,10,.35) 45%,rgba(10,10,10,.8) 100%)"></div>
-    <div class="absolute inset-0" style="background:linear-gradient(to right,rgba(10,10,10,.8) 0%,rgba(10,10,10,.3) 60%,rgba(10,10,10,0) 100%)"></div>
-    <!-- Emerald glow accents -->
-    <div class="absolute -left-32 top-1/4 w-[480px] h-[480px] rounded-full pointer-events-none" style="background:radial-gradient(circle,rgba(16,185,129,.16) 0%,transparent 70%);filter:blur(20px)"></div>
-    <div class="absolute right-0 bottom-0 w-[420px] h-[420px] rounded-full pointer-events-none" style="background:radial-gradient(circle,rgba(5,150,105,.12) 0%,transparent 70%);filter:blur(20px)"></div>
-    <!-- Subtle noise/vignette -->
+    <!-- Overlays (forest-tinted dark for text legibility) -->
+    <div class="absolute inset-0" style="background:linear-gradient(to bottom,rgba(20,33,28,.85) 0%,rgba(20,33,28,.4) 45%,rgba(20,33,28,.85) 100%)"></div>
+    <div class="absolute inset-0" style="background:linear-gradient(to right,rgba(20,33,28,.85) 0%,rgba(20,33,28,.35) 60%,rgba(20,33,28,0) 100%)"></div>
+    <div class="absolute -left-32 top-1/4 w-[480px] h-[480px] rounded-full pointer-events-none" style="background:radial-gradient(circle,rgba(160,94,34,.16) 0%,transparent 70%);filter:blur(20px)"></div>
     <div class="absolute inset-0 pointer-events-none" style="background:radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,.45) 100%)"></div>
   </div>
 
@@ -427,62 +521,39 @@ try {
   <div class="relative z-10 w-full max-w-7xl mx-auto px-4 lg:px-6 pt-24 pb-16 lg:pt-36 lg:pb-24">
     <div class="grid md:grid-cols-2 gap-10 lg:gap-16 items-center">
 
-      <!-- ── Left: Slide text ── -->
+      <!-- -- Left: Slide text -- -->
       <div id="hero-left" class="max-w-xl md:max-w-none">
-        <?php foreach ($heroSlides as $i => $slide):
-          $words = explode(' ', trim($slide['headline']));
-          $mid   = (int)ceil(count($words) / 2);
-          $line1 = implode(' ', array_slice($words, 0, $mid));
-          $line2 = implode(' ', array_slice($words, $mid));
-        ?>
-        <div class="hero-slide-content <?= $i > 0 ? 'hidden' : '' ?>" data-slide="<?= $i ?>">
+        <div class="hero-slide-content">
 
-          <!-- Animated badge -->
-          <div class="anim-up" style="animation-delay:.1s">
-            <div class="hero-badge inline-flex items-start sm:items-center gap-2 rounded-full px-3 sm:px-4 py-1.5 mb-6 max-w-full">
-              <span class="relative flex h-2 w-2 mt-1 sm:mt-0 flex-shrink-0">
-                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
-              </span>
-              <span class="text-emerald-300 text-[.58rem] sm:text-[.63rem] font-semibold tracking-[.12em] sm:tracking-[.18em] uppercase font-nav leading-relaxed"><?= e($siteName) ?> — Tanzania Safari Experts</span>
-            </div>
-          </div>
-
-          <!-- Heading: line 1 white, line 2 emerald gradient -->
+          <!-- Heading -->
           <h1 class="anim-up font-heading text-white leading-[1.04] tracking-tight mb-6"
               style="font-size:clamp(2.6rem,6.8vw,4.8rem);animation-delay:.2s;text-shadow:0 2px 30px rgba(0,0,0,.5)">
-            <?= e($line1) ?><br>
-            <span class="hero-grad hero-grad-anim"><?= e($line2) ?></span>
+            Experience Tanzania Like<br>
+            <span class="hero-grad hero-grad-anim">Never Before</span>
           </h1>
 
           <!-- Subtitle -->
-          <?php if (!empty($slide['subtitle'])): ?>
           <p class="anim-up text-white/65 text-[1.05rem] leading-relaxed max-w-lg mb-8" style="animation-delay:.3s">
-            <?= e($slide['subtitle']) ?>
+            Luxury Safaris, Maasai Culture &amp; Unforgettable Adventures
           </p>
-          <?php endif; ?>
 
           <!-- CTA buttons -->
           <div class="anim-up grid grid-cols-1 sm:flex sm:flex-wrap gap-3 mb-10" style="animation-delay:.4s">
-            <?php if (!empty($slide['btn1_text'])): ?>
-            <a href="<?= e(strpos($slide['btn1_link'],'http')===0 ? $slide['btn1_link'] : url($slide['btn1_link'])) ?>"
+            <a href="tours.php"
                class="btn-shine group inline-flex items-center justify-center gap-2 font-nav font-semibold text-[.8rem] text-white px-7 py-3.5 rounded-xl transition-all hover:scale-105 w-full sm:w-auto"
-               style="background:linear-gradient(135deg,#059669,#10b981);box-shadow:0 8px 30px rgba(16,185,129,.35)">
+               style="background:linear-gradient(135deg,#7d4817,#a05e22);box-shadow:0 8px 30px rgba(160,94,34,.35)">
               <i class="fas fa-compass text-xs"></i>
-              <?= e($slide['btn1_text']) ?>
+              Explore Safaris
               <i class="fas fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
             </a>
-            <?php endif; ?>
             <div class="grid grid-cols-2 gap-3 sm:contents">
-              <?php if (!empty($slide['btn2_text'])): ?>
-              <a href="<?= e(strpos($slide['btn2_link'],'http')===0 ? $slide['btn2_link'] : url($slide['btn2_link'])) ?>"
+              <a href="booking.php"
                  class="inline-flex items-center justify-center gap-2 font-nav font-semibold text-[.8rem] text-white px-7 py-3.5 rounded-xl transition-all hover:bg-white/10 w-full sm:w-auto"
                  style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)">
                 <i class="fas fa-play text-emerald-400 text-xs"></i>
-                <?= e($slide['btn2_text']) ?>
+                Book Safari
               </a>
-              <?php endif; ?>
-              <a href="https://wa.me/<?= e(WHATSAPP_NUMBER) ?>" target="_blank" rel="noopener"
+              <a href="https://wa.me/+255659667271" target="_blank" rel="noopener"
                  class="inline-flex items-center justify-center gap-2 font-nav font-semibold text-[.8rem] px-6 py-3.5 rounded-xl transition-all w-full sm:w-auto"
                  style="color:#25D366;background:rgba(37,211,102,.08);border:1px solid rgba(37,211,102,.2)">
                 <i class="fab fa-whatsapp text-base"></i> WhatsApp
@@ -490,20 +561,25 @@ try {
             </div>
           </div>
 
-          <!-- Inline stats row -->
+          <!-- Stats row -->
           <div class="anim-up flex items-center justify-between sm:justify-start gap-2 sm:gap-8" style="animation-delay:.5s">
-            <?php foreach ([['15+','Years Experience'],['1,200+','Travellers'],['4.9 ★','Avg Rating']] as $idx => $st): ?>
-            <div <?= $idx > 0 ? 'class="pl-3 sm:pl-8 border-l border-white/[.12]"' : '' ?>>
-              <div class="text-xl sm:text-2xl lg:text-3xl font-bold font-heading hero-stat"><?= $st[0] ?></div>
-              <div class="text-[.6rem] sm:text-[.65rem] text-white/40 mt-0.5 uppercase tracking-wider font-nav whitespace-nowrap"><?= $st[1] ?></div>
+            <div>
+              <div class="text-xl sm:text-2xl lg:text-3xl font-bold font-heading hero-stat">15+</div>
+              <div class="text-[.6rem] sm:text-[.65rem] text-white/40 mt-0.5 uppercase tracking-wider font-nav whitespace-nowrap">Years Experience</div>
             </div>
-            <?php endforeach; ?>
+            <div class="pl-3 sm:pl-8 border-l border-white/[.12]">
+              <div class="text-xl sm:text-2xl lg:text-3xl font-bold font-heading hero-stat">1,200+</div>
+              <div class="text-[.6rem] sm:text-[.65rem] text-white/40 mt-0.5 uppercase tracking-wider font-nav whitespace-nowrap">Travellers</div>
+            </div>
+            <div class="pl-3 sm:pl-8 border-l border-white/[.12]">
+              <div class="text-xl sm:text-2xl lg:text-3xl font-bold font-heading hero-stat">4.9 ★</div>
+              <div class="text-[.6rem] sm:text-[.65rem] text-white/40 mt-0.5 uppercase tracking-wider font-nav whitespace-nowrap">Avg Rating</div>
+            </div>
           </div>
 
         </div>
-        <?php endforeach; ?>
 
-        <!-- Scroll indicator (mobile only — in normal flow) -->
+        <!-- Scroll indicator (mobile only - in normal flow) -->
         <div class="flex lg:hidden justify-center mt-12">
           <a href="#" onclick="event.preventDefault();window.scrollBy({top:window.innerHeight*0.85,behavior:'smooth'})" class="flex flex-col items-center gap-2" aria-label="Scroll down">
             <div class="scrolldown"></div>
@@ -515,138 +591,51 @@ try {
         </div>
       </div>
 
-      <!-- ── Right: Inline "Plan Your Safari" quote form ── -->
-      <div class="hidden md:flex items-center justify-center relative anim-up" style="animation-delay:.35s">
-        <!-- Glow behind form -->
-        <div class="absolute inset-0 m-auto w-[380px] h-[380px] rounded-full pointer-events-none" style="background:radial-gradient(circle,rgba(16,185,129,.18) 0%,transparent 70%);filter:blur(45px)"></div>
-
-        <div class="relative w-full max-w-[420px] ml-auto">
-
-          <!-- Floating trust chip: rating (top) -->
-          <div class="glass-card absolute -top-5 -right-5 z-20 px-3.5 py-2.5 anim-float hidden lg:flex items-center gap-2.5" style="animation-delay:1s">
-            <div class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style="background:rgba(245,158,11,.15)">
-              <i class="fas fa-star text-amber-400 text-sm"></i>
-            </div>
-            <div>
-              <div class="text-[.82rem] font-semibold text-white leading-none">4.9/5</div>
-              <div class="text-[.6rem] text-white/40 mt-0.5">2,400+ Reviews</div>
-            </div>
-          </div>
-
-          <!-- Floating trust chip: verified (bottom) -->
-          <div class="glass-card absolute -bottom-5 -left-6 z-20 px-3.5 py-2.5 anim-float hidden lg:flex items-center gap-2.5" style="animation-delay:2s">
-            <div class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style="background:rgba(16,185,129,.15)">
-              <i class="fas fa-shield-alt text-emerald-400 text-sm"></i>
-            </div>
-            <div>
-              <div class="text-[.82rem] font-semibold text-white leading-none">Verified</div>
-              <div class="text-[.6rem] text-white/40 mt-0.5">TATO Licensed</div>
-            </div>
-          </div>
-
-          <!-- Form card -->
-          <div class="glass-card relative overflow-hidden p-6 lg:p-7" style="box-shadow:0 30px 80px rgba(0,0,0,.55)">
-            <!-- Top accent bar -->
-            <div class="absolute inset-x-0 top-0 h-1" style="background:linear-gradient(90deg,#34d399,#10b981,#059669)"></div>
-
-            <!-- Header -->
-            <div class="mb-5">
-              <h2 class="font-heading text-white text-2xl leading-tight">Plan Your <span class="hero-grad">Safari</span></h2>
-              <p class="text-white/50 text-[.82rem] mt-1">Free quote · We reply within 24 hours.</p>
-            </div>
-
-            <!-- Form -->
-            <form id="hero-bk-form" novalidate>
-              <input type="hidden" name="<?= CSRF_TOKEN_NAME ?>" id="hero-bk-csrf" value="<?= e($heroCsrf) ?>">
-
-              <div class="mb-3">
-                <label class="bm-label" for="hero-bk-name">Full Name <span style="color:#f87171">*</span></label>
-                <input type="text" id="hero-bk-name" name="name" class="bm-input" required placeholder="John Smith" autocomplete="name">
-              </div>
-
-              <div class="grid grid-cols-2 gap-3 mb-3">
-                <div>
-                  <label class="bm-label" for="hero-bk-email">Email <span style="color:#f87171">*</span></label>
-                  <input type="email" id="hero-bk-email" name="email" class="bm-input" required placeholder="you@email.com" autocomplete="email">
-                </div>
-                <div>
-                  <label class="bm-label" for="hero-bk-phone">Phone</label>
-                  <input type="tel" id="hero-bk-phone" name="phone" class="bm-input" placeholder="+255 700 000 000" autocomplete="tel">
-                </div>
-              </div>
-
-              <div class="grid grid-cols-2 gap-3 mb-3">
-                <div>
-                  <label class="bm-label" for="hero-bk-dest">Destination</label>
-                  <div class="relative">
-                    <select id="hero-bk-dest" name="destination" class="bm-input" style="cursor:pointer">
-                      <option value="">Choose…</option>
-                      <?php foreach ($heroDests as $d): ?>
-                      <option value="<?= e($d) ?>"><?= e($d) ?></option>
-                      <?php endforeach; ?>
-                      <option value="Multiple Destinations">Multiple</option>
-                      <option value="Undecided - Need Advice">Need Advice</option>
-                    </select>
-                    <i class="fas fa-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-white/30 text-[.6rem] pointer-events-none"></i>
-                  </div>
-                </div>
-                <div>
-                  <label class="bm-label" for="hero-bk-travelers">Travelers</label>
-                  <input type="number" id="hero-bk-travelers" name="travelers" class="bm-input" value="2" min="1" max="50" autocomplete="off">
-                </div>
-              </div>
-
-              <div class="mb-4">
-                <label class="bm-label" for="hero-bk-date">Preferred Travel Date</label>
-                <input type="date" id="hero-bk-date" name="travel_date" class="bm-input" min="<?= date('Y-m-d', strtotime('+7 days')) ?>">
-              </div>
-
-              <!-- Error -->
-              <div id="hero-bk-error" class="hidden mb-3 rounded-lg px-3 py-2.5 text-[.8rem]" style="background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);color:#f87171"></div>
-
-              <!-- Submit -->
-              <button type="submit" id="hero-bk-submit"
-                      class="btn-shine w-full inline-flex items-center justify-center gap-2 font-nav font-bold text-[.82rem] text-white uppercase tracking-wide px-6 py-3.5 rounded-xl transition-all"
-                      style="background:linear-gradient(135deg,#10b981,#059669);box-shadow:0 8px 28px rgba(16,185,129,.32)">
-                <i class="fas fa-compass text-xs"></i> Request Free Quote
-              </button>
-
-              <p class="text-center text-[.68rem] text-white/30 mt-3 font-nav">
-                <i class="fas fa-lock text-emerald-400 mr-1 text-[.6rem]"></i> No payment required · Free cancellation
-              </p>
-            </form>
-
-            <!-- Success state -->
-            <div id="hero-bk-success" class="hidden text-center py-8">
-              <div class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style="background:rgba(16,185,129,.12)">
-                <i class="fas fa-check text-2xl text-emerald-400"></i>
-              </div>
-              <h3 class="font-heading text-white text-xl mb-2">Request Sent!</h3>
-              <p class="text-white/55 text-[.85rem] leading-relaxed mb-5">Our safari specialists will contact you within <strong class="text-white/80">24 hours</strong> to craft your perfect adventure.</p>
-              <a href="https://wa.me/<?= e(WHATSAPP_NUMBER) ?>" target="_blank" rel="noopener"
-                 class="inline-flex items-center gap-2 font-nav font-bold text-[.78rem] px-5 py-2.5 rounded-lg transition-all"
-                 style="color:#25D366;background:rgba(37,211,102,.1);border:1px solid rgba(37,211,102,.2)">
-                <i class="fab fa-whatsapp text-base"></i> Chat on WhatsApp
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
+      <!-- spacer so the left text doesn't sit under the absolute image columns -->
+      <div class="hidden md:block" aria-hidden="true"></div>
 
     </div>
+  </div>
+
+  <!-- -- Right: full-bleed scrolling vertical image columns (touches right/top/bottom edge) -- -->
+  <?php
+  /* Build an image pool for the columns from gallery (fallback to hero consts) */
+  $heroColImgs = [];
+  foreach ($galleryImages as $g) { if (!empty($g['image'])) $heroColImgs[] = ['src'=>$g['image'],'title'=>$g['title'] ?? '']; }
+  $heroColImgs[] = ['src'=>IMG_HERO,'title'=>'Tanzania'];
+  $heroColImgs[] = ['src'=>IMG_SERENGETI,'title'=>'Serengeti'];
+  /* Split into 2 columns, round-robin */
+  $cols = [[],[]];
+  foreach ($heroColImgs as $i=>$im) { $cols[$i % 2][] = $im; }
+  $colDirs = ['up','up'];          // both scroll bottom -> top
+  $colDur  = ['35s','42s'];        // slow but clearly visible, slightly different speeds
+  ?>
+  <div class="hero-cols hidden md:grid" id="hero-cols">
+    <?php foreach ($cols as $ci => $col): if (empty($col)) continue; ?>
+    <div class="hero-col">
+      <div class="hero-col-track <?= $colDirs[$ci]==='down' ? 'is-down' : 'is-up' ?>" style="--dur:<?= $colDur[$ci] ?>;animation-duration:<?= $colDur[$ci] ?>">
+        <?php for ($r=0; $r<2; $r++): foreach ($col as $im): ?>
+        <div class="hero-col-card">
+          <img src="<?= e($im['src']) ?>" alt="<?= e($im['title']) ?>" loading="lazy">
+          <?php if (!empty($im['title'])): ?><span class="hero-col-cap"><?= e($im['title']) ?></span><?php endif; ?>
+        </div>
+        <?php endforeach; endfor; ?>
+      </div>
+    </div>
+    <?php endforeach; ?>
   </div>
 
   <!-- Slide prev/next (only when multiple slides, desktop only) -->
   <?php if (count($heroSlides) > 1): ?>
   <div class="hidden lg:flex absolute bottom-10 right-6 z-20 gap-2">
     <button id="hero-prev" class="w-10 h-10 rounded-full text-white flex items-center justify-center transition-all"
-            style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2)" aria-label="Prev slide">‹</button>
+            style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2)" aria-label="Prev slide"><i class="fas fa-chevron-left text-xs"></i></button>
     <button id="hero-next" class="w-10 h-10 rounded-full text-white flex items-center justify-center transition-all"
-            style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2)" aria-label="Next slide">›</button>
+            style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2)" aria-label="Next slide"><i class="fas fa-chevron-right text-xs"></i></button>
   </div>
   <?php endif; ?>
 
-  <!-- Scroll indicator (desktop only — absolute over full-height hero) -->
+  <!-- Scroll indicator (desktop only - absolute over full-height hero) -->
   <a href="#" onclick="event.preventDefault();window.scrollBy({top:window.innerHeight*0.85,behavior:'smooth'})" class="hidden lg:flex absolute bottom-16 left-1/2 -translate-x-1/2 z-10 flex-col items-center gap-2" aria-label="Scroll down">
     <div class="scrolldown"></div>
     <div class="chevrons">
@@ -655,41 +644,41 @@ try {
     </div>
   </a>
 
-  <!-- Curved wave divider — flows into the section below -->
+  <!-- Curved wave divider - flows into the section below -->
   <div class="absolute bottom-0 inset-x-0 z-[5] pointer-events-none leading-[0]" aria-hidden="true">
     <svg viewBox="0 0 1440 80" preserveAspectRatio="none" class="w-full h-[50px] lg:h-[70px]">
-      <path d="M0,40 C360,90 1080,0 1440,40 L1440,80 L0,80 Z" fill="#0a0a0a"></path>
+      <path d="M0,40 C360,90 1080,0 1440,40 L1440,80 L0,80 Z" fill="#5c3a21"></path>
     </svg>
   </div>
 
 </section>
 
-<!-- ══════════════════════════════════════
+<!-- --------------------------------------
      TRUSTED PARTNERS / CERTIFICATIONS
-══════════════════════════════════════ -->
+-------------------------------------- -->
 <section class="partners-strip relative z-10 py-10">
   <div class="max-w-7xl mx-auto px-4 lg:px-6">
 
     <!-- Header -->
     <div class="flex items-center gap-4 mb-7">
-      <div class="flex-1 h-px" style="background:linear-gradient(to right,transparent,rgba(255,255,255,.07))"></div>
-      <span class="font-nav text-[.6rem] font-700 uppercase tracking-[.22em] text-white/25 flex-shrink-0">
+      <div class="flex-1 h-px" style="background:linear-gradient(to right,transparent,rgba(255,255,255,.2))"></div>
+      <span class="font-nav text-[.6rem] font-700 uppercase tracking-[.22em] text-white/55 flex-shrink-0">
         Certified &amp; Featured On
       </span>
-      <div class="flex-1 h-px" style="background:linear-gradient(to left,transparent,rgba(255,255,255,.07))"></div>
+      <div class="flex-1 h-px" style="background:linear-gradient(to left,transparent,rgba(255,255,255,.2))"></div>
     </div>
 
-    <!-- Partner badges — infinite scroll carousel -->
+    <!-- Partner badges - infinite scroll carousel -->
     <?php
     $partners = [
       ['name' => 'SafariBookings',  'short' => 'Safari Bookings', 'icon' => 'fa-binoculars',    'color' => '#f59e0b', 'url' => 'https://www.safaribookings.com/p6419'],
-      ['name' => 'TATO',            'short' => 'TATO',            'icon' => 'fa-certificate',   'color' => '#10b981', 'url' => 'https://www.tatotz.org/'],
+      ['name' => 'TATO',            'short' => 'TATO',            'icon' => 'fa-certificate',   'color' => '#a05e22', 'url' => 'https://www.tatotz.org/'],
       ['name' => 'TourHQ',          'short' => 'TourHQ',          'icon' => 'fa-globe',         'color' => '#3b82f6', 'url' => 'https://www.tourhq.com/'],
       ['name' => 'Trustpilot',      'short' => 'Trustpilot',      'icon' => 'fa-star',          'color' => '#00b67a', 'url' => 'https://www.trustpilot.com/'],
       ['name' => 'KPAP',            'short' => 'KPAP',            'icon' => 'fa-mountain',      'color' => '#8b5cf6', 'url' => 'https://www.kpap.org/'],
-      ['name' => 'TripAdvisor',     'short' => 'TripAdvisor',     'icon' => 'fa-map-marked-alt','color' => '#34d399', 'url' => 'https://www.tripadvisor.com/'],
+      ['name' => 'TripAdvisor',     'short' => 'TripAdvisor',     'icon' => 'fa-map-marked-alt','color' => '#c17a3a', 'url' => 'https://www.tripadvisor.com/'],
       ['name' => 'SafariOptions',   'short' => 'Safari Options',  'icon' => 'fa-paw',           'color' => '#f97316', 'url' => 'https://www.safarioptions.com/'],
-      ['name' => 'SafariGo',        'short' => 'SafariGo',        'icon' => 'fa-compass',       'color' => '#10b981', 'url' => 'https://www.safarigo.com/'],
+      ['name' => 'SafariGo',        'short' => 'SafariGo',        'icon' => 'fa-compass',       'color' => '#a05e22', 'url' => 'https://www.safarigo.com/'],
       ['name' => 'GetYourGuide',    'short' => 'GetYourGuide',    'icon' => 'fa-ticket-alt',    'color' => '#ff6b35', 'url' => 'https://www.getyourguide.com/'],
       ['name' => 'SafariPicked',    'short' => 'SafariPicked',    'icon' => 'fa-check-circle',  'color' => '#a78bfa', 'url' => 'https://www.safaripicked.com/'],
       ['name' => 'BRELA',           'short' => 'BRELA',           'icon' => 'fa-building',      'color' => '#60a5fa', 'url' => 'https://ors.brela.go.tz/ors/start?returnUrl=%2fbrela%2fprod%2fors'],
@@ -762,7 +751,7 @@ try {
 }
 .partner-badge:hover {
   background: rgba(255,255,255,.07) !important;
-  border-color: rgba(16,185,129,.25) !important;
+  border-color: rgba(160,94,34,.25) !important;
   transform: translateY(-2px);
 }
 .partner-icon {
@@ -781,37 +770,32 @@ try {
 }
 .partner-badge:hover .partner-name { color: rgba(255,255,255,.85); }
 
-/* About section — subtle dot grid background */
+/* About section - subtle dot grid background */
 .about-dots{
-  background-image:radial-gradient(rgba(16,185,129,.12) 1px,transparent 1px);
+  background-image:radial-gradient(rgba(160,94,34,.12) 1px,transparent 1px);
   background-size:26px 26px;
   -webkit-mask-image:radial-gradient(ellipse 80% 70% at 50% 45%,#000 30%,transparent 80%);
   mask-image:radial-gradient(ellipse 80% 70% at 50% 45%,#000 30%,transparent 80%);
 }
 </style>
 
-<!-- ══════════════════════════════════════
+<!-- --------------------------------------
      ABOUT
-══════════════════════════════════════ -->
-<section class="about-section relative py-20 lg:py-28 px-4 lg:px-0 overflow-hidden" id="about">
+-------------------------------------- -->
+<section class="about-section section-light relative py-20 lg:py-28 px-4 lg:px-0 overflow-hidden" id="about">
   <!-- Background decoration -->
   <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
-    <!-- Soft top/bottom fade so section blends with neighbours -->
-    <div class="absolute inset-0" style="background:linear-gradient(180deg,#0a0a0a 0%,#0d1311 40%,#0d1311 60%,#0a0a0a 100%)"></div>
-    <!-- Emerald glow — left -->
-    <div class="absolute -left-40 top-10 w-[520px] h-[520px] rounded-full" style="background:radial-gradient(circle,rgba(16,185,129,.14) 0%,transparent 70%);filter:blur(30px)"></div>
-    <!-- Emerald glow — right -->
-    <div class="absolute -right-40 bottom-0 w-[460px] h-[460px] rounded-full" style="background:radial-gradient(circle,rgba(5,150,105,.1) 0%,transparent 70%);filter:blur(30px)"></div>
+    <!-- Emerald glow - left -->
+    <div class="absolute -left-40 top-10 w-[520px] h-[520px] rounded-full" style="background:radial-gradient(circle,rgba(160,94,34,.18) 0%,transparent 70%);filter:blur(30px)"></div>
+    <!-- Emerald glow - right -->
+    <div class="absolute -right-40 bottom-0 w-[460px] h-[460px] rounded-full" style="background:radial-gradient(circle,rgba(5,150,105,.14) 0%,transparent 70%);filter:blur(30px)"></div>
     <!-- Subtle dot grid -->
-    <div class="absolute inset-0 about-dots opacity-[.4]"></div>
-    <!-- Top & bottom hairline -->
-    <div class="absolute top-0 inset-x-0 h-px" style="background:linear-gradient(to right,transparent,rgba(16,185,129,.25),transparent)"></div>
-    <div class="absolute bottom-0 inset-x-0 h-px" style="background:linear-gradient(to right,transparent,rgba(16,185,129,.15),transparent)"></div>
+    <div class="absolute inset-0 about-dots opacity-[.5]"></div>
   </div>
   <div class="relative z-10 max-w-7xl mx-auto">
     <div class="grid lg:grid-cols-[5fr_6fr] gap-14 lg:gap-20 items-center">
 
-      <!-- ── Left: Image composition ── -->
+      <!-- -- Left: Image composition -- -->
       <div class="relative reveal">
 
         <!-- Main image -->
@@ -820,27 +804,27 @@ try {
                loading="lazy" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
         </div>
 
-        <!-- Secondary inset image — bottom right -->
+        <!-- Secondary inset image - bottom right -->
         <div class="absolute -bottom-7 -right-3 lg:-right-8 w-40 h-32 lg:w-52 lg:h-40 rounded-2xl overflow-hidden shadow-2xl"
-             style="border:3px solid #0a0a0a">
+             style="border:3px solid #f4e1c3">
           <img src="<?= IMG_MAASAI ?>" alt="Maasai culture Tanzania"
                loading="lazy" class="w-full h-full object-cover">
           <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
           <p class="absolute bottom-2 left-3 text-white text-[.6rem] font-nav font-semibold tracking-wider uppercase">Jambo Masai Tours</p>
         </div>
 
-        <!-- Experience badge — top left -->
+        <!-- Experience badge - top left -->
         <div class="absolute -top-4 -left-3 lg:-left-6 rounded-2xl px-5 py-4 shadow-2xl"
-             style="background:linear-gradient(135deg,#047857,#10b981)">
-          <div class="text-3xl font-bold text-white font-heading leading-none">15+</div>
-          <div class="text-emerald-100 text-[.72rem] mt-1 leading-tight font-nav uppercase tracking-wider">Years of<br>Adventure</div>
+             style="background:linear-gradient(135deg,#5e3611,#a05e22)">
+          <div class="text-3xl font-bold font-heading leading-none" style="color:#fff">15+</div>
+          <div class="text-[.72rem] mt-1 leading-tight font-nav uppercase tracking-wider" style="color:rgba(255,255,255,.9)">Years of<br>Adventure</div>
         </div>
 
-        <!-- Floating cert card — middle right -->
+        <!-- Floating cert card - middle right -->
         <div class="glass-card absolute top-1/2 -translate-y-1/2 -right-3 lg:-right-10 p-4 space-y-2.5 hidden lg:block">
           <?php foreach ([
             ['fa-star',       '#f59e0b', 'Top Rated',     '4.9 · TripAdvisor'],
-            ['fa-certificate','#10b981', 'TATO Certified','Licensed Operator'],
+            ['fa-certificate','#a05e22', 'TATO Certified','Licensed Operator'],
             ['fa-shield-alt', '#8b5cf6', 'KPAP Member',   'Responsible Tourism'],
           ] as $c): ?>
           <div class="flex items-center gap-3">
@@ -858,7 +842,7 @@ try {
 
       </div>
 
-      <!-- ── Right: Text content ── -->
+      <!-- -- Right: Text content -- -->
       <div class="reveal" style="transition-delay:120ms">
 
         <!-- Section pill -->
@@ -867,9 +851,9 @@ try {
           <span class="text-emerald-400 text-[.62rem] font-bold tracking-[.18em] uppercase font-nav">About Us</span>
         </div>
 
-        <!-- Heading -->
-        <h2 class="font-heading text-white leading-[1.08] mb-2" style="font-size:clamp(2rem,4vw,3.1rem)">
-          Tanzania's Most <span class="hero-grad">Trusted</span><br>Safari Experience
+        <!-- Heading — scroll-driven word reveal -->
+        <h2 class="font-heading leading-[1.08] mb-2 scroll-reveal" style="font-size:clamp(2rem,4vw,3.1rem)">
+          Tanzania's Most Trusted Safari Experience
         </h2>
 
         <!-- Location tag -->
@@ -877,23 +861,22 @@ try {
           <i class="fas fa-map-marker-alt text-xs mr-1"></i> Premier Safari Provider · Heart of Arusha, Tanzania
         </p>
 
-        <!-- Body copy -->
-        <p class="text-white/60 leading-[1.85] mb-4 text-[.94rem]">
-          At <strong class="text-white/90 font-semibold">Jambo Masai Tours</strong>, we invite you to explore the wonders of Tanzania — from the majestic heights of
-          <strong class="text-emerald-400">Kilimanjaro</strong> to the pristine shores of <strong class="text-emerald-400">Zanzibar</strong>.
+        <!-- Body copy — scroll-driven word reveal -->
+        <p class="leading-[1.85] mb-4 text-[1.02rem] scroll-reveal">
+          At Jambo Masai Tours, we invite you to explore the wonders of Tanzania — from the majestic heights of Kilimanjaro to the pristine shores of Zanzibar.
         </p>
-        <p class="text-white/50 leading-[1.85] mb-7 text-[.94rem]">
-          We specialise in crafting <strong class="text-white/75 font-medium">tailor-made experiences</strong> that cater to your every desire — whether you seek the thrill of mountain climbing, the serenity of a beach retreat, or the excitement of encountering Africa's iconic wildlife. Our expert team is here to make your dreams a reality.
+        <p class="leading-[1.85] mb-7 text-[1.02rem] scroll-reveal">
+          We specialise in crafting tailor-made experiences that cater to your every desire — whether you seek the thrill of mountain climbing, the serenity of a beach retreat, or the excitement of encountering Africa's iconic wildlife. Our expert team is here to make your dreams a reality.
         </p>
 
-        <!-- Feature grid 2×3 -->
+        <!-- Feature grid 2-3 -->
         <div class="grid grid-cols-2 gap-x-4 gap-y-3 mb-8">
           <?php foreach ([
-            ['fa-compass',       '#10b981', 'Expert Maasai Guides',   'Born & raised in Tanzania'],
+            ['fa-compass',       '#a05e22', 'Expert Maasai Guides',   'Born & raised in Tanzania'],
             ['fa-mountain',      '#8b5cf6', 'Kilimanjaro Expeditions','All routes & skill levels'],
             ['fa-water',         '#3b82f6', 'Zanzibar Retreats',      'Beach & island packages'],
             ['fa-paw',           '#f59e0b', 'Wildlife Safaris',       'Big Five guaranteed'],
-            ['fa-leaf',          '#34d399', 'Eco-Responsible',        'Carbon-neutral by 2027'],
+            ['fa-leaf',          '#c17a3a', 'Eco-Responsible',        'Carbon-neutral by 2027'],
             ['fa-headset',       '#f97316', '24/7 Support',           'Always here for you'],
           ] as $f): ?>
           <div class="flex items-start gap-3 group py-1">
@@ -912,11 +895,11 @@ try {
         <!-- CTA row -->
         <div class="flex flex-wrap gap-3 items-center">
           <a href="<?= url('about.php') ?>"
-             class="group inline-flex items-center gap-2 font-nav font-semibold text-[.78rem] text-white px-6 py-3 rounded-xl transition-all hover:scale-105 hover:shadow-lg"
-             style="background:linear-gradient(135deg,#059669,#10b981);box-shadow:0 4px 18px rgba(16,185,129,.2)">
-            <i class="fas fa-compass text-xs"></i>
+             class="group inline-flex items-center gap-2 font-nav font-semibold text-[.78rem] px-6 py-3 rounded-xl transition-all hover:scale-105 hover:shadow-lg"
+             style="background:linear-gradient(135deg,#7d4817,#a05e22);box-shadow:0 4px 18px rgba(160,94,34,.2);color:#fff">
+            <i class="fas fa-compass text-xs" style="color:#fff"></i>
             Our Full Story
-            <i class="fas fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
+            <i class="fas fa-arrow-right text-xs group-hover:translate-x-1 transition-transform" style="color:#fff"></i>
           </a>
           <a href="<?= url('booking.php') ?>"
              class="inline-flex items-center gap-2 font-nav font-semibold text-[.78rem] text-white/75 px-6 py-3 rounded-xl transition-all hover:text-white hover:bg-white/10"
@@ -939,9 +922,9 @@ try {
 
 <div class="section-divider max-w-7xl mx-auto px-4"></div>
 
-<!-- ══════════════════════════════════════
+<!-- --------------------------------------
      SEARCH BAR
-══════════════════════════════════════ -->
+-------------------------------------- -->
 <section class="relative z-20 -mt-px">
   <div class="max-w-6xl mx-auto px-4 lg:px-6 py-6">
     <form action="<?= url('tours.php') ?>" method="GET"
@@ -983,13 +966,13 @@ try {
 
 <div class="section-divider max-w-7xl mx-auto px-4"></div>
 
-<!-- ══════════════════════════════════════
+<!-- --------------------------------------
      FEATURED TOURS
-══════════════════════════════════════ -->
+-------------------------------------- -->
 <section class="py-20 lg:py-24 px-4 lg:px-0" id="tours">
   <div class="max-w-7xl mx-auto">
 
-    <!-- Section header — centered -->
+    <!-- Section header - centered -->
     <div class="text-center max-w-2xl mx-auto mb-14 reveal">
       <div class="inline-flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/20 rounded-full px-4 py-1.5 mb-5">
         <span class="text-emerald-400 text-[.62rem] font-bold tracking-[.2em] uppercase font-nav">Our Safaris</span>
@@ -1036,7 +1019,7 @@ try {
           <!-- Meta pills -->
           <div class="flex items-center gap-2 mb-3">
             <span class="font-nav text-[.65rem] text-emerald-400 font-semibold px-2.5 py-0.5 rounded-full"
-                  style="background:rgba(16,185,129,.1)">
+                  style="background:rgba(160,94,34,.1)">
               <?= e($tour['duration']) ?>
             </span>
             <span class="font-nav text-[.65rem] text-white/50 px-2.5 py-0.5 rounded-full"
@@ -1064,7 +1047,7 @@ try {
             </div>
             <a href="<?= url('tour-detail.php?slug=' . e($tour['slug'])) ?>"
                class="w-10 h-10 rounded-xl flex items-center justify-center transition-all hover:scale-110 hover:shadow-lg flex-shrink-0"
-               style="background:linear-gradient(135deg,#059669,#10b981);box-shadow:0 3px 12px rgba(16,185,129,.3)"
+               style="background:linear-gradient(135deg,#7d4817,#a05e22);box-shadow:0 3px 12px rgba(160,94,34,.3)"
                aria-label="View details for <?= e($tour['name']) ?>">
               <i class="fas fa-arrow-right text-white text-sm"></i>
             </a>
@@ -1105,18 +1088,18 @@ try {
 .dest-bento-extra{opacity:0;transform:translateY(8px);transition:opacity .35s .04s,transform .35s .04s}
 .dest-bento-card:hover .dest-bento-extra{opacity:1;transform:translateY(0)}
 .dest-bento-arrow{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;color:#fff;font-size:.85rem;transition:all .3s;flex-shrink:0}
-.dest-bento-card:hover .dest-bento-arrow{background:linear-gradient(135deg,#059669,#10b981);border-color:transparent;transform:rotate(-30deg)}
+.dest-bento-card:hover .dest-bento-arrow{background:linear-gradient(135deg,#7d4817,#a05e22);border-color:transparent;transform:rotate(-30deg)}
 </style>
 
 <div class="section-divider max-w-7xl mx-auto px-4"></div>
 
-<!-- ══════════════════════════════════════
+<!-- --------------------------------------
      POPULAR DESTINATIONS
-══════════════════════════════════════ -->
+-------------------------------------- -->
 <section class="py-20 lg:py-24 px-4 lg:px-0" id="destinations">
   <div class="max-w-7xl mx-auto">
 
-    <!-- Header — centered -->
+    <!-- Header - centered -->
     <div class="text-center max-w-2xl mx-auto mb-12 reveal">
       <div class="inline-flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/20 rounded-full px-4 py-1.5 mb-5">
         <span class="text-emerald-400 text-[.62rem] font-bold tracking-[.2em] uppercase font-nav">Explore Africa</span>
@@ -1136,7 +1119,7 @@ try {
       </div>
     </div>
 
-    <!-- Bento grid — DB driven -->
+    <!-- Bento grid - DB driven -->
     <div class="dest-bento reveal">
       <?php foreach ($destinations as $idx => $dest):
         $isLarge   = $idx === 0;
@@ -1157,12 +1140,12 @@ try {
 
         <div class="dest-bento-overlay"></div>
 
-        <!-- Number — top left -->
+        <!-- Number - top left -->
         <div class="absolute top-4 left-4 z-10">
           <span class="font-nav font-bold text-[.58rem] tracking-[.2em] text-white/30"><?= $num ?></span>
         </div>
 
-        <!-- Region — top right, on hover -->
+        <!-- Region - top right, on hover -->
         <div class="absolute top-4 right-4 z-10 dest-bento-extra">
           <span class="font-nav text-[.6rem] text-white/75 px-2.5 py-1 rounded-full"
                 style="background:rgba(255,255,255,.1);backdrop-filter:blur(8px)">
@@ -1173,11 +1156,11 @@ try {
         <!-- Bottom info -->
         <div class="absolute bottom-0 left-0 right-0 z-10 p-5">
 
-          <!-- Tag + season — on hover -->
+          <!-- Tag + season - on hover -->
           <div class="dest-bento-extra flex flex-wrap items-center gap-2 mb-2.5">
             <?php if ($tag): ?>
             <span class="font-nav text-[.6rem] text-emerald-400 font-semibold px-2 py-0.5 rounded-full"
-                  style="background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.2)">
+                  style="background:rgba(160,94,34,.12);border:1px solid rgba(160,94,34,.2)">
               <?= e($tag) ?>
             </span>
             <?php endif; ?>
@@ -1186,7 +1169,7 @@ try {
             </span>
           </div>
 
-          <!-- Name + count + arrow — always visible -->
+          <!-- Name + count + arrow - always visible -->
           <div class="flex items-end justify-between gap-3">
             <div>
               <h3 class="font-heading text-white font-bold leading-tight <?= $isLarge ? 'text-3xl' : 'text-xl' ?>">
@@ -1211,10 +1194,10 @@ try {
 
 <div class="section-divider max-w-7xl mx-auto px-4"></div>
 
-<!-- ══════════════════════════════════════
+<!-- --------------------------------------
      STATS
-══════════════════════════════════════ -->
-<section class="py-16 px-4 lg:px-0" id="stats" style="background:linear-gradient(135deg,#0d0d0d,#111)">
+-------------------------------------- -->
+<section class="py-16 px-4 lg:px-0" id="stats" style="background:linear-gradient(135deg,#1c2c26,#2c463d)">
   <div class="max-w-7xl mx-auto">
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
       <?php foreach ([
@@ -1238,10 +1221,10 @@ try {
 
 <div class="section-divider max-w-7xl mx-auto px-4"></div>
 
-<!-- ══════════════════════════════════════
+<!-- --------------------------------------
      WHY CHOOSE US
-══════════════════════════════════════ -->
-<section class="py-20 px-4 lg:px-0" id="why-us">
+-------------------------------------- -->
+<section class="section-light py-20 px-4 lg:px-0" id="why-us">
   <div class="max-w-7xl mx-auto">
     <div class="text-center mb-14 reveal">
       <span class="section-tag">Why Choose Us</span>
@@ -1271,41 +1254,46 @@ try {
   </div>
 </section>
 
-<div class="section-divider max-w-7xl mx-auto px-4"></div>
-
-<!-- ══════════════════════════════════════
+<!-- --------------------------------------
      GALLERY
-══════════════════════════════════════ -->
-<section class="py-20 px-4 lg:px-0" id="gallery">
+-------------------------------------- -->
+<section class="section-light py-20 px-4 lg:px-6" id="gallery">
   <div class="max-w-7xl mx-auto">
-    <div class="text-center mb-10 reveal">
-      <span class="section-tag">Gallery</span>
-      <h2 class="font-heading text-4xl lg:text-5xl text-white mt-2">Wildlife &amp; <em class="gradient-text not-italic">Wonders</em></h2>
-    </div>
-
-    <!-- Filter tabs -->
-    <div class="flex flex-wrap gap-2 justify-center mb-8 reveal">
-      <?php foreach (['all'=>'All','wildlife'=>'Wildlife','landscapes'=>'Landscapes','culture'=>'Culture','safari-life'=>'Safari Life','zanzibar'=>'Zanzibar'] as $cat => $label): ?>
-      <button class="gallery-filter-btn font-nav text-[.7rem] font-600 uppercase tracking-wider px-4 py-2 rounded-full border transition-all
-                     <?= $cat==='all' ? 'bg-brand/20 border-brand/50 text-brand' : 'bg-white/5 border-white/10 text-white/60 hover:border-brand/30 hover:text-white' ?>"
-              data-cat="<?= $cat ?>"
-              onclick="filterGallery(this,'<?= $cat ?>')">
-        <?= $label ?>
-      </button>
-      <?php endforeach; ?>
-    </div>
-
-    <div class="gallery-grid reveal">
-      <?php foreach ($galleryImages as $g): ?>
-      <div class="gallery-item" data-category="<?= e($g['category']) ?>"
-           onclick="openLightbox('<?= addslashes(e($g['image'])) ?>','<?= addslashes(e($g['title'])) ?>')">
-        <img src="<?= e($g['image']) ?>" alt="<?= e($g['title']) ?>" loading="lazy" width="600" height="400">
-        <div class="gallery-item-overlay"><i class="fas fa-search-plus text-white/80"></i></div>
+    <!-- Header row: title left, controls right -->
+    <div class="flex items-end justify-between gap-4 mb-10 reveal">
+      <div>
+        <span class="section-tag">Gallery</span>
+        <h2 class="font-heading text-4xl lg:text-5xl text-white mt-2">Wildlife &amp; <em class="gradient-text not-italic">Wonders</em></h2>
       </div>
-      <?php endforeach; ?>
+      <div class="flex gap-2 flex-shrink-0">
+        <button id="gallery-prev" class="w-11 h-11 rounded-xl flex items-center justify-center text-white transition-all" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)" aria-label="Previous"><i class="fas fa-arrow-left text-sm"></i></button>
+        <button id="gallery-next" class="w-11 h-11 rounded-xl flex items-center justify-center text-white transition-all" style="background:linear-gradient(135deg,#a05e22,#7d4817)" aria-label="Next"><i class="fas fa-arrow-right text-sm"></i></button>
+      </div>
     </div>
 
-    <div class="text-center mt-10 reveal">
+    <!-- Auto-sliding carousel (clipped to the container on both sides) -->
+    <div class="gallery-carousel reveal" id="gallery-carousel">
+      <div class="gallery-track" id="gallery-track">
+        <?php foreach ($galleryImages as $i => $g):
+          $isFeatured = ($i % 4 === 0);   // every 4th card is the wide "featured" one
+          $cls = $isFeatured ? 'gallery-item is-featured' : 'gallery-item';
+        ?>
+        <div class="<?= $cls ?>"
+             onclick="openLightbox('<?= addslashes(e($g['image'])) ?>','<?= addslashes(e($g['title'])) ?>')">
+          <img src="<?= e($g['image']) ?>" alt="<?= e($g['title']) ?>" loading="lazy" width="600" height="400">
+          <div class="gallery-item-overlay">
+            <span class="ico"><i class="fas fa-search-plus"></i></span>
+            <span class="font-nav text-white text-[.78rem] font-600"><?= e($g['title']) ?></span>
+          </div>
+        </div>
+        <?php endforeach; ?>
+      </div>
+    </div>
+
+    <!-- Progress bar -->
+    <div class="gallery-progress reveal" id="gallery-progress"><span id="gallery-progress-bar"></span></div>
+
+    <div class="text-center mt-12 reveal">
       <a href="<?= url('gallery.php') ?>" class="btn-outline">View Full Gallery</a>
     </div>
   </div>
@@ -1319,9 +1307,9 @@ try {
 
 <div class="section-divider max-w-7xl mx-auto px-4"></div>
 
-<!-- ══════════════════════════════════════
+<!-- --------------------------------------
      TESTIMONIALS
-══════════════════════════════════════ -->
+-------------------------------------- -->
 <section class="py-20 px-4 lg:px-0" id="testimonials">
   <div class="max-w-7xl mx-auto">
     <div class="text-center mb-14 reveal">
@@ -1343,7 +1331,7 @@ try {
               <div>
                 <div class="text-white font-semibold text-sm"><?= e($t['customer_name']) ?></div>
                 <div class="text-white/40 text-xs"><?= e($t['country']) ?></div>
-                <div class="stars text-xs mt-0.5"><?= str_repeat('★',(int)$t['rating']) ?></div>
+                <div class="stars text-xs mt-0.5"><?= str_repeat('?',(int)$t['rating']) ?></div>
               </div>
             </div>
           </div>
@@ -1352,20 +1340,19 @@ try {
       </div>
 
       <div class="flex items-center justify-center gap-4 mt-8">
-        <button id="testi-prev" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 text-white flex items-center justify-center transition hover:bg-brand/20 hover:border-brand" aria-label="Prev">‹</button>
+        <button id="testi-prev" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 text-white flex items-center justify-center transition hover:bg-brand/20 hover:border-brand" aria-label="Prev"><i class="fas fa-chevron-left text-xs"></i></button>
         <div id="testi-dots" class="flex items-center gap-2"></div>
-        <button id="testi-next" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 text-white flex items-center justify-center transition hover:bg-brand/20 hover:border-brand" aria-label="Next">›</button>
+        <button id="testi-next" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 text-white flex items-center justify-center transition hover:bg-brand/20 hover:border-brand" aria-label="Next"><i class="fas fa-chevron-right text-xs"></i></button>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══════════════════════════════════════
+<!-- --------------------------------------
      BLOG
-══════════════════════════════════════ -->
+-------------------------------------- -->
 <?php if (!empty($blogPosts)): ?>
-<div class="section-divider max-w-7xl mx-auto px-4"></div>
-<section class="py-20 px-4 lg:px-0" id="blog">
+<section class="section-light py-20 px-4 lg:px-0" id="blog">
   <div class="max-w-7xl mx-auto">
     <div class="text-center mb-14 reveal">
       <span class="section-tag">Travel Tips & Guides</span>
@@ -1385,7 +1372,7 @@ try {
           <p class="text-white/50 text-sm leading-relaxed mb-4"><?= e(truncate($post['excerpt'], 110)) ?></p>
           <a href="<?= url('blog-single.php?slug=' . e($post['slug'])) ?>"
              class="text-brand font-nav text-[.72rem] font-600 uppercase tracking-wider hover:text-brand/80 transition-colors">
-            Read More →
+            Read More ?
           </a>
         </div>
       </article>
@@ -1398,11 +1385,11 @@ try {
 </section>
 <?php endif; ?>
 
-<!-- ══════════════════════════════════════
+<!-- --------------------------------------
      CTA BANNER
-══════════════════════════════════════ -->
+-------------------------------------- -->
 <section class="py-20 px-4 lg:px-0 relative overflow-hidden"
-         style="background:linear-gradient(135deg,rgba(16,185,129,.12) 0%,rgba(10,10,10,0) 60%),linear-gradient(to bottom right,#0d0d0d,#111)">
+         style="background:linear-gradient(135deg,rgba(160,94,34,.18) 0%,rgba(20,33,28,0) 60%),linear-gradient(to bottom right,#1c2c26,#2c463d)">
   <div class="max-w-3xl mx-auto text-center relative z-10 reveal">
     <span class="section-tag">Ready to Go?</span>
     <h2 class="font-heading text-4xl lg:text-5xl text-white mt-3 leading-snug">
@@ -1428,35 +1415,35 @@ try {
   <div class="absolute bottom-10 right-10 w-48 h-48 rounded-full border border-brand/[.07]" aria-hidden="true"></div>
 </section>
 
-<!-- ══════════════════════════════════════
+<!-- --------------------------------------
      MEGA FOOTER
-══════════════════════════════════════ -->
+-------------------------------------- -->
 <style>
   .ftr-link{transition:all .25s;display:flex;align-items:center;gap:.5rem;font-family:'Montserrat',sans-serif;font-size:.8rem;color:rgba(255,255,255,.45);text-decoration:none}
-  .ftr-link:hover{color:#34d399;transform:translateX(4px)}
+  .ftr-link:hover{color:#c17a3a;transform:translateX(4px)}
   .ftr-social{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;transition:all .3s;text-decoration:none;flex-shrink:0}
   .ftr-social:hover{transform:translateY(-3px) scale(1.08)}
   .trust-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:.5rem .75rem;transition:all .3s;cursor:default}
-  .trust-badge:hover{border-color:rgba(16,185,129,.25);background:rgba(16,185,129,.04)}
+  .trust-badge:hover{border-color:rgba(160,94,34,.25);background:rgba(160,94,34,.04)}
   .pay-icon{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:.4rem .65rem;display:flex;align-items:center;justify-content:center;transition:all .25s}
   .pay-icon:hover{border-color:rgba(255,255,255,.18);transform:scale(1.08)}
   .safari-mini{position:relative;border-radius:16px;overflow:hidden;height:130px;border:1px solid rgba(255,255,255,.06);transition:all .35s;text-decoration:none;display:block}
-  .safari-mini:hover{transform:translateY(-4px);border-color:rgba(16,185,129,.2);box-shadow:0 12px 32px rgba(0,0,0,.5)}
+  .safari-mini:hover{transform:translateY(-4px);border-color:rgba(160,94,34,.2);box-shadow:0 12px 32px rgba(0,0,0,.5)}
   .safari-mini img{width:100%;height:100%;object-fit:cover;opacity:.5;transition:transform .6s,opacity .3s}
   .safari-mini:hover img{transform:scale(1.08);opacity:.65}
   .nl-input{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#e5e7eb;border-radius:12px;padding:.8rem 1rem .8rem 2.75rem;font-family:'Inter',sans-serif;font-size:.88rem;outline:none;transition:border-color .2s,box-shadow .2s;-webkit-appearance:none;box-sizing:border-box}
-  .nl-input:focus{border-color:rgba(16,185,129,.5);box-shadow:0 0 0 3px rgba(16,185,129,.1)}
+  .nl-input:focus{border-color:rgba(160,94,34,.5);box-shadow:0 0 0 3px rgba(160,94,34,.1)}
   .nl-input::placeholder{color:rgba(255,255,255,.25)}
-  .footer-glow{position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:600px;height:160px;background:radial-gradient(ellipse,rgba(16,185,129,.07) 0%,transparent 70%);pointer-events:none}
+  .footer-glow{position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:600px;height:160px;background:radial-gradient(ellipse,rgba(160,94,34,.07) 0%,transparent 70%);pointer-events:none}
 </style>
 
 <footer id="site-footer" class="relative border-t border-white/[.06] pt-20 pb-0 overflow-hidden">
   <div class="footer-glow"></div>
 
-  <!-- ── Newsletter CTA ── -->
+  <!-- -- Newsletter CTA -- -->
   <div style="width:100%;padding:0 2rem 0;margin-bottom:3.5rem">
-    <div class="relative overflow-hidden" style="background:rgba(18,18,18,.8);backdrop-filter:blur(20px);border-top:1px solid rgba(16,185,129,.1);border-bottom:1px solid rgba(255,255,255,.06)">
-      <div class="absolute inset-0 pointer-events-none" style="background:linear-gradient(to right,rgba(16,185,129,.12),transparent 50%,rgba(201,168,76,.06))"></div>
+    <div class="relative overflow-hidden" style="background:rgba(18,18,18,.8);backdrop-filter:blur(20px);border-top:1px solid rgba(160,94,34,.1);border-bottom:1px solid rgba(255,255,255,.06)">
+      <div class="absolute inset-0 pointer-events-none" style="background:linear-gradient(to right,rgba(160,94,34,.12),transparent 50%,rgba(201,168,76,.06))"></div>
       <div class="relative p-8 lg:p-10 flex flex-col lg:flex-row items-center justify-between gap-8">
         <div class="flex-1 text-center lg:text-left">
           <h3 class="font-heading text-white font-bold text-2xl lg:text-3xl mb-2">Stay Wild, Stay Updated</h3>
@@ -1468,7 +1455,7 @@ try {
               <i class="fas fa-envelope" style="position:absolute;left:.85rem;top:50%;transform:translateY(-50%);color:rgba(255,255,255,.25);font-size:.82rem;pointer-events:none"></i>
               <input type="email" required placeholder="Enter your email address" class="nl-input">
             </div>
-            <button type="submit" style="background:linear-gradient(135deg,#059669,#10b981);color:#fff;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.78rem;padding:.8rem 1.6rem;border-radius:12px;border:none;cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:.5rem;transition:all .25s;box-shadow:0 4px 16px rgba(16,185,129,.3)" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform=''">
+            <button type="submit" style="background:linear-gradient(135deg,#7d4817,#a05e22);color:#fff;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.78rem;padding:.8rem 1.6rem;border-radius:12px;border:none;cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:.5rem;transition:all .25s;box-shadow:0 4px 16px rgba(160,94,34,.3)" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform=''">
               <i class="fas fa-paper-plane" style="font-size:.72rem"></i> Subscribe
             </button>
           </form>
@@ -1478,7 +1465,7 @@ try {
     </div>
   </div>
 
-  <!-- ── Main Grid ── -->
+  <!-- -- Main Grid -- -->
   <div style="width:100%;padding:0 2rem 0;margin-bottom:3rem">
     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-12 gap-8 lg:gap-5">
 
@@ -1488,13 +1475,13 @@ try {
           <img src="<?= SITE_URL ?>/uploads/logo-husika.png" alt="<?= e($siteName) ?>"
                style="height:48px;width:auto;max-width:160px;object-fit:contain;display:block">
           <?php if (false): ?>
-            <div style="width:42px;height:42px;border-radius:11px;background:linear-gradient(135deg,#10b981,#059669);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+            <div style="width:42px;height:42px;border-radius:11px;background:linear-gradient(135deg,#a05e22,#7d4817);display:flex;align-items:center;justify-content:center;flex-shrink:0">
               <i class="fas fa-tree" style="color:#fff;font-size:1rem"></i>
             </div>
             <div>
-              <div style="font-family:'Playfair Display',serif;font-weight:700;color:#fff;font-size:1.15rem;line-height:1.2">
+              <div style="font-family:'Nanum Myeongjo',serif;font-weight:700;color:#fff;font-size:1.15rem;line-height:1.2">
                 <?= e(explode(' ',$siteName)[0]??'Jambo') ?>
-                <span style="background:linear-gradient(135deg,#34d399,#10b981);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text"> <?= e(explode(' ',$siteName)[1]??'Masai') ?></span>
+                <span style="background:linear-gradient(135deg,#c17a3a,#a05e22);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text"> <?= e(explode(' ',$siteName)[1]??'Masai') ?></span>
               </div>
               <div style="font-family:'Montserrat',sans-serif;font-size:.55rem;color:rgba(255,255,255,.28);letter-spacing:.18em;text-transform:uppercase"><?= e($siteTagline) ?></div>
             </div>
@@ -1510,7 +1497,7 @@ try {
             ['fab fa-instagram',getSetting('social_instagram','#'),'rgba(236,72,153,.12)','#f472b6'],
             ['fab fa-twitter',getSetting('social_twitter','#'),'rgba(14,165,233,.12)','#38bdf8'],
             ['fab fa-youtube',getSetting('social_youtube','#'),'rgba(239,68,68,.12)','#f87171'],
-            ['fab fa-tiktok',getSetting('social_tiktok','#'),'rgba(16,185,129,.12)','#34d399'],
+            ['fab fa-tiktok',getSetting('social_tiktok','#'),'rgba(160,94,34,.12)','#c17a3a'],
           ] as $s): ?>
           <a href="<?= e($s[1]) ?>" target="_blank" rel="noopener" class="ftr-social" style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08)"
              onmouseover="this.style.background='<?= $s[2] ?>';this.querySelector('i').style.color='<?= $s[3] ?>'"
@@ -1522,7 +1509,7 @@ try {
         <!-- TripAdvisor -->
         <div class="trust-badge">
           <div style="display:flex;gap:2px">
-            <?php for($i=0;$i<5;$i++): ?><i class="fas fa-circle" style="color:#34d399;font-size:.5rem"></i><?php endfor; ?>
+            <?php for($i=0;$i<5;$i++): ?><i class="fas fa-circle" style="color:#c17a3a;font-size:.5rem"></i><?php endfor; ?>
           </div>
           <div>
             <div style="font-family:'Montserrat',sans-serif;font-size:.72rem;font-weight:700;color:rgba(255,255,255,.8)">TripAdvisor</div>
@@ -1534,7 +1521,7 @@ try {
       <!-- Safaris (2 cols) -->
       <div class="col-span-1 lg:col-span-2">
         <h4 style="font-family:'Montserrat',sans-serif;font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.15em;color:rgba(255,255,255,.65);margin-bottom:1.1rem;display:flex;align-items:center;gap:.5rem">
-          <span style="width:3px;height:14px;background:#10b981;border-radius:2px;display:inline-block"></span> Safaris
+          <span style="width:3px;height:14px;background:#a05e22;border-radius:2px;display:inline-block"></span> Safaris
         </h4>
         <ul style="space-y:0">
           <?php foreach ([
@@ -1547,12 +1534,12 @@ try {
           ] as $l): ?>
           <li style="margin-bottom:.65rem">
             <a href="<?= url($l[1]) ?>" class="ftr-link">
-              <i class="fas fa-chevron-right" style="font-size:.45rem;color:rgba(16,185,129,.4);flex-shrink:0"></i><?= $l[0] ?>
+              <i class="fas fa-chevron-right" style="font-size:.45rem;color:rgba(160,94,34,.4);flex-shrink:0"></i><?= $l[0] ?>
             </a>
           </li>
           <?php endforeach; ?>
           <li style="margin-top:.85rem">
-            <a href="<?= url('tours.php') ?>" style="font-family:'Montserrat',sans-serif;font-size:.78rem;font-weight:700;color:#10b981;text-decoration:none;display:flex;align-items:center;gap:.4rem">View All Safaris <i class="fas fa-arrow-right" style="font-size:.55rem"></i></a>
+            <a href="<?= url('tours.php') ?>" style="font-family:'Montserrat',sans-serif;font-size:.78rem;font-weight:700;color:#a05e22;text-decoration:none;display:flex;align-items:center;gap:.4rem">View All Safaris <i class="fas fa-arrow-right" style="font-size:.55rem"></i></a>
           </li>
         </ul>
       </div>
@@ -1564,15 +1551,15 @@ try {
         </h4>
         <ul>
           <?php foreach ([
-            ['🦁','Serengeti',   'serengeti'],
-            ['🌋','Ngorongoro',  'ngorongoro'],
-            ['🏔️','Kilimanjaro', 'kilimanjaro'],
-            ['🏖️','Zanzibar',    'zanzibar'],
-            ['🐘','Tarangire',   'tarangire'],
-            ['🤝','Maasai Heartland','maasai'],
+            ['fa-paw',             'Serengeti',        'serengeti'],
+            ['fa-mountain-sun',    'Ngorongoro',       'ngorongoro'],
+            ['fa-mountain',        'Kilimanjaro',      'kilimanjaro'],
+            ['fa-umbrella-beach',  'Zanzibar',         'zanzibar'],
+            ['fa-tree',            'Tarangire',        'tarangire'],
+            ['fa-person-rays',     'Maasai Heartland', 'maasai'],
           ] as $d): ?>
           <li style="margin-bottom:.65rem">
-            <a href="<?= url('destinations.php?d='.$d[2]) ?>" class="ftr-link"><?= $d[0] ?> <?= $d[1] ?></a>
+            <a href="<?= url('destinations.php?d='.$d[2]) ?>" class="ftr-link"><i class="fas <?= $d[0] ?>" style="color:#a05e22;font-size:.7rem;width:1rem;margin-right:.35rem"></i><?= $d[1] ?></a>
           </li>
           <?php endforeach; ?>
         </ul>
@@ -1585,15 +1572,15 @@ try {
         </h4>
         <ul>
           <?php foreach ([
-            ['🏔️','Machame Route',  'mountain-trekking.php'],
-            ['🌿','Marangu Route',  'mountain-trekking.php'],
-            ['🗺️','Lemosho Route',  'mountain-trekking.php'],
-            ['⛺','Rongai Route',   'mountain-trekking.php'],
-            ['🌋','Mt. Meru',       'mountain-trekking.php'],
-            ['🎒','Gear Checklist', 'mountain-trekking.php#gear'],
+            ['fa-route',          'Machame Route',  'mountain-trekking.php'],
+            ['fa-route',          'Marangu Route',  'mountain-trekking.php'],
+            ['fa-route',          'Lemosho Route',  'mountain-trekking.php'],
+            ['fa-route',          'Rongai Route',   'mountain-trekking.php'],
+            ['fa-mountain',       'Mt. Meru',       'mountain-trekking.php'],
+            ['fa-clipboard-list', 'Gear Checklist', 'mountain-trekking.php#gear'],
           ] as $t): ?>
           <li style="margin-bottom:.65rem">
-            <a href="<?= url($t[2]) ?>" class="ftr-link"><?= $t[0] ?> <?= $t[1] ?></a>
+            <a href="<?= url($t[2]) ?>" class="ftr-link"><i class="fas <?= $t[0] ?>" style="color:#a05e22;font-size:.7rem;width:1rem;margin-right:.35rem"></i><?= $t[1] ?></a>
           </li>
           <?php endforeach; ?>
         </ul>
@@ -1606,10 +1593,10 @@ try {
         </h4>
         <ul style="list-style:none">
           <?php foreach ([
-            ['fa-map-marker-alt','#10b981','<a href="https://maps.app.goo.gl/cqcERfdGpABg9xo49" target="_blank" rel="noopener" style="color:rgba(255,255,255,.42);text-decoration:none">Arusha, Tanzania 12105</a>'],
-            ['fa-phone',         '#10b981','<a href="tel:'.e(SITE_PHONE).'" style="color:rgba(255,255,255,.42);text-decoration:none">'.e(SITE_PHONE).'</a>'],
-            ['fa-envelope',      '#10b981','<a href="mailto:'.e(SITE_EMAIL).'" style="color:rgba(255,255,255,.42);text-decoration:none">'.e(SITE_EMAIL).'</a>'],
-            ['fab fa-whatsapp',  '#25D366','<a href="https://wa.me/'.e(WHATSAPP_NUMBER).'" target="_blank" rel="noopener" style="color:#25D366;font-weight:600;text-decoration:none">Chat on WhatsApp</a>'],
+            ['fas fa-map-marker-alt','#a05e22','<a href="https://maps.app.goo.gl/cqcERfdGpABg9xo49" target="_blank" rel="noopener" style="color:rgba(255,255,255,.42);text-decoration:none">Arusha, Tanzania 12105</a>'],
+            ['fas fa-phone',         '#a05e22','<a href="tel:'.e(SITE_PHONE).'" style="color:rgba(255,255,255,.42);text-decoration:none">'.e(SITE_PHONE).'</a>'],
+            ['fas fa-envelope',      '#a05e22','<a href="mailto:'.e(SITE_EMAIL).'" style="color:rgba(255,255,255,.42);text-decoration:none">'.e(SITE_EMAIL).'</a>'],
+            ['fab fa-whatsapp',      '#25D366','<a href="https://wa.me/'.e(WHATSAPP_NUMBER).'" target="_blank" rel="noopener" style="color:#25D366;font-weight:600;text-decoration:none">Chat on WhatsApp</a>'],
           ] as $c): ?>
           <li style="display:flex;align-items:flex-start;gap:.65rem;margin-bottom:.85rem">
             <div style="width:30px;height:30px;background:rgba(255,255,255,.05);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
@@ -1620,7 +1607,7 @@ try {
           <?php endforeach; ?>
           <!-- Hours -->
           <li style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:.65rem .85rem;margin-top:.65rem">
-            <p style="font-family:'Montserrat',sans-serif;font-size:.58rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#10b981;margin-bottom:.3rem">Office Hours</p>
+            <p style="font-family:'Montserrat',sans-serif;font-size:.58rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#a05e22;margin-bottom:.3rem">Office Hours</p>
             <p style="font-family:'Inter',sans-serif;font-size:.72rem;color:rgba(255,255,255,.38)">Mon–Fri: 8am – 6pm EAT</p>
             <p style="font-family:'Inter',sans-serif;font-size:.72rem;color:rgba(255,255,255,.38)">Sat–Sun: 9am – 4pm EAT</p>
           </li>
@@ -1629,7 +1616,7 @@ try {
     </div>
   </div>
 
-  <!-- ── Safari Mini Cards (Featured from DB) ── -->
+  <!-- -- Safari Mini Cards (Featured from DB) -- -->
   <div style="width:100%;padding:0 2rem 0;margin-bottom:3rem">
     <p style="font-family:'Montserrat',sans-serif;font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.15em;color:rgba(255,255,255,.25);margin-bottom:.75rem">Featured Experiences</p>
     <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px" class="grid-cols-2 sm:grid-cols-4">
@@ -1651,14 +1638,14 @@ try {
         <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(0,0,0,.88),transparent 55%)"></div>
         <div class="absolute bottom-0 left-0 right-0 p-3.5">
           <div style="font-family:'Montserrat',sans-serif;font-size:.75rem;font-weight:700;color:#fff;line-height:1.3"><?= e($mt['name']) ?></div>
-          <div style="font-family:'Montserrat',sans-serif;font-size:.62rem;color:#10b981;margin-top:.15rem">From $<?= number_format((float)$mt['price']) ?></div>
+          <div style="font-family:'Montserrat',sans-serif;font-size:.62rem;color:#a05e22;margin-top:.15rem">From $<?= number_format((float)$mt['price']) ?></div>
         </div>
       </a>
       <?php endforeach; ?>
     </div>
   </div>
 
-  <!-- ── Trust & Payments ── -->
+  <!-- -- Trust & Payments -- -->
   <div style="width:100%;padding:0 2rem 0;margin-bottom:2.5rem">
     <div style="background:rgba(14,14,14,.7);border-top:1px solid rgba(255,255,255,.07);border-bottom:1px solid rgba(255,255,255,.07);padding:1.5rem 0">
       <div class="grid md:grid-cols-3 gap-6 items-center">
@@ -1667,9 +1654,9 @@ try {
           <p style="font-family:'Montserrat',sans-serif;font-size:.58rem;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:rgba(255,255,255,.25);margin-bottom:.65rem">Trusted & Certified</p>
           <div style="display:flex;flex-wrap:wrap;gap:.4rem">
             <?php foreach ([
-              ['fa-shield-alt','#10b981','TATO Member',   'Tanzania Association'],
+              ['fa-shield-alt','#a05e22','TATO Member',   'Tanzania Association'],
               ['fa-certificate','#f59e0b','KINAPA Licensed','National Parks Auth.'],
-              ['fa-leaf',       '#34d399','Eco-Certified', 'Sustainable Tourism'],
+              ['fa-leaf',       '#c17a3a','Eco-Certified', 'Sustainable Tourism'],
             ] as $b): ?>
             <div class="trust-badge">
               <i class="fas <?= $b[0] ?>" style="color:<?= $b[1] ?>;font-size:.82rem"></i>
@@ -1694,9 +1681,9 @@ try {
             ] as $p): ?>
             <div class="pay-icon"><i class="<?= $p[0] ?> <?= $p[1] ?>" style="font-size:1.3rem"></i></div>
             <?php endforeach; ?>
-            <div class="pay-icon" style="background:rgba(16,185,129,.06);border-color:rgba(16,185,129,.15)">
-              <i class="fas fa-mobile-alt" style="color:#10b981;font-size:.78rem;margin-right:.25rem"></i>
-              <span style="font-family:'Montserrat',sans-serif;font-size:.62rem;font-weight:700;color:#10b981">M-Pesa</span>
+            <div class="pay-icon" style="background:rgba(160,94,34,.06);border-color:rgba(160,94,34,.15)">
+              <i class="fas fa-mobile-alt" style="color:#a05e22;font-size:.78rem;margin-right:.25rem"></i>
+              <span style="font-family:'Montserrat',sans-serif;font-size:.62rem;font-weight:700;color:#a05e22">M-Pesa</span>
             </div>
           </div>
         </div>
@@ -1705,7 +1692,7 @@ try {
           <p style="font-family:'Montserrat',sans-serif;font-size:.58rem;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:rgba(255,255,255,.25);margin-bottom:.65rem">Secure Booking</p>
           <div style="display:flex;gap:.4rem;flex-wrap:wrap">
             <?php foreach ([
-              ['fa-lock',   '#10b981','SSL Encrypted', '256-bit security'],
+              ['fa-lock',   '#a05e22','SSL Encrypted', '256-bit security'],
               ['fa-undo',   '#f59e0b','Free Cancel',   '30 days notice'],
               ['fa-headset','#8b5cf6','24/7 Support',  'Always available'],
             ] as $s): ?>
@@ -1723,23 +1710,23 @@ try {
     </div>
   </div>
 
-  <!-- ── Bottom bar ── -->
+  <!-- -- Bottom bar -- -->
   <div style="border-top:1px solid rgba(255,255,255,.06);background:rgba(0,0,0,.3)">
     <div style="width:100%;padding:.85rem 2rem;box-sizing:border-box">
       <div class="flex flex-col md:flex-row items-center justify-between gap-4">
         <div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap">
           <span style="font-family:'Montserrat',sans-serif;font-size:.7rem;color:rgba(255,255,255,.3)">&copy; <?= date('Y') ?> <?= e($siteName) ?>. All rights reserved.</span>
-          <span style="color:rgba(255,255,255,.12);display:none" class="md:inline">•</span>
+          <span style="color:rgba(255,255,255,.12);display:none" class="md:inline">·</span>
           <span style="font-family:'Montserrat',sans-serif;font-size:.7rem;color:rgba(255,255,255,.2)" class="hidden md:inline">Made with <i class="fas fa-heart" style="color:rgba(239,68,68,.45);font-size:.6rem"></i> in Tanzania</span>
-          <span style="color:rgba(255,255,255,.12);display:none" class="md:inline">•</span>
-          <span style="font-family:'Montserrat',sans-serif;font-size:.7rem;color:rgba(255,255,255,.2)">Built by <span style="color:#10b981">hiddenxcel</span></span>
+          <span style="color:rgba(255,255,255,.12);display:none" class="md:inline">·</span>
+          <span style="font-family:'Montserrat',sans-serif;font-size:.7rem;color:rgba(255,255,255,.2)">Built by <span style="color:#a05e22">hiddenxcel</span></span>
         </div>
         <div style="display:flex;align-items:center;gap:1.25rem;flex-wrap:wrap">
           <?php foreach (['Privacy Policy','Terms of Service','Cookie Policy','Sitemap'] as $l): ?>
           <a href="#" style="font-family:'Montserrat',sans-serif;font-size:.68rem;color:rgba(255,255,255,.25);text-decoration:none;transition:color .2s" onmouseover="this.style.color='rgba(255,255,255,.55)'" onmouseout="this.style.color='rgba(255,255,255,.25)'"><?= $l ?></a>
           <?php endforeach; ?>
         </div>
-        <button onclick="window.scrollTo({top:0,behavior:'smooth'})" style="display:flex;align-items:center;gap:.4rem;font-family:'Montserrat',sans-serif;font-size:.68rem;color:rgba(255,255,255,.3);background:none;border:none;cursor:pointer;transition:color .2s" onmouseover="this.style.color='#10b981'" onmouseout="this.style.color='rgba(255,255,255,.3)'">
+        <button onclick="window.scrollTo({top:0,behavior:'smooth'})" style="display:flex;align-items:center;gap:.4rem;font-family:'Montserrat',sans-serif;font-size:.68rem;color:rgba(255,255,255,.3);background:none;border:none;cursor:pointer;transition:color .2s" onmouseover="this.style.color='#a05e22'" onmouseout="this.style.color='rgba(255,255,255,.3)'">
           Back to top <i class="fas fa-arrow-up" style="font-size:.55rem"></i>
         </button>
       </div>
@@ -1815,6 +1802,8 @@ function handleFooterNl(e) {
   <i class="fas fa-chevron-up text-sm"></i>
 </button>
 
+<?php require_once 'includes/chatbot-widget.php'; ?>
+
 <!-- AOS -->
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 
@@ -1824,22 +1813,22 @@ function handleFooterNl(e) {
 
   window.SITE_URL = '<?= SITE_URL ?>';
 
-  /* ─── AOS ─── */
+  /* --- AOS --- */
   AOS.init({ duration: 700, once: true, offset: 60 });
 
-  /* ─── Navbar ─── */
+  /* --- Navbar --- */
   const navEl = document.getElementById('main-nav');
   window.addEventListener('scroll', () => {
     if (!navEl) return;
     navEl.style.background    = scrollY > 60 ? 'rgba(10,10,10,.96)' : '';
     navEl.style.backdropFilter = scrollY > 60 ? 'blur(20px)' : '';
-    navEl.style.borderBottom  = scrollY > 60 ? '1px solid rgba(16,185,129,.1)' : '';
+    navEl.style.borderBottom  = scrollY > 60 ? '1px solid rgba(160,94,34,.1)' : '';
     navEl.style.boxShadow     = scrollY > 60 ? '0 4px 24px rgba(0,0,0,.4)' : '';
     const sp = document.getElementById('scroll-prog-home');
     if (sp) { const mx = document.documentElement.scrollHeight - innerHeight; if(mx>0) sp.style.width=(scrollY/mx*100).toFixed(2)+'%'; }
   }, { passive: true });
 
-  /* ─── Mobile drawer (new) ─── */
+  /* --- Mobile drawer (new) --- */
   const mmNew = document.getElementById('main-mobile-menu');
   const bdNew = document.getElementById('mobile-backdrop');
   const togNew = document.getElementById('menu-toggle');
@@ -1860,27 +1849,27 @@ function handleFooterNl(e) {
   mmNew?.querySelectorAll('a').forEach(a => a.addEventListener('click', idxCloseMob));
   document.addEventListener('keydown', e => { if(e.key==='Escape'){idxCloseMob();idxCloseSearch();} });
 
-  /* ─── Search overlay ─── */
+  /* --- Search overlay --- */
   const sOv=document.getElementById('idx-search-ov'), sWr=document.getElementById('idx-swrap');
   function idxOpenSearch(){sOv.style.opacity='1';sOv.style.pointerEvents='all';if(sWr)sWr.style.transform='translateY(0)';document.body.style.overflow='hidden';setTimeout(()=>document.getElementById('idx-sinput')?.focus(),250);}
   function idxCloseSearch(){sOv.style.opacity='0';sOv.style.pointerEvents='none';if(sWr)sWr.style.transform='translateY(-16px)';document.body.style.overflow='';}
   function idxDoSearch(){const q=document.getElementById('idx-sinput')?.value?.trim();if(q)window.location=SITE_URL+'/tours.php?search='+encodeURIComponent(q);}
   window.idxOpenSearch=idxOpenSearch; window.idxCloseSearch=idxCloseSearch; window.idxDoSearch=idxDoSearch;
 
-  /* ─── Scroll progress ─── */
+  /* --- Scroll progress --- */
   const prog = document.getElementById('scroll-progress');
   window.addEventListener('scroll', () => {
     const max = document.documentElement.scrollHeight - innerHeight;
     if (prog) prog.style.width = (scrollY / max * 100).toFixed(2) + '%';
   }, { passive: true });
 
-  /* ─── Navbar scroll ─── */
+  /* --- Navbar scroll --- */
   const nav = document.getElementById('main-nav');
   const updateNav = () => nav && nav.classList.toggle('scrolled', scrollY > 60);
   window.addEventListener('scroll', updateNav, { passive: true });
   updateNav();
 
-  /* ─── Mobile menu ─── */
+  /* --- Mobile menu --- */
   const menuToggle  = document.getElementById('menu-toggle');
   const mobileMenu  = document.getElementById('mobile-menu');
   const backdrop    = document.getElementById('mobile-backdrop');
@@ -1906,7 +1895,7 @@ function handleFooterNl(e) {
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMobileMenu(); });
   window.addEventListener('resize', () => { if (innerWidth >= 992) closeMobileMenu(); }, { passive: true });
 
-  /* ─── Hero slider ─── */
+  /* --- Hero slider --- */
   const slides    = document.querySelectorAll('.hero-slide-content');
   const heroPrev  = document.getElementById('hero-prev');
   const heroNext  = document.getElementById('hero-next');
@@ -1938,14 +1927,14 @@ function handleFooterNl(e) {
     }, { passive: true });
   }
 
-  /* ─── Scroll reveal ─── */
+  /* --- Scroll reveal --- */
   const revealEls = document.querySelectorAll('.reveal');
   const revObs = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revObs.unobserve(e.target); } });
   }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
   revealEls.forEach(el => revObs.observe(el));
 
-  /* ─── Stats counter ─── */
+  /* --- Stats counter --- */
   const counters = document.querySelectorAll('[data-count]');
   const ease = t => 1 - Math.pow(1 - t, 3);
   const cntObs = new IntersectionObserver(entries => {
@@ -1966,7 +1955,7 @@ function handleFooterNl(e) {
   }, { threshold: 0.3 });
   counters.forEach(c => cntObs.observe(c));
 
-  /* ─── Testimonials slider ─── */
+  /* --- Testimonials slider --- */
   const track   = document.getElementById('testi-track');
   const dotsWrap = document.getElementById('testi-dots');
   const tPrev   = document.getElementById('testi-prev');
@@ -2006,7 +1995,7 @@ function handleFooterNl(e) {
     window.addEventListener('resize', () => { tBuildDots(); tGoTo(0); }, { passive: true });
   }
 
-  /* ─── Gallery lightbox ─── */
+  /* --- Gallery lightbox --- */
   const lb = document.getElementById('lightbox');
   const lbImg = document.getElementById('lightbox-img');
   window.openLightbox = (src, alt) => {
@@ -2023,28 +2012,91 @@ function handleFooterNl(e) {
   lb && lb.addEventListener('click', e => { if (e.target === lb) closeLightbox(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
 
-  /* ─── Gallery filter ─── */
-  window.filterGallery = (btn, cat) => {
-    document.querySelectorAll('.gallery-filter-btn').forEach(b => {
-      b.className = b.className.replace('bg-brand/20 border-brand/50 text-brand', 'bg-white/5 border-white/10 text-white/60');
-    });
-    btn.className = btn.className.replace('bg-white/5 border-white/10 text-white/60', 'bg-brand/20 border-brand/50 text-brand');
-    document.querySelectorAll('.gallery-item').forEach(item => {
-      const show = cat === 'all' || item.dataset.category === cat;
-      item.style.display = show ? '' : 'none';
-    });
-  };
+  /* --- Gallery carousel - step one card every 4s, infinite, progress bar, prev/next --- */
+  (function(){
+    const track    = document.getElementById('gallery-track');
+    const carousel = document.getElementById('gallery-carousel');
+    const bar      = document.getElementById('gallery-progress-bar');
+    const prevBtn  = document.getElementById('gallery-prev');
+    const nextBtn  = document.getElementById('gallery-next');
+    if (!track || track.children.length === 0) return;
 
-  /* ─── Back to top ─── */
+    const GAP = 16, STEP_MS = 4000, ANIM_MS = 900;
+    let timer = null, animating = false, paused = false;
+
+    /* progress bar: reset to 0 then run to 100% over STEP_MS (all inline so nothing overrides it) */
+    const runBar = () => {
+      if (!bar) return;
+      bar.style.transition = 'none';
+      bar.style.width = '0%';
+      void bar.offsetWidth;                 // reflow so the reset isn't animated
+      bar.style.transition = `width ${STEP_MS}ms linear`;
+      bar.style.width = '100%';
+    };
+    const pauseBar = () => {
+      if (!bar) return;
+      const w = getComputedStyle(bar).width; // freeze current width in px
+      bar.style.transition = 'none';
+      bar.style.width = w;
+    };
+
+    const slide = (dir = 1) => {
+      if (animating) return;
+      animating = true;
+      if (dir > 0) {
+        const first = track.children[0];
+        const shift = first.getBoundingClientRect().width + GAP;
+        track.style.transition = `transform ${ANIM_MS}ms cubic-bezier(.65,0,.35,1)`;
+        track.style.transform  = `translateX(-${shift}px)`;
+        const done = () => {
+          track.style.transition = 'none';
+          track.style.transform  = 'translateX(0)';
+          track.appendChild(first);         // recycle first ? end (infinite)
+          track.removeEventListener('transitionend', done);
+          void track.offsetWidth;
+          animating = false;
+        };
+        track.addEventListener('transitionend', done);
+      } else {
+        const last = track.children[track.children.length - 1];
+        track.insertBefore(last, track.children[0]);   // bring last to front
+        const shift = last.getBoundingClientRect().width + GAP;
+        track.style.transition = 'none';
+        track.style.transform  = `translateX(-${shift}px)`;
+        void track.offsetWidth;
+        track.style.transition = `transform ${ANIM_MS}ms cubic-bezier(.65,0,.35,1)`;
+        track.style.transform  = 'translateX(0)';
+        const done = () => { track.removeEventListener('transitionend', done); animating = false; };
+        track.addEventListener('transitionend', done);
+      }
+    };
+
+    const tick  = () => { slide(1); runBar(); };
+    const start = () => { if (timer || paused) return; runBar(); timer = setInterval(tick, STEP_MS); };
+    const stop  = () => { clearInterval(timer); timer = null; pauseBar(); };
+
+    /* manual controls reset the timer */
+    const manual = (dir) => { stop(); slide(dir); if (!paused) { runBar(); timer = setInterval(tick, STEP_MS); } };
+    nextBtn && nextBtn.addEventListener('click', () => manual(1));
+    prevBtn && prevBtn.addEventListener('click', () => manual(-1));
+
+    carousel.addEventListener('mouseenter', () => { paused = true; stop(); });
+    carousel.addEventListener('mouseleave', () => { paused = false; start(); });
+    document.addEventListener('visibilitychange', () => { if (document.hidden) stop(); else if (!paused) start(); });
+
+    if (track.scrollWidth > carousel.clientWidth) start();
+  })();
+
+  /* --- Back to top --- */
   const btt = document.getElementById('back-top');
   window.addEventListener('scroll', () => btt && btt.classList.toggle('visible', scrollY > 400), { passive: true });
   btt && btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-  /* ─── WhatsApp float ─── */
+  /* --- WhatsApp float --- */
   const waFloat = document.getElementById('wa-float');
   if (waFloat) setTimeout(() => waFloat.classList.add('visible'), 3000);
 
-  /* ─── Lazy images ─── */
+  /* --- Lazy images --- */
   if ('IntersectionObserver' in window) {
     const imgObs = new IntersectionObserver((entries, obs) => {
       entries.forEach(e => {
@@ -2057,10 +2109,58 @@ function handleFooterNl(e) {
     document.querySelectorAll('img[data-src]').forEach(img => imgObs.observe(img));
   }
 
-})();
-</script>
+  /* --- Scroll-driven word reveal (Snippe-style) --- */
+  (function(){
+    const els = Array.from(document.querySelectorAll('.scroll-reveal'));
+    if (!els.length) return;
 
-<!-- Lenis Smooth Scroll -->
+    /* Split each element's text into word spans (once) */
+    const items = els.map(el => {
+      const text = el.textContent.trim().replace(/\s+/g, ' ');
+      el.textContent = '';
+      const words = [];
+      text.split(' ').forEach((word, i, arr) => {
+        const span = document.createElement('span');
+        span.className = 'w';
+        span.textContent = word;
+        el.appendChild(span);
+        words.push(span);
+        if (i < arr.length - 1) {
+          const sp = document.createElement('span');
+          sp.className = 'sp';
+          el.appendChild(sp);
+        }
+      });
+      return { el, words };
+    });
+
+    let ticking = false;
+    function update(){
+      ticking = false;
+      const vh = window.innerHeight;
+      items.forEach(({ el, words }) => {
+        const r = el.getBoundingClientRect();
+        /* progress: 0 when the element's top hits 85% of viewport,
+           1 when it reaches 35% of viewport (reveal finishes a bit before center) */
+        const start = vh * 0.85, end = vh * 0.35;
+        let p = (start - r.top) / (start - end);
+        p = Math.max(0, Math.min(1, p));
+        const reveal = Math.round(p * words.length);
+        for (let i = 0; i < words.length; i++) {
+          words[i].classList.toggle('on', i < reveal);
+        }
+      });
+    }
+    function onScroll(){ if (!ticking){ ticking = true; requestAnimationFrame(update); } }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    update();
+  })();
+
+})();
+
+/* --- Lenis Smooth Scroll --- */
+</script>
 <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
 <script>
 (function(){
@@ -2071,9 +2171,29 @@ function handleFooterNl(e) {
     mouseMultiplier: 0.8,
     smoothTouch: false,
   });
-  function raf(t){ lenis.raf(t); requestAnimationFrame(raf); }
+
+  /* Scroll-driven word highlight — runs every RAF frame */
+  (function(){
+    var el=document.querySelector('.scroll-word-reveal');
+    if(!el)return;
+    var words=el.querySelectorAll('span'), total=words.length;
+    var prev=-1;
+    function update(){
+      var r=el.getBoundingClientRect(), vh=window.innerHeight;
+      if(r.top>vh){if(prev!=-1){prev=-1;for(var i=0;i<total;i++)words[i].classList.remove('active')}return}
+      if(r.bottom<0){if(prev!==total){prev=total;for(var i=0;i<total;i++)words[i].classList.add('active')}return}
+      var p=Math.max(0,Math.min(1,(vh-r.top)/(vh+r.height)));
+      var idx=Math.min(total-1,Math.floor(p*total));
+      if(idx===prev)return;prev=idx;
+      for(var i=0;i<total;i++)words[i].classList.toggle('active',i<=idx);
+    }
+    window._wordUpdate=update;
+  })();
+
+  function raf(t){ lenis.raf(t); window._wordUpdate&&window._wordUpdate(); requestAnimationFrame(raf); }
   requestAnimationFrame(raf);
   window._lenis = lenis;
+
   document.querySelectorAll('a[href^="#"]').forEach(function(a){
     a.addEventListener('click',function(e){
       var el=document.querySelector(this.getAttribute('href'));
