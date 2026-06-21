@@ -69,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         setFlashMessage('success','Your booking request has been received! We\'ll contact you within 24 hours.');
-        redirect(url('booking.php?success=1'));
+        redirect(url('booking?success=1'));
     }
 }
 
@@ -83,12 +83,12 @@ $currentPage     = 'tours';
 
 $navItems = [
     'home'         => ['url' => url(),                   'label' => 'Home'],
-    'tours'        => ['url' => url('tours.php'),        'label' => 'Safari Tours'],
-    'destinations' => ['url' => url('destinations.php'), 'label' => 'Destinations'],
-    'about'        => ['url' => url('about.php'),        'label' => 'About Us'],
-    'gallery'      => ['url' => url('gallery.php'),      'label' => 'Gallery'],
-    'blog'         => ['url' => url('blog.php'),         'label' => 'Blog'],
-    'contact'      => ['url' => url('contact.php'),      'label' => 'Contact'],
+    'tours'        => ['url' => url('tours'),        'label' => 'Safari Tours'],
+    'destinations' => ['url' => url('destinations'), 'label' => 'Destinations'],
+    'about'        => ['url' => url('about'),        'label' => 'About Us'],
+    'gallery'      => ['url' => url('gallery'),      'label' => 'Gallery'],
+    'blog'         => ['url' => url('blog'),         'label' => 'Blog'],
+    'contact'      => ['url' => url('contact'),      'label' => 'Contact'],
 ];
 ?>
 <!DOCTYPE html>
@@ -480,8 +480,8 @@ $navItems = [
     <span class="font-heading text-white/40 font-bold text-sm"><?= e($siteName) ?></span>
     <p class="text-white/20 text-xs font-nav">&copy; <?= date('Y') ?> <?= e($siteName) ?>. All rights reserved.</p>
     <div class="flex gap-4">
-      <a href="<?= url('tours.php') ?>" class="text-white/35 hover:text-emerald-400 text-xs font-nav transition-colors">? All Tours</a>
-      <a href="<?= url('contact.php') ?>" class="text-white/35 hover:text-white text-xs font-nav transition-colors">Contact</a>
+      <a href="<?= url('tours') ?>" class="text-white/35 hover:text-emerald-400 text-xs font-nav transition-colors">? All Tours</a>
+      <a href="<?= url('contact') ?>" class="text-white/35 hover:text-white text-xs font-nav transition-colors">Contact</a>
     </div>
   </div>
 </footer>

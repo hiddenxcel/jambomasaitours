@@ -265,7 +265,7 @@ $destinations = [
 ];
 
 if (!isset($destinations[$slug])) {
-    redirect(url('destinations.php'));
+    redirect(url('destinations'));
 }
 $dest = $destinations[$slug];
 $db = getDB();
@@ -352,7 +352,7 @@ $headExtra = '
     "@type": "BreadcrumbList",
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": "Home",         "item": ' . json_encode(SITE_URL) . ' },
-      { "@type": "ListItem", "position": 2, "name": "Destinations", "item": ' . json_encode(SITE_URL . '/destinations.php') . ' },
+      { "@type": "ListItem", "position": 2, "name": "Destinations", "item": ' . json_encode(SITE_URL . '/destinations') . ' },
       { "@type": "ListItem", "position": 3, "name": ' . json_encode($dest['title']) . ' }
     ]
   }
@@ -376,7 +376,7 @@ require_once 'includes/dark_header.php';
     <!-- breadcrumb -->
     <nav class="flex items-center gap-2 font-nav text-[.62rem] text-white/35 mb-4">
       <a href="<?= url() ?>" class="hover:text-white transition-colors">Home</a><span>›</span>
-      <a href="<?= url('destinations.php') ?>" class="hover:text-white transition-colors">Destinations</a><span>›</span>
+      <a href="<?= url('destinations') ?>" class="hover:text-white transition-colors">Destinations</a><span>›</span>
       <span class="text-white/55"><?= e($dest['title']) ?></span>
     </nav>
     <div class="section-tag reveal"><i class="fas fa-map-marker-alt mr-1"></i><?= e($dest['region']) ?></div>
@@ -529,7 +529,7 @@ require_once 'includes/dark_header.php';
       <div class="glass-card p-6 mb-4 reveal">
         <h3 style="font-family:'Nanum Myeongjo',serif;font-size:1.15rem;font-weight:700;color:#fff;margin-bottom:.35rem">Plan Your <?= e($dest['title']) ?> Trip</h3>
         <p style="font-size:.78rem;color:rgba(255,255,255,.4);line-height:1.5;margin-bottom:1.1rem">Our experts are ready to design your perfect itinerary.</p>
-        <a href="<?= url('booking.php') ?>" class="btn-em btn-em-primary w-full" style="display:flex;justify-content:center;margin-bottom:.5rem">
+        <a href="<?= url('booking') ?>" class="btn-em btn-em-primary w-full" style="display:flex;justify-content:center;margin-bottom:.5rem">
           <i class="fas fa-calendar-check mr-2" style="font-size:.75rem"></i> Book Safari
         </a>
         <a href="https://wa.me/<?= WHATSAPP_NUMBER ?>?text=<?= urlencode('Hi! I\'m interested in a ' . $dest['title'] . ' safari.') ?>" class="btn-em btn-em-wa w-full" style="display:flex;justify-content:center" target="_blank" rel="noopener">
@@ -586,10 +586,10 @@ require_once 'includes/dark_header.php';
       Let our expert guides craft your perfect <?= e($dest['title']) ?> itinerary. Every detail handled, every moment extraordinary.
     </p>
     <div class="flex flex-wrap gap-4 justify-center">
-      <a href="<?= url('booking.php') ?>" class="btn-em btn-em-primary">
+      <a href="<?= url('booking') ?>" class="btn-em btn-em-primary">
         <i class="fas fa-calendar-check" style="font-size:.75rem"></i> Plan My Safari
       </a>
-      <a href="<?= url('tours.php') ?>" class="btn-em btn-em-outline">
+      <a href="<?= url('tours') ?>" class="btn-em btn-em-outline">
         <i class="fas fa-compass" style="font-size:.75rem"></i> View All Tours
       </a>
     </div>

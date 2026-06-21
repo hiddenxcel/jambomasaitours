@@ -32,13 +32,13 @@ $siteTagline = getSetting('site_tagline', 'Tanzania Safari Experts');
 
 $navItems = [
     'home'         => ['url'=>url(),                        'desk'=>'Home',        'mob'=>'Home',             'icon'=>'fa-home'],
-    'tours'        => ['url'=>url('tours.php'),             'desk'=>'Safaris',     'mob'=>'Safari Tours',     'icon'=>'fa-compass'],
-    'trekking'     => ['url'=>url('mountain-trekking.php'), 'desk'=>'Trekking',    'mob'=>'Mountain Trekking','icon'=>'fa-mountain'],
-    'destinations' => ['url'=>url('destinations.php'),      'desk'=>'Destinations','mob'=>'Destinations',     'icon'=>'fa-map-marker-alt'],
-    'gallery'      => ['url'=>url('gallery.php'),           'desk'=>'Gallery',     'mob'=>'Gallery',          'icon'=>'fa-images'],
-    'blog'         => ['url'=>url('blog.php'),              'desk'=>'Blog',        'mob'=>'Blog',             'icon'=>'fa-newspaper'],
-    'about'        => ['url'=>url('about.php'),             'desk'=>'About',       'mob'=>'About Us',         'icon'=>'fa-info-circle'],
-    'contact'      => ['url'=>url('contact.php'),           'desk'=>'Contact',     'mob'=>'Contact',          'icon'=>'fa-envelope'],
+    'tours'        => ['url'=>url('tours'),             'desk'=>'Safaris',     'mob'=>'Safari Tours',     'icon'=>'fa-compass'],
+    'trekking'     => ['url'=>url('mountain-trekking'), 'desk'=>'Trekking',    'mob'=>'Mountain Trekking','icon'=>'fa-mountain'],
+    'destinations' => ['url'=>url('destinations'),      'desk'=>'Destinations','mob'=>'Destinations',     'icon'=>'fa-map-marker-alt'],
+    'gallery'      => ['url'=>url('gallery'),           'desk'=>'Gallery',     'mob'=>'Gallery',          'icon'=>'fa-images'],
+    'blog'         => ['url'=>url('blog'),              'desk'=>'Blog',        'mob'=>'Blog',             'icon'=>'fa-newspaper'],
+    'about'        => ['url'=>url('about'),             'desk'=>'About',       'mob'=>'About Us',         'icon'=>'fa-info-circle'],
+    'contact'      => ['url'=>url('contact'),           'desk'=>'Contact',     'mob'=>'Contact',          'icon'=>'fa-envelope'],
 ];
 
 function tdiff(string $type): array {
@@ -99,7 +99,7 @@ function cardBadge(array $tour, int $idx): ?array {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <?php $toursCanon = SITE_URL . '/tours.php'; ?>
+  <?php $toursCanon = SITE_URL . '/tours'; ?>
   <title><?= e($pageTitle) ?></title>
   <meta name="description" content="<?= e($pageDescription) ?>">
   <link rel="canonical" href="<?= e($toursCanon) ?>">
@@ -563,7 +563,7 @@ function cardBadge(array $tour, int $idx): ?array {
           </p>
         </div>
         <div class="flex flex-wrap gap-3 flex-shrink-0">
-          <a href="<?= url('contact.php') ?>"
+          <a href="<?= url('contact') ?>"
              class="inline-flex items-center gap-2 font-nav font-bold text-sm text-white px-6 py-3 rounded-xl transition-all hover:scale-105 hover:shadow-lg"
              style="background:linear-gradient(135deg,#7d4817,#a05e22);box-shadow:0 4px 16px rgba(160,94,34,.3)">
             <i class="fas fa-compass text-xs"></i> Get Custom Quote
@@ -614,7 +614,7 @@ function cardBadge(array $tour, int $idx): ?array {
         <h4 class="font-nav font-bold text-white text-sm uppercase tracking-widest mb-4">Safari Types</h4>
         <ul class="space-y-2.5">
           <?php foreach (['Wildlife Safari','Cultural Tour','Trekking','Beach Holiday','Honeymoon Safari','Family Safari'] as $t): ?>
-          <li><a href="<?= url('tours.php?tour_type='.urlencode($t)) ?>" class="text-white/45 hover:text-emerald-400 text-sm transition-colors"><?= $t ?></a></li>
+          <li><a href="<?= url('tours?tour_type='.urlencode($t)) ?>" class="text-white/45 hover:text-emerald-400 text-sm transition-colors"><?= $t ?></a></li>
           <?php endforeach; ?>
         </ul>
       </div>
@@ -677,7 +677,7 @@ function cardBadge(array $tour, int $idx): ?array {
   const sWr = document.getElementById('nav-search-wrap');
   window.openNavSearch  = () => { sOv.style.opacity='1';sOv.style.pointerEvents='all';sWr.style.transform='translateY(0)';document.body.style.overflow='hidden';setTimeout(()=>document.getElementById('nav-search-input')?.focus(),250); };
   window.closeNavSearch = () => { sOv.style.opacity='0';sOv.style.pointerEvents='none';sWr.style.transform='translateY(-16px)';document.body.style.overflow=''; };
-  window.doNavSearch    = () => { const q=document.getElementById('nav-search-input')?.value?.trim(); if(q) window.location=(window.SITE_URL||'')+'/tours.php?search='+encodeURIComponent(q); };
+  window.doNavSearch    = () => { const q=document.getElementById('nav-search-input')?.value?.trim(); if(q) window.location=(window.SITE_URL||'')+'/tours?search='+encodeURIComponent(q); };
   sOv?.addEventListener('click', e => { if(e.target===sOv) closeNavSearch(); });
   /* Improved mobile menu */
   document.getElementById('mob-close-btn')?.addEventListener('click', closeM);

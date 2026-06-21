@@ -39,13 +39,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newsletter_email'])) 
         <div class="footer-col__title">Quick Links</div>
         <ul class="footer-links">
           <li><a href="<?= url() ?>"               class="footer-link">Home</a></li>
-          <li><a href="<?= url('about.php') ?>"    class="footer-link">About Us</a></li>
-          <li><a href="<?= url('tours.php') ?>"    class="footer-link">Safari Tours</a></li>
-          <li><a href="<?= url('destinations.php') ?>" class="footer-link">Destinations</a></li>
-          <li><a href="<?= url('gallery.php') ?>"  class="footer-link">Gallery</a></li>
-          <li><a href="<?= url('blog.php') ?>"     class="footer-link">Travel Blog</a></li>
-          <li><a href="<?= url('contact.php') ?>"  class="footer-link">Contact Us</a></li>
-          <li><a href="<?= url('booking.php') ?>"  class="footer-link">Book Safari</a></li>
+          <li><a href="<?= url('about') ?>"    class="footer-link">About Us</a></li>
+          <li><a href="<?= url('tours') ?>"    class="footer-link">Safari Tours</a></li>
+          <li><a href="<?= url('destinations') ?>" class="footer-link">Destinations</a></li>
+          <li><a href="<?= url('gallery') ?>"  class="footer-link">Gallery</a></li>
+          <li><a href="<?= url('blog') ?>"     class="footer-link">Travel Blog</a></li>
+          <li><a href="<?= url('contact') ?>"  class="footer-link">Contact Us</a></li>
+          <li><a href="<?= url('booking') ?>"  class="footer-link">Book Safari</a></li>
         </ul>
       </div>
 

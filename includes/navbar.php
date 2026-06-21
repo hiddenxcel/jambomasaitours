@@ -1,12 +1,12 @@
 <?php
 $navItems = [
   'home'         => ['url' => url(),                   'label' => 'Home'],
-  'tours'        => ['url' => url('tours.php'),        'label' => 'Safari Tours'],
-  'destinations' => ['url' => url('destinations.php'), 'label' => 'Destinations'],
-  'about'        => ['url' => url('about.php'),        'label' => 'About Us'],
-  'gallery'      => ['url' => url('gallery.php'),      'label' => 'Gallery'],
-  'blog'         => ['url' => url('blog.php'),         'label' => 'Blog'],
-  'contact'      => ['url' => url('contact.php'),      'label' => 'Contact'],
+  'tours'        => ['url' => url('tours'),        'label' => 'Safari Tours'],
+  'destinations' => ['url' => url('destinations'), 'label' => 'Destinations'],
+  'about'        => ['url' => url('about'),        'label' => 'About Us'],
+  'gallery'      => ['url' => url('gallery'),      'label' => 'Gallery'],
+  'blog'         => ['url' => url('blog'),         'label' => 'Blog'],
+  'contact'      => ['url' => url('contact'),      'label' => 'Contact'],
 ];
 $logoUrl     = getSetting('logo_url');
 $logoWidth   = (int)(getSetting('logo_width', '160') ?: 160);
@@ -43,13 +43,13 @@ $siteTagline = getSetting('site_tagline', 'Tanzania Safari Experts');
       <?php endforeach; ?>
       <!-- Book Now — visible inside drawer on mobile only -->
       <li class="navbar__item navbar__item--cta">
-        <a href="<?= url('booking.php') ?>" class="navbar__cta-btn">Book Safari →</a>
+        <a href="<?= url('booking') ?>" class="navbar__cta-btn">Book Safari →</a>
       </li>
     </ul>
 
     <!-- ── Right actions (desktop CTA + hamburger) ── -->
     <div class="navbar__actions">
-      <a href="<?= url('booking.php') ?>" class="navbar__cta-btn" aria-label="Book a safari">
+      <a href="<?= url('booking') ?>" class="navbar__cta-btn" aria-label="Book a safari">
         Book Safari
       </a>
       <button class="navbar__toggle" id="nav-toggle"

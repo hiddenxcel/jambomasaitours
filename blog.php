@@ -57,7 +57,7 @@ function catStyle(string $cat): array {
 }
 
 $categories   = ['Safari Tips','Wildlife','Culture','Trekking','Conservation','Zanzibar'];
-$canonicalUrl = SITE_URL . '/blog.php' . ($catFilter ? '?cat=' . urlencode($catFilter) : '');
+$canonicalUrl = SITE_URL . '/blog' . ($catFilter ? '?cat=' . urlencode($catFilter) : '');
 
 $extraCss = '
   /* Blog card */
@@ -123,14 +123,14 @@ require_once 'includes/dark_header.php';
 <section class="px-4 lg:px-0 py-5 relative z-10">
   <div class="max-w-7xl mx-auto">
     <div style="display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center" class="reveal">
-      <a href="<?= url('blog.php') ?>" class="ftab <?= !$catFilter&&!$search?'active':'' ?>">
+      <a href="<?= url('blog') ?>" class="ftab <?= !$catFilter&&!$search?'active':'' ?>">
         All Posts
       </a>
       <?php foreach ($categories as $cat):
         [$clr,$bg,$icon] = catStyle($cat);
         $isActive = $catFilter === $cat;
       ?>
-      <a href="<?= url('blog.php?cat='.urlencode($cat)) ?>" class="ftab <?= $isActive?'active':'' ?>">
+      <a href="<?= url('blog?cat='.urlencode($cat)) ?>" class="ftab <?= $isActive?'active':'' ?>">
         <i class="fas <?= $icon ?>" style="font-size:.6rem;color:<?= $clr ?>"></i>
         <?= $cat ?>
       </a>
@@ -147,7 +147,7 @@ require_once 'includes/dark_header.php';
     <div style="margin-bottom:1.25rem;padding:.65rem 1rem;background:rgba(160,94,34,.08);border:1px solid rgba(160,94,34,.2);border-radius:12px;font-family:'Montserrat',sans-serif;font-size:.78rem;color:#c17a3a;display:flex;align-items:center;gap:.5rem">
       <i class="fas fa-search text-xs"></i>
       Showing results for "<strong><?= e($search) ?></strong>" · <?= count($posts) ?> article<?= count($posts)!==1?'s':'' ?> found
-      <a href="<?= url('blog.php') ?>" style="margin-left:auto;color:rgba(255,255,255,.4);font-size:.7rem;text-decoration:none">Clear ×</a>
+      <a href="<?= url('blog') ?>" style="margin-left:auto;color:rgba(255,255,255,.4);font-size:.7rem;text-decoration:none">Clear ×</a>
     </div>
     <?php endif; ?>
 
@@ -213,7 +213,7 @@ require_once 'includes/dark_header.php';
             <?= $search ? 'No articles found for "'.e($search).'".' : 'No articles yet. Check back soon!' ?>
           </p>
           <?php if ($search || $catFilter): ?>
-          <a href="<?= url('blog.php') ?>" style="font-family:'Montserrat',sans-serif;font-size:.72rem;font-weight:600;color:#a05e22;text-decoration:none">← View all articles</a>
+          <a href="<?= url('blog') ?>" style="font-family:'Montserrat',sans-serif;font-size:.72rem;font-weight:600;color:#a05e22;text-decoration:none">← View all articles</a>
           <?php endif; ?>
         </div>
         <?php else: ?>
@@ -261,7 +261,7 @@ require_once 'includes/dark_header.php';
         <!-- Search -->
         <div class="sw reveal">
           <h3><i class="fas fa-search" style="color:#a05e22"></i> Search</h3>
-          <form action="<?= url('blog.php') ?>" method="GET" style="position:relative">
+          <form action="<?= url('blog') ?>" method="GET" style="position:relative">
             <i class="fas fa-search" style="position:absolute;left:.75rem;top:50%;transform:translateY(-50%);color:rgba(255,255,255,.22);font-size:.72rem;pointer-events:none"></i>
             <input type="text" name="search" class="s-inp" placeholder="Search articles…"
                    value="<?= e($search) ?>"
@@ -276,7 +276,7 @@ require_once 'includes/dark_header.php';
             <?php foreach ($categories as $cat):
               [$clr] = catStyle($cat);
             ?>
-            <a href="<?= url('blog.php?cat='.urlencode($cat)) ?>" class="tpill" style="<?= $catFilter===$cat?'background:rgba(160,94,34,.12);border-color:rgba(160,94,34,.3);color:#a05e22':'' ?>">
+            <a href="<?= url('blog?cat='.urlencode($cat)) ?>" class="tpill" style="<?= $catFilter===$cat?'background:rgba(160,94,34,.12);border-color:rgba(160,94,34,.3);color:#a05e22':'' ?>">
               <?= $cat ?>
             </a>
             <?php endforeach; ?>

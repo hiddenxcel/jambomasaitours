@@ -7,7 +7,7 @@ require_once 'includes/db.php';
 $pageTitle       = 'Safari Photo Gallery | Tanzania Wildlife & Landscapes — Jambo Masai Tours';
 $pageDescription = 'Stunning safari photography from our Tanzania tours. Wildlife, landscapes, Maasai culture, Zanzibar beaches and luxury camps.';
 $currentPage     = 'gallery';
-$canonicalUrl    = SITE_URL . '/gallery.php';
+$canonicalUrl    = SITE_URL . '/gallery';
 
 $db         = getDB();
 $gallery    = $db->query("SELECT * FROM gallery ORDER BY created_at DESC")->fetchAll();
@@ -96,7 +96,7 @@ require_once 'includes/dark_header.php';
       Create Your Own <span class="hero-grad">Safari Memories</span>
     </h2>
     <p class="text-white/50 text-[.92rem] mb-7 leading-relaxed">These photographs were taken by our guests. Your adventure — and your perfect shot — is waiting.</p>
-    <a href="<?= url('booking.php') ?>" class="btn-em btn-em-primary"><i class="fas fa-compass text-xs"></i> Book a Safari</a>
+    <a href="<?= url('booking') ?>" class="btn-em btn-em-primary"><i class="fas fa-compass text-xs"></i> Book a Safari</a>
   </div>
 </section>
 

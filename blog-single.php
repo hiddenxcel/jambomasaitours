@@ -5,13 +5,13 @@ require_once 'includes/security.php';
 require_once 'includes/db.php';
 
 $slug = sanitizeInput($_GET['slug'] ?? '');
-if (!$slug) { redirect(url('blog.php')); }
+if (!$slug) { redirect(url('blog')); }
 
 $db   = getDB();
 $stmt = $db->prepare("SELECT * FROM blog_posts WHERE slug = ? AND published = 1 LIMIT 1");
 $stmt->execute([$slug]);
 $post = $stmt->fetch();
-if (!$post) { http_response_code(404); redirect(url('blog.php')); }
+if (!$post) { http_response_code(404); redirect(url('blog')); }
 
 $relStmt = $db->prepare("SELECT id,title,slug,image,excerpt,created_at FROM blog_posts WHERE published=1 AND id != ? ORDER BY created_at DESC LIMIT 3");
 $relStmt->execute([$post['id']]);
@@ -75,7 +75,7 @@ $headExtra = '
       "@type": "BreadcrumbList",
       "itemListElement": [
         { "@type": "ListItem", "position": 1, "name": "Home", "item": "' . SITE_URL . '" },
-        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "' . SITE_URL . '/blog.php" },
+        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "' . SITE_URL . '/blog" },
         { "@type": "ListItem", "position": 3, "name": ' . json_encode($post['title']) . ' }
       ]
     }
@@ -136,7 +136,7 @@ require_once 'includes/dark_header.php';
       <ol>
         <li><a href="<?= url() ?>">Home</a></li>
         <li class="sep" aria-hidden="true">/</li>
-        <li><a href="<?= url('blog.php') ?>">Blog</a></li>
+        <li><a href="<?= url('blog') ?>">Blog</a></li>
         <li class="sep" aria-hidden="true">/</li>
         <li aria-current="page"><?= e(truncate($post['title'], 48)) ?></li>
       </ol>
@@ -168,7 +168,7 @@ require_once 'includes/dark_header.php';
     </div>
 
     <div class="flex flex-wrap gap-3">
-      <a href="<?= url('booking.php') ?>" class="btn-em btn-em-primary">
+      <a href="<?= url('booking') ?>" class="btn-em btn-em-primary">
         <i class="fas fa-paper-plane" aria-hidden="true"></i> Plan This Safari
       </a>
       <a href="https://wa.me/<?= e(WHATSAPP_NUMBER) ?>" target="_blank" rel="noopener noreferrer" class="btn-em btn-em-wa">
@@ -221,7 +221,7 @@ require_once 'includes/dark_header.php';
           </div>
           <h3 class="font-heading text-white text-lg font-bold mb-2">Ready to Go?</h3>
           <p class="text-white/45 text-sm leading-relaxed mb-5">Turn these tips into your own safari adventure.</p>
-          <a href="<?= url('booking.php') ?>" class="btn-em btn-em-primary w-full justify-center mb-3 text-xs">
+          <a href="<?= url('booking') ?>" class="btn-em btn-em-primary w-full justify-center mb-3 text-xs">
             <i class="fas fa-calendar-check text-xs"></i> Book a Safari
           </a>
           <a href="https://wa.me/<?= e(WHATSAPP_NUMBER) ?>" target="_blank" rel="noopener" class="btn-em btn-em-wa w-full justify-center text-xs">
@@ -235,7 +235,7 @@ require_once 'includes/dark_header.php';
           <h3 class="font-nav font-bold text-[.65rem] uppercase tracking-widest text-emerald-400 mb-4">More Articles</h3>
           <div class="space-y-3">
             <?php foreach ($related as $r): ?>
-            <a href="<?= url('blog-single.php?slug=' . e($r['slug'])) ?>" class="related-card">
+            <a href="<?= url('blog/' . e($r['slug'])) ?>" class="related-card">
               <img src="<?= e($r['image']) ?>" alt="<?= e($r['title']) ?>" loading="lazy">
               <div class="p-3">
                 <h4 class="font-heading text-white text-[.88rem] font-bold leading-snug mb-1"><?= e($r['title']) ?></h4>

@@ -38,7 +38,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
     <lastmod><?= date('Y-m-d') ?></lastmod>
   </url>
   <url>
-    <loc><?= $base ?>/tours.php</loc>
+    <loc><?= $base ?>/tours</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <lastmod><?= date('Y-m-d') ?></lastmod>

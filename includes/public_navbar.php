@@ -187,7 +187,7 @@ $_name2      = $_nameParts[1] ?? 'Masai';
                   <i class="fas fa-fire" style="font-size:.48rem;margin-right:.3rem"></i>Featured Safaris
                 </p>
                 <?php if (!empty($idxMegaTours)): foreach($idxMegaTours as $mt): ?>
-                <a href="<?= url('tour-detail.php?slug='.e($mt['slug'])) ?>" class="pnav-m-item">
+                <a href="<?= url('tour/'.e($mt['slug'])) ?>" class="pnav-m-item">
                   <div style="width:32px;height:32px;border-radius:8px;background:rgba(160,94,34,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="fas fa-paw" style="color:#a05e22;font-size:.6rem"></i></div>
                   <div style="min-width:0">
                     <div class="pnav-m-name" style="font-size:.8rem;font-weight:600;color:rgba(255,255,255,.82);white-space:nowrap;overflow:hidden;text-overflow:ellipsis"><?= e($mt['name']) ?></div>

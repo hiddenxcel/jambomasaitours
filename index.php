@@ -113,7 +113,7 @@ if (empty($testimonials)) {
         "@type": "SearchAction",
         "target": {
           "@type": "EntryPoint",
-          "urlTemplate": "<?= SITE_URL ?>/tours.php?q={search_term_string}"
+          "urlTemplate": "<?= SITE_URL ?>/tours?q={search_term_string}"
         },
         "query-input": "required name=search_term_string"
       }
@@ -478,13 +478,13 @@ if (empty($testimonials)) {
 /* Nav items - shorter labels for desktop, full for mobile */
 $navItems = [
   'home'         => ['url'=>url(),                        'desk'=>'Home',       'mob'=>'Home',             'icon'=>'fa-home'],
-  'tours'        => ['url'=>url('tours.php'),             'desk'=>'Safaris',    'mob'=>'Safari Tours',     'icon'=>'fa-compass'],
-  'trekking'     => ['url'=>url('mountain-trekking.php'), 'desk'=>'Trekking',   'mob'=>'Mountain Trekking','icon'=>'fa-mountain'],
-  'destinations' => ['url'=>url('destinations.php'),      'desk'=>'Destinations','mob'=>'Destinations',    'icon'=>'fa-map-marker-alt'],
-  'gallery'      => ['url'=>url('gallery.php'),           'desk'=>'Gallery',    'mob'=>'Gallery',          'icon'=>'fa-images'],
-  'blog'         => ['url'=>url('blog.php'),              'desk'=>'Blog',       'mob'=>'Blog',             'icon'=>'fa-newspaper'],
-  'about'        => ['url'=>url('about.php'),             'desk'=>'About',      'mob'=>'About Us',         'icon'=>'fa-info-circle'],
-  'contact'      => ['url'=>url('contact.php'),           'desk'=>'Contact',    'mob'=>'Contact',          'icon'=>'fa-envelope'],
+  'tours'        => ['url'=>url('tours'),             'desk'=>'Safaris',    'mob'=>'Safari Tours',     'icon'=>'fa-compass'],
+  'trekking'     => ['url'=>url('mountain-trekking'), 'desk'=>'Trekking',   'mob'=>'Mountain Trekking','icon'=>'fa-mountain'],
+  'destinations' => ['url'=>url('destinations'),      'desk'=>'Destinations','mob'=>'Destinations',    'icon'=>'fa-map-marker-alt'],
+  'gallery'      => ['url'=>url('gallery'),           'desk'=>'Gallery',    'mob'=>'Gallery',          'icon'=>'fa-images'],
+  'blog'         => ['url'=>url('blog'),              'desk'=>'Blog',       'mob'=>'Blog',             'icon'=>'fa-newspaper'],
+  'about'        => ['url'=>url('about'),             'desk'=>'About',      'mob'=>'About Us',         'icon'=>'fa-info-circle'],
+  'contact'      => ['url'=>url('contact'),           'desk'=>'Contact',    'mob'=>'Contact',          'icon'=>'fa-envelope'],
 ];
 /* Fetch featured tours for mega menu */
 try {
@@ -539,7 +539,7 @@ try {
 
           <!-- CTA buttons -->
           <div class="anim-up grid grid-cols-1 sm:flex sm:flex-wrap gap-3 mb-10" style="animation-delay:.4s">
-            <a href="tours.php"
+            <a href="<?= url('tours') ?>"
                class="btn-shine group inline-flex items-center justify-center gap-2 font-nav font-semibold text-[.8rem] text-white px-7 py-3.5 rounded-xl transition-all hover:scale-105 w-full sm:w-auto"
                style="background:linear-gradient(135deg,#7d4817,#a05e22);box-shadow:0 8px 30px rgba(160,94,34,.35)">
               <i class="fas fa-compass text-xs"></i>
@@ -547,7 +547,7 @@ try {
               <i class="fas fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
             </a>
             <div class="grid grid-cols-2 gap-3 sm:contents">
-              <a href="booking.php"
+              <a href="<?= url('booking') ?>"
                  class="inline-flex items-center justify-center gap-2 font-nav font-semibold text-[.8rem] text-white px-7 py-3.5 rounded-xl transition-all hover:bg-white/10 w-full sm:w-auto"
                  style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)">
                 <i class="fas fa-play text-emerald-400 text-xs"></i>
@@ -894,14 +894,14 @@ try {
 
         <!-- CTA row -->
         <div class="flex flex-wrap gap-3 items-center">
-          <a href="<?= url('about.php') ?>"
+          <a href="<?= url('about') ?>"
              class="group inline-flex items-center gap-2 font-nav font-semibold text-[.78rem] px-6 py-3 rounded-xl transition-all hover:scale-105 hover:shadow-lg"
              style="background:linear-gradient(135deg,#7d4817,#a05e22);box-shadow:0 4px 18px rgba(160,94,34,.2);color:#fff">
             <i class="fas fa-compass text-xs" style="color:#fff"></i>
             Our Full Story
             <i class="fas fa-arrow-right text-xs group-hover:translate-x-1 transition-transform" style="color:#fff"></i>
           </a>
-          <a href="<?= url('booking.php') ?>"
+          <a href="<?= url('booking') ?>"
              class="inline-flex items-center gap-2 font-nav font-semibold text-[.78rem] text-white/75 px-6 py-3 rounded-xl transition-all hover:text-white hover:bg-white/10"
              style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1)">
             <i class="fas fa-calendar-check text-xs text-emerald-400"></i>
@@ -927,7 +927,7 @@ try {
 -------------------------------------- -->
 <section class="relative z-20 -mt-px">
   <div class="max-w-6xl mx-auto px-4 lg:px-6 py-6">
-    <form action="<?= url('tours.php') ?>" method="GET"
+    <form action="<?= url('tours') ?>" method="GET"
           class="glass-card p-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 items-end">
       <div>
         <label class="search-label" for="s-dest">Destination</label>
@@ -1045,7 +1045,7 @@ try {
               <span class="text-white font-bold text-xl font-heading"><?= formatPrice($tour['price']) ?></span>
               <span class="text-white/35 text-xs font-nav"> /person</span>
             </div>
-            <a href="<?= url('tour-detail.php?slug=' . e($tour['slug'])) ?>"
+            <a href="<?= url('tour/' . e($tour['slug'])) ?>"
                class="w-10 h-10 rounded-xl flex items-center justify-center transition-all hover:scale-110 hover:shadow-lg flex-shrink-0"
                style="background:linear-gradient(135deg,#7d4817,#a05e22);box-shadow:0 3px 12px rgba(160,94,34,.3)"
                aria-label="View details for <?= e($tour['name']) ?>">
@@ -1060,7 +1060,7 @@ try {
 
     <!-- View all -->
     <div class="text-center mt-10 reveal">
-      <a href="<?= url('tours.php') ?>"
+      <a href="<?= url('tours') ?>"
          class="inline-flex items-center gap-2 font-nav font-semibold text-[.78rem] text-white/55 hover:text-white transition-colors group">
         View all safari packages
         <i class="fas fa-arrow-right text-xs text-emerald-400 group-hover:translate-x-1 transition-transform"></i>
@@ -1111,7 +1111,7 @@ try {
         Tanzania's most breathtaking parks, peaks and shores — explore the wonders that await you.
       </p>
       <div class="mt-5">
-        <a href="<?= url('destinations.php') ?>"
+        <a href="<?= url('destinations') ?>"
            class="inline-flex items-center gap-2 font-nav font-semibold text-[.75rem] text-white/45 hover:text-emerald-400 transition-colors group">
           View all destinations
           <i class="fas fa-arrow-right text-xs group-hover:translate-x-1 transition-transform text-emerald-400"></i>
@@ -1133,7 +1133,7 @@ try {
         $cnt       = $toursByDest[$titleKey] ?? 0;
         $countLabel = $cnt > 0 ? $cnt . ' ' . ($cnt === 1 ? 'Tour' : 'Tours') : 'Explore';
       ?>
-      <a href="<?= url('destinations.php?d=' . e($slug)) ?>"
+      <a href="<?= url('destinations?d=' . e($slug)) ?>"
          class="dest-bento-card <?= $isLarge ? 'dest-bento-large' : '' ?>">
 
         <img src="<?= e($img) ?>" alt="<?= e($dest['title']) ?>" loading="<?= $idx < 2 ? 'eager' : 'lazy' ?>">
@@ -1294,7 +1294,7 @@ try {
     <div class="gallery-progress reveal" id="gallery-progress"><span id="gallery-progress-bar"></span></div>
 
     <div class="text-center mt-12 reveal">
-      <a href="<?= url('gallery.php') ?>" class="btn-outline">View Full Gallery</a>
+      <a href="<?= url('gallery') ?>" class="btn-outline">View Full Gallery</a>
     </div>
   </div>
 </section>
@@ -1370,7 +1370,7 @@ try {
           </div>
           <h3 class="font-heading text-white text-lg leading-snug mb-2"><?= e($post['title']) ?></h3>
           <p class="text-white/50 text-sm leading-relaxed mb-4"><?= e(truncate($post['excerpt'], 110)) ?></p>
-          <a href="<?= url('blog-single.php?slug=' . e($post['slug'])) ?>"
+          <a href="<?= url('blog/' . e($post['slug'])) ?>"
              class="text-brand font-nav text-[.72rem] font-600 uppercase tracking-wider hover:text-brand/80 transition-colors">
             Read More ?
           </a>
@@ -1379,7 +1379,7 @@ try {
       <?php endforeach; ?>
     </div>
     <div class="text-center mt-10 reveal">
-      <a href="<?= url('blog.php') ?>" class="btn-outline">All Travel Articles</a>
+      <a href="<?= url('blog') ?>" class="btn-outline">All Travel Articles</a>
     </div>
   </div>
 </section>
@@ -1399,10 +1399,10 @@ try {
       Contact us today and let our experts design the perfect African adventure just for you.
     </p>
     <div class="flex flex-wrap gap-3 justify-center mt-10">
-      <a href="<?= url('booking.php') ?>" class="btn-gold btn-lg">
+      <a href="<?= url('booking') ?>" class="btn-gold btn-lg">
         <i class="fas fa-calendar-check text-sm"></i> Start Booking
       </a>
-      <a href="<?= url('contact.php') ?>" class="btn-outline">
+      <a href="<?= url('contact') ?>" class="btn-outline">
         Ask a Question
       </a>
       <a href="https://wa.me/<?= e(WHATSAPP_NUMBER) ?>" class="btn-wa" target="_blank" rel="noopener">
@@ -1555,7 +1555,7 @@ try {
           </li>
           <?php endforeach; ?>
           <li style="margin-top:.85rem">
-            <a href="<?= url('tours.php') ?>" style="font-family:'Montserrat',sans-serif;font-size:.78rem;font-weight:700;color:#a05e22;text-decoration:none;display:flex;align-items:center;gap:.4rem">View All Safaris <i class="fas fa-arrow-right" style="font-size:.55rem"></i></a>
+            <a href="<?= url('tours') ?>" style="font-family:'Montserrat',sans-serif;font-size:.78rem;font-weight:700;color:#a05e22;text-decoration:none;display:flex;align-items:center;gap:.4rem">View All Safaris <i class="fas fa-arrow-right" style="font-size:.55rem"></i></a>
           </li>
         </ul>
       </div>
@@ -1575,7 +1575,7 @@ try {
             ['fa-person-rays',     'Maasai Heartland', 'maasai'],
           ] as $d): ?>
           <li style="margin-bottom:.65rem">
-            <a href="<?= url('destinations.php?d='.$d[2]) ?>" class="ftr-link"><i class="fas <?= $d[0] ?>" style="color:#a05e22;font-size:.7rem;width:1rem;margin-right:.35rem"></i><?= $d[1] ?></a>
+            <a href="<?= url('destinations?d='.$d[2]) ?>" class="ftr-link"><i class="fas <?= $d[0] ?>" style="color:#a05e22;font-size:.7rem;width:1rem;margin-right:.35rem"></i><?= $d[1] ?></a>
           </li>
           <?php endforeach; ?>
         </ul>
@@ -1647,7 +1647,7 @@ try {
         ];
       }
       foreach ($miniTours as $mt):
-        $mlink = !empty($mt['slug']) ? url('tour-detail.php?slug='.e($mt['slug'])) : url('tours.php');
+        $mlink = !empty($mt['slug']) ? url('tour/'.e($mt['slug'])) : url('tours');
       ?>
       <a href="<?= $mlink ?>" class="safari-mini">
         <img src="<?= e($mt['image']) ?>" alt="<?= e($mt['name']) ?>" loading="lazy">
@@ -1870,7 +1870,7 @@ function handleFooterNl(e) {
   const sOv=document.getElementById('idx-search-ov'), sWr=document.getElementById('idx-swrap');
   function idxOpenSearch(){sOv.style.opacity='1';sOv.style.pointerEvents='all';if(sWr)sWr.style.transform='translateY(0)';document.body.style.overflow='hidden';setTimeout(()=>document.getElementById('idx-sinput')?.focus(),250);}
   function idxCloseSearch(){sOv.style.opacity='0';sOv.style.pointerEvents='none';if(sWr)sWr.style.transform='translateY(-16px)';document.body.style.overflow='';}
-  function idxDoSearch(){const q=document.getElementById('idx-sinput')?.value?.trim();if(q)window.location=SITE_URL+'/tours.php?search='+encodeURIComponent(q);}
+  function idxDoSearch(){const q=document.getElementById('idx-sinput')?.value?.trim();if(q)window.location=SITE_URL+'/tours?search='+encodeURIComponent(q);}
   window.idxOpenSearch=idxOpenSearch; window.idxCloseSearch=idxCloseSearch; window.idxDoSearch=idxDoSearch;
 
   /* --- Scroll progress --- */

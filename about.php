@@ -8,7 +8,7 @@ $pageTitle       = 'About Us | Maasai-Led Safari Experts — Jambo Masai Tours';
 $pageDescription = 'Jambo Masai Tours is a Maasai-founded, award-winning safari operator based in Arusha, Tanzania. 15+ years of luxury safari experiences and community-first tourism.';
 $currentPage     = 'about';
 $ogImage         = IMG_ABOUT;
-$canonicalUrl    = SITE_URL . '/about.php';
+$canonicalUrl    = SITE_URL . '/about';
 $logoUrl_seo     = getSetting('logo_url') ?: (SITE_URL . '/uploads/logo-husika.png');
 $_aFav = getSetting('favicon_url') ?: getSetting('logo_url') ?: (SITE_URL . '/uploads/logo-husika.png');
 $headExtra = '<link rel="icon" type="image/png" href="' . e($_aFav) . '">
@@ -113,8 +113,8 @@ require_once 'includes/dark_header.php';
         </div>
 
         <div class="flex flex-wrap gap-3">
-          <a href="<?= url('tours.php') ?>"   class="btn-em btn-em-primary"><i class="fas fa-compass text-xs"></i> Browse Safaris</a>
-          <a href="<?= url('contact.php') ?>" class="btn-em btn-em-outline">Contact Us</a>
+          <a href="<?= url('tours') ?>"   class="btn-em btn-em-primary"><i class="fas fa-compass text-xs"></i> Browse Safaris</a>
+          <a href="<?= url('contact') ?>" class="btn-em btn-em-outline">Contact Us</a>
         </div>
       </div>
     </div>
@@ -179,8 +179,8 @@ require_once 'includes/dark_header.php';
     </h2>
     <p class="text-white/50 leading-relaxed mb-8">Let our expert Maasai guides take you on a journey you'll never forget.</p>
     <div class="flex flex-wrap gap-3 justify-center">
-      <a href="<?= url('tours.php') ?>"   class="btn-em btn-em-primary"><i class="fas fa-compass text-xs"></i> Browse Safaris</a>
-      <a href="<?= url('contact.php') ?>" class="btn-em btn-em-outline">Contact Us</a>
+      <a href="<?= url('tours') ?>"   class="btn-em btn-em-primary"><i class="fas fa-compass text-xs"></i> Browse Safaris</a>
+      <a href="<?= url('contact') ?>" class="btn-em btn-em-outline">Contact Us</a>
       <a href="https://wa.me/<?= e(WHATSAPP_NUMBER) ?>" target="_blank" rel="noopener" class="btn-em btn-em-wa"><i class="fab fa-whatsapp text-base"></i> WhatsApp</a>
     </div>
   </div>

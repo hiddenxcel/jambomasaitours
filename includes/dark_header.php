@@ -9,14 +9,14 @@ if (!isset($logoUrl)) {
 /* desk = shorter label for desktop, mob = full label for mobile drawer */
 $_navItems = [
     'home'         => ['url'=>url(),                        'desk'=>'Home',       'mob'=>'Home',             'icon'=>'fa-home'],
-    'tours'        => ['url'=>url('tours.php'),             'desk'=>'Safaris',    'mob'=>'Safari Tours',     'icon'=>'fa-compass'],
-    'trekking'     => ['url'=>url('mountain-trekking.php'), 'desk'=>'Trekking',   'mob'=>'Mountain Trekking','icon'=>'fa-mountain'],
-    'destinations' => ['url'=>url('destinations.php'),      'desk'=>'Destinations','mob'=>'Destinations',   'icon'=>'fa-map-marker-alt'],
-    'gallery'      => ['url'=>url('gallery.php'),           'desk'=>'Gallery',    'mob'=>'Gallery',          'icon'=>'fa-images'],
-    'blog'         => ['url'=>url('blog.php'),              'desk'=>'Blog',       'mob'=>'Blog',             'icon'=>'fa-newspaper'],
-    'about'        => ['url'=>url('about.php'),             'desk'=>'About',      'mob'=>'About Us',         'icon'=>'fa-info-circle'],
-    'faq'          => ['url'=>url('faq.php'),               'desk'=>'FAQ',        'mob'=>'Safari FAQ',       'icon'=>'fa-question-circle'],
-    'contact'      => ['url'=>url('contact.php'),           'desk'=>'Contact',    'mob'=>'Contact',          'icon'=>'fa-envelope'],
+    'tours'        => ['url'=>url('tours'),             'desk'=>'Safaris',    'mob'=>'Safari Tours',     'icon'=>'fa-compass'],
+    'trekking'     => ['url'=>url('mountain-trekking'), 'desk'=>'Trekking',   'mob'=>'Mountain Trekking','icon'=>'fa-mountain'],
+    'destinations' => ['url'=>url('destinations'),      'desk'=>'Destinations','mob'=>'Destinations',   'icon'=>'fa-map-marker-alt'],
+    'gallery'      => ['url'=>url('gallery'),           'desk'=>'Gallery',    'mob'=>'Gallery',          'icon'=>'fa-images'],
+    'blog'         => ['url'=>url('blog'),              'desk'=>'Blog',       'mob'=>'Blog',             'icon'=>'fa-newspaper'],
+    'about'        => ['url'=>url('about'),             'desk'=>'About',      'mob'=>'About Us',         'icon'=>'fa-info-circle'],
+    'faq'          => ['url'=>url('faq'),               'desk'=>'FAQ',        'mob'=>'Safari FAQ',       'icon'=>'fa-question-circle'],
+    'contact'      => ['url'=>url('contact'),           'desk'=>'Contact',    'mob'=>'Contact',          'icon'=>'fa-envelope'],
 ];
 
 /* Featured tours for mega menu */

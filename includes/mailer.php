@@ -191,7 +191,7 @@ function emailBookingCustomer(array $data): bool {
     $tourName = e($data['tour_name']  ?? 'Safari Tour');
     $date     = e($data['travel_date']     ?? 'TBD');
     $travelers= e($data['travelers']       ?? '1');
-    $toursUrl = SITE_URL . '/tours.php';
+    $toursUrl = SITE_URL . '/tours';
     $waLink   = 'https://wa.me/' . WHATSAPP_NUMBER . '?text=' . urlencode('Hi! I\'d like to confirm my booking for ' . ($data['tour_name'] ?? 'a safari tour') . '.');
 
     $content = <<<HTML

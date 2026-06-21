@@ -38,7 +38,7 @@ $pageTitle       = 'Contact Jambo Masai Tours | Safari Experts in Arusha, Tanzan
 $pageDescription = 'Contact Jambo Masai Tours for safari inquiries. WhatsApp, email, phone — our team is always ready to help plan your perfect African adventure.';
 $currentPage     = 'contact';
 $csrfToken       = generateCsrfToken();
-$canonicalUrl    = SITE_URL . '/contact.php';
+$canonicalUrl    = SITE_URL . '/contact';
 $headExtra = '<script type="application/ld+json">
 {
   "@context": "https://schema.org",

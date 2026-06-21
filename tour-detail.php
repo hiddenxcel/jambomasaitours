@@ -5,13 +5,13 @@ require_once 'includes/security.php';
 require_once 'includes/db.php';
 
 $slug = sanitizeInput($_GET['slug'] ?? '');
-if (!$slug) { redirect(url('tours.php')); }
+if (!$slug) { redirect(url('tours')); }
 
 $db   = getDB();
 $stmt = $db->prepare("SELECT * FROM tours WHERE slug = ? LIMIT 1");
 $stmt->execute([$slug]);
 $tour = $stmt->fetch();
-if (!$tour) { http_response_code(404); redirect(url('tours.php')); }
+if (!$tour) { http_response_code(404); redirect(url('tours')); }
 
 $highlights  = $tour['highlights'] ? explode('|', $tour['highlights']) : [];
 /* Same destination first, then fill from all other tours up to 10 */
@@ -41,12 +41,12 @@ $currentPage = 'tours';
 
 $navItems = [
     'home'         => ['url' => url(),                   'label' => 'Home'],
-    'tours'        => ['url' => url('tours.php'),        'label' => 'Safari Tours'],
-    'destinations' => ['url' => url('destinations.php'), 'label' => 'Destinations'],
-    'about'        => ['url' => url('about.php'),        'label' => 'About Us'],
-    'gallery'      => ['url' => url('gallery.php'),      'label' => 'Gallery'],
-    'blog'         => ['url' => url('blog.php'),         'label' => 'Blog'],
-    'contact'      => ['url' => url('contact.php'),      'label' => 'Contact'],
+    'tours'        => ['url' => url('tours'),        'label' => 'Safari Tours'],
+    'destinations' => ['url' => url('destinations'), 'label' => 'Destinations'],
+    'about'        => ['url' => url('about'),        'label' => 'About Us'],
+    'gallery'      => ['url' => url('gallery'),      'label' => 'Gallery'],
+    'blog'         => ['url' => url('blog'),         'label' => 'Blog'],
+    'contact'      => ['url' => url('contact'),      'label' => 'Contact'],
 ];
 
 preg_match('/\d+/', $tour['duration'] ?? '', $dm);
@@ -91,7 +91,7 @@ $waMsg = urlencode('Hi! I am interested in the ' . $tour['name'] . ' tour. Pleas
         "price": "<?= e($tour['price'] ?? '0') ?>",
         "priceCurrency": "USD",
         "availability": "https://schema.org/InStock",
-        "url": "<?= SITE_URL ?>/booking.php?tour=<?= e($tour['slug']) ?>"
+        "url": "<?= SITE_URL ?>/booking?tour=<?= e($tour['slug']) ?>"
       },
       "provider": {
         "@type": "TravelAgency",
@@ -110,7 +110,7 @@ $waMsg = urlencode('Hi! I am interested in the ' . $tour['name'] . ' tour. Pleas
       "@type": "BreadcrumbList",
       "itemListElement": [
         { "@type": "ListItem", "position": 1, "name": "Home",         "item": "<?= SITE_URL ?>" },
-        { "@type": "ListItem", "position": 2, "name": "Safari Tours", "item": "<?= SITE_URL ?>/tours.php" },
+        { "@type": "ListItem", "position": 2, "name": "Safari Tours", "item": "<?= SITE_URL ?>/tours" },
         { "@type": "ListItem", "position": 3, "name": <?= json_encode(strip_tags($tour['name'])) ?> }
       ]
     },
@@ -278,7 +278,7 @@ $totalAll   = $photoCount + 1; // +1 main tour image
   <div class="max-w-7xl mx-auto px-4 lg:px-6 pt-6 pb-2">
     <nav class="flex items-center gap-2 font-nav text-[.65rem] text-white/35 mb-3">
       <a href="<?= url() ?>" class="hover:text-white transition-colors">Home</a><span>&#8250;</span>
-      <a href="<?= url('tours.php') ?>" class="hover:text-white transition-colors">Safari Tours</a><span>&#8250;</span>
+      <a href="<?= url('tours') ?>" class="hover:text-white transition-colors">Safari Tours</a><span>&#8250;</span>
       <span class="text-white/60"><?= e($tour['name']) ?></span>
     </nav>
     <div class="flex flex-wrap gap-2 mb-3">
@@ -743,7 +743,7 @@ document.addEventListener('keydown', e => {
         </div>
 
         <!-- CTA buttons -->
-        <a href="<?= url('booking.php?tour='.e($tour['slug'])) ?>"
+        <a href="<?= url('booking?tour='.e($tour['slug'])) ?>"
            class="flex items-center justify-center gap-2 font-nav font-bold text-sm text-white w-full py-3.5 rounded-xl mb-3 transition-all hover:scale-[1.02] hover:shadow-lg"
            style="background:linear-gradient(135deg,#7d4817,#a05e22);box-shadow:0 4px 18px rgba(160,94,34,.25)">
           <i class="fas fa-calendar-check text-xs"></i> Book This Safari
@@ -753,7 +753,7 @@ document.addEventListener('keydown', e => {
            style="color:#25D366;background:rgba(37,211,102,.08);border:1px solid rgba(37,211,102,.2)">
           <i class="fab fa-whatsapp text-base"></i> Chat on WhatsApp
         </a>
-        <a href="<?= url('contact.php') ?>"
+        <a href="<?= url('contact') ?>"
            class="flex items-center justify-center gap-2 font-nav text-sm text-white/50 hover:text-white w-full py-2.5 rounded-xl transition-all"
            style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)">
           <i class="fas fa-envelope text-xs"></i> Ask a Question
@@ -818,7 +818,7 @@ document.addEventListener('keydown', e => {
         <div style="flex:0 0 220px;scroll-snap-align:start"
              class="group">
           <!-- Card -->
-          <a href="<?= url('tour-detail.php?slug='.e($r['slug'])) ?>"
+          <a href="<?= url('tour/'.e($r['slug'])) ?>"
              class="block rounded-2xl overflow-hidden transition-all duration-300 group-hover:transform group-hover:-translate-y-1.5"
              style="background:#2c463d;border:1px solid rgba(255,255,255,.07);text-decoration:none">
 
@@ -903,8 +903,8 @@ document.addEventListener('keydown', e => {
     <span class="font-heading text-white/40 font-bold text-sm"><?= e($siteName) ?></span>
     <p class="text-white/20 text-xs font-nav">&copy; <?= date('Y') ?> <?= e($siteName) ?>. All rights reserved.</p>
     <div class="flex gap-4">
-      <a href="<?= url('tours.php') ?>" class="text-white/35 hover:text-emerald-400 text-xs font-nav transition-colors">&larr; All Tours</a>
-      <a href="<?= url('booking.php?tour='.e($tour['slug'])) ?>" class="text-emerald-400 text-xs font-nav font-semibold transition-colors">Book Safari &rarr;</a>
+      <a href="<?= url('tours') ?>" class="text-white/35 hover:text-emerald-400 text-xs font-nav transition-colors">&larr; All Tours</a>
+      <a href="<?= url('booking?tour='.e($tour['slug'])) ?>" class="text-emerald-400 text-xs font-nav font-semibold transition-colors">Book Safari &rarr;</a>
     </div>
   </div>
 </footer>

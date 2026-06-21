@@ -41,7 +41,7 @@
         <h4 class="font-nav font-700 text-white text-sm uppercase tracking-widest mb-4">Safari Types</h4>
         <ul class="space-y-2.5">
           <?php foreach (['Wildlife Safari','Cultural Tour','Trekking','Beach Holiday','Honeymoon Safari','Family Safari'] as $t): ?>
-          <li><a href="<?= url('tours.php?tour_type='.urlencode($t)) ?>" class="text-white/45 hover:text-emerald-400 text-sm transition-colors"><?= $t ?></a></li>
+          <li><a href="<?= url('tours?tour_type='.urlencode($t)) ?>" class="text-white/45 hover:text-emerald-400 text-sm transition-colors"><?= $t ?></a></li>
           <?php endforeach; ?>
         </ul>
       </div>
@@ -89,7 +89,7 @@
   if (!window.doNavSearch)    window.doNavSearch    = function(){
     var inp = document.getElementById('pnav-s-input') || document.getElementById('nav-search-input');
     var q   = inp ? inp.value.trim() : '';
-    if (q) window.location = (window.SITE_URL||'') + '/tours.php?search=' + encodeURIComponent(q);
+    if (q) window.location = (window.SITE_URL||'') + '/tours?search=' + encodeURIComponent(q);
   };
 
   /* Back to top */

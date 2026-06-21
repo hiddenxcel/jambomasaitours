@@ -7,7 +7,7 @@ require_once 'includes/db.php';
 $pageTitle    = 'Safari FAQ | Tanzania Travel Questions Answered — Jambo Masai Tours';
 $pageDescription = 'Everything you need to know before your Tanzania safari. Visa, vaccinations, best time to visit, packing list, costs, safety, and more — answered by our safari experts.';
 $currentPage  = 'about';
-$canonicalUrl = SITE_URL . '/faq.php';
+$canonicalUrl = SITE_URL . '/faq';
 $ogImage      = IMG_SERENGETI;
 
 $faqs = [
@@ -131,7 +131,7 @@ require_once 'includes/dark_header.php';
     <h2 class="font-heading text-2xl font-bold text-white mb-3">Talk to a Safari Expert</h2>
     <p class="text-white/45 mb-6" style="font-size:.88rem;max-width:460px;margin-left:auto;margin-right:auto">Our team is based in Arusha and answers every enquiry personally — no bots, no call centres.</p>
     <div class="flex flex-wrap gap-3 justify-center">
-      <a href="<?= url('contact.php') ?>" class="btn-em btn-em-primary">
+      <a href="<?= url('contact') ?>" class="btn-em btn-em-primary">
         <i class="fas fa-envelope" style="font-size:.7rem"></i> Send a Message
       </a>
       <a href="https://wa.me/<?= WHATSAPP_NUMBER ?>" class="btn-em btn-em-wa" target="_blank" rel="noopener">

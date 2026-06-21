@@ -157,7 +157,7 @@ function destDetailSlug(string $title, string $slug = ''): string {
 $pageTitle    = 'Tanzania Destinations | Serengeti, Zanzibar & More — Jambo Masai Tours';
 $pageDescription = 'Explore Tanzania\'s most breathtaking destinations: Serengeti, Ngorongoro Crater, Kilimanjaro, Zanzibar and more.';
 $currentPage  = 'destinations';
-$canonicalUrl = SITE_URL . '/destinations.php';
+$canonicalUrl = SITE_URL . '/destinations';
 
 $extraCss = '
   /* Destination cards */
@@ -349,7 +349,7 @@ require_once 'includes/dark_header.php';
             </div>
           </div>
           <?php endforeach; ?>
-          <a href="<?= url('booking.php') ?>" class="btn-em btn-em-primary w-full justify-center mt-1 text-xs">
+          <a href="<?= url('booking') ?>" class="btn-em btn-em-primary w-full justify-center mt-1 text-xs">
             <i class="fas fa-compass text-xs"></i> Plan My Trip
           </a>
         </div>
@@ -518,7 +518,7 @@ require_once 'includes/dark_header.php';
               </div>
               <?php if (count($dTours) > 4): ?>
               <div class="mt-3">
-                <a href="<?= $detailUrl ?: url('tours.php?destination='.urlencode($d['title'])) ?>" class="text-emerald-400 hover:text-emerald-300 text-[.72rem] font-nav font-semibold transition-colors">
+                <a href="<?= $detailUrl ?: url('tours?destination='.urlencode($d['title'])) ?>" class="text-emerald-400 hover:text-emerald-300 text-[.72rem] font-nav font-semibold transition-colors">
                   View all <?= count($dTours) ?> <?= e($d['title']) ?> safaris →
                 </a>
               </div>
@@ -599,12 +599,12 @@ require_once 'includes/dark_header.php';
               <i class="fas fa-compass text-xs"></i> Explore <?= e($d['title']) ?>
             </a>
             <?php else: ?>
-            <a href="<?= url('tours.php?destination='.urlencode($d['title'])) ?>"
+            <a href="<?= url('tours?destination='.urlencode($d['title'])) ?>"
                class="btn-em btn-em-primary w-full justify-center text-xs">
               <i class="fas fa-compass text-xs"></i> Explore <?= e($d['title']) ?> Safaris
             </a>
             <?php endif; ?>
-            <a href="<?= url('booking.php') ?>"
+            <a href="<?= url('booking') ?>"
                class="btn-em btn-em-outline w-full justify-center text-xs">
               <i class="fas fa-calendar-check text-xs text-emerald-400"></i> Book Custom Trip
             </a>
@@ -699,7 +699,7 @@ require_once 'includes/dark_header.php';
           </div>
           <h3 class="font-heading text-white text-xl font-bold mb-2">Enquiry Sent!</h3>
           <p class="text-white/45 text-sm mb-5">Our team will be in touch within 24 hours.</p>
-          <a href="<?= url('destinations.php') ?>" class="btn-em btn-em-primary text-xs"><i class="fas fa-map text-xs"></i> Explore More</a>
+          <a href="<?= url('destinations') ?>" class="btn-em btn-em-primary text-xs"><i class="fas fa-map text-xs"></i> Explore More</a>
         </div>
         <?php else: ?>
         <?php if (!empty($formErrors)): ?>
