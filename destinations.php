@@ -386,7 +386,10 @@ require_once 'includes/dark_header.php';
   $dTours     = $toursByDest[strtolower($d['title'])] ?? $toursByDest[$slug] ?? [];
   $hls        = array_filter(explode('|', $d['highlights'] ?? ''));
   $img        = $d['image'] ?: IMG_SERENGETI;
-  $detailSlug = destDetailSlug($d['title'], $slug);
+  /* Each $d row already comes from destination_pages_full, so its own slug IS the
+     detail-page slug — use it directly (falls back to the legacy keyword map only
+     if a slug is somehow missing). */
+  $detailSlug = !empty($d['slug']) ? $d['slug'] : destDetailSlug($d['title'], $slug);
   $detailUrl  = $detailSlug ? url('destination/' . $detailSlug) : '';
 ?>
 <section id="<?= e($slug) ?>" class="py-8 px-4 lg:px-0">
