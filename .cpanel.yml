@@ -1,0 +1,18 @@
+---
+# =====================================================================
+# cPanel Git Version Control — deployment script
+# ---------------------------------------------------------------------
+# cPanel inasoma faili hii kila unapobonyeza "Update from Remote" +
+# "Deploy HEAD Commit" (au automatic). Inanakili faili za repo kwenda
+# kwenye folder halisi ya website.
+#
+# HAITAGUSA: config/config.php, uploads/ — kwa sababu HAZIKO kwenye git
+# (zime-ignore). Hivyo siri zako za DB na picha za watumiaji zinabaki salama.
+# =====================================================================
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/jambomasait/public_html/jambomasaitours.com/
+    - /bin/cp -R . "$DEPLOYPATH"
+    - /bin/rm -f "$DEPLOYPATH/.cpanel.yml"
+    - /bin/rm -f "$DEPLOYPATH/error_log"
+    - /bin/rm -f "$DEPLOYPATH/jambo-masai-tours.zip"

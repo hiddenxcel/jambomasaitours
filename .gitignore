@@ -1,6 +1,9 @@
 # ===== Siri / Config (HAZIENDI GitHub) =====
 config/config.php
 
+# ===== Deploy staging (database dumps, packaged code — KAMWE GitHub) =====
+_deploy/
+
 # ===== Backups & Archives =====
 *.zip
 *.tar
