@@ -376,7 +376,7 @@ require_once 'includes/dark_header.php';
     <!-- breadcrumb -->
     <nav class="flex items-center gap-2 font-nav text-[.62rem] text-white/35 mb-4">
       <a href="<?= url() ?>" class="hover:text-white transition-colors">Home</a><span>-</span>
-      <a href="<?= url('destinations') ?>" class="hover:text-white transition-colors">Destinations</a><span>�</span>
+      <a href="<?= url('destinations') ?>" class="hover:text-white transition-colors">Destinations</a><span>-</span>
       <span class="text-white/55"><?= e($dest['title']) ?></span>
     </nav>
     <div class="section-tag reveal"><i class="fas fa-map-marker-alt mr-1"></i><?= e($dest['region']) ?></div>
