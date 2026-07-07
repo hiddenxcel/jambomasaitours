@@ -16,7 +16,6 @@ $_pNavItems = [
     'home'         => ['url'=>url(),                     'desk'=>'Home',        'mob'=>'Home',             'icon'=>'fa-home'],
     'tours'        => ['url'=>url('tours'),              'desk'=>'Safaris',     'mob'=>'Safari Tours',     'icon'=>'fa-compass',       'mega'=>'safaris'],
     'migration'    => ['url'=>url('migration'),          'desk'=>'Migration',   'mob'=>'Great Migration', 'icon'=>'fa-horse'],
-    'trekking'     => ['url'=>url('mountain-trekking'),  'desk'=>'Trekking',    'mob'=>'Mountain Trekking','icon'=>'fa-mountain'],
     'destinations' => ['url'=>url('destinations'),       'desk'=>'Destinations','mob'=>'Destinations',     'icon'=>'fa-map-marker-alt'],
     'blog'         => ['url'=>url('blog'),               'desk'=>'Blog',        'mob'=>'Blog',             'icon'=>'fa-newspaper'],
     'contact'      => ['url'=>url('contact'),            'desk'=>'Contact',     'mob'=>'Contact',          'icon'=>'fa-envelope'],
@@ -239,6 +238,7 @@ $_name2      = $_nameParts[1] ?? 'Masai';
             <!-- Menu items -->
             <div style="padding:.5rem">
               <?php foreach ([
+                ['fa-mountain',      'Mountain Trekking','Kilimanjaro & beyond',    'mountain-trekking','#c17a3a','Machame, Lemosho, Marangu routes'],
                 ['fa-users',         'About Us',  'Our story, team & mission',    'about',  '#a05e22','Meet the team behind your safari'],
                 ['fa-question-circle','FAQ',       'Safari questions answered',     'faq',    '#fbbf24','Visa, packing, best time & more'],
                 ['fa-newspaper',     'Blog',      'Tips, guides & wildlife news',  'blog',   '#f87171','Expert safari advice & stories'],
@@ -377,6 +377,7 @@ $_name2      = $_nameParts[1] ?? 'Masai';
     <div class="mob-more-section" style="border-top:1px solid rgba(255,255,255,.05);margin-top:.5rem;padding-top:.5rem">
       <p style="font-family:'Montserrat',sans-serif;font-size:.55rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.2);padding:.25rem .5rem .4rem">More</p>
       <?php foreach ([
+        ['fa-mountain',      url('mountain-trekking'),   'Mountain Trekking','rgba(160,94,34,.15)', '#c17a3a'],
         ['fa-images',        url('gallery'),             'Gallery',  'rgba(249,115,22,.15)', '#f97316'],
         ['fa-question-circle',url('faq'),                'Safari FAQ','rgba(251,191,36,.15)','#fbbf24'],
         ['fa-info-circle',   url('about'),               'About Us', 'rgba(160,94,34,.15)', '#a05e22'],
