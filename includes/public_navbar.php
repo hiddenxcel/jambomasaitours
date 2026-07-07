@@ -15,6 +15,7 @@ if (!isset($siteTagline)){ $siteTagline= getSetting('site_tagline','Tanzania Saf
 $_pNavItems = [
     'home'         => ['url'=>url(),                     'desk'=>'Home',        'mob'=>'Home',             'icon'=>'fa-home'],
     'tours'        => ['url'=>url('tours'),              'desk'=>'Safaris',     'mob'=>'Safari Tours',     'icon'=>'fa-compass',       'mega'=>'safaris'],
+    'migration'    => ['url'=>url('migration'),          'desk'=>'Migration',   'mob'=>'Great Migration', 'icon'=>'fa-horse'],
     'trekking'     => ['url'=>url('mountain-trekking'),  'desk'=>'Trekking',    'mob'=>'Mountain Trekking','icon'=>'fa-mountain'],
     'destinations' => ['url'=>url('destinations'),       'desk'=>'Destinations','mob'=>'Destinations',     'icon'=>'fa-map-marker-alt'],
     'blog'         => ['url'=>url('blog'),               'desk'=>'Blog',        'mob'=>'Blog',             'icon'=>'fa-newspaper'],
@@ -197,7 +198,7 @@ $_name2      = $_nameParts[1] ?? 'Masai';
                 <?php endforeach; else: ?>
                 <?php foreach([
                   ['fa-paw',           'Wildlife Safari',  'tours?tour_type=Wildlife+Safari'],
-                  ['fa-horse',         'Migration Safari', 'tours?tour_type=Great+Migration+Safari'],
+                  ['fa-horse',         'Migration Safari', 'migration'],
                   ['fa-heart',         'Honeymoon',        'tours?tour_type=Honeymoon+Safari'],
                   ['fa-child',         'Family Safari',    'tours?tour_type=Family+Safari'],
                 ] as $ct): ?>

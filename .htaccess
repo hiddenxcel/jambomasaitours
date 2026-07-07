@@ -31,6 +31,7 @@ RewriteRule ^booking/?$             booking.php            [L]
 RewriteRule ^faq/?$                 faq.php                [L]
 RewriteRule ^destinations/?$        destinations.php       [L]
 RewriteRule ^mountain-trekking/?$   mountain-trekking.php  [L]
+RewriteRule ^migration/?$           migration.php          [L]
 
 # Clean URLs — dynamic pages
 RewriteRule ^tour/([a-z0-9-]+)/?$          tour-detail.php?slug=$1         [L,QSA]

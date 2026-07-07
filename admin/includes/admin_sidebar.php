@@ -101,6 +101,16 @@ try {
     <!-- Tours sub-items -->
     <?php $toursActive = in_array($currentFile, ['tours.php','tour-itinerary.php','tour-photos.php']); ?>
     <div style="margin-left:1rem;padding-left:.65rem;border-left:1px solid rgba(16,185,129,.15)">
+      <?php
+      /* Migration shortcut: active when tours.php is filtered by the migration type */
+      $isMig = ($currentFile === 'tours.php' && ($_GET['type'] ?? '') === 'Great Migration Safari');
+      ?>
+      <a href="tours.php?type=Great+Migration+Safari"
+         class="admin-nav__item <?= $isMig ? 'is-active' : '' ?>" style="font-size:.76rem;padding:.5rem .65rem">
+        <i class="fas fa-horse" style="width:16px;text-align:center;font-size:.72rem;color:<?= $isMig ? '#10b981' : 'rgba(255,255,255,.25)' ?>"></i>
+        Migration Pkgs
+        <span style="font-size:.55rem;color:rgba(255,255,255,.2);margin-left:.3rem">↳</span>
+      </a>
       <?php foreach ([
         ['tour-itinerary.php','fa-route',  'Itinerary Editor'],
         ['tour-photos.php',  'fa-images',  'Tour Photos'],

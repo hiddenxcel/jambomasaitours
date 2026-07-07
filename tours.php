@@ -255,9 +255,29 @@ function cardBadge(array $tour, int $idx): ?array {
         Find Your Perfect<br><span class="hero-grad">Safari Adventure</span>
       </h1>
 
-      <p class="anim-up text-white/55 text-[1rem] leading-relaxed mb-8 max-w-lg" style="animation-delay:.3s">
+      <p class="anim-up text-white/55 text-[1rem] leading-relaxed mb-6 max-w-lg" style="animation-delay:.3s">
         From thrilling game drives across the Serengeti to cultural immersions with the Maasai — every journey is crafted to leave you breathless.
       </p>
+
+      <!-- Migration season banner (internal link) -->
+      <a href="<?= url('migration') ?>" class="anim-up mig-promo" style="animation-delay:.35s">
+        <span class="mig-promo-dot"></span>
+        <i class="fas fa-horse"></i>
+        <span class="mig-promo-txt"><strong>It's Great Migration season</strong> — see our Serengeti migration safaris</span>
+        <i class="fas fa-arrow-right mig-promo-arrow"></i>
+      </a>
+      <style>
+      .mig-promo{display:inline-flex;align-items:center;gap:.6rem;margin-bottom:1.75rem;padding:.6rem 1.1rem;border-radius:999px;background:linear-gradient(135deg,rgba(160,94,34,.16),rgba(125,72,23,.08));border:1px solid rgba(160,94,34,.35);text-decoration:none;transition:all .3s cubic-bezier(.22,1,.36,1)}
+      .mig-promo:hover{border-color:rgba(160,94,34,.6);background:linear-gradient(135deg,rgba(160,94,34,.24),rgba(125,72,23,.14));transform:translateY(-2px)}
+      .mig-promo i.fa-horse{color:#c17a3a;font-size:.8rem}
+      .mig-promo-dot{width:7px;height:7px;border-radius:50%;background:#c17a3a;box-shadow:0 0 0 0 rgba(193,122,58,.7);animation:migPromoLive 1.8s ease-out infinite}
+      @keyframes migPromoLive{0%{box-shadow:0 0 0 0 rgba(193,122,58,.6)}70%,100%{box-shadow:0 0 0 8px rgba(193,122,58,0)}}
+      .mig-promo-txt{font-family:'Inter',sans-serif;font-size:.8rem;color:rgba(255,255,255,.7)}
+      .mig-promo-txt strong{color:#fff;font-weight:600}
+      .mig-promo-arrow{color:#c17a3a;font-size:.7rem;transition:transform .3s}
+      .mig-promo:hover .mig-promo-arrow{transform:translateX(3px)}
+      @media(max-width:520px){.mig-promo-txt{font-size:.72rem}}
+      </style>
 
       <div class="anim-up flex flex-wrap gap-6" style="animation-delay:.4s">
         <?php foreach ([

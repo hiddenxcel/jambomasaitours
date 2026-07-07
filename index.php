@@ -1541,7 +1541,7 @@ try {
         </h4>
         <ul style="space-y:0">
           <?php foreach ([
-            ['Serengeti Migration', 'tours.php?destination=Serengeti'],
+            ['Great Migration Safari', 'migration'],
             ['Ngorongoro Crater',   'tours.php?destination=Ngorongoro'],
             ['Zanzibar & Beach',    'tours.php?tour_type=Beach+Holiday'],
             ['Wildlife Big Five',   'tours.php?tour_type=Wildlife+Safari'],

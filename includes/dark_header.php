@@ -45,7 +45,14 @@ try {
   <meta property="og:url"         content="<?= e($canonicalUrl) ?>">
   <meta property="og:type"        content="<?= e($ogType) ?>">
   <meta property="og:site_name"   content="Jambo Masai Tours">
+  <?php if (!empty($ogImage)): ?><meta property="og:image:alt" content="<?= e($pageTitle ?? '') ?>"><?php endif; ?>
   <meta name="theme-color"        content="#a05e22">
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:title"       content="<?= e($pageTitle ?? '') ?>">
+  <meta name="twitter:description" content="<?= e($pageDescription ?? '') ?>">
+  <?php if (!empty($ogImage)): ?><meta name="twitter:image" content="<?= e($ogImage) ?>"><?php endif; ?>
+  <?php if (!empty($metaKeywords)): ?><meta name="keywords" content="<?= e($metaKeywords) ?>"><?php endif; ?>
   <?php $_fav = getSetting('favicon_url') ?: getSetting('logo_url') ?: (SITE_URL . '/uploads/logo-husika.png'); ?>
   <link rel="icon" type="image/png" href="<?= e($_fav) ?>">
   <link rel="shortcut icon" href="<?= e($_fav) ?>">

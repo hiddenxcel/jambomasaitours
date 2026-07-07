@@ -44,6 +44,12 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
     <lastmod><?= date('Y-m-d') ?></lastmod>
   </url>
   <url>
+    <loc><?= $base ?>/migration</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <lastmod><?= date('Y-m-d') ?></lastmod>
+  </url>
+  <url>
     <loc><?= $base ?>/mountain-trekking.php</loc>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
