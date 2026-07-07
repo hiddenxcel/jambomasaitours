@@ -248,63 +248,9 @@ require_once 'includes/dark_header.php';
       The Great Migration is not a single event but a continuous, clockwise loop through the
       Serengeti–Mara ecosystem, driven by the rains and the search for fresh grass. Every month
       the herds are somewhere different — which is exactly why <strong class="text-white/80">timing your
-      safari matters</strong>. Use the calendar below to see where the herds are, then choose the
-      package built for that moment.
+      safari matters</strong>. Browse our curated packages below, then use the month-by-month
+      calendar to pinpoint exactly where the herds will be.
     </p>
-  </div>
-</section>
-
-<!-- ═══════════════ MIGRATION CALENDAR ═══════════════ -->
-<section class="pb-20 px-4 lg:px-0">
-  <div class="max-w-7xl mx-auto">
-    <div class="text-center mb-10 reveal">
-      <div class="section-tag">Month-by-Month</div>
-      <h2 class="font-heading text-white font-bold" style="font-size:clamp(1.6rem,3.5vw,2.3rem)">
-        Where are the herds <span class="hero-grad">right now?</span>
-      </h2>
-    </div>
-
-    <!-- Legend -->
-    <div class="flex flex-wrap justify-center gap-x-5 gap-y-2 mb-10 reveal">
-      <?php foreach ($phaseColors as $pc): ?>
-      <div class="flex items-center gap-2">
-        <span style="width:26px;height:26px;border-radius:8px;background:<?= $pc[0] ?>;border:1px solid <?= $pc[1] ?>;display:inline-flex;align-items:center;justify-content:center">
-          <i class="fas <?= $pc[4] ?>" style="font-size:.6rem;color:<?= $pc[2] ?>"></i>
-        </span>
-        <span class="font-nav uppercase tracking-wider" style="font-size:.6rem;font-weight:600;color:<?= $pc[2] ?>"><?= $pc[3] ?></span>
-      </div>
-      <?php endforeach; ?>
-    </div>
-
-    <div class="mig-cal-grid reveal">
-      <?php foreach ($calendar as $mNum => $m):
-        $pc      = $phaseColors[$m[3]];
-        $isNow   = ($mNum === $currentMonth);
-        $isPast  = ($mNum < $currentMonth);
-      ?>
-      <div class="mig-cal-card<?= $isNow ? ' is-now' : '' ?>"
-           style="--accent:<?= $pc[2] ?>;--tint:<?= $pc[0] ?>;--brd:<?= $pc[1] ?>">
-        <!-- top row: month + phase chip -->
-        <div class="mig-cal-top">
-          <div class="mig-cal-month">
-            <span class="mig-cal-mn"><?= $m[0] ?></span>
-            <?php if ($isNow): ?><span class="mig-cal-now"><span class="mig-cal-dot"></span>You are here</span><?php endif; ?>
-          </div>
-          <span class="mig-cal-chip">
-            <i class="fas <?= $pc[4] ?>"></i><?= $pc[3] ?>
-          </span>
-        </div>
-        <!-- location -->
-        <div class="mig-cal-loc">
-          <i class="fas fa-location-dot"></i><span><?= e($m[1]) ?></span>
-        </div>
-        <!-- description -->
-        <p class="mig-cal-desc"><?= e($m[2]) ?></p>
-        <!-- accent underline -->
-        <span class="mig-cal-bar"></span>
-      </div>
-      <?php endforeach; ?>
-    </div>
   </div>
 </section>
 
@@ -462,6 +408,61 @@ require_once 'includes/dark_header.php';
       <?php endforeach; ?>
     </div>
     <?php endif; ?>
+  </div>
+</section>
+
+<!-- ═══════════════ MIGRATION CALENDAR ═══════════════ -->
+<section class="py-20 px-4 lg:px-0">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-10 reveal">
+      <div class="section-tag">Month-by-Month</div>
+      <h2 class="font-heading text-white font-bold" style="font-size:clamp(1.6rem,3.5vw,2.3rem)">
+        Where are the herds <span class="hero-grad">right now?</span>
+      </h2>
+      <p class="text-white/50 mt-3 text-[.95rem] max-w-xl mx-auto">Plan your trip around the herds — see exactly where the migration is each month and pick the package built for that season.</p>
+    </div>
+
+    <!-- Legend -->
+    <div class="flex flex-wrap justify-center gap-x-5 gap-y-2 mb-10 reveal">
+      <?php foreach ($phaseColors as $pc): ?>
+      <div class="flex items-center gap-2">
+        <span style="width:26px;height:26px;border-radius:8px;background:<?= $pc[0] ?>;border:1px solid <?= $pc[1] ?>;display:inline-flex;align-items:center;justify-content:center">
+          <i class="fas <?= $pc[4] ?>" style="font-size:.6rem;color:<?= $pc[2] ?>"></i>
+        </span>
+        <span class="font-nav uppercase tracking-wider" style="font-size:.6rem;font-weight:600;color:<?= $pc[2] ?>"><?= $pc[3] ?></span>
+      </div>
+      <?php endforeach; ?>
+    </div>
+
+    <div class="mig-cal-grid reveal">
+      <?php foreach ($calendar as $mNum => $m):
+        $pc      = $phaseColors[$m[3]];
+        $isNow   = ($mNum === $currentMonth);
+        $isPast  = ($mNum < $currentMonth);
+      ?>
+      <div class="mig-cal-card<?= $isNow ? ' is-now' : '' ?>"
+           style="--accent:<?= $pc[2] ?>;--tint:<?= $pc[0] ?>;--brd:<?= $pc[1] ?>">
+        <!-- top row: month + phase chip -->
+        <div class="mig-cal-top">
+          <div class="mig-cal-month">
+            <span class="mig-cal-mn"><?= $m[0] ?></span>
+            <?php if ($isNow): ?><span class="mig-cal-now"><span class="mig-cal-dot"></span>You are here</span><?php endif; ?>
+          </div>
+          <span class="mig-cal-chip">
+            <i class="fas <?= $pc[4] ?>"></i><?= $pc[3] ?>
+          </span>
+        </div>
+        <!-- location -->
+        <div class="mig-cal-loc">
+          <i class="fas fa-location-dot"></i><span><?= e($m[1]) ?></span>
+        </div>
+        <!-- description -->
+        <p class="mig-cal-desc"><?= e($m[2]) ?></p>
+        <!-- accent underline -->
+        <span class="mig-cal-bar"></span>
+      </div>
+      <?php endforeach; ?>
+    </div>
   </div>
 </section>
 
