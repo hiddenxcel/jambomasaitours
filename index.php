@@ -85,6 +85,7 @@ if (empty($testimonials)) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <?php require __DIR__ . '/includes/google-tags.php'; /* Google Ads + GA4 */ ?>
   <title><?= e($pageTitle) ?></title>
   <meta name="description" content="<?= e($pageDescription) ?>">
   <link rel="canonical" href="<?= e(SITE_URL) ?>/">

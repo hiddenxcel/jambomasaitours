@@ -99,6 +99,7 @@ function cardBadge(array $tour, int $idx): ?array {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <?php require __DIR__ . '/includes/google-tags.php'; /* Google Ads + GA4 */ ?>
   <?php $toursCanon = SITE_URL . '/tours'; ?>
   <title><?= e($pageTitle) ?></title>
   <meta name="description" content="<?= e($pageDescription) ?>">

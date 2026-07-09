@@ -41,6 +41,7 @@ function ticon2(string $t): string {
 <html lang="en">
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <?php require __DIR__ . '/includes/google-tags.php'; /* Google Ads + GA4 */ ?>
   <title><?= e($pageTitle) ?></title>
   <meta name="description" content="<?= e($pageDesc) ?>">
   <link rel="canonical" href="<?= SITE_URL ?>/mountain-trekking">

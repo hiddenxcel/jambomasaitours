@@ -59,13 +59,9 @@ try {
   <link rel="apple-touch-icon" href="<?= e($_fav) ?>">
   <link rel="manifest" href="<?= e(SITE_URL) ?>/manifest.json">
   <?php
-  $_ga4 = getSetting('ga4_measurement_id');
-  $_gv  = getSetting('google_site_verification');
-  if ($_gv): ?><meta name="google-site-verification" content="<?= e($_gv) ?>"><?php endif;
-  if ($_ga4): ?>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=<?= e($_ga4) ?>"></script>
-  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','<?= e($_ga4) ?>');</script>
-  <?php endif; ?>
+  $_gv = getSetting('google_site_verification');
+  if ($_gv): ?><meta name="google-site-verification" content="<?= e($_gv) ?>"><?php endif; ?>
+  <?php require __DIR__ . '/google-tags.php'; /* Google Ads + GA4 */ ?>
   <!-- Resource hints for faster CDN loading -->
   <link rel="preconnect" href="https://cdn.tailwindcss.com">
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>

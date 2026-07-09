@@ -58,6 +58,7 @@ $waMsg = urlencode('Hi! I am interested in the ' . $tour['name'] . ' tour. Pleas
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <?php require __DIR__ . '/includes/google-tags.php'; /* Google Ads + GA4 */ ?>
   <?php $_fav = getSetting('favicon_url') ?: getSetting('logo_url') ?: (SITE_URL . '/uploads/logo-husika.png'); ?>
   <link rel="icon" type="image/png" href="<?= e($_fav) ?>">
   <link rel="shortcut icon" href="<?= e($_fav) ?>">
