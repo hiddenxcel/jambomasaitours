@@ -4,8 +4,8 @@ require_once 'includes/functions.php';
 require_once 'includes/security.php';
 require_once 'includes/db.php';
 
-$pageTitle       = 'Jambo Masai Tours | Luxury Safari Tours Tanzania & East Africa';
-$pageDescription = 'Award-winning luxury safari tours in Tanzania. Witness the Great Migration, explore Ngorongoro Crater, climb Kilimanjaro & relax in Zanzibar. Expert local guides.';
+$pageTitle       = 'Jambo Masai Tours | Tanzania Safari & Kilimanjaro Tours — Arusha';
+$pageDescription = 'Jambo Masai Tours is a Maasai-founded, TATO-licensed safari operator in Arusha, Tanzania. Great Migration & Serengeti safaris, Kilimanjaro treks, Zanzibar beach holidays and Maasai cultural tours. Rated 4.9/5 by 150+ travellers.';
 $currentPage     = 'home';
 
 $db = getDB();
@@ -91,7 +91,13 @@ if (empty($testimonials)) {
   <link rel="canonical" href="<?= e(SITE_URL) ?>/">
   <meta property="og:title"       content="<?= e($pageTitle) ?>">
   <meta property="og:description" content="<?= e($pageDescription) ?>">
-  <meta property="og:image"       content="<?= e(SITE_URL) ?>/assets/images/hero.jpg">
+  <meta property="og:image"       content="<?= e(IMG_HERO) ?>">
+  <meta property="og:image:alt"    content="Great Migration wildebeest herds in the Serengeti, Tanzania">
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:title"       content="<?= e($pageTitle) ?>">
+  <meta name="twitter:description" content="<?= e($pageDescription) ?>">
+  <meta name="twitter:image"       content="<?= e(IMG_HERO) ?>">
+  <meta name="keywords"            content="jambo masai tours, tanzania safari, serengeti safari, great migration safari, kilimanjaro trekking, zanzibar beach holiday, ngorongoro crater tour, maasai cultural safari, luxury safari tanzania, arusha safari operator">
   <meta property="og:url"         content="<?= e(SITE_URL) ?>/">
   <meta property="og:type"        content="website">
   <meta property="og:site_name"   content="Jambo Masai Tours">
@@ -128,7 +134,7 @@ if (empty($testimonials)) {
         "@type": "ImageObject",
         "url": "<?= e($logoUrl_seo) ?>"
       },
-      "image": "<?= SITE_URL ?>/assets/images/hero.jpg",
+      "image": "<?= e(IMG_HERO) ?>",
       "description": "<?= addslashes($pageDescription) ?>",
       "telephone": "+255659667271",
       "priceRange": "$$$$",
