@@ -1,0 +1,199 @@
+/* ──────────────────────────────────────────────────────────────────────────
+   article.css — mtindo wa content ya makala (blog posts).
+
+   Chanzo kimoja cha ukweli kwa `.prose`: kinatumika na ukurasa wa umma
+   (blog-single.php) NA preview ya admin (admin/blog.php), ili unachokiona
+   ukiandika ndicho kitakachotokea kwenye site.
+
+   Madarasa yote ya block hapa chini (.tip-box, .important-note, .faq-item,
+   .checklist, n.k.) yanawekwa mtindo mara moja hapa. Post yoyote mpya
+   itakayotumia darasa lolote kati ya haya itapangwa vizuri moja kwa moja —
+   hakuna CSS ya kuongeza kila unapoandika post.
+   ────────────────────────────────────────────────────────────────────────── */
+
+:root{
+  --art-text:      rgba(255,255,255,.62);
+  --art-strong:    rgba(255,255,255,.88);
+  --art-heading:   #fff;
+  --art-accent:    #c17a3a;
+  --art-accent-dk: #a05e22;
+  --art-emerald:   #34d399;
+  --art-card:      rgba(255,255,255,.028);
+  --art-line:      rgba(255,255,255,.09);
+}
+
+/* ── Msingi ─────────────────────────────────────────────────────────────── */
+.prose{color:var(--art-text);line-height:1.9;font-size:.95rem}
+.prose > :first-child{margin-top:0}
+.prose > :last-child{margin-bottom:0}
+
+.prose h2,.prose h3,.prose h4{
+  font-family:"Nanum Myeongjo",Georgia,serif;
+  color:var(--art-heading);
+  margin:2.2rem 0 .9rem;
+  line-height:1.3;
+  text-wrap:balance;
+}
+.prose h2{font-size:1.5rem}
+.prose h3{font-size:1.2rem}
+.prose h4{font-size:1.05rem}
+
+.prose p{margin-bottom:1.2rem}
+.prose a{color:var(--art-accent);text-decoration:underline;text-underline-offset:2px}
+.prose a:hover{color:var(--art-accent-dk)}
+.prose strong{color:var(--art-strong);font-weight:600}
+.prose ul,.prose ol{margin:1rem 0 1.4rem 1.5rem}
+.prose li{margin-bottom:.45rem}
+.prose li::marker{color:rgba(193,122,58,.75)}
+.prose blockquote{
+  border-left:3px solid var(--art-accent-dk);
+  padding-left:1.2rem;margin:1.6rem 0;
+  color:rgba(255,255,255,.5);font-style:italic;
+}
+.prose img{border-radius:12px;width:100%;height:auto;margin:1.6rem 0}
+.prose hr{border:0;border-top:1px solid var(--art-line);margin:2.4rem 0}
+.prose code{
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.86em;
+  background:rgba(255,255,255,.06);padding:.15em .42em;border-radius:5px;
+  color:rgba(255,255,255,.8);
+}
+
+/* `<section>` hutumika kugawa makala — ipe nafasi badala ya kubanana */
+.prose section{margin:0 0 .5rem}
+.prose section + section{margin-top:2.2rem}
+
+/* Jedwali lolote lisivunje layout kwenye simu */
+.prose table{width:100%;border-collapse:collapse;margin:1.6rem 0;font-size:.9rem}
+.prose th,.prose td{border:1px solid var(--art-line);padding:.6rem .75rem;text-align:left}
+.prose th{background:rgba(255,255,255,.04);color:var(--art-strong);font-weight:600}
+.prose :is(table,pre){display:block;max-width:100%;overflow-x:auto}
+
+/* ── Checklist ──────────────────────────────────────────────────────────────
+   Inashughulikia maumbo yote mawili yanayotumika kwenye posts:
+     <ul class="checklist"><li>…</li></ul>
+     <div class="checklist"><label>…</label><br></div>
+   Herufi `☐` iliyoandikwa ndani ya matini inafichwa na CSS (angalia chini),
+   na nafasi yake inachukuliwa na alama safi ya ✓ inayotengenezwa hapa.       */
+.prose .checklist{
+  list-style:none;
+  margin:1.5rem 0;padding:1.25rem 1.35rem;
+  background:var(--art-card);
+  border:1px solid var(--art-line);
+  border-radius:14px;
+  display:grid;gap:.7rem;
+}
+.prose .checklist li,
+.prose .checklist label{
+  display:grid;
+  grid-template-columns:1.35rem 1fr;
+  align-items:start;
+  gap:.7rem;
+  margin:0;
+  color:var(--art-text);
+  line-height:1.65;
+}
+.prose .checklist li::before,
+.prose .checklist label::before{
+  content:"\f00c";                       /* Font Awesome check */
+  font-family:"Font Awesome 6 Free","Font Awesome 5 Free";
+  font-weight:900;font-size:.6rem;
+  width:1.35rem;height:1.35rem;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:6px;
+  background:rgba(52,211,153,.1);
+  border:1px solid rgba(52,211,153,.28);
+  color:var(--art-emerald);
+  margin-top:.12rem;
+}
+.prose .checklist li::marker{content:""}
+/* `<br>` zinazofuata `<label>` ndani ya checklist hazihitajiki — grid inashughulikia mistari */
+.prose .checklist br{display:none}
+
+/* ── Tip / Note / Disclaimer ────────────────────────────────────────────── */
+.prose .tip-box,
+.prose .important-note,
+.prose .important-notice,
+.prose .highlight,
+.prose .disclaimer,
+.prose .medical-disclaimer{
+  margin:1.6rem 0;padding:1.1rem 1.25rem;
+  border-radius:12px;
+  border:1px solid var(--art-line);
+  border-left-width:3px;
+  background:var(--art-card);
+  font-size:.92rem;line-height:1.8;
+}
+.prose .tip-box{border-left-color:var(--art-emerald);background:rgba(52,211,153,.055)}
+.prose .tip-box strong{color:var(--art-emerald)}
+
+.prose .important-note,
+.prose .important-notice{border-left-color:#fbbf24;background:rgba(251,191,36,.055)}
+.prose .important-note strong,
+.prose .important-notice strong{color:#fbbf24}
+
+.prose .highlight{
+  border-left-color:var(--art-accent);
+  background:rgba(193,122,58,.075);
+  font-size:1rem;
+}
+.prose .highlight strong{color:var(--art-strong)}
+
+.prose .disclaimer,
+.prose .medical-disclaimer{
+  border-left-color:rgba(255,255,255,.2);
+  font-size:.85rem;
+  color:rgba(255,255,255,.42);
+}
+.prose .disclaimer h2,
+.prose .medical-disclaimer h2{font-size:1.05rem;margin-top:0}
+
+.prose :is(.tip-box,.important-note,.important-notice,.highlight,.disclaimer,.medical-disclaimer) > :last-child{margin-bottom:0}
+
+/* ── FAQ ────────────────────────────────────────────────────────────────── */
+.prose .faq-section,.prose .faq{margin:1.8rem 0;display:grid;gap:.8rem}
+.prose .faq-item{
+  padding:1.1rem 1.25rem;
+  background:var(--art-card);
+  border:1px solid var(--art-line);
+  border-radius:12px;
+}
+.prose .faq-item h3{
+  margin:0 0 .55rem;
+  font-size:1rem;
+  color:var(--art-strong);
+  font-family:"Montserrat",sans-serif;font-weight:600;
+}
+.prose .faq-item > :last-child{margin-bottom:0}
+
+/* ── Official links ─────────────────────────────────────────────────────── */
+.prose .official-links{
+  margin:1.6rem 0;padding:1.25rem 1.35rem;
+  background:var(--art-card);
+  border:1px solid var(--art-line);
+  border-radius:14px;
+}
+.prose .official-links h3{margin-top:1.4rem;font-size:1rem}
+.prose .official-links h3:first-child{margin-top:0}
+.prose .official-links > :last-child{margin-bottom:0}
+
+/* ── CTA ya ndani ya makala ─────────────────────────────────────────────── */
+.prose .jambo-masai-cta{
+  margin:2.4rem 0;padding:1.75rem 1.6rem;
+  border-radius:16px;
+  border:1px solid rgba(160,94,34,.26);
+  background:linear-gradient(135deg,rgba(160,94,34,.14),rgba(160,94,34,.045));
+}
+.prose .jambo-masai-cta h2{margin-top:0;font-size:1.3rem}
+.prose .jambo-masai-cta > :last-child{margin-bottom:0}
+
+/* ── Wrappers za makala nzima — zisiongeze nafasi mara mbili ────────────── */
+.prose .travel-guide,
+.prose .tanzania-travel-health-guide{display:block;margin:0}
+
+/* ── Simu ───────────────────────────────────────────────────────────────── */
+@media (max-width:640px){
+  .prose h2{font-size:1.3rem}
+  .prose h3{font-size:1.1rem}
+  .prose :is(.checklist,.official-links,.jambo-masai-cta){padding:1rem 1.05rem}
+  .prose ul,.prose ol{margin-left:1.15rem}
+}

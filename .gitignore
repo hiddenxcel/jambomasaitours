@@ -1,5 +1,9 @@
 # ===== Siri / Config (HAZIENDI GitHub) =====
 config/config.php
+# Nakala zozote za config (mf. config.live-backup.php ya kuhifadhi
+# thamani za production wakati wa kufanya kazi local) — zina siri.
+config/config.*.php
+!config/config.example.php
 
 # ===== Deploy staging (database dumps, packaged code — KAMWE GitHub) =====
 _deploy/

@@ -90,6 +90,24 @@ function setFlashMessage(string $type, string $message): void {
 }
 
 /**
+ * Ondoa alama za checkbox zilizoandikwa kwa mkono ndani ya matini
+ * (☐ ☑ ☒ ❏ ▢ □ na "[ ]" / "[x]") mwanzoni mwa kila kipengele cha orodha.
+ *
+ * Alama hizi huingia pale makala inapoandikwa/inapobandikwa kutoka nje. Ni
+ * herufi za kawaida, si checkbox — CSS haiwezi kuzificha. Zikiachwa,
+ * `.checklist` hupata alama mbili: ile ya CSS na hii ya matini. Kuziondoa
+ * hapa kunahakikisha kila post — ya zamani na mpya — inatoka safi bila
+ * kuhariri content iliyopo kwenye database.
+ */
+function stripChecklistGlyphs(string $html): string {
+    return preg_replace(
+        '/(<(?:li|label|p)\b[^>]*>)\s*(?:&nbsp;|\s)*(?:[\x{2610}-\x{2612}\x{274F}\x{25A2}\x{25A1}\x{2751}\x{2752}]|\[\s*[xX\x{2713}]?\s*\])\s*/u',
+        '$1',
+        $html
+    ) ?? $html;
+}
+
+/**
  * Render blog post content safely.
  * - If content has HTML block elements → output as-is (admin entered HTML via toolbar).
  * - If content is plain text → auto-convert double newlines to <p> and single to <br>.
@@ -99,7 +117,7 @@ function blogContent(string $text): string {
     $text = trim($text);
     // Already has block-level HTML — render as-is
     if (preg_match('/<(p|h[1-6]|ul|ol|li|blockquote|div|table|hr)\b/i', $text)) {
-        return $text;
+        return stripChecklistGlyphs($text);
     }
     // Plain text — build paragraphs from double newlines
     $paragraphs = preg_split('/\n{2,}/', $text);

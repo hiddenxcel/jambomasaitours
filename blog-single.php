@@ -83,18 +83,13 @@ $headExtra = '
   </script>
 ';
 
+/* Mtindo wa `.prose` (pamoja na .checklist, .tip-box, .faq-item n.k.) uko
+   kwenye assets/css/article.css — faili moja inayotumika pia na preview ya
+   admin, ili post mpya yoyote ipangwe vizuri bila kuongeza CSS hapa. */
+$headExtra .= '<link rel="stylesheet" href="' . e(SITE_URL) . '/assets/css/article.css?v=' .
+              @filemtime(__DIR__ . '/assets/css/article.css') . '">';
+
 $extraCss = '
-  .prose{color:rgba(255,255,255,.6);line-height:1.9;font-size:.95rem}
-  .prose h2,.prose h3{font-family:"Nanum Myeongjo",Georgia,serif;color:#fff;margin:1.8rem 0 .9rem}
-  .prose h2{font-size:1.5rem} .prose h3{font-size:1.2rem}
-  .prose p{margin-bottom:1.2rem}
-  .prose a{color:#c17a3a;text-decoration:underline}
-  .prose a:hover{color:#a05e22}
-  .prose ul,.prose ol{margin:1rem 0 1rem 1.5rem;space-y:0.5rem}
-  .prose li{margin-bottom:.4rem}
-  .prose blockquote{border-left:3px solid #a05e22;padding-left:1.2rem;color:rgba(255,255,255,.5);font-style:italic;margin:1.5rem 0}
-  .prose img{border-radius:12px;width:100%;margin:1.5rem 0}
-  .prose strong{color:rgba(255,255,255,.85);font-weight:600}
   .related-card{background:#2c463d;border:1px solid rgba(255,255,255,.07);border-radius:12px;overflow:hidden;transition:all .3s;text-decoration:none;display:block}
   .related-card:hover{border-color:rgba(160,94,34,.25);transform:translateY(-3px)}
   .related-card img{width:100%;height:140px;object-fit:cover;transition:transform .5s}

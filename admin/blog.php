@@ -106,6 +106,9 @@ $siteHost  = parse_url(SITE_URL, PHP_URL_HOST) ?: 'jambomasaitours.com';
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Nanum+Myeongjo:wght@700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="<?= SITE_URL ?>/admin/assets/admin.css">
+  <!-- Mtindo ule ule wa makala unaotumika kwenye blog ya umma, ili preview
+       ilingane kabisa na kitakachoonekana kwenye site -->
+  <link rel="stylesheet" href="<?= SITE_URL ?>/assets/css/article.css?v=<?= @filemtime(__DIR__ . '/../assets/css/article.css') ?>">
   <style>
     /* ── Content editor ── */
     .content-editor{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:#e5e7eb;border-radius:0 0 10px 10px;padding:.85rem 1rem;font-family:'Fira Code','Courier New',monospace;font-size:.83rem;outline:none;transition:border-color .2s;resize:vertical;min-height:340px;line-height:1.7;tab-size:2}
@@ -117,18 +120,12 @@ $siteHost  = parse_url(SITE_URL, PHP_URL_HOST) ?: 'jambomasaitours.com';
     .mode-tab i{font-size:.62rem}
     .mode-tab.active{background:rgba(16,185,129,.15);color:#10b981}
 
-    /* ── Content live preview (matches public blog .prose styles) ── */
-    #content-preview{display:none;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.1rem 1.3rem;min-height:340px;color:rgba(255,255,255,.6);line-height:1.9;font-size:.95rem}
-    #content-preview h2,#content-preview h3{font-family:'Nanum Myeongjo',serif;color:#fff;margin:1.4rem 0 .7rem}
-    #content-preview h2{font-size:1.35rem}
-    #content-preview h3{font-size:1.1rem}
-    #content-preview p{margin-bottom:1rem}
-    #content-preview a{color:#34d399;text-decoration:underline}
-    #content-preview ul,#content-preview ol{margin:.75rem 0 .75rem 1.5rem}
-    #content-preview li{margin-bottom:.35rem}
-    #content-preview blockquote{border-left:3px solid #10b981;padding-left:1.1rem;color:rgba(255,255,255,.5);font-style:italic;margin:1.2rem 0}
-    #content-preview img{border-radius:10px;width:100%;margin:1rem 0}
-    #content-preview strong{color:rgba(255,255,255,.85);font-weight:600}
+    /* ── Content live preview ──
+       Preview ina darasa `.prose`, hivyo inarithi mtindo ULE ULE wa ukurasa wa
+       umma kutoka assets/css/article.css (imeunganishwa kwenye <head>).
+       Hapa tunaweka mwonekano wa kisanduku cha preview peke yake — usirudie
+       sheria za .prose hapa, zitatofautiana na site halisi. */
+    #content-preview{display:none;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.1rem 1.3rem;min-height:340px}
 
     /* ── Toolbar ── */
     .editor-toolbar{display:flex;flex-wrap:wrap;gap:.25rem;padding:.55rem .75rem;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:10px 10px 0 0;border-bottom:none}
@@ -318,7 +315,7 @@ $siteHost  = parse_url(SITE_URL, PHP_URL_HOST) ?: 'jambomasaitours.com';
                 <i class="fas fa-circle-info" style="color:#60a5fa;margin-right:.3rem"></i>
                 No <code style="background:rgba(255,255,255,.07);border-radius:4px;padding:.05rem .3rem">&lt;p&gt;</code>/<code style="background:rgba(255,255,255,.07);border-radius:4px;padding:.05rem .3rem">&lt;h2&gt;</code> tags found, so this is being auto-split into paragraphs as <strong style="color:rgba(255,255,255,.6)">plain text</strong>. Inline formatting — <code style="background:rgba(255,255,255,.07);border-radius:4px;padding:.05rem .3rem">&lt;strong&gt;</code>, <code style="background:rgba(255,255,255,.07);border-radius:4px;padding:.05rem .3rem">&lt;em&gt;</code>, <code style="background:rgba(255,255,255,.07);border-radius:4px;padding:.05rem .3rem">&lt;u&gt;</code>, <code style="background:rgba(255,255,255,.07);border-radius:4px;padding:.05rem .3rem">&lt;a&gt;</code>, images — still renders fine. Other tags (e.g. <code style="background:rgba(255,255,255,.07);border-radius:4px;padding:.05rem .3rem">&lt;div&gt;</code>) would show as literal text. Wrap content in <code style="background:rgba(255,255,255,.07);border-radius:4px;padding:.05rem .3rem">&lt;p&gt;...&lt;/p&gt;</code> / use H2/H3 if you need full block-level HTML.
               </div>
-              <div id="content-preview"></div>
+              <div id="content-preview" class="prose"></div>
               <div class="f-hint" style="margin-top:.4rem"><i class="fas fa-info-circle" style="color:rgba(16,185,129,.5);margin-right:.3rem"></i>Use toolbar buttons to insert HTML. <kbd style="background:rgba(255,255,255,.07);border-radius:4px;padding:.1rem .35rem;font-size:.6rem">Tab</kbd> inserts 2 spaces. Switch to <strong style="color:rgba(255,255,255,.6)">Preview</strong> to see how it will look on the blog.</div>
             </div>
           </div>
@@ -617,12 +614,22 @@ function inlineSafeHtmlPreview(text){
   return html;
 }
 
+/* Lazima ilingane na stripChecklistGlyphs() ya includes/functions.php —
+   ondoa alama za checkbox zilizoandikwa kwa mkono ili preview ionyeshe
+   kile kile kitakachotoka kwenye site. */
+function stripChecklistGlyphsPreview(html){
+  return html.replace(
+    /(<(?:li|label|p)\b[^>]*>)\s*(?:&nbsp;|\s)*(?:[☐-☒❏▢□❑❒]|\[\s*[xX✓]?\s*\])\s*/gi,
+    '$1'
+  );
+}
+
 function blogContentPreview(text){
   text = text.trim();
   if (!text) return '';
   // Already has block-level HTML — render as-is
   if (/<(p|h[1-6]|ul|ol|li|blockquote|div|table|hr)\b/i.test(text)) {
-    return text;
+    return stripChecklistGlyphsPreview(text);
   }
   // Plain text — build <p> paragraphs from blank lines, preserving safe inline tags
   var paragraphs = text.split(/\n{2,}/);
