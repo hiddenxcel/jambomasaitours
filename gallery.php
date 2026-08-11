@@ -4,7 +4,7 @@ require_once 'includes/functions.php';
 require_once 'includes/security.php';
 require_once 'includes/db.php';
 
-$pageTitle       = 'Safari Photo Gallery | Tanzania Wildlife & Landscapes — Jambo Masai Tours';
+$pageTitle       = 'Tanzania Safari Photo Gallery | Wildlife & Landscapes';
 $pageDescription = 'Stunning safari photography from our Tanzania tours. Wildlife, landscapes, Maasai culture, Zanzibar beaches and luxury camps.';
 $currentPage     = 'gallery';
 $canonicalUrl    = SITE_URL . '/gallery';

@@ -97,8 +97,28 @@ $navItems = [
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <?php require __DIR__ . '/includes/google-tags.php'; /* Google Ads + GA4 */ ?>
-  <title>Book a Safari | <?= e($siteName) ?></title>
-  <meta name="description" content="Book your luxury Tanzania safari. Secure online booking for Serengeti, Ngorongoro, Kilimanjaro and Zanzibar tours.">
+  <?php
+  /* Ukurasa huu una <head> yake (hautumii dark_header.php), hivyo tag za SEO
+     lazima ziwekwe hapa — zilikuwa hazipo kabisa: canonical, OG na Twitter. */
+  $_bookTitle = 'Book a Tanzania Safari Online | ' . $siteName;
+  $_bookDesc  = 'Book your Tanzania safari online. Secure booking for Serengeti, Ngorongoro, Kilimanjaro treks and Zanzibar with TATO-licensed Maasai guides.';
+  $_bookImg   = getSetting('og_default_image') ?: (SITE_URL . '/uploads/about-main.jpg');
+  ?>
+  <title><?= e($_bookTitle) ?></title>
+  <meta name="description" content="<?= e($_bookDesc) ?>">
+  <link rel="canonical" href="<?= e(SITE_URL) ?>/booking">
+  <meta property="og:title"       content="<?= e($_bookTitle) ?>">
+  <meta property="og:description" content="<?= e($_bookDesc) ?>">
+  <meta property="og:url"         content="<?= e(SITE_URL) ?>/booking">
+  <meta property="og:type"        content="website">
+  <meta property="og:site_name"   content="<?= e($siteName) ?>">
+  <meta property="og:image"       content="<?= e($_bookImg) ?>">
+  <meta property="og:image:alt"   content="<?= e($_bookTitle) ?>">
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:title"       content="<?= e($_bookTitle) ?>">
+  <meta name="twitter:description" content="<?= e($_bookDesc) ?>">
+  <meta name="twitter:image"       content="<?= e($_bookImg) ?>">
+  <meta name="theme-color"         content="#a05e22">
   <?php $_fav = getSetting('favicon_url') ?: getSetting('logo_url') ?: (SITE_URL . '/uploads/logo-husika.png'); ?>
   <link rel="icon" type="image/png" href="<?= e($_fav) ?>">
   <link rel="shortcut icon" href="<?= e($_fav) ?>">
@@ -157,7 +177,7 @@ $navItems = [
 
 <?php require_once 'includes/public_navbar.php'; ?>
 
-<!-- BOOKING PAGE � Split layout -->
+<!-- BOOKING PAGE — Split layout -->
 <style>
   .bk-grid{display:grid;grid-template-columns:360px 1fr;gap:0;min-height:calc(100vh - 68px);margin-top:68px}
   @media(max-width:1023px){.bk-grid{grid-template-columns:1fr;margin-top:68px}}
@@ -202,7 +222,7 @@ $navItems = [
       Our safari specialists will contact you within <strong style="color:#a05e22">24 hours</strong> to confirm your itinerary and next steps.
     </p>
     <div style="display:flex;flex-direction:column;gap:.65rem">
-      <a href="<?= url() ?>" style="display:flex;align-items:center;justify-content:center;gap:.5rem;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.82rem;text-white;padding:.9rem;border-radius:12px;text-decoration:none;color:#fff;background:linear-gradient(135deg,#7d4817,#a05e22)">
+      <a href="<?= url() ?>" style="display:flex;align-items:center;justify-content:center;gap:.5rem;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.82rem;padding:.9rem;border-radius:12px;text-decoration:none;color:#fff;background:linear-gradient(135deg,#7d4817,#a05e22)">
         <i class="fas fa-home text-xs"></i> Back to Home
       </a>
       <a href="https://wa.me/<?= e(WHATSAPP_NUMBER) ?>" target="_blank" rel="noopener"
@@ -217,7 +237,7 @@ $navItems = [
 <!-- SPLIT LAYOUT -->
 <div class="bk-grid">
 
-  <!-- == LEFT SIDEBAR � Tour Summary == -->
+  <!-- == LEFT SIDEBAR — Tour Summary == -->
   <aside class="bk-sidebar">
     <!-- Tour image -->
     <div id="bk-tour-img-wrap" style="margin-bottom:1rem">
@@ -246,17 +266,17 @@ $navItems = [
       <p style="font-family:'Montserrat',sans-serif;font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.28);margin-bottom:.65rem">Price Summary</p>
       <div class="bk-price-row">
         <span style="font-size:.8rem;color:rgba(255,255,255,.5);font-family:'Montserrat',sans-serif">Per person</span>
-        <span id="sb-price" style="font-size:.88rem;font-weight:600;color:#fff;font-family:'Montserrat',sans-serif">�</span>
+        <span id="sb-price" style="font-size:.88rem;font-weight:600;color:#fff;font-family:'Montserrat',sans-serif">—</span>
       </div>
       <div class="bk-price-row">
         <span style="font-size:.8rem;color:rgba(255,255,255,.5);font-family:'Montserrat',sans-serif">Travellers</span>
-        <span id="sb-travelers" style="font-size:.88rem;font-weight:600;color:#fff;font-family:'Montserrat',sans-serif">�</span>
+        <span id="sb-travelers" style="font-size:.88rem;font-weight:600;color:#fff;font-family:'Montserrat',sans-serif">—</span>
       </div>
       <div class="bk-price-row total">
         <span style="font-size:.82rem;font-weight:700;font-family:'Montserrat',sans-serif;color:rgba(255,255,255,.65)">Estimated Total</span>
-        <span id="sb-total" style="font-size:1.25rem;font-weight:700;color:#a05e22;font-family:'Nanum Myeongjo',serif">�</span>
+        <span id="sb-total" style="font-size:1.25rem;font-weight:700;color:#a05e22;font-family:'Nanum Myeongjo',serif">—</span>
       </div>
-      <p style="font-family:'Montserrat',sans-serif;font-size:.62rem;color:rgba(255,255,255,.2);margin-top:.6rem">No payment now � Final price confirmed within 24hrs</p>
+      <p style="font-family:'Montserrat',sans-serif;font-size:.62rem;color:rgba(255,255,255,.2);margin-top:.6rem">No payment now — Final price confirmed within 24hrs</p>
     </div>
 
     <!-- What's included -->
@@ -301,7 +321,7 @@ $navItems = [
       <h1 style="font-family:'Nanum Myeongjo',serif;font-weight:700;color:#fff;font-size:1.6rem;line-height:1.2">
         Book Your <span style="background:linear-gradient(135deg,#c17a3a,#a05e22);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Safari</span>
       </h1>
-      <p style="font-family:'Montserrat',sans-serif;font-size:.78rem;color:rgba(255,255,255,.4);margin-top:.3rem">3 easy steps � No payment required now</p>
+      <p style="font-family:'Montserrat',sans-serif;font-size:.78rem;color:rgba(255,255,255,.4);margin-top:.3rem">3 easy steps — No payment required now</p>
     </div>
 
     <!-- Step progress -->
@@ -323,7 +343,7 @@ $navItems = [
       <i class="fas fa-exclamation-circle" style="color:#f87171;font-size:.88rem;margin-top:.1rem;flex-shrink:0"></i>
       <ul style="list-style:none">
         <?php foreach ($errors as $err): ?>
-        <li style="font-size:.82rem;color:#f87171">� <?= e($err) ?></li>
+        <li style="font-size:.82rem;color:#f87171">— <?= e($err) ?></li>
         <?php endforeach; ?>
       </ul>
     </div>
@@ -337,14 +357,14 @@ $navItems = [
         <div style="margin-bottom:1rem">
           <label class="f-label" for="tour_id">Select Safari Tour <span>*</span></label>
           <select class="f-select" id="tour_id" name="tour_id" required onchange="bkUpdateSidebar()">
-            <option value="">� Choose your safari �</option>
+            <option value="">— Choose your safari —</option>
             <?php foreach ($allTours as $t): ?>
             <option value="<?= e($t['id']) ?>" data-price="<?= e($t['price']) ?>" data-name="<?= e($t['name']) ?>"
-                    data-dest="<?= e($t['destination'].' � '.$t['duration']) ?>"
+                    data-dest="<?= e($t['destination'].' — '.$t['duration']) ?>"
                     data-img="<?= e($t['image'] ?? IMG_SERENGETI) ?>"
                     data-slug="<?= e($t['slug']) ?>"
                     <?= $preselectedSlug === $t['slug'] ? 'selected' : '' ?>>
-              <?= e($t['name']) ?> � <?= e($t['destination']) ?> � <?= formatPrice($t['price']) ?>/person
+              <?= e($t['name']) ?> — <?= e($t['destination']) ?> — <?= formatPrice($t['price']) ?>/person
             </option>
             <?php endforeach; ?>
           </select>
@@ -367,20 +387,20 @@ $navItems = [
           </div>
         </div>
 
-        <!-- Inline price calc (mobile only � sidebar hidden on mobile) -->
+        <!-- Inline price calc (mobile only — sidebar hidden on mobile) -->
         <div id="mobile-price-calc" style="background:rgba(160,94,34,.07);border:1px solid rgba(160,94,34,.15);border-radius:12px;padding:1rem;margin-bottom:1rem;display:none">
           <div style="display:flex;justify-content:space-between;align-items:center">
             <span style="font-family:'Montserrat',sans-serif;font-size:.72rem;color:rgba(255,255,255,.5)">Estimated Total</span>
-            <span id="calc-total" style="font-family:'Nanum Myeongjo',serif;font-size:1.2rem;font-weight:700;color:#a05e22">�</span>
+            <span id="calc-total" style="font-family:'Nanum Myeongjo',serif;font-size:1.2rem;font-weight:700;color:#a05e22">—</span>
           </div>
-          <p style="font-family:'Montserrat',sans-serif;font-size:.6rem;color:rgba(255,255,255,.2);margin-top:.25rem">No payment now � Final price confirmed within 24hrs</p>
+          <p style="font-family:'Montserrat',sans-serif;font-size:.6rem;color:rgba(255,255,255,.2);margin-top:.25rem">No payment now — Final price confirmed within 24hrs</p>
         </div>
         <!-- Hidden inputs for sidebar JS compat -->
         <input type="hidden" id="calc-price" value="">
         <input type="hidden" id="calc-travelers" value="">
 
         <div style="display:flex;justify-content:flex-end;margin-top:1.5rem">
-          <button type="button" onclick="goStep(1)" style="display:inline-flex;align-items:center;gap:.5rem;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.82rem;text-white;padding:.85rem 1.75rem;border-radius:12px;background:linear-gradient(135deg,#7d4817,#a05e22);border:none;color:#fff;cursor:pointer;box-shadow:0 4px 18px rgba(160,94,34,.3);transition:all .25s" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform=''">
+          <button type="button" onclick="goStep(1)" style="display:inline-flex;align-items:center;gap:.5rem;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.82rem;padding:.85rem 1.75rem;border-radius:12px;background:linear-gradient(135deg,#7d4817,#a05e22);border:none;color:#fff;cursor:pointer;box-shadow:0 4px 18px rgba(160,94,34,.3);transition:all .25s" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform=''">
             Your Information <i class="fas fa-arrow-right" style="font-size:.72rem"></i>
           </button>
         </div>
@@ -415,21 +435,21 @@ $navItems = [
           $preSelected = $formData['country'] ?? '';
           ?>
           <select class="f-select" id="country" name="country" required onchange="toggleOtherCountry(this)">
-            <option value="">� Select your country �</option>
+            <option value="">— Select your country —</option>
             <?php foreach ($countries as $c): ?>
             <option value="<?= e($c) ?>" <?= $preSelected === $c ? 'selected' : '' ?>><?= e($c) ?></option>
             <?php endforeach; ?>
             <option value="__other__" <?= (!empty($preSelected) && !in_array($preSelected, $countries)) ? 'selected' : '' ?>>Other (type manually)</option>
           </select>
           <input type="text" id="country_other" name="country_other" class="f-input"
-                 placeholder="Type your country name�"
+                 placeholder="Type your country name—"
                  value="<?= (!empty($preSelected) && !in_array($preSelected, $countries)) ? e($preSelected) : '' ?>"
                  style="margin-top:.5rem;display:<?= (!empty($preSelected) && !in_array($preSelected, $countries)) ? 'block' : 'none' ?>">
         </div>
         <div style="margin-bottom:1.25rem">
           <label class="f-label" for="special_requests">Special Requests</label>
           <textarea class="f-textarea" id="special_requests" name="special_requests"
-                    placeholder="Dietary needs, accommodation preferences, special occasions, accessibility requirements�"><?= e($formData['special_requests'] ?? '') ?></textarea>
+                    placeholder="Dietary needs, accommodation preferences, special occasions, accessibility requirements—"><?= e($formData['special_requests'] ?? '') ?></textarea>
         </div>
         <div style="display:flex;align-items:center;justify-content:space-between;gap:.65rem;flex-wrap:wrap">
           <button type="button" onclick="goStep(0)" style="display:inline-flex;align-items:center;gap:.4rem;font-family:'Montserrat',sans-serif;font-weight:600;font-size:.78rem;padding:.75rem 1.25rem;border-radius:10px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.6);cursor:pointer;transition:all .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.6)'">
@@ -449,7 +469,7 @@ $navItems = [
           <?php foreach ([['Safari Tour','s-tour'],['Travel Date','s-date'],['Travellers','s-travelers'],['Full Name','s-name'],['Email','s-email'],['Country','s-country'],['Est. Total','s-total']] as $sf): ?>
           <div style="display:flex;justify-content:space-between;align-items:center;padding:.55rem 0;border-bottom:1px solid rgba(255,255,255,.05)">
             <span style="font-family:'Montserrat',sans-serif;font-size:.75rem;color:rgba(255,255,255,.38)"><?= $sf[0] ?></span>
-            <span id="<?= $sf[1] ?>" style="font-family:'Montserrat',sans-serif;font-size:.78rem;font-weight:600;color:rgba(255,255,255,.85)">�</span>
+            <span id="<?= $sf[1] ?>" style="font-family:'Montserrat',sans-serif;font-size:.78rem;font-weight:600;color:rgba(255,255,255,.85)">—</span>
           </div>
           <?php endforeach; ?>
         </div>
@@ -566,22 +586,22 @@ $navItems = [
 
   function buildSummary() {
     const tourSel    = document.getElementById('tour_id');
-    const tourText   = tourSel.options[tourSel.selectedIndex]?.text || '�';
+    const tourText   = tourSel.options[tourSel.selectedIndex]?.text || '—';
     const date       = document.getElementById('travel_date').value;
     const trav       = document.getElementById('travelers').value;
     const fn         = document.getElementById('first_name').value;
     const ln         = document.getElementById('last_name').value;
     const em         = document.getElementById('email').value;
     const co         = document.getElementById('country').value;
-    const total      = document.getElementById('sb-total')?.textContent || document.getElementById('calc-total')?.textContent || '�';
+    const total      = document.getElementById('sb-total')?.textContent || document.getElementById('calc-total')?.textContent || '—';
 
-    const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val || '�'; };
-    set('s-tour',     tourText.split('�')[0].trim());
-    set('s-date',     date || '�');
+    const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val || '—'; };
+    set('s-tour',     tourText.split('—')[0].trim());
+    set('s-date',     date || '—');
     set('s-travelers',trav + (trav == 1 ? ' Person' : ' People'));
-    set('s-name',     (fn + ' ' + ln).trim() || '�');
-    set('s-email',    em || '�');
-    set('s-country',  co || '�');
+    set('s-name',     (fn + ' ' + ln).trim() || '—');
+    set('s-email',    em || '—');
+    set('s-country',  co || '—');
     set('s-total',    total);
   }
 
@@ -605,8 +625,8 @@ $navItems = [
     const travelers= parseInt(document.getElementById('travelers')?.value) || 0;
     const opt      = tourSel ? tourSel.options[tourSel.selectedIndex] : null;
     const price    = opt ? parseFloat(opt.dataset.price) : 0;
-    const fmt = v => v > 0 ? '$' + v.toLocaleString('en-US',{minimumFractionDigits:0}) : '�';
-    const total    = (price > 0 && travelers > 0) ? fmt(price * travelers) : '�';
+    const fmt = v => v > 0 ? '$' + v.toLocaleString('en-US',{minimumFractionDigits:0}) : '—';
+    const total    = (price > 0 && travelers > 0) ? fmt(price * travelers) : '—';
 
     /* Sidebar elements */
     const sbPrice    = document.getElementById('sb-price');
@@ -616,9 +636,9 @@ $navItems = [
     const sbDest     = document.getElementById('bk-tour-dest');
     const sbImg      = document.getElementById('bk-tour-img');
     if (sbPrice)    sbPrice.textContent    = fmt(price);
-    if (sbTrav)     sbTrav.textContent     = travelers > 0 ? travelers + (travelers===1?' Person':' People') : '�';
+    if (sbTrav)     sbTrav.textContent     = travelers > 0 ? travelers + (travelers===1?' Person':' People') : '—';
     if (sbTotal)    sbTotal.textContent    = total;
-    if (sbName && opt && opt.value) sbName.textContent = opt.dataset.name || opt.text.split('�')[0].trim();
+    if (sbName && opt && opt.value) sbName.textContent = opt.dataset.name || opt.text.split('—')[0].trim();
     if (sbDest && opt && opt.value) sbDest.textContent = opt.dataset.dest || '';
     if (sbImg  && opt && opt.dataset.img) sbImg.src = opt.dataset.img;
 

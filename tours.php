@@ -4,7 +4,7 @@ require_once 'includes/functions.php';
 require_once 'includes/security.php';
 require_once 'includes/db.php';
 
-$pageTitle       = 'Luxury Safari Tours Tanzania & Kenya | Packages & Prices — Jambo Masai Tours';
+$pageTitle       = 'Tanzania Safari Tours & Packages | Prices ' . date('Y');
 $pageDescription = 'Browse all our luxury safari tours in Tanzania. Serengeti migration, Ngorongoro Crater, Kilimanjaro trekking, Zanzibar beach and cultural tours.';
 $currentPage     = 'tours';
 

@@ -37,6 +37,13 @@ try {
       $canonicalUrl = SITE_URL . '/' . ltrim(strtok($_SERVER['PHP_SELF'] ?? '', '?'), '/');
   }
   $ogType = $ogType ?? 'website';
+  /* og:image fallback — kurasa kadhaa (tours, blog, gallery, contact,
+     destinations, trekking) hazikuweka $ogImage, hivyo zilishirikishwa
+     WhatsApp/Facebook bila picha kabisa. Sasa kila ukurasa una picha. */
+  if (empty($ogImage)) {
+      $ogImage = getSetting('og_default_image') ?: getSetting('logo_url')
+               ?: (SITE_URL . '/uploads/about-main.jpg');
+  }
   ?>
   <link rel="canonical" href="<?= e($canonicalUrl) ?>">
   <?php if (!empty($ogImage)): ?><meta property="og:image" content="<?= e($ogImage) ?>"><?php endif; ?>

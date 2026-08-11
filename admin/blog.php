@@ -624,12 +624,18 @@ function stripChecklistGlyphsPreview(html){
   );
 }
 
+/* Lazima ilingane na demoteContentH1() ya includes/functions.php — ukurasa
+   tayari una <h1> yake (kichwa cha makala), hivyo H1 ya ndani inakuwa H2. */
+function demoteContentH1Preview(html){
+  return html.replace(/<h1\b([^>]*)>/gi, '<h2$1>').replace(/<\/h1\s*>/gi, '</h2>');
+}
+
 function blogContentPreview(text){
   text = text.trim();
   if (!text) return '';
   // Already has block-level HTML — render as-is
   if (/<(p|h[1-6]|ul|ol|li|blockquote|div|table|hr)\b/i.test(text)) {
-    return stripChecklistGlyphsPreview(text);
+    return demoteContentH1Preview(stripChecklistGlyphsPreview(text));
   }
   // Plain text — build <p> paragraphs from blank lines, preserving safe inline tags
   var paragraphs = text.split(/\n{2,}/);

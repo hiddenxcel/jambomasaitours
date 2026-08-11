@@ -23,7 +23,7 @@ try {
 
 $prices   = array_filter(array_column($tours, 'price'));
 $minPrice = $prices ? min($prices) : 0;
-$pageTitle   = 'Mountain Trekking Tanzania | Kilimanjaro & Mt. Meru � Jambo Masai Tours';
+$pageTitle   = 'Kilimanjaro & Mt. Meru Trekking | Tanzania Routes';
 $pageDesc    = 'Conquer Africa\'s highest peaks. Expert-guided Kilimanjaro climbs, walking safaris and adventure tours. KINAPA certified guides.';
 $currentPage = 'trekking';
 

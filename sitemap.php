@@ -50,13 +50,13 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
     <lastmod><?= date('Y-m-d') ?></lastmod>
   </url>
   <url>
-    <loc><?= $base ?>/mountain-trekking.php</loc>
+    <loc><?= $base ?>/mountain-trekking</loc>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
     <lastmod><?= date('Y-m-d') ?></lastmod>
   </url>
   <url>
-    <loc><?= $base ?>/destinations.php</loc>
+    <loc><?= $base ?>/destinations</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <lastmod><?= date('Y-m-d') ?></lastmod>
@@ -72,37 +72,37 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
   </url>
   <?php endforeach; ?>
   <url>
-    <loc><?= $base ?>/faq.php</loc>
+    <loc><?= $base ?>/faq</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
     <lastmod><?= date('Y-m-d') ?></lastmod>
   </url>
   <url>
-    <loc><?= $base ?>/blog.php</loc>
+    <loc><?= $base ?>/blog</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <lastmod><?= date('Y-m-d') ?></lastmod>
   </url>
   <url>
-    <loc><?= $base ?>/booking.php</loc>
+    <loc><?= $base ?>/booking</loc>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
     <lastmod><?= date('Y-m-d') ?></lastmod>
   </url>
   <url>
-    <loc><?= $base ?>/about.php</loc>
+    <loc><?= $base ?>/about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <lastmod><?= date('Y-m-d') ?></lastmod>
   </url>
   <url>
-    <loc><?= $base ?>/gallery.php</loc>
+    <loc><?= $base ?>/gallery</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <lastmod><?= date('Y-m-d') ?></lastmod>
   </url>
   <url>
-    <loc><?= $base ?>/contact.php</loc>
+    <loc><?= $base ?>/contact</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <lastmod><?= date('Y-m-d') ?></lastmod>

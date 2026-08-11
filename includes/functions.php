@@ -56,9 +56,25 @@ function slugify(string $text): string {
     return trim($text, '-');
 }
 
-function truncate(string $text, int $length = 120): string {
-    if (strlen($text) <= $length) return $text;
-    return rtrim(substr($text, 0, $length)) . '...';
+/**
+ * Kata matini kwa urefu fulani.
+ *
+ * Inatumia mb_* — strlen/substr huhesabu BYTES, hivyo zingeweza kukata herufi
+ * ya UTF-8 (mf. em dash "—" = bytes 3) katikati na kuzalisha "�" kwenye
+ * <title> na meta description. Vilevile inakata kwenye nafasi ya mwisho ili
+ * neno lisikatike katikati, na inatumia "…" (herufi moja) badala ya "...".
+ */
+function truncate(string $text, int $length = 120, string $ellipsis = '…'): string {
+    $text = trim(preg_replace('/\s+/u', ' ', $text));
+    if (mb_strlen($text, 'UTF-8') <= $length) return $text;
+
+    $cut = mb_substr($text, 0, $length - mb_strlen($ellipsis, 'UTF-8'), 'UTF-8');
+    // Rudi nyuma hadi nafasi ya mwisho ili tusikate neno katikati
+    $sp = mb_strrpos($cut, ' ', 0, 'UTF-8');
+    if ($sp !== false && $sp > (int)($length * 0.6)) {
+        $cut = mb_substr($cut, 0, $sp, 'UTF-8');
+    }
+    return rtrim($cut, " \t\n\r\0\x0B,;:.—–-") . $ellipsis;
 }
 
 function starRating(float $rating): string {
@@ -108,6 +124,25 @@ function stripChecklistGlyphs(string $html): string {
 }
 
 /**
+ * Shusha <h1> iliyoko ndani ya matini ya makala kuwa <h2>.
+ *
+ * Ukurasa wenyewe (hero) tayari unatoa <h1> — ile ya kichwa cha makala. Post
+ * nyingi zinabandikwa zikiwa na <h1> yake ya ndani, hivyo ukurasa unapata H1
+ * mbili. Google inapendelea H1 moja kwa kila ukurasa, na muundo wa vichwa
+ * (H1 → H2 → H3) ndio unaosaidia kuelewa maudhui.
+ *
+ * Kufanya hivi wakati wa ku-render kunashughulikia posts zote — za zamani na
+ * zozote utakazoandika baadaye — bila kuhariri database.
+ */
+function demoteContentH1(string $html): string {
+    return preg_replace(
+        ['/<h1\b([^>]*)>/i', '/<\/h1\s*>/i'],
+        ['<h2$1>', '</h2>'],
+        $html
+    ) ?? $html;
+}
+
+/**
  * Render blog post content safely.
  * - If content has HTML block elements → output as-is (admin entered HTML via toolbar).
  * - If content is plain text → auto-convert double newlines to <p> and single to <br>.
@@ -117,7 +152,7 @@ function blogContent(string $text): string {
     $text = trim($text);
     // Already has block-level HTML — render as-is
     if (preg_match('/<(p|h[1-6]|ul|ol|li|blockquote|div|table|hr)\b/i', $text)) {
-        return stripChecklistGlyphs($text);
+        return demoteContentH1(stripChecklistGlyphs($text));
     }
     // Plain text — build paragraphs from double newlines
     $paragraphs = preg_split('/\n{2,}/', $text);

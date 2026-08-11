@@ -5,7 +5,8 @@ require_once 'includes/security.php';
 require_once 'includes/db.php';
 
 $pageTitle       = 'Jambo Masai Tours | Tanzania Safari & Kilimanjaro Tours — Arusha';
-$pageDescription = 'Jambo Masai Tours is a Maasai-founded, TATO-licensed safari operator in Arusha, Tanzania. Great Migration & Serengeti safaris, Kilimanjaro treks, Zanzibar beach holidays and Maasai cultural tours. Rated 4.9/5 by 150+ travellers.';
+/* Maelezo yasizidi ~158 ili yasikatwe kwenye matokeo ya Google */
+$pageDescription = 'Maasai-founded, TATO-licensed safari operator in Arusha. Great Migration & Serengeti safaris, Kilimanjaro treks and Zanzibar holidays. Rated 4.9/5.';
 $currentPage     = 'home';
 
 $db = getDB();
