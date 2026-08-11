@@ -397,7 +397,7 @@ function ticon2(string $t): string {
   },{passive:true});
   if(wa)setTimeout(function(){wa.classList.add('visible');},2500);
   if('IntersectionObserver' in window){
-    var ro=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add('visible');ro.unobserve(x.target);}});},{threshold:.07});
+    var ro=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add('visible');ro.unobserve(x.target);}});},{rootMargin:'0px 0px -60px 0px',threshold:0});
     document.querySelectorAll('.reveal').forEach(function(el){ro.observe(el);});
   } else {
     document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('visible');});

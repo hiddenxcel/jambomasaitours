@@ -922,7 +922,7 @@ document.addEventListener('keydown', e => {
   btt&&btt.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
   const wa=document.getElementById('wa-float');
   if(wa)setTimeout(()=>wa.classList.add('visible'),2500);
-  const revObs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');revObs.unobserve(e.target);}}),{threshold:.08});
+  const revObs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');revObs.unobserve(e.target);}}),{rootMargin:'0px 0px -60px 0px',threshold:0});
   document.querySelectorAll('.reveal').forEach(el=>revObs.observe(el));
 })();
 </script>

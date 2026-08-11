@@ -101,11 +101,17 @@
   const wa = document.getElementById('wa-float');
   if (wa) setTimeout(() => wa.classList.add('visible'), 2500);
 
-  /* Reveal on scroll */
-  const revObs = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revObs.unobserve(e.target); } });
-  }, { threshold: 0.07 });
-  document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
+  /* Reveal on scroll.
+     rootMargin (si threshold ya asilimia) — element ndefu kama article ya blog
+     haiwezi kamwe kuonyesha 7% yake kwenye viewport, hivyo ingebaki opacity:0. */
+  if ('IntersectionObserver' in window) {
+    const revObs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revObs.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -60px 0px', threshold: 0 });
+    document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
+  } else {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+  }
 
 })();
 </script>

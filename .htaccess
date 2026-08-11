@@ -3,10 +3,12 @@ ServerSignature Off
 
 RewriteEngine On
 
-# Force HTTPS on production (skipped for local .local / localhost dev hosts)
+# Force HTTPS on production (skipped for local .local / localhost dev hosts,
+# including when Apache serves on a non-default port e.g. localhost:8080)
 RewriteCond %{HTTPS} off
-RewriteCond %{HTTP_HOST} !=localhost [NC]
-RewriteCond %{HTTP_HOST} !\.local$ [NC]
+RewriteCond %{HTTP_HOST} !^localhost(:\d+)?$ [NC]
+RewriteCond %{HTTP_HOST} !^127\.0\.0\.1(:\d+)?$ [NC]
+RewriteCond %{HTTP_HOST} !\.local(:\d+)?$ [NC]
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 
 # Force non-www → www-less (canonical). Comment out if you prefer www.

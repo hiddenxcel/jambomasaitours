@@ -298,7 +298,7 @@ $_name2      = $_nameParts[1] ?? 'Masai';
       </button>
       <!-- Book Safari - desktop only -->
       <button onclick="openBookingModal()" id="p-book-btn"
-              style="display:none;align-items:center;gap:.4rem;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.72rem;text-white;padding:.6rem 1.1rem;border-radius:10px;background:linear-gradient(135deg,#7d4817,#a05e22);border:none;color:#fff;cursor:pointer;box-shadow:0 3px 12px rgba(160,94,34,.25);transition:all .25s;white-space:nowrap"
+              style="display:none;align-items:center;gap:.4rem;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.72rem;padding:.6rem 1.1rem;border-radius:10px;background:linear-gradient(135deg,#7d4817,#a05e22);border:none;color:#fff;cursor:pointer;box-shadow:0 3px 12px rgba(160,94,34,.25);transition:all .25s;white-space:nowrap"
               onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform=''">
         <i class="fas fa-compass" style="font-size:.7rem"></i> Book Safari
       </button>
@@ -469,10 +469,13 @@ $_name2      = $_nameParts[1] ?? 'Masai';
   function pnavDoSearch(){var q=sIn?sIn.value.trim():'';if(q)window.location='<?= url('tours') ?>?search='+encodeURIComponent(q);}
   window.pnavOpenSearch=pnavOpenSearch;window.pnavCloseSearch=pnavCloseSearch;window.pnavDoSearch=pnavDoSearch;
 
-  /* Scroll reveal (shared) */
+  /* Scroll reveal (shared) — rootMargin, si threshold ya asilimia, ili element
+     ndefu (mf. article ya blog) zisikwame kwenye opacity:0 */
   if('IntersectionObserver' in window){
-    var ro=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');ro.unobserve(e.target);}});},{threshold:.07});
+    var ro=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');ro.unobserve(e.target);}});},{rootMargin:'0px 0px -60px 0px',threshold:0});
     document.querySelectorAll('.reveal').forEach(function(el){ro.observe(el);});
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('visible');});
   }
 })();
 window.SITE_URL='<?= SITE_URL ?>';
