@@ -4,7 +4,7 @@ require_once 'includes/functions.php';
 require_once 'includes/security.php';
 require_once 'includes/db.php';
 
-$pageTitle    = 'Safari FAQ | Tanzania Travel Questions Answered — Jambo Masai Tours';
+$pageTitle    = 'Safari FAQ | Tanzania Travel Questions Answered';
 $pageDescription = 'Everything to know before your Tanzania safari: visas, vaccinations, best time to visit, packing, costs and safety — answered by our safari experts.';
 $currentPage  = 'about';
 $canonicalUrl = SITE_URL . '/faq';

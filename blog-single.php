@@ -17,7 +17,11 @@ $relStmt = $db->prepare("SELECT id,title,slug,image,excerpt,created_at FROM blog
 $relStmt->execute([$post['id']]);
 $related = $relStmt->fetchAll();
 
-$pageTitle       = $post['title'] . ' | Jambo Masai Tours Blog';
+/* Ongeza chapa pale tu kichwa ni kifupi vya kutosha; vinginevyo Google
+   inakata (>60). Kichwa cha makala chenyewe ndicho muhimu zaidi. */
+$pageTitle       = mb_strlen($post['title'], 'UTF-8') <= 38
+                 ? $post['title'] . ' | Jambo Masai Tours'
+                 : truncate($post['title'], 60);
 $pageDescription = truncate(strip_tags($post['excerpt']), 160);
 $ogImage         = $post['image'];
 $currentPage     = 'blog';

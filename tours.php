@@ -100,7 +100,14 @@ function cardBadge(array $tour, int $idx): ?array {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <?php require __DIR__ . '/includes/google-tags.php'; /* Google Ads + GA4 */ ?>
-  <?php $toursCanon = SITE_URL . '/tours'; ?>
+  <?php
+  $toursCanon = SITE_URL . '/tours';
+  /* Ukurasa huu una <head> yake (hautumii dark_header.php), hivyo og:image na
+     Twitter card lazima ziwekwe hapa — zilikuwa hazipo, hivyo link ya /tours
+     ilishirikishwa WhatsApp/Facebook bila picha. */
+  $_toursImg = getSetting('og_default_image') ?: ($tours[0]['image'] ?? '')
+             ?: (SITE_URL . '/uploads/about-main.jpg');
+  ?>
   <title><?= e($pageTitle) ?></title>
   <meta name="description" content="<?= e($pageDescription) ?>">
   <link rel="canonical" href="<?= e($toursCanon) ?>">
@@ -109,6 +116,12 @@ function cardBadge(array $tour, int $idx): ?array {
   <meta property="og:url"         content="<?= e($toursCanon) ?>">
   <meta property="og:type"        content="website">
   <meta property="og:site_name"   content="Jambo Masai Tours">
+  <meta property="og:image"       content="<?= e($_toursImg) ?>">
+  <meta property="og:image:alt"   content="<?= e($pageTitle) ?>">
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:title"       content="<?= e($pageTitle) ?>">
+  <meta name="twitter:description" content="<?= e($pageDescription) ?>">
+  <meta name="twitter:image"       content="<?= e($_toursImg) ?>">
   <?php if (!empty($tours)): ?>
   <script type="application/ld+json">
   {

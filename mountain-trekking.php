@@ -45,10 +45,22 @@ function ticon2(string $t): string {
   <title><?= e($pageTitle) ?></title>
   <meta name="description" content="<?= e($pageDesc) ?>">
   <link rel="canonical" href="<?= SITE_URL ?>/mountain-trekking">
+  <?php
+  /* <head> ya ukurasa huu (hautumii dark_header.php) — og:image, og:url na
+     Twitter card zilikuwa hazipo, hivyo link ilishirikishwa bila picha. */
+  $_trekImg = getSetting('og_default_image') ?: (SITE_URL . '/uploads/about-main.jpg');
+  ?>
   <meta property="og:title" content="<?= e($pageTitle) ?>">
   <meta property="og:description" content="<?= e($pageDesc) ?>">
+  <meta property="og:url" content="<?= SITE_URL ?>/mountain-trekking">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Jambo Masai Tours">
+  <meta property="og:image" content="<?= e($_trekImg) ?>">
+  <meta property="og:image:alt" content="<?= e($pageTitle) ?>">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="<?= e($pageTitle) ?>">
+  <meta name="twitter:description" content="<?= e($pageDesc) ?>">
+  <meta name="twitter:image" content="<?= e($_trekImg) ?>">
   <meta name="theme-color" content="#a05e22">
   <?php $_fav = getSetting('favicon_url') ?: getSetting('logo_url') ?: (SITE_URL . '/uploads/logo-husika.png'); ?>
   <link rel="icon" type="image/png" href="<?= e($_fav) ?>">

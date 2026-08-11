@@ -154,7 +154,7 @@ function destDetailSlug(string $title, string $slug = ''): string {
     return '';
 }
 
-$pageTitle    = 'Tanzania Destinations | Serengeti, Zanzibar & More — Jambo Masai Tours';
+$pageTitle    = 'Tanzania Safari Destinations | Serengeti & Zanzibar';
 $pageDescription = 'Explore Tanzania\'s most breathtaking destinations: Serengeti, Ngorongoro Crater, Kilimanjaro, Zanzibar and more.';
 $currentPage  = 'destinations';
 $canonicalUrl = SITE_URL . '/destinations';

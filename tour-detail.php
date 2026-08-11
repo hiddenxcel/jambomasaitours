@@ -68,15 +68,28 @@ $waMsg = urlencode('Hi! I am interested in the ' . $tour['name'] . ' tour. Pleas
   $tourDesc      = truncate(strip_tags($tour['description']), 160);
   $logoUrl_seo   = getSetting('logo_url') ?: (SITE_URL . '/uploads/logo-husika.png');
   ?>
-  <title><?= e($tour['name']) ?> | Luxury Safari Tanzania — Jambo Masai Tours</title>
+  <?php
+  /* Jina la tour peke yake ni refu; ukiongeza "Luxury Safari Tanzania —
+     Jambo Masai Tours" kichwa kinafika herufi 98 na Google inakikata.
+     Tunaongeza chapa pale tu nafasi inaruhusu (<60). */
+  $_tourTitle = mb_strlen($tour['name'], 'UTF-8') <= 42
+              ? $tour['name'] . ' | Jambo Masai Tours'
+              : truncate($tour['name'], 60);
+  ?>
+  <title><?= e($_tourTitle) ?></title>
   <meta name="description" content="<?= e($tourDesc) ?>">
   <link rel="canonical" href="<?= e($tourCanonical) ?>">
   <meta property="og:title"       content="<?= e($tour['name']) ?> | Jambo Masai Tours">
   <meta property="og:description" content="<?= e($tourDesc) ?>">
   <meta property="og:image"       content="<?= e($tour['image']) ?>">
+  <meta property="og:image:alt"   content="<?= e($tour['name']) ?>">
   <meta property="og:url"         content="<?= e($tourCanonical) ?>">
   <meta property="og:type"        content="website">
   <meta property="og:site_name"   content="Jambo Masai Tours">
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:title"       content="<?= e($_tourTitle) ?>">
+  <meta name="twitter:description" content="<?= e($tourDesc) ?>">
+  <meta name="twitter:image"       content="<?= e($tour['image']) ?>">
   <script type="application/ld+json">
   [
     {

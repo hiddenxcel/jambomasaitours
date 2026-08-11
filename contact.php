@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-$pageTitle       = 'Contact Jambo Masai Tours | Safari Experts in Arusha, Tanzania';
+$pageTitle       = 'Contact Us | Safari Experts in Arusha, Tanzania';
 $pageDescription = 'Contact Jambo Masai Tours for safari inquiries. WhatsApp, email, phone — our team is always ready to help plan your perfect African adventure.';
 $currentPage     = 'contact';
 $csrfToken       = generateCsrfToken();

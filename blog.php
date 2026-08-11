@@ -4,7 +4,7 @@ require_once 'includes/functions.php';
 require_once 'includes/security.php';
 require_once 'includes/db.php';
 
-$pageTitle       = 'Safari Travel Blog | Tanzania Tips & Guides — Jambo Masai Tours';
+$pageTitle       = 'Safari Travel Blog | Tanzania Tips & Guides';
 $pageDescription = 'Expert safari tips, Tanzania travel guides, packing lists, best time to visit and Zanzibar travel advice from our professional safari team.';
 $currentPage     = 'blog';
 
