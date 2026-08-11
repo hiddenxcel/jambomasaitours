@@ -74,12 +74,27 @@ $_name2      = $_nameParts[1] ?? 'Masai';
 #pnav-search-btn:hover i{color:#a05e22 !important}
 /* Mega menu - enhanced dropdown with stagger & glassmorphism */
 .pnav-mega{position:relative}
-.pnav-mega-drop{position:absolute;top:100%;left:50%;transform:translateX(-50%) translateY(12px);width:540px;opacity:0;pointer-events:none;transition:all .35s cubic-bezier(.22,1,.36,1);padding-top:.5rem;z-index:200}
+/* Upana: 540px, ila kamwe usizidi ukubwa wa dirisha (ondoa 2rem kwa pembeni).
+   Bila max-width, dropdown ya SAFARIS (iliyo upande wa kushoto wa navbar)
+   ilipita ukingo wa kulia na kukatika kwenye madirisha membamba. */
+.pnav-mega-drop{position:absolute;top:100%;left:50%;transform:translateX(-50%) translateY(12px);width:540px;max-width:calc(100vw - 2rem);opacity:0;pointer-events:none;transition:opacity .35s cubic-bezier(.22,1,.36,1),transform .35s cubic-bezier(.22,1,.36,1);padding-top:.5rem;z-index:200}
 .pnav-mega:hover .pnav-mega-drop{opacity:1;pointer-events:all;transform:translateX(-50%) translateY(0)}
 .pnav-mega:hover .pnav-mega-chevron{transform:rotate(180deg) !important;color:#a05e22 !important}
 /* More mega - aligns to the right edge */
 .pnav-mega-drop[style*="right:0"]{left:auto;transform:none;top:calc(100% + 2px)}
 .pnav-mega:hover .pnav-mega-drop[style*="right:0"]{opacity:1;pointer-events:all;transform:none}
+/* Dirisha lisilo pana vya kutosha kubeba 540px iliyowekwa katikati:
+   ishikamanishe SAFARIS na ukingo wa kushoto badala ya katikati, ili
+   safu ya "Browse by Type" isikatike. 1280 = navbar + nafasi ya dropdown. */
+@media (max-width:1279px){
+  .pnav-mega-drop:not([style*="right:0"]){left:0;transform:translateX(0) translateY(12px)}
+  .pnav-mega:hover .pnav-mega-drop:not([style*="right:0"]){transform:translateX(0) translateY(0)}
+}
+/* Dirisha jembamba zaidi: safu mbili zikibanana, jina la tour hukatika.
+   Ziwe safu moja badala yake. */
+@media (max-width:1120px){
+  .pnav-mega-grid{grid-template-columns:1fr !important;gap:.35rem !important}
+}
 /* Solid cream mega card */
 .pnav-mega-card{background:#f4e1c3;border:1px solid rgba(44,70,61,.12);border-radius:20px;padding:1.25rem;box-shadow:0 32px 80px rgba(44,70,61,.28);overflow:hidden;transition:border-color .4s,box-shadow .4s}
 .pnav-mega:hover .pnav-mega-card{border-color:rgba(160,94,34,.3);box-shadow:0 32px 80px rgba(44,70,61,.3),0 0 60px rgba(160,94,34,.06),inset 0 1px 0 rgba(255,255,255,.5)}
@@ -181,7 +196,7 @@ $_name2      = $_nameParts[1] ?? 'Masai';
         <!-- Safaris mega dropdown -->
         <div class="pnav-mega-drop">
           <div class="pnav-mega-card">
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+            <div class="pnav-mega-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
               <div>
                 <p style="font-family:'Montserrat',sans-serif;font-size:.56rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#a05e22;margin:0 0 .65rem">
                   <i class="fas fa-fire" style="font-size:.48rem;margin-right:.3rem"></i>Featured Safaris
