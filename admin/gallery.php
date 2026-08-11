@@ -78,7 +78,7 @@ $csrfToken = generateCsrfToken();
 
       <?php if (!empty($errors)): ?>
       <div style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);color:#991b1b;padding:var(--space-4) var(--space-5);border-radius:var(--radius-md);margin-bottom:var(--space-5);">
-        <?php foreach ($errors as $e_): ?><div>• <?= e($e_) ?></div><?php endforeach; ?>
+        <?php foreach ($errors as $e_): ?><div>â€” <?= e($e_) ?></div><?php endforeach; ?>
       </div>
       <?php endif; ?>
 

@@ -107,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <label class="f-label" for="password">Password</label>
         <div style="position:relative">
           <i class="fas fa-lock" style="position:absolute;left:.9rem;top:50%;transform:translateY(-50%);color:rgba(255,255,255,.25);font-size:.78rem;pointer-events:none"></i>
-          <input type="password" class="f-input" id="password" name="password" required autocomplete="current-password" placeholder="��������" style="padding-left:2.5rem">
+          <input type="password" class="f-input" id="password" name="password" required autocomplete="current-password" placeholder="————————" style="padding-left:2.5rem">
         </div>
       </div>
       <button type="submit" class="btn btn-adm btn-adm-primary w-full" style="justify-content:center;padding:.85rem;font-size:.82rem;margin-top:.5rem;border-radius:12px">

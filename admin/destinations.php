@@ -102,7 +102,7 @@ $destinations = $db->query("SELECT * FROM destinations ORDER BY sort_order ASC, 
 
 /* --- CSRF token ------------------------------------ */
 $csrf = generateCsrfToken();
-$pageTitle = 'Destinations — Admin';
+$pageTitle = 'Destinations â€” Admin';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -210,7 +210,7 @@ $pageTitle = 'Destinations — Admin';
         </div>
         <div style="margin-bottom:1rem;">
           <label class="f-label">Description <span>*</span></label>
-          <textarea name="description" class="f-input" rows="5" placeholder="Describe this destination — landscape, wildlife, culture, unique features..."><?= e($editing['description'] ?? '') ?></textarea>
+          <textarea name="description" class="f-input" rows="5" placeholder="Describe this destination â€” landscape, wildlife, culture, unique features..."><?= e($editing['description'] ?? '') ?></textarea>
         </div>
         <div style="display:flex;align-items:center;gap:var(--space-3);">
           <input type="checkbox" name="active" id="dest-active" value="1" <?= ($editing['active'] ?? 1) ? 'checked' : '' ?>>
@@ -223,11 +223,11 @@ $pageTitle = 'Destinations — Admin';
         <div class="field-grid" style="margin-bottom:1rem;">
           <div>
             <label class="f-label">Best Season to Visit</label>
-            <input type="text" name="best_season" class="f-input" value="<?= e($editing['best_season'] ?? '') ?>" placeholder="e.g. June – October">
+            <input type="text" name="best_season" class="f-input" value="<?= e($editing['best_season'] ?? '') ?>" placeholder="e.g. June â€” October">
           </div>
           <div>
             <label class="f-label">Climate</label>
-            <input type="text" name="climate" class="f-input" value="<?= e($editing['climate'] ?? '') ?>" placeholder="e.g. Warm and dry. Average 26°C.">
+            <input type="text" name="climate" class="f-input" value="<?= e($editing['climate'] ?? '') ?>" placeholder="e.g. Warm and dry. Average 26â€”C.">
           </div>
         </div>
         <div>
@@ -255,12 +255,12 @@ $pageTitle = 'Destinations — Admin';
         <div class="upload-area" id="img-drop" onclick="document.getElementById('image_file').click()">
           <div style="font-size:2rem;margin-bottom:var(--space-2);">??</div>
           <p style="font-size:.85rem;color:rgba(255,255,255,.45);margin:0;">Click to upload or drag & drop</p>
-          <p style="font-size:.75rem;color:rgba(255,255,255,.45);margin:var(--space-1) 0 0;">JPG, PNG, WebP — max 8MB</p>
+          <p style="font-size:.75rem;color:rgba(255,255,255,.45);margin:var(--space-1) 0 0;">JPG, PNG, WebP â€” max 8MB</p>
           <img id="img-preview" src="" alt="" class="thumb-preview" style="display:none;">
         </div>
         <input type="file" name="image_file" id="image_file" accept="image/*" style="display:none;">
         <div style="margin-top:1rem;">
-          <label class="f-label">— OR paste an image URL —</label>
+          <label class="f-label">â€” OR paste an image URL â€”</label>
           <input type="text" name="image_url" id="image_url" class="f-input" value="" placeholder="https://images.unsplash.com/...">
           <small style="color:rgba(255,255,255,.45);font-size:.75rem;">Uploading a file takes priority over the URL field.</small>
         </div>
@@ -310,7 +310,7 @@ $pageTitle = 'Destinations — Admin';
             </td>
             <td>
               <strong style="font-family:var(--font-heading);color:#10b981;"><?= e($dest['title']) ?></strong>
-              <div style="font-size:.75rem;color:rgba(255,255,255,.45);"><?= e($dest['country']) ?> <?= $dest['region'] ? '· '.e($dest['region']) : '' ?></div>
+              <div style="font-size:.75rem;color:rgba(255,255,255,.45);"><?= e($dest['country']) ?> <?= $dest['region'] ? 'â€” '.e($dest['region']) : '' ?></div>
               <div style="font-size:.72rem;color:rgba(255,255,255,.45);font-family:var(--font-nav);">/<?= e($dest['slug']) ?></div>
             </td>
             <td style="font-size:.85rem;"><?= e($dest['region']) ?></td>
@@ -340,7 +340,7 @@ $pageTitle = 'Destinations — Admin';
                     <?= $dest['active'] ? '? Deactivate' : '? Activate' ?>
                   </button>
                 </form>
-                <form method="POST" onsubmit="return confirm('Delete «<?= e(addslashes($dest['title'])) ?>»? This cannot be undone.');">
+                <form method="POST" onsubmit="return confirm('Delete â€”<?= e(addslashes($dest['title'])) ?>â€”? This cannot be undone.');">
                   <input type="hidden" name="<?= CSRF_TOKEN_NAME ?>" value="<?= e($csrf) ?>">
                   <input type="hidden" name="action" value="delete">
                   <input type="hidden" name="id" value="<?= $dest['id'] ?>">

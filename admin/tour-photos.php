@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     'error'    => $_FILES['photos']['error'][$i],
                     'size'     => $_FILES['photos']['size'][$i],
                 ];
-                /* Upload single via helper — temporarily set $_FILES */
+                /* Upload single via helper â€” temporarily set $_FILES */
                 $_FILES['_single_photo'] = $singleFile;
                 $res = handleImageUpload('_single_photo', '');
                 if (isset($res['url'])) {
@@ -259,13 +259,13 @@ $csrfToken = generateCsrfToken();
                 <input type="hidden" name="action" value="update_caption">
                 <input type="hidden" name="photo_id" value="<?= $p['id'] ?>">
                 <input type="text" name="caption" value="<?= e($p['caption']) ?>"
-                       placeholder="Add caption…"
+                       placeholder="Add captionâ€”"
                        style="flex:1;background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.6);font-size:.72rem;padding:.2rem .1rem;outline:none;font-family:'Inter',sans-serif"
                        onfocus="this.style.borderColor='rgba(16,185,129,.5)'"
                        onblur="this.style.borderColor='rgba(255,255,255,.1)'">
                 <button type="submit" style="background:transparent;border:none;color:#34d399;cursor:pointer;padding:.1rem .3rem;font-size:.65rem" title="Save"><i class="fas fa-check"></i></button>
               </form>
-              <div style="font-size:.58rem;color:rgba(255,255,255,.2);margin-top:.25rem;font-family:'Montserrat',sans-serif">Photo #<?= $idx+1 ?> · <?= $idx===0?'<span style="color:#34d399">Main / Hero</span>':'Position '.$p['sort_order'] ?></div>
+              <div style="font-size:.58rem;color:rgba(255,255,255,.2);margin-top:.25rem;font-family:'Montserrat',sans-serif">Photo #<?= $idx+1 ?> â€” <?= $idx===0?'<span style="color:#34d399">Main / Hero</span>':'Position '.$p['sort_order'] ?></div>
             </div>
           </div>
           <?php endforeach; ?>
@@ -311,7 +311,7 @@ $csrfToken = generateCsrfToken();
             <div class="drop-zone" id="drop-zone" onclick="document.getElementById('file-input').click()">
               <i class="fas fa-cloud-upload-alt" style="font-size:2rem;color:rgba(16,185,129,.5);margin-bottom:.65rem"></i>
               <p style="font-size:.85rem;color:rgba(255,255,255,.5);margin-bottom:.3rem">Click or drag & drop photos here</p>
-              <p style="font-size:.72rem;color:rgba(255,255,255,.25)">JPG, PNG, WebP · Multiple allowed · Max 8MB each</p>
+              <p style="font-size:.72rem;color:rgba(255,255,255,.25)">JPG, PNG, WebP â€” Multiple allowed â€” Max 8MB each</p>
               <input type="file" name="photos[]" id="file-input" multiple accept="image/jpeg,image/png,image/webp">
             </div>
 
@@ -339,10 +339,10 @@ $csrfToken = generateCsrfToken();
           <div style="margin-top:1.25rem;padding:1rem;background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.12);border-radius:10px">
             <p style="font-family:'Montserrat',sans-serif;font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#34d399;margin-bottom:.6rem">Tips</p>
             <ul style="space-y:0.3rem;color:rgba(255,255,255,.4);font-size:.75rem;line-height:1.7">
-              <li>· First photo becomes the <strong style="color:rgba(255,255,255,.6)">hero image</strong> in the mosaic</li>
-              <li>· Upload at least 5 photos for the full mosaic grid</li>
-              <li>· Landscape photos (16:9) look best</li>
-              <li>· Add captions to describe each photo</li>
+              <li>â€” First photo becomes the <strong style="color:rgba(255,255,255,.6)">hero image</strong> in the mosaic</li>
+              <li>â€” Upload at least 5 photos for the full mosaic grid</li>
+              <li>â€” Landscape photos (16:9) look best</li>
+              <li>â€” Add captions to describe each photo</li>
             </ul>
           </div>
         </div>

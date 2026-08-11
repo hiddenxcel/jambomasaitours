@@ -245,7 +245,7 @@ function dc(int $n): array {
 
     <?php if (!empty($errors)): ?>
     <div style="background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.18);color:#f87171;padding:.8rem 1.2rem;border-radius:10px;margin-bottom:1.2rem;font-size:.875rem">
-      <?php foreach($errors as $err): ?><div>· <?= e($err) ?></div><?php endforeach; ?>
+      <?php foreach($errors as $err): ?><div>â€” <?= e($err) ?></div><?php endforeach; ?>
     </div>
     <?php endif; ?>
 
@@ -324,7 +324,7 @@ function dc(int $n): array {
             <div>
               <label class="f-label" style="font-size:.58rem">Upload from computer</label>
               <input type="file" class="f-input" name="hotel_image_file" accept="image/jpeg,image/png,image/webp" id="hotel-file">
-              <div class="f-hint">JPG/PNG/WebP · Max 8MB</div>
+              <div class="f-hint">JPG/PNG/WebP â€” Max 8MB</div>
             </div>
             <div>
               <label class="f-label" style="font-size:.58rem">Or paste image URL</label>
@@ -348,7 +348,7 @@ function dc(int $n): array {
         <div style="margin-bottom:1rem">
           <label class="f-label">Day Description <span>*</span></label>
           <textarea class="f-textarea" name="description" rows="4"
-                    placeholder="Describe what happens this day — activities, landscapes, wildlife sightings, cultural moments..."><?= e($editing['description'] ?? '') ?></textarea>
+                    placeholder="Describe what happens this day â€” activities, landscapes, wildlife sightings, cultural moments..."><?= e($editing['description'] ?? '') ?></textarea>
         </div>
 
         <!-- Meals + Highlights -->
@@ -474,7 +474,7 @@ function dc(int $n): array {
                    style="width:160px;height:100px;object-fit:cover;border-radius:9px;border:1px solid rgba(255,255,255,.07)">
               <?php endif; ?>
               <?php if ($day['description']): ?>
-              <p style="color:rgba(255,255,255,.45);font-size:.85rem;line-height:1.7;margin:0"><?= e(mb_substr($day['description'],0,200)).(mb_strlen($day['description'])>200?'…':'') ?></p>
+              <p style="color:rgba(255,255,255,.45);font-size:.85rem;line-height:1.7;margin:0"><?= e(mb_substr($day['description'],0,200)).(mb_strlen($day['description'])>200?'â€”':'') ?></p>
               <?php endif; ?>
             </div>
             <?php endif; ?>
@@ -503,7 +503,7 @@ function dc(int $n): array {
     <!-- Add next day -->
     <div style="margin-top:1rem;padding:1.1rem;background:#1a1d27;border-radius:12px;border:1.5px dashed rgba(16,185,129,.18);text-align:center">
       <a href="tour-itinerary.php?tour_id=<?= $tourId ?>&edit=new" class="ab ab-em" style="display:inline-flex"><i class="fas fa-plus" style="font-size:.6rem"></i> Add Day <?= $nextDay ?></a>
-      <p style="color:rgba(255,255,255,.2);font-size:.72rem;margin-top:.5rem"><?= count($days) ?> day<?= count($days)!==1?'s':'' ?> · Next will be Day <?= $nextDay ?></p>
+      <p style="color:rgba(255,255,255,.2);font-size:.72rem;margin-top:.5rem"><?= count($days) ?> day<?= count($days)!==1?'s':'' ?> â€” Next will be Day <?= $nextDay ?></p>
     </div>
     <?php endif; ?>
 

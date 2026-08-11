@@ -316,7 +316,7 @@ function dayClr(int $n):array{$c=[['#10b981','rgba(16,185,129,.15)'],['#f59e0b',
       <div class="alert alert-error" style="margin:1rem 1.25rem 0">
         <i class="fas fa-exclamation-circle"></i>
         <ul style="list-style:none;margin:0">
-          <?php foreach ($errors as $e_): ?><li>� <?= e($e_) ?></li><?php endforeach; ?>
+          <?php foreach ($errors as $e_): ?><li>— <?= e($e_) ?></li><?php endforeach; ?>
         </ul>
       </div>
       <?php endif; ?>
@@ -345,7 +345,7 @@ function dayClr(int $n):array{$c=[['#10b981','rgba(16,185,129,.15)'],['#f59e0b',
             <div class="f-group">
               <label class="f-label">Destination <span>*</span></label>
               <select class="f-select" name="destination">
-                <option value="">� Select �</option>
+                <option value="">— Select —</option>
                 <?php foreach ($destinations as $d): ?>
                 <option value="<?= $d ?>" <?= ($editing['destination'] ?? '') === $d ? 'selected' : '' ?>><?= $d ?></option>
                 <?php endforeach; ?>
@@ -354,7 +354,7 @@ function dayClr(int $n):array{$c=[['#10b981','rgba(16,185,129,.15)'],['#f59e0b',
             <div class="f-group">
               <label class="f-label">Tour Type <span>*</span></label>
               <select class="f-select" name="tour_type">
-                <option value="">� Select �</option>
+                <option value="">— Select —</option>
                 <?php foreach ($tourTypes as $tt): ?>
                 <option value="<?= $tt ?>" <?= ($editing['tour_type'] ?? '') === $tt ? 'selected' : '' ?>><?= $tt ?></option>
                 <?php endforeach; ?>
@@ -376,7 +376,7 @@ function dayClr(int $n):array{$c=[['#10b981','rgba(16,185,129,.15)'],['#f59e0b',
                      value="<?= e($editing['max_travelers'] ?? 12) ?>">
             </div>
             <div class="f-group">
-              <label class="f-label">Rating (0�5)</label>
+              <label class="f-label">Rating (0–5)</label>
               <input type="number" class="f-input" name="rating" min="0" max="5" step="0.1"
                      value="<?= e($editing['rating'] ?? '4.8') ?>">
             </div>
@@ -428,7 +428,7 @@ function dayClr(int $n):array{$c=[['#10b981','rgba(16,185,129,.15)'],['#f59e0b',
               <div>
                 <label class="f-label" style="font-size:.58rem">Upload file</label>
                 <input type="file" class="f-input" name="image_file" accept="image/jpeg,image/png,image/webp" id="img-file-input">
-                <div class="f-hint">JPG/PNG/WebP � Max 8MB</div>
+                <div class="f-hint">JPG/PNG/WebP — Max 8MB</div>
               </div>
               <div>
                 <label class="f-label" style="font-size:.58rem">Or paste image URL</label>
@@ -472,9 +472,9 @@ function dayClr(int $n):array{$c=[['#10b981','rgba(16,185,129,.15)'],['#f59e0b',
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.1rem;flex-wrap:wrap;gap:.65rem">
           <div>
             <h3 style="font-family:'Nanum Myeongjo',serif;font-size:1rem;color:#fff;font-weight:700">
-              Day-by-Day Itinerary � <?= e($editing['name']) ?>
+              Day-by-Day Itinerary — <?= e($editing['name']) ?>
             </h3>
-            <p style="font-size:.72rem;color:rgba(255,255,255,.35);font-family:'Montserrat',sans-serif;margin-top:.15rem"><?= count($itineraryDays) ?> day<?= count($itineraryDays)!==1?'s':'' ?> � Next: Day <?= $nextDay ?></p>
+            <p style="font-size:.72rem;color:rgba(255,255,255,.35);font-family:'Montserrat',sans-serif;margin-top:.15rem"><?= count($itineraryDays) ?> day<?= count($itineraryDays)!==1?'s':'' ?> — Next: Day <?= $nextDay ?></p>
           </div>
           <a href="tours.php?edit=<?= $editId ?>&tab=itinerary&add_day=1"
              class="btn btn--primary btn--sm" style="display:inline-flex;align-items:center;gap:.35rem">
@@ -537,11 +537,11 @@ function dayClr(int $n):array{$c=[['#10b981','rgba(16,185,129,.15)'],['#f59e0b',
             <!-- Hotel image -->
             <div class="f-grid-2" style="margin-bottom:1rem">
               <div class="f-group" style="margin-bottom:0">
-                <label class="f-label">Hotel Image � Upload</label>
+                <label class="f-label">Hotel Image — Upload</label>
                 <input type="file" class="f-input" name="hotel_image_file" accept="image/jpeg,image/png,image/webp">
               </div>
               <div class="f-group" style="margin-bottom:0">
-                <label class="f-label">Hotel Image � URL</label>
+                <label class="f-label">Hotel Image — URL</label>
                 <input type="url" class="f-input" name="hotel_image_url" placeholder="https://..." value="<?= e($editingDay['hotel_image'] ?? '') ?>">
               </div>
             </div>
@@ -609,7 +609,7 @@ function dayClr(int $n):array{$c=[['#10b981','rgba(16,185,129,.15)'],['#f59e0b',
                 <div style="display:flex;flex-wrap:wrap;align-items:center;gap:.35rem;margin-bottom:.4rem">
                   <?php if($day['departure_location']): ?><span style="font-family:'Montserrat',sans-serif;font-size:.62rem;color:rgba(255,255,255,.4);background:rgba(255,255,255,.06);padding:.18rem .55rem;border-radius:4px"><?= e($day['departure_location']) ?></span><span style="color:rgba(255,255,255,.2);font-size:.7rem">?</span><?php endif; ?>
                   <?php if($day['distance']): ?><span style="font-family:'Montserrat',sans-serif;font-size:.6rem;color:rgba(255,255,255,.3)"><?= e($day['distance']) ?></span><?php endif; ?>
-                  <?php if($day['travel_time']): ?><span style="font-family:'Montserrat',sans-serif;font-size:.6rem;color:rgba(255,255,255,.3)">� <?= e($day['travel_time']) ?></span><?php endif; ?>
+                  <?php if($day['travel_time']): ?><span style="font-family:'Montserrat',sans-serif;font-size:.6rem;color:rgba(255,255,255,.3)">— <?= e($day['travel_time']) ?></span><?php endif; ?>
                   <?php if($day['arrival_location']): ?><span style="font-size:.7rem;color:rgba(255,255,255,.2)">?</span><span style="font-family:'Montserrat',sans-serif;font-size:.62rem;color:<?= $clr ?>;background:<?= $clrBg ?>;padding:.18rem .55rem;border-radius:4px"><?= e($day['arrival_location']) ?></span><?php endif; ?>
                 </div>
                 <?php endif; ?>
@@ -624,7 +624,7 @@ function dayClr(int $n):array{$c=[['#10b981','rgba(16,185,129,.15)'],['#f59e0b',
                   <?php endif; ?>
                 </div>
                 <?php if($day['description']): ?>
-                <p style="font-size:.78rem;color:rgba(255,255,255,.4);line-height:1.6;margin-bottom:.35rem"><?= e(mb_substr($day['description'],0,120)).(mb_strlen($day['description'])>120?'�':'') ?></p>
+                <p style="font-size:.78rem;color:rgba(255,255,255,.4);line-height:1.6;margin-bottom:.35rem"><?= e(mb_substr($day['description'],0,120)).(mb_strlen($day['description'])>120?'—':'') ?></p>
                 <?php endif; ?>
                 <?php if(!empty($hls)): ?>
                 <div style="display:flex;flex-wrap:wrap;gap:.2rem">
@@ -683,7 +683,7 @@ function dayClr(int $n):array{$c=[['#10b981','rgba(16,185,129,.15)'],['#f59e0b',
 
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.1rem;flex-wrap:wrap;gap:.65rem">
           <h3 style="font-family:'Nanum Myeongjo',serif;font-size:1rem;color:#fff;font-weight:700">
-            Tour Photos � <?= e($editing['name']) ?>
+            Tour Photos — <?= e($editing['name']) ?>
           </h3>
           <span style="font-family:'Montserrat',sans-serif;font-size:.72rem;color:rgba(255,255,255,.35)"><?= count($tourPhotos) ?> photo<?= count($tourPhotos)!==1?'s':'' ?> uploaded</span>
         </div>
@@ -699,7 +699,7 @@ function dayClr(int $n):array{$c=[['#10b981','rgba(16,185,129,.15)'],['#f59e0b',
               <div class="f-group" style="margin-bottom:0">
                 <label class="f-label">Upload files (multiple allowed)</label>
                 <input type="file" class="f-input" name="photos[]" multiple accept="image/jpeg,image/png,image/webp">
-                <div class="f-hint">JPG/PNG/WebP � Max 8MB each</div>
+                <div class="f-hint">JPG/PNG/WebP — Max 8MB each</div>
               </div>
               <div class="f-group" style="margin-bottom:0">
                 <label class="f-label">Or paste image URLs <span class="f-hint" style="text-transform:none;letter-spacing:0">(one per line)</span></label>
@@ -725,7 +725,7 @@ function dayClr(int $n):array{$c=[['#10b981','rgba(16,185,129,.15)'],['#f59e0b',
             <img src="<?= e($p['image']) ?>" alt="" style="width:100%;height:110px;object-fit:cover;display:block">
             <div style="padding:.5rem .65rem">
               <div style="font-size:.62rem;color:rgba(255,255,255,.28);font-family:'Montserrat',sans-serif;margin-bottom:.3rem">
-                Photo #<?= $i+1 ?><?= $i===0?' � <span style="color:#10b981">Cover</span>':'' ?>
+                Photo #<?= $i+1 ?><?= $i===0?' — <span style="color:#10b981">Cover</span>':'' ?>
               </div>
               <form method="POST" style="display:inline">
                 <input type="hidden" name="<?= CSRF_TOKEN_NAME ?>" value="<?= e($csrfToken) ?>">

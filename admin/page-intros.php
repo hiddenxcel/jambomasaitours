@@ -100,7 +100,7 @@ $knownPages = ['tours','destinations','about','gallery','blog','booking','contac
     <?php endif; ?>
     <?php if ($errors): ?>
     <div style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);color:#991b1b;padding:var(--space-4) var(--space-6);border-radius:var(--radius-md);margin-bottom:var(--space-6);">
-      <?php foreach ($errors as $err): ?><div>• <?= e($err) ?></div><?php endforeach; ?>
+      <?php foreach ($errors as $err): ?><div>â€” <?= e($err) ?></div><?php endforeach; ?>
     </div>
     <?php endif; ?>
 
@@ -176,7 +176,7 @@ $knownPages = ['tours','destinations','about','gallery','blog','booking','contac
             <input type="text" class="form-control" name="page_slug" required value="<?= e($editing['page_slug']) ?>">
             <?php else: ?>
             <select class="form-control" name="page_slug" required>
-              <option value="">— Select page —</option>
+              <option value="">â€” Select page â€”</option>
               <?php foreach ($knownPages as $pg): ?>
               <option value="<?= $pg ?>"><?= $pg ?></option>
               <?php endforeach; ?>
@@ -203,7 +203,7 @@ $knownPages = ['tours','destinations','about','gallery','blog','booking','contac
               <div>
                 <label class="form-label" style="font-size:.78rem;">Upload from computer</label>
                 <input type="file" class="form-control" name="bg_file" accept="image/jpeg,image/png,image/webp,image/gif" id="pi-file">
-                <small style="color:var(--text-muted);font-size:.72rem;">JPG/PNG/WebP · Max 8MB</small>
+                <small style="color:var(--text-muted);font-size:.72rem;">JPG/PNG/WebP â€” Max 8MB</small>
               </div>
               <div>
                 <label class="form-label" style="font-size:.78rem;">Or paste URL</label>
@@ -212,7 +212,7 @@ $knownPages = ['tours','destinations','about','gallery','blog','booking','contac
                        placeholder="https://images.unsplash.com/...">
               </div>
             </div>
-            <small style="color:var(--text-muted);font-size:.72rem;">Recommended: 1920×600px. Leave empty for default.</small>
+            <small style="color:var(--text-muted);font-size:.72rem;">Recommended: 1920â€“600px. Leave empty for default.</small>
           </div>
 
           <?php if (!empty($editing['bg_image'])): ?>
