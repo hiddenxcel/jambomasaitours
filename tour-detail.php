@@ -386,7 +386,7 @@ document.addEventListener('keydown', e => {
 
 <!-- MAIN CONTENT -->
 <div class="max-w-7xl mx-auto px-4 lg:px-6 py-12">
-  <div class="grid lg:grid-cols-[1fr_340px] gap-10 items-start">
+  <div class="grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-10 items-start">
 
     <!-- Left: Details -->
     <div>
