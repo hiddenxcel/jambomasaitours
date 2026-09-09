@@ -511,8 +511,8 @@ require_once 'includes/dark_header.php';
                   <div class="min-w-0 flex-1">
                     <div class="text-white text-[.82rem] font-semibold leading-snug truncate group-hover:text-emerald-400 transition-colors"><?= e($t['name']) ?></div>
                     <div class="flex items-center gap-2 mt-0.5">
-                      <span class="text-white/35 text-[.65rem] font-nav"><?= e($t['duration']) ?></span>
-                      <span class="text-emerald-400 text-[.65rem] font-nav font-semibold"><?= formatPrice($t['price']) ?></span>
+                      <span class="text-white/35 text-[.65rem] font-nav"><?= e(formatDuration($t['duration'])) ?></span>
+                      <span class="text-emerald-400 text-[.65rem] font-nav font-semibold js-price" data-price-usd="<?= (float)$t['price'] ?>"><?= formatPrice($t['price']) ?></span>
                     </div>
                   </div>
                   <i class="fas fa-arrow-right text-white/20 group-hover:text-emerald-400 text-xs transition-colors flex-shrink-0"></i>

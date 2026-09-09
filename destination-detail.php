@@ -491,8 +491,8 @@ require_once 'includes/dark_header.php';
               <div style="font-family:'Montserrat',sans-serif;font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#a05e22;margin-bottom:.35rem"><?= e($t['tour_type']) ?></div>
               <h3 style="font-family:'Nanum Myeongjo',serif;font-size:.95rem;font-weight:700;color:#fff;margin-bottom:.35rem;line-height:1.3"><?= e($t['name']) ?></h3>
               <div style="display:flex;align-items:center;justify-content:space-between">
-                <span style="font-family:'Montserrat',sans-serif;font-size:.7rem;color:rgba(255,255,255,.4)"><?= e($t['duration']) ?></span>
-                <span style="font-family:'Montserrat',sans-serif;font-size:.78rem;font-weight:700;color:#a05e22">From $<?= number_format((float)$t['price']) ?></span>
+                <span style="font-family:'Montserrat',sans-serif;font-size:.7rem;color:rgba(255,255,255,.4)"><?= e(formatDuration($t['duration'])) ?></span>
+                <span style="font-family:'Montserrat',sans-serif;font-size:.78rem;font-weight:700;color:#a05e22">From <span class="js-price" data-price-usd="<?= (float)$t['price'] ?>">$<?= number_format((float)$t['price']) ?></span></span>
               </div>
             </div>
           </a>

@@ -17,6 +17,8 @@ foreach (["ALTER TABLE tours ADD COLUMN IF NOT EXISTS included TEXT DEFAULT ''",
 /* -- Ensure itinerary + photos tables exist -- */
 $db->exec("CREATE TABLE IF NOT EXISTS tour_itinerary (id INT AUTO_INCREMENT PRIMARY KEY,tour_id INT NOT NULL,day_number INT NOT NULL,title VARCHAR(255) NOT NULL,description TEXT,departure_location VARCHAR(200) DEFAULT '',arrival_location VARCHAR(200) DEFAULT '',distance VARCHAR(50) DEFAULT '',travel_time VARCHAR(50) DEFAULT '',accommodation VARCHAR(200) DEFAULT '',hotel_url VARCHAR(500) DEFAULT '',hotel_image VARCHAR(500) DEFAULT '',meals VARCHAR(200) DEFAULT '',highlights TEXT DEFAULT '',notes TEXT DEFAULT '',created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,UNIQUE KEY unique_day(tour_id,day_number))");
 $db->exec("CREATE TABLE IF NOT EXISTS tour_photos (id INT AUTO_INCREMENT PRIMARY KEY,tour_id INT NOT NULL,image VARCHAR(500) NOT NULL,caption VARCHAR(255) DEFAULT '',sort_order INT DEFAULT 0,created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP)");
+$db->exec("CREATE TABLE IF NOT EXISTS tour_discount_tiers (id INT AUTO_INCREMENT PRIMARY KEY,tour_id INT NOT NULL,min_people INT NOT NULL,max_people INT DEFAULT NULL,discount_percent DECIMAL(5,2) NOT NULL DEFAULT 0,created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,KEY idx_tour(tour_id))");
+$db->exec("CREATE TABLE IF NOT EXISTS tour_addons (id INT AUTO_INCREMENT PRIMARY KEY,tour_id INT NOT NULL,name VARCHAR(150) NOT NULL,description VARCHAR(255) DEFAULT '',price DECIMAL(10,2) NOT NULL DEFAULT 0,price_unit VARCHAR(20) NOT NULL DEFAULT 'per_person',sort_order INT DEFAULT 0,created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,KEY idx_tour(tour_id))");
 
 /* -- slugify helper ----------------------- */
 function makeSlug(string $str): string {
@@ -186,6 +188,51 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($photoId) $db->prepare("DELETE FROM tour_photos WHERE id=? AND tour_id=?")->execute([$photoId,$tourId]);
         redirect(SITE_URL.'/admin/tours.php?edit='.$tourId.'&tab=photos&msg=Photo+deleted.');
     }
+
+    /* -- PRICING: add discount tier -- */
+    if ($action === 'add_tier') {
+        $tourId   = sanitizeInt($_POST['tour_id'] ?? 0, 1);
+        $minP     = sanitizeInt($_POST['min_people'] ?? 0, 1);
+        $maxRaw   = trim($_POST['max_people'] ?? '');
+        $maxP     = ($maxRaw === '') ? null : sanitizeInt($maxRaw, 1);
+        $discount = min(100, max(0, (float)($_POST['discount_percent'] ?? 0)));
+        if ($minP && $tourId) {
+            $db->prepare("INSERT INTO tour_discount_tiers (tour_id,min_people,max_people,discount_percent) VALUES (?,?,?,?)")
+               ->execute([$tourId, $minP, $maxP, $discount]);
+        }
+        redirect(SITE_URL.'/admin/tours.php?edit='.$tourId.'&tab=pricing&msg='.urlencode('Discount tier added.'));
+    }
+
+    /* -- PRICING: delete discount tier -- */
+    if ($action === 'delete_tier') {
+        $tourId = sanitizeInt($_POST['tour_id'] ?? 0, 1);
+        $tierId = sanitizeInt($_POST['tier_id'] ?? 0, 1);
+        if ($tierId) $db->prepare("DELETE FROM tour_discount_tiers WHERE id=? AND tour_id=?")->execute([$tierId,$tourId]);
+        redirect(SITE_URL.'/admin/tours.php?edit='.$tourId.'&tab=pricing&msg=Tier+deleted.');
+    }
+
+    /* -- ADD-ONS: add optional extra -- */
+    if ($action === 'add_addon') {
+        $tourId  = sanitizeInt($_POST['tour_id'] ?? 0, 1);
+        $name    = sanitizeInput($_POST['name'] ?? '');
+        $desc    = sanitizeInput($_POST['description'] ?? '');
+        $price   = max(0, (float)($_POST['price'] ?? 0));
+        $unit    = in_array($_POST['price_unit'] ?? '', ['per_person','per_group']) ? $_POST['price_unit'] : 'per_person';
+        if ($name && $tourId) {
+            $s = $db->query("SELECT COALESCE(MAX(sort_order),0)+1 FROM tour_addons WHERE tour_id=$tourId")->fetchColumn();
+            $db->prepare("INSERT INTO tour_addons (tour_id,name,description,price,price_unit,sort_order) VALUES (?,?,?,?,?,?)")
+               ->execute([$tourId, $name, $desc, $price, $unit, $s]);
+        }
+        redirect(SITE_URL.'/admin/tours.php?edit='.$tourId.'&tab=addons&msg='.urlencode('Add-on added.'));
+    }
+
+    /* -- ADD-ONS: delete optional extra -- */
+    if ($action === 'delete_addon') {
+        $tourId  = sanitizeInt($_POST['tour_id'] ?? 0, 1);
+        $addonId = sanitizeInt($_POST['addon_id'] ?? 0, 1);
+        if ($addonId) $db->prepare("DELETE FROM tour_addons WHERE id=? AND tour_id=?")->execute([$addonId,$tourId]);
+        redirect(SITE_URL.'/admin/tours.php?edit='.$tourId.'&tab=addons&msg=Add-on+deleted.');
+    }
 }
 
 $msg      = sanitizeInput($_GET['msg'] ?? '');
@@ -196,6 +243,8 @@ $editDayId= sanitizeInt($_GET['edit_day'] ?? 0, 0);
 $editingDay = null;
 $itineraryDays = [];
 $tourPhotos    = [];
+$discountTiers = [];
+$tourAddons    = [];
 
 if ($editId) {
     $s = $db->prepare("SELECT * FROM tours WHERE id=?"); $s->execute([$editId]);
@@ -209,6 +258,12 @@ if ($editId) {
         /* Load photos */
         $pStmt = $db->prepare("SELECT * FROM tour_photos WHERE tour_id=? ORDER BY sort_order ASC,id ASC");
         $pStmt->execute([$editId]); $tourPhotos = $pStmt->fetchAll();
+        /* Load discount tiers */
+        $tStmt = $db->prepare("SELECT * FROM tour_discount_tiers WHERE tour_id=? ORDER BY min_people ASC");
+        $tStmt->execute([$editId]); $discountTiers = $tStmt->fetchAll();
+        /* Load add-ons */
+        $aStmt = $db->prepare("SELECT * FROM tour_addons WHERE tour_id=? ORDER BY sort_order ASC, id ASC");
+        $aStmt->execute([$editId]); $tourAddons = $aStmt->fetchAll();
     }
 }
 $filterType = sanitizeInput($_GET['type'] ?? '');
@@ -295,6 +350,8 @@ function dayClr(int $n):array{$c=[['#10b981','rgba(16,185,129,.15)'],['#f59e0b',
           'details'   => ['fa-compass',   'Tour Details',  true],
           'itinerary' => ['fa-route',     'Itinerary ('.count($itineraryDays).' days)', (bool)$editing],
           'photos'    => ['fa-images',    'Photos ('.count($tourPhotos).')', (bool)$editing],
+          'pricing'   => ['fa-tags',      'Group Pricing ('.count($discountTiers).')', (bool)$editing],
+          'addons'    => ['fa-plus-circle','Add-ons ('.count($tourAddons).')', (bool)$editing],
         ];
         foreach ($tabs as $tabKey => [$tabIcon,$tabLabel,$tabEnabled]): ?>
         <?php if ($tabEnabled): ?>
@@ -743,6 +800,162 @@ function dayClr(int $n):array{$c=[['#10b981','rgba(16,185,129,.15)'],['#f59e0b',
         <div style="margin-top:.75rem;font-family:'Montserrat',sans-serif;font-size:.68rem;color:rgba(255,255,255,.25)">
           <i class="fas fa-info-circle" style="color:rgba(16,185,129,.5);margin-right:.3rem"></i>
           First photo is used as the hero cover. Photos appear in the mosaic gallery on the tour detail page.
+        </div>
+        <?php endif; ?>
+
+        <!-- -- TAB: PRICING (group discount tiers) -- -->
+        <?php elseif ($activeTab === 'pricing' && $editing): ?>
+
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.1rem;flex-wrap:wrap;gap:.65rem">
+          <h3 style="font-family:'Nanum Myeongjo',serif;font-size:1rem;color:#fff;font-weight:700">
+            Group Discount Pricing — <?= e($editing['name']) ?>
+          </h3>
+          <span style="font-family:'Montserrat',sans-serif;font-size:.72rem;color:rgba(255,255,255,.35)">Base price: <?= formatPrice((float)$editing['price']) ?> / person</span>
+        </div>
+
+        <div style="background:rgba(96,165,250,.06);border:1px solid rgba(96,165,250,.15);border-radius:var(--radius-lg);padding:.85rem 1.1rem;margin-bottom:1.1rem;font-family:'Montserrat',sans-serif;font-size:.72rem;color:rgba(255,255,255,.5);line-height:1.6">
+          <i class="fas fa-info-circle" style="color:#60a5fa;margin-right:.3rem"></i>
+          Set automatic discounts based on group size. When a traveller requests an itinerary quote for e.g. 6 people, the matching tier's discount is applied automatically to the per-person price.
+        </div>
+
+        <!-- Add tier form -->
+        <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius-lg);padding:1.1rem;margin-bottom:1.1rem">
+          <h4 style="font-family:'Montserrat',sans-serif;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.4);margin-bottom:.85rem">Add Discount Tier</h4>
+          <form method="POST">
+            <input type="hidden" name="<?= CSRF_TOKEN_NAME ?>" value="<?= e($csrfToken) ?>">
+            <input type="hidden" name="action" value="add_tier">
+            <input type="hidden" name="tour_id" value="<?= $editId ?>">
+            <div class="f-grid-3">
+              <div class="f-group" style="margin-bottom:0">
+                <label class="f-label">Min People <span style="color:#f87171">*</span></label>
+                <input type="number" class="f-input" name="min_people" min="1" required placeholder="e.g. 4">
+              </div>
+              <div class="f-group" style="margin-bottom:0">
+                <label class="f-label">Max People <span class="f-hint" style="text-transform:none;letter-spacing:0">(blank = no limit)</span></label>
+                <input type="number" class="f-input" name="max_people" min="1" placeholder="e.g. 6">
+              </div>
+              <div class="f-group" style="margin-bottom:0">
+                <label class="f-label">Discount % <span style="color:#f87171">*</span></label>
+                <input type="number" class="f-input" name="discount_percent" min="0" max="100" step="0.5" required placeholder="e.g. 5">
+              </div>
+            </div>
+            <button type="submit" class="btn btn--primary btn--sm" style="display:inline-flex;align-items:center;gap:.35rem;margin-top:.75rem">
+              <i class="fas fa-plus" style="font-size:.6rem"></i> Add Tier
+            </button>
+          </form>
+        </div>
+
+        <!-- Tiers list -->
+        <?php if (empty($discountTiers)): ?>
+        <div style="text-align:center;padding:2rem;background:rgba(255,255,255,.02);border:2px dashed rgba(255,255,255,.07);border-radius:var(--radius-lg)">
+          <i class="fas fa-tags" style="font-size:2rem;color:rgba(255,255,255,.12);margin-bottom:.5rem;display:block"></i>
+          <p style="color:rgba(255,255,255,.3);font-size:.82rem">No discount tiers yet. Groups will be quoted at full price.</p>
+        </div>
+        <?php else: ?>
+        <div style="display:flex;flex-direction:column;gap:.5rem">
+          <?php foreach ($discountTiers as $tier): ?>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:1rem;background:#1f2333;border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:.75rem 1rem">
+            <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
+              <span style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:.8rem;color:#fff">
+                <?= (int)$tier['min_people'] ?><?= $tier['max_people'] ? '–'.(int)$tier['max_people'] : '+' ?> people
+              </span>
+              <span style="display:inline-flex;align-items:center;gap:.3rem;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.75rem;color:#34d399;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.2);padding:.25rem .7rem;border-radius:999px">
+                <i class="fas fa-percent" style="font-size:.55rem"></i><?= rtrim(rtrim(number_format((float)$tier['discount_percent'],2),'0'),'.') ?>% off
+              </span>
+            </div>
+            <form method="POST" onsubmit="return confirm('Delete this tier?')">
+              <input type="hidden" name="<?= CSRF_TOKEN_NAME ?>" value="<?= e($csrfToken) ?>">
+              <input type="hidden" name="action" value="delete_tier">
+              <input type="hidden" name="tour_id" value="<?= $editId ?>">
+              <input type="hidden" name="tier_id" value="<?= $tier['id'] ?>">
+              <button type="submit" class="btn btn--danger btn--sm" style="font-size:.6rem;padding:.3rem .6rem">
+                <i class="fas fa-trash" style="font-size:.55rem"></i>
+              </button>
+            </form>
+          </div>
+          <?php endforeach; ?>
+        </div>
+        <?php endif; ?>
+
+        <?php elseif ($activeTab === 'addons' && $editing): ?>
+
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.1rem;flex-wrap:wrap;gap:.65rem">
+          <h3 style="font-family:'Nanum Myeongjo',serif;font-size:1rem;color:#fff;font-weight:700">
+            Optional Add-ons — <?= e($editing['name']) ?>
+          </h3>
+        </div>
+
+        <div style="background:rgba(96,165,250,.06);border:1px solid rgba(96,165,250,.15);border-radius:var(--radius-lg);padding:.85rem 1.1rem;margin-bottom:1.1rem;font-family:'Montserrat',sans-serif;font-size:.72rem;color:rgba(255,255,255,.5);line-height:1.6">
+          <i class="fas fa-info-circle" style="color:#60a5fa;margin-right:.3rem"></i>
+          Extras travellers can add to this tour but aren't included in the base price — e.g. Balloon Safari, Cultural Village Visit. Shown on the itinerary PDF's pricing page.
+        </div>
+
+        <!-- Add add-on form -->
+        <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius-lg);padding:1.1rem;margin-bottom:1.1rem">
+          <h4 style="font-family:'Montserrat',sans-serif;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.4);margin-bottom:.85rem">Add Optional Extra</h4>
+          <form method="POST">
+            <input type="hidden" name="<?= CSRF_TOKEN_NAME ?>" value="<?= e($csrfToken) ?>">
+            <input type="hidden" name="action" value="add_addon">
+            <input type="hidden" name="tour_id" value="<?= $editId ?>">
+            <div class="f-grid-2">
+              <div class="f-group" style="margin-bottom:0">
+                <label class="f-label">Name <span style="color:#f87171">*</span></label>
+                <input type="text" class="f-input" name="name" required placeholder="e.g. Balloon Safari">
+              </div>
+              <div class="f-group" style="margin-bottom:0">
+                <label class="f-label">Description <span class="f-hint" style="text-transform:none;letter-spacing:0">(optional)</span></label>
+                <input type="text" class="f-input" name="description" placeholder="e.g. Sunrise flight over the Serengeti">
+              </div>
+            </div>
+            <div class="f-grid-2" style="margin-top:.85rem">
+              <div class="f-group" style="margin-bottom:0">
+                <label class="f-label">Price (USD) <span style="color:#f87171">*</span></label>
+                <input type="number" class="f-input" name="price" min="0" step="0.01" required placeholder="e.g. 600">
+              </div>
+              <div class="f-group" style="margin-bottom:0">
+                <label class="f-label">Price Unit</label>
+                <select class="f-input" name="price_unit">
+                  <option value="per_person">Per Person</option>
+                  <option value="per_group">Per Group / Flat Rate</option>
+                </select>
+              </div>
+            </div>
+            <button type="submit" class="btn btn--primary btn--sm" style="display:inline-flex;align-items:center;gap:.35rem;margin-top:.75rem">
+              <i class="fas fa-plus" style="font-size:.6rem"></i> Add Extra
+            </button>
+          </form>
+        </div>
+
+        <!-- Add-ons list -->
+        <?php if (empty($tourAddons)): ?>
+        <div style="text-align:center;padding:2rem;background:rgba(255,255,255,.02);border:2px dashed rgba(255,255,255,.07);border-radius:var(--radius-lg)">
+          <i class="fas fa-plus-circle" style="font-size:2rem;color:rgba(255,255,255,.12);margin-bottom:.5rem;display:block"></i>
+          <p style="color:rgba(255,255,255,.3);font-size:.82rem">No optional extras yet.</p>
+        </div>
+        <?php else: ?>
+        <div style="display:flex;flex-direction:column;gap:.5rem">
+          <?php foreach ($tourAddons as $addon): ?>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:1rem;background:#1f2333;border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:.75rem 1rem">
+            <div style="flex:1;min-width:0">
+              <div style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:.8rem;color:#fff">
+                <?= e($addon['name']) ?>
+                <span style="font-weight:400;color:#34d399;margin-left:.5rem"><?= formatPrice((float)$addon['price']) ?> <?= $addon['price_unit']==='per_person'?'pp':'flat' ?></span>
+              </div>
+              <?php if ($addon['description']): ?>
+              <div style="font-size:.72rem;color:rgba(255,255,255,.4);margin-top:.2rem"><?= e($addon['description']) ?></div>
+              <?php endif; ?>
+            </div>
+            <form method="POST" onsubmit="return confirm('Delete this add-on?')">
+              <input type="hidden" name="<?= CSRF_TOKEN_NAME ?>" value="<?= e($csrfToken) ?>">
+              <input type="hidden" name="action" value="delete_addon">
+              <input type="hidden" name="tour_id" value="<?= $editId ?>">
+              <input type="hidden" name="addon_id" value="<?= $addon['id'] ?>">
+              <button type="submit" class="btn btn--danger btn--sm" style="font-size:.6rem;padding:.3rem .6rem">
+                <i class="fas fa-trash" style="font-size:.55rem"></i>
+              </button>
+            </form>
+          </div>
+          <?php endforeach; ?>
         </div>
         <?php endif; ?>
 

@@ -45,6 +45,19 @@ function formatPrice(float $price): string {
     return '$' . number_format($price, 0, '.', ',');
 }
 
+/**
+ * Normalize inconsistent tour duration strings (e.g. "5/4NIGHTS", "3/2nights")
+ * into a consistent "X Days / Y Nights" format. Leaves already-well-formed
+ * strings ("7 Days / 6 Nights") untouched.
+ */
+function formatDuration(string $duration): string {
+    $duration = trim($duration);
+    if (preg_match('/^(\d+)\s*\/\s*(\d+)\s*nights?$/i', $duration, $m)) {
+        return $m[1] . ' Days / ' . $m[2] . ' Nights';
+    }
+    return $duration;
+}
+
 function formatDate(string $date): string {
     return date('F j, Y', strtotime($date));
 }
@@ -182,6 +195,39 @@ function inlineSafeHtml(string $text): string {
     return $html;
 }
 
+/**
+ * Find the discount tier matching a given group size (min_people <= count,
+ * and count <= max_people or max_people is open-ended). Returns the tier
+ * row with the highest min_people that still matches, or null.
+ */
+function findDiscountTier(PDO $db, int $tourId, int $peopleCount): ?array {
+    $stmt = $db->prepare("SELECT * FROM tour_discount_tiers
+                           WHERE tour_id = ? AND min_people <= ?
+                             AND (max_people IS NULL OR max_people >= ?)
+                           ORDER BY min_people DESC LIMIT 1");
+    $stmt->execute([$tourId, $peopleCount, $peopleCount]);
+    $tier = $stmt->fetch();
+    return $tier ?: null;
+}
+
+/**
+ * Compute a group price quote: base per-person price, matching discount
+ * tier (if any), discounted per-person price, and grand total.
+ */
+function computeGroupQuote(PDO $db, int $tourId, float $basePrice, int $peopleCount): array {
+    $tier = findDiscountTier($db, $tourId, $peopleCount);
+    $discountPercent = $tier ? (float)$tier['discount_percent'] : 0.0;
+    $discountedPrice = round($basePrice * (1 - $discountPercent / 100), 2);
+    return [
+        'base_price'        => $basePrice,
+        'discount_percent'  => $discountPercent,
+        'discounted_price'  => $discountedPrice,
+        'people_count'      => $peopleCount,
+        'total'             => round($discountedPrice * $peopleCount, 2),
+        'tier'              => $tier,
+    ];
+}
+
 function getSetting(string $key, string $default = ''): string {
     static $cache = null;
     if ($cache === null) {
@@ -194,4 +240,12 @@ function getSetting(string $key, string $default = ''): string {
         }
     }
     return $cache[$key] ?? $default;
+}
+
+/* Admin-configurable Groq API key (Settings → AI) overrides the hardcoded
+   fallback in config.php, so it can be rotated without touching code. */
+function getGroqApiKey(): string {
+    $fromSettings = getSetting('groq_api_key', '');
+    if ($fromSettings !== '') return $fromSettings;
+    return defined('GROQ_API_KEY') ? GROQ_API_KEY : '';
 }

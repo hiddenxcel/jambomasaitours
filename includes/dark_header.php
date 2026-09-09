@@ -74,7 +74,7 @@ try {
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="dns-prefetch" href="https://images.unsplash.com">
-  <script src="https://cdn.tailwindcss.com" fetchpriority="low"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: { extend: {
@@ -94,7 +94,7 @@ try {
 
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
+    html{scroll-behavior:smooth;overflow-x:hidden}
     body{background:#23362f;color:#e5e7eb;font-family:'Inter',sans-serif;overflow-x:hidden}
     ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:#2c463d}::-webkit-scrollbar-thumb{background:#a05e22;border-radius:2px}
 

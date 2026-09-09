@@ -87,6 +87,7 @@ try {
       ['tours.php',             'fa-compass',       'Safari Tours'],
       ['destinations-manager.php','fa-map-marker-alt','Dest. Pages'],
       ['gallery.php',           'fa-images',        'Gallery'],
+      ['image-library.php',     'fa-photo-video',   'Image Library'],
       ['blog.php',              'fa-newspaper',     'Blog Posts'],
     ];
     foreach ($contentNav as $n):

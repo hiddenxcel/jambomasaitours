@@ -9,7 +9,7 @@ require_once 'includes/upload_helper.php';
 $db = getDB();
 
 /* Ensure email settings exist in site_settings */
-$emailKeys = ['smtp_host'=>'','smtp_port'=>'587','smtp_user'=>'','smtp_pass'=>'','smtp_from_email'=>SITE_EMAIL,'smtp_from_name'=>SITE_NAME,'admin_notify_email'=>SITE_EMAIL,'notify_on_booking'=>'1','notify_on_contact'=>'1','notify_customer'=>'1','ga4_measurement_id'=>'','google_site_verification'=>'','favicon_url'=>'','social_facebook'=>'','social_instagram'=>'','social_twitter'=>'','social_youtube'=>'','social_tiktok'=>'','social_tripadvisor'=>'','tawkto_widget_id'=>''];
+$emailKeys = ['smtp_host'=>'','smtp_port'=>'587','smtp_user'=>'','smtp_pass'=>'','smtp_from_email'=>SITE_EMAIL,'smtp_from_name'=>SITE_NAME,'admin_notify_email'=>SITE_EMAIL,'notify_on_booking'=>'1','notify_on_contact'=>'1','notify_customer'=>'1','ga4_measurement_id'=>'','google_site_verification'=>'','favicon_url'=>'','social_facebook'=>'','social_instagram'=>'','social_twitter'=>'','social_youtube'=>'','social_tiktok'=>'','social_tripadvisor'=>'','tawkto_widget_id'=>'','groq_api_key'=>''];
 $ins = $db->prepare("INSERT IGNORE INTO site_settings (setting_key,setting_value) VALUES (?,?)");
 foreach ($emailKeys as $k => $v) { try { $ins->execute([$k, $v]); } catch (\Throwable $e) {} }
 
@@ -38,6 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $ga4Id              = trim($_POST['ga4_measurement_id']    ?? '');
     $gVerification      = trim($_POST['google_site_verification'] ?? '');
     $tawktoId           = trim($_POST['tawkto_widget_id'] ?? '');
+    $groqApiKey         = trim($_POST['groq_api_key'] ?? '');
 
     /* Social media links */
     $socialFacebook     = trim($_POST['social_facebook']    ?? '');
@@ -93,6 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $upsert->execute(['ga4_measurement_id',       $ga4Id]);
         $upsert->execute(['google_site_verification', $gVerification]);
         $upsert->execute(['tawkto_widget_id',         $tawktoId]);
+        $upsert->execute(['groq_api_key',             $groqApiKey]);
         $upsert->execute(['favicon_url',              $faviconUrl]);
         /* Social media links */
         $upsert->execute(['social_facebook',    $socialFacebook]);
@@ -131,6 +133,7 @@ $cNotifyCustomer   = $rows['notify_customer']     ?? '1';
 $cGa4Id            = $rows['ga4_measurement_id']      ?? '';
 $cGVerification    = $rows['google_site_verification'] ?? '';
 $cTawktoId         = $rows['tawkto_widget_id']         ?? '';
+$cGroqApiKey       = $rows['groq_api_key']             ?? '';
 $cFaviconUrl       = $rows['favicon_url']              ?? '';
 /* Social media links */
 $cSocialFacebook    = $rows['social_facebook']    ?? '';
@@ -506,6 +509,28 @@ $csrf = generateCsrfToken();
             <textarea class="form-control" name="tawkto_widget_id" rows="3"
                       placeholder="60f1a2b3c4d5e6f7a8b9c0d1/default"><?= e($cTawktoId) ?></textarea>
             <small style="color:var(--text-muted);font-size:.72rem">Leave blank to disable the chat widget on the site</small>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI Settings (Groq) -->
+      <div style="background:var(--color-white);border-radius:var(--radius-xl);padding:var(--space-6);box-shadow:var(--shadow-sm);margin-top:1.25rem">
+        <p style="font-family:'Montserrat',sans-serif;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#10b981;margin:0 0 .5rem">
+          <i class="fas fa-robot" style="margin-right:.35rem"></i>AI Settings (Groq)
+        </p>
+        <p style="font-size:.78rem;color:var(--text-muted);margin-bottom:1rem">
+          Groq API key inatumika kutengeneza itinerary PDF (uchaguzi wa picha, usafishaji wa route, mpango wa shughuli za kila siku).
+          Pata key yako bila malipo kwenye <strong>console.groq.com/keys</strong>.
+        </p>
+        <div class="form-row">
+          <div class="form-group" style="flex:1 1 100%">
+            <label class="form-label">Groq API Key</label>
+            <input type="text" class="form-control" name="groq_api_key" autocomplete="off"
+                   value="<?= e($cGroqApiKey) ?>" placeholder="gsk_..." style="font-family:monospace">
+            <small style="color:var(--text-muted);font-size:.72rem">
+              <?= $cGroqApiKey ? '✓ Key iko tayari — badilisha hapo juu kuibadilisha.' : 'Bado haijawekwa — AI features za itinerary PDF hazitafanya kazi mpaka ujaze hii.' ?>
+              Ikiachwa wazi kabisa, mfumo utatumia key ya chaguo-msingi kwenye code (kama ipo).
+            </small>
           </div>
         </div>
       </div>

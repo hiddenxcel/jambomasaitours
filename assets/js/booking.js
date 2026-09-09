@@ -80,8 +80,12 @@
     const opt = tourSelect.selectedOptions[0];
     const pp  = parseFloat(opt ? opt.dataset.price || 0 : 0);
     const n   = parseInt(travelersEl.value, 10) || 1;
-    priceEl.textContent = pp ? '$' + pp.toLocaleString() : '—';
-    totalEl.textContent = pp ? '$' + (pp * n).toLocaleString() : '—';
+    // Display converts to the visitor's chosen currency (window.jmtConvertPrice,
+    // from currency.js); the booking itself is always quoted/submitted in USD —
+    // this is a display preview only, not a payment amount.
+    const convert = window.jmtConvertPrice || (v => '$' + Math.round(v).toLocaleString());
+    priceEl.textContent = pp ? convert(pp) : '—';
+    totalEl.textContent = pp ? convert(pp * n) : '—';
   }
 
   tourSelect  && tourSelect.addEventListener('change', updatePrice);

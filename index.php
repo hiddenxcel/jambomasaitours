@@ -186,7 +186,7 @@ if (empty($testimonials)) {
   </script>
 
   <!-- Tailwind CSS CDN -->
-  <link rel="preconnect" href="https://cdn.tailwindcss.com"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="dns-prefetch" href="https://images.unsplash.com"><script src="https://cdn.tailwindcss.com" fetchpriority="low"></script>
+  <link rel="preconnect" href="https://cdn.tailwindcss.com"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="dns-prefetch" href="https://images.unsplash.com"><script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: {
@@ -232,7 +232,7 @@ if (empty($testimonials)) {
 
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
+    html{scroll-behavior:smooth;overflow-x:hidden}
     body{background:#23362f;color:#e9efe9;font-family:'Inter','Poppins',sans-serif;line-height:1.6;overflow-x:hidden}
     ::-webkit-scrollbar{width:4px}
     ::-webkit-scrollbar-track{background:#2c463d}
@@ -1028,7 +1028,7 @@ try {
           <div class="flex items-center gap-2 mb-3">
             <span class="font-nav text-[.65rem] text-emerald-400 font-semibold px-2.5 py-0.5 rounded-full"
                   style="background:rgba(160,94,34,.1)">
-              <?= e($tour['duration']) ?>
+              <?= e(formatDuration($tour['duration'])) ?>
             </span>
             <span class="font-nav text-[.65rem] text-white/50 px-2.5 py-0.5 rounded-full"
                   style="background:rgba(255,255,255,.06)">
@@ -1050,7 +1050,7 @@ try {
           <div class="flex items-center justify-between mt-4 pt-4 border-t border-white/[.07]">
             <div>
               <span class="text-white/40 text-xs font-nav">From </span>
-              <span class="text-white font-bold text-xl font-heading"><?= formatPrice($tour['price']) ?></span>
+              <span class="text-white font-bold text-xl font-heading js-price" data-price-usd="<?= (float)$tour['price'] ?>"><?= formatPrice($tour['price']) ?></span>
               <span class="text-white/35 text-xs font-nav"> /person</span>
             </div>
             <a href="<?= url('tour/' . e($tour['slug'])) ?>"
@@ -1662,7 +1662,7 @@ try {
         <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(0,0,0,.88),transparent 55%)"></div>
         <div class="absolute bottom-0 left-0 right-0 p-3.5">
           <div style="font-family:'Montserrat',sans-serif;font-size:.75rem;font-weight:700;color:#fff;line-height:1.3"><?= e($mt['name']) ?></div>
-          <div style="font-family:'Montserrat',sans-serif;font-size:.62rem;color:#a05e22;margin-top:.15rem">From $<?= number_format((float)$mt['price']) ?></div>
+          <div style="font-family:'Montserrat',sans-serif;font-size:.62rem;color:#a05e22;margin-top:.15rem">From <span class="js-price" data-price-usd="<?= (float)$mt['price'] ?>">$<?= number_format((float)$mt['price']) ?></span></div>
         </div>
       </a>
       <?php endforeach; ?>

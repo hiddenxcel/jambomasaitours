@@ -11,6 +11,11 @@ if (!isset($logoWidth))  { $logoWidth  = (int)(getSetting('logo_width','160') ?:
 if (!isset($siteName))   { $siteName   = getSetting('site_name','Jambo Masai Tours'); }
 if (!isset($siteTagline)){ $siteTagline= getSetting('site_tagline','Tanzania Safari Experts'); }
 
+/* Currency conversion rates — USD stays the stored/computed price everywhere;
+   this only feeds currency.js's client-side display conversion. */
+require_once __DIR__ . '/currency.php';
+try { $_pCurrencyRates = getCurrencyRates(); } catch (\Throwable $e) { $_pCurrencyRates = ['USD' => 1.0]; }
+
 /* Canonical navItems - identical on every page */
 $_pNavItems = [
     'home'         => ['url'=>url(),                     'desk'=>'Home',        'mob'=>'Home',             'icon'=>'fa-home'],
@@ -18,6 +23,7 @@ $_pNavItems = [
     'migration'    => ['url'=>url('migration'),          'desk'=>'Migration',   'mob'=>'Great Migration', 'icon'=>'fa-horse'],
     'destinations' => ['url'=>url('destinations'),       'desk'=>'Destinations','mob'=>'Destinations',     'icon'=>'fa-map-marker-alt'],
     'blog'         => ['url'=>url('blog'),               'desk'=>'Blog',        'mob'=>'Blog',             'icon'=>'fa-newspaper'],
+    'about'        => ['url'=>url('about'),               'desk'=>'About',       'mob'=>'About Us',         'icon'=>'fa-users'],
     'contact'      => ['url'=>url('contact'),            'desk'=>'Contact',     'mob'=>'Contact',          'icon'=>'fa-envelope'],
     'more'         => ['url'=>'#',                       'desk'=>'More',        'mob'=>'More',             'icon'=>'fa-ellipsis-h',    'mega'=>'more'],
 ];
@@ -78,6 +84,8 @@ $_name2      = $_nameParts[1] ?? 'Masai';
 #p-nav.solid #pnav-search-btn,#p-nav.solid #p-mob-toggle{background:rgba(16,68,45,.06) !important;border-color:rgba(16,68,45,.12) !important}
 #p-nav.solid #pnav-search-btn i{color:#374151 !important}
 #p-nav.solid #p-mob-toggle span{background:#1f2937 !important}
+/* Currency button on white pill: dark text for readability */
+#p-nav.solid .jmt-cur-btn{background:rgba(16,68,45,.06) !important;border-color:rgba(16,68,45,.12) !important;color:#1f2937 !important}
 /* Search button hover (works in both dark & solid states) */
 #pnav-search-btn:hover{background:rgba(160,94,34,.12) !important;border-color:rgba(160,94,34,.3) !important}
 #pnav-search-btn:hover i{color:#a05e22 !important}
@@ -180,6 +188,7 @@ $_name2      = $_nameParts[1] ?? 'Masai';
     <!-- Desktop links -->
     <ul style="display:none;align-items:center;list-style:none;margin:0;padding:0;flex:1;justify-content:center;gap:0" id="p-nav-links" class="desk-nav">
       <?php foreach ($_pNavItems as $key => $item):
+        if ($key === 'contact') continue; // Contact has its own icon shortcut in the actions area — no duplicate text link on desktop
         $isActive  = $_activePage === $key;
         $megaType  = $item['mega'] ?? false;
         $hasMega   = (bool)$megaType;
@@ -206,7 +215,7 @@ $_name2      = $_nameParts[1] ?? 'Masai';
                   <div style="width:32px;height:32px;border-radius:8px;background:rgba(160,94,34,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="fas fa-paw" style="color:#a05e22;font-size:.6rem"></i></div>
                   <div style="min-width:0">
                     <div class="pnav-m-name" style="font-size:.8rem;font-weight:600;color:rgba(255,255,255,.82);white-space:nowrap;overflow:hidden;text-overflow:ellipsis"><?= e($mt['name']) ?></div>
-                    <div style="font-size:.62rem;color:rgba(255,255,255,.28);font-family:'Montserrat',sans-serif"><?= e($mt['destination']) ?> · $<?= number_format((float)$mt['price']) ?></div>
+                    <div style="font-size:.62rem;color:rgba(255,255,255,.28);font-family:'Montserrat',sans-serif"><?= e($mt['destination']) ?> · <span class="js-price" data-price-usd="<?= (float)$mt['price'] ?>">$<?= number_format((float)$mt['price']) ?></span></div>
                   </div>
                 </a>
                 <?php endforeach; else: ?>
@@ -306,11 +315,36 @@ $_name2      = $_nameParts[1] ?? 'Masai';
 
     <!-- Right actions -->
     <div style="display:flex;align-items:center;gap:.45rem;flex-shrink:0">
-      <!-- Search -->
-      <button onclick="pnavOpenSearch()" aria-label="Search" id="pnav-search-btn"
-              style="width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.45);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s">
-        <i class="fas fa-search" style="font-size:.75rem"></i>
-      </button>
+      <!-- Currency selector (custom dropdown — a native <select>'s option
+           list can't be styled and renders as a jarring full-width white
+           sheet on mobile, so this is a plain button + absolutely
+           positioned menu instead, matching the site's own dark theme
+           everywhere). -->
+      <div class="jmt-cur-wrap" style="position:relative">
+        <button type="button" class="jmt-cur-btn" onclick="jmtToggleCurrencyMenu(event)" aria-haspopup="listbox" aria-expanded="false" aria-label="Currency"
+                style="display:flex;align-items:center;gap:.35rem;height:38px;padding:0 .7rem;border-radius:10px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.85);font-family:'Montserrat',sans-serif;font-weight:700;font-size:.68rem;cursor:pointer">
+          <span class="js-currency-label">USD</span>
+        </button>
+        <div class="jmt-cur-menu" role="listbox"
+             style="display:none;position:absolute;top:calc(100% + 6px);right:0;min-width:110px;background:#1a1a1a;border:1px solid rgba(255,255,255,.1);border-radius:10px;box-shadow:0 12px 32px rgba(0,0,0,.5);overflow:hidden;z-index:500">
+          <?php foreach (SUPPORTED_CURRENCIES as $_cur): ?>
+          <button type="button" class="jmt-cur-item" data-currency="<?= e($_cur) ?>" onclick="window.jmtSetCurrency('<?= e($_cur) ?>');jmtToggleCurrencyMenu()"
+                  style="display:block;width:100%;text-align:left;padding:.55rem .8rem;background:none;border:none;color:rgba(255,255,255,.65);font-family:'Montserrat',sans-serif;font-weight:600;font-size:.72rem;cursor:pointer;transition:background .15s,color .15s">
+            <?= e($_cur) ?>
+          </button>
+          <?php endforeach; ?>
+        </div>
+      </div>
+      <style>
+        .jmt-cur-item:hover{background:rgba(160,94,34,.15)!important;color:#fff!important}
+        .jmt-cur-item.active{background:rgba(160,94,34,.12)!important;color:#c17a3a!important}
+      </style>
+      <!-- Contact shortcut (was the search icon — replaced per request so
+           this slot links straight to /contact instead of opening search) -->
+      <a href="<?= url('contact') ?>" aria-label="Contact Us" id="pnav-search-btn"
+         style="width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.45);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;text-decoration:none">
+        <i class="fas fa-phone-alt" style="font-size:.7rem"></i>
+      </a>
       <!-- Book Safari - desktop only -->
       <button onclick="openBookingModal()" id="p-book-btn"
               style="display:none;align-items:center;gap:.4rem;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.72rem;padding:.6rem 1.1rem;border-radius:10px;background:linear-gradient(135deg,#7d4817,#a05e22);border:none;color:#fff;cursor:pointer;box-shadow:0 3px 12px rgba(160,94,34,.25);transition:all .25s;white-space:nowrap"
@@ -442,6 +476,47 @@ $_name2      = $_nameParts[1] ?? 'Masai';
 }
 </style>
 
+<script>window.JMT_CURRENCY_RATES = <?= json_encode($_pCurrencyRates) ?>;</script>
+<script src="<?= url('assets/js/currency.js') ?>"></script>
+<script>
+(function(){
+  function openMenu(wrap) {
+    var menu = wrap.querySelector('.jmt-cur-menu');
+    var btn = wrap.querySelector('.jmt-cur-btn');
+    if (wrap._closeTimer) { clearTimeout(wrap._closeTimer); wrap._closeTimer = null; }
+    menu.style.display = 'block';
+    btn.setAttribute('aria-expanded', 'true');
+  }
+  function closeMenu(wrap) {
+    var menu = wrap.querySelector('.jmt-cur-menu');
+    var btn = wrap.querySelector('.jmt-cur-btn');
+    menu.style.display = 'none';
+    btn.setAttribute('aria-expanded', 'false');
+  }
+  // Click still works (e.g. touch devices without hover), toggling immediately.
+  window.jmtToggleCurrencyMenu = function(e) {
+    if (e) e.stopPropagation();
+    document.querySelectorAll('.jmt-cur-wrap').forEach(function(wrap){
+      var menu = wrap.querySelector('.jmt-cur-menu');
+      if (menu.style.display === 'block') { closeMenu(wrap); } else { openMenu(wrap); }
+    });
+  };
+  document.querySelectorAll('.jmt-cur-wrap').forEach(function(wrap){
+    // Open immediately on hover; close only after the pointer has been away
+    // from the whole wrapper (button + menu) for a short grace period, so
+    // moving diagonally from the button down into the menu doesn't close it.
+    wrap.addEventListener('mouseenter', function(){ openMenu(wrap); });
+    wrap.addEventListener('mouseleave', function(){
+      wrap._closeTimer = setTimeout(function(){ closeMenu(wrap); }, 450);
+    });
+  });
+  document.addEventListener('click', function(e){
+    if (!e.target.closest('.jmt-cur-wrap')) {
+      document.querySelectorAll('.jmt-cur-wrap').forEach(function(wrap){ closeMenu(wrap); });
+    }
+  });
+})();
+</script>
 <script>
 (function(){
   /* Scroll progress */

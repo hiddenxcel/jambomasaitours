@@ -64,7 +64,7 @@ function ticon2(string $t): string {
   <meta name="theme-color" content="#a05e22">
   <?php $_fav = getSetting('favicon_url') ?: getSetting('logo_url') ?: (SITE_URL . '/uploads/logo-husika.png'); ?>
   <link rel="icon" type="image/png" href="<?= e($_fav) ?>">
-  <link rel="preconnect" href="https://cdn.tailwindcss.com"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="dns-prefetch" href="https://images.unsplash.com"><script src="https://cdn.tailwindcss.com" fetchpriority="low"></script>
+  <link rel="preconnect" href="https://cdn.tailwindcss.com"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="dns-prefetch" href="https://images.unsplash.com"><script src="https://cdn.tailwindcss.com"></script>
   <script>tailwind.config={theme:{extend:{colors:{brand:'#a05e22',dark:'#23362f'},fontFamily:{heading:['Nanum Myeongjo','Georgia','serif'],sans:['Inter','sans-serif'],nav:['Montserrat','sans-serif']}}}}</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -72,7 +72,7 @@ function ticon2(string $t): string {
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
+    html{scroll-behavior:smooth;overflow-x:hidden}
     body{background:#23362f;color:#e5e7eb;font-family:'Inter',sans-serif;overflow-x:hidden}
     ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:#2c463d}::-webkit-scrollbar-thumb{background:#a05e22;border-radius:2px}
     .hero-grad{background:linear-gradient(135deg,#c17a3a,#7d4817,#a05e22);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
@@ -155,7 +155,6 @@ function ticon2(string $t): string {
       <?php endforeach; ?>
     </div>
   </div>
-  @media(max-width:768px){.hero-grid{grid-template-columns:1fr !important}}
 </section>
 
 <!-- ---------- WHY CHOOSE US ---------- -->
@@ -219,7 +218,7 @@ function ticon2(string $t): string {
           </div>
           <?php endif; ?>
           <div style="position:absolute;top:.85rem;right:.85rem;font-family:'Montserrat',sans-serif;font-size:.6rem;color:#fff;padding:.28rem .65rem;border-radius:999px;background:rgba(0,0,0,.55);backdrop-filter:blur(8px)">
-            <i class="fas fa-clock" style="color:#a05e22;font-size:.5rem"></i> <?= e($tour['duration']) ?>
+            <i class="fas fa-clock" style="color:#a05e22;font-size:.5rem"></i> <?= e(formatDuration($tour['duration'])) ?>
           </div>
           <div style="position:absolute;bottom:.85rem;right:.85rem;font-family:'Montserrat',sans-serif;font-size:.62rem;font-weight:700;color:#fff;padding:.25rem .6rem;border-radius:999px;background:rgba(0,0,0,.55)">
             <i class="fas fa-star" style="color:#fbbf24;font-size:.52rem"></i> <?= e($tour['rating'] ?? '5.0') ?>
@@ -245,7 +244,7 @@ function ticon2(string $t): string {
           <div style="display:flex;align-items:center;justify-content:space-between;padding-top:.75rem;border-top:1px solid rgba(255,255,255,.06);margin-top:.25rem">
             <div>
               <div style="font-family:'Montserrat',sans-serif;font-size:.52rem;color:rgba(255,255,255,.25);text-transform:uppercase">From</div>
-              <div style="font-family:'Nanum Myeongjo',serif;font-size:1.35rem;font-weight:700;color:#a05e22"><?= formatPrice($tour['price']) ?><span style="font-family:'Montserrat',sans-serif;font-size:.52rem;font-weight:400;color:rgba(255,255,255,.3)">/person</span></div>
+              <div style="font-family:'Nanum Myeongjo',serif;font-size:1.35rem;font-weight:700;color:#a05e22"><span class="js-price" data-price-usd="<?= (float)$tour['price'] ?>"><?= formatPrice($tour['price']) ?></span><span style="font-family:'Montserrat',sans-serif;font-size:.52rem;font-weight:400;color:rgba(255,255,255,.3)">/person</span></div>
             </div>
             <div style="display:flex;gap:.45rem">
               <a href="<?= url('tour/'.e($tour['slug'])) ?>" style="display:inline-flex;align-items:center;gap:.35rem;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;padding:.55rem 1rem;border-radius:9px;background:linear-gradient(135deg,#7d4817,#a05e22);color:#fff;text-decoration:none">
@@ -388,11 +387,13 @@ function ticon2(string $t): string {
 <style>
 @media(max-width:900px){
   [style*="grid-template-columns:repeat(4"]{grid-template-columns:repeat(2,1fr) !important}
+  [style*="grid-template-columns:repeat(3"]{grid-template-columns:repeat(2,1fr) !important}
   [style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr !important}
   [style*="grid-template-columns:1fr 1fr;gap:3rem"]{grid-template-columns:1fr !important}
 }
 @media(max-width:640px){
   [style*="grid-template-columns:repeat(4"]{grid-template-columns:1fr !important}
+  [style*="grid-template-columns:repeat(3"]{grid-template-columns:1fr !important}
   [style*="grid-template-columns:repeat(2"]{grid-template-columns:1fr !important}
 }
 </style>

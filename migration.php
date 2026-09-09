@@ -396,7 +396,7 @@ require_once 'includes/dark_header.php';
           <div class="mig-pkg-cta flex flex-wrap items-center justify-between gap-4 pt-5" style="border-top:1px solid rgba(44,70,61,.12)">
             <div>
               <span class="font-nav uppercase tracking-widest block" style="font-size:.55rem;color:#7a8b80">From / per person</span>
-              <span class="font-heading font-bold" style="font-size:1.8rem;color:#a05e22"><?= formatPrice((float)$p['price']) ?></span>
+              <span class="font-heading font-bold js-price" style="font-size:1.8rem;color:#a05e22" data-price-usd="<?= (float)$p['price'] ?>"><?= formatPrice((float)$p['price']) ?></span>
             </div>
             <div class="mig-pkg-btns flex gap-2.5">
               <a href="<?= url('tour/' . e($p['slug'])) ?>" class="btn-em btn-em-outline" style="color:#5a6f64;border-color:rgba(44,70,61,.25)">Details</a>

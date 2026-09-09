@@ -124,7 +124,7 @@ $navItems = [
   <link rel="shortcut icon" href="<?= e($_fav) ?>">
   <link rel="apple-touch-icon" href="<?= e($_fav) ?>">
   <link rel="manifest" href="<?= e(SITE_URL) ?>/manifest.json">
-  <link rel="preconnect" href="https://cdn.tailwindcss.com"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="dns-prefetch" href="https://images.unsplash.com"><script src="https://cdn.tailwindcss.com" fetchpriority="low"></script>
+  <link rel="preconnect" href="https://cdn.tailwindcss.com"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="dns-prefetch" href="https://images.unsplash.com"><script src="https://cdn.tailwindcss.com"></script>
   <script>tailwind.config={theme:{extend:{colors:{brand:'#a05e22',safari:'#a05e22',dark:'#23362f'},fontFamily:{heading:['Nanum Myeongjo','Georgia','serif'],sans:['Inter','Poppins','sans-serif'],nav:['Montserrat','sans-serif']}}}}</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -132,7 +132,7 @@ $navItems = [
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
+    html{scroll-behavior:smooth;overflow-x:hidden}
     body{background:#23362f;color:#e5e7eb;font-family:'Inter',sans-serif;overflow-x:hidden}
     ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:#2c463d}::-webkit-scrollbar-thumb{background:#a05e22;border-radius:2px}
     .glass-card{background:rgba(255,255,255,.04);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.08);border-radius:16px}
@@ -364,7 +364,7 @@ $navItems = [
                     data-img="<?= e($t['image'] ?? IMG_SERENGETI) ?>"
                     data-slug="<?= e($t['slug']) ?>"
                     <?= $preselectedSlug === $t['slug'] ? 'selected' : '' ?>>
-              <?= e($t['name']) ?> — <?= e($t['destination']) ?> — <?= formatPrice($t['price']) ?>/person
+              <?= e($t['name']) ?> — <?= e($t['destination']) ?> — <?= formatPrice($t['price']) ?>/person (USD)
             </option>
             <?php endforeach; ?>
           </select>

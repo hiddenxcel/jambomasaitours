@@ -40,6 +40,9 @@ RewriteRule ^tour/([a-z0-9-]+)/?$          tour-detail.php?slug=$1         [L,QS
 RewriteRule ^blog/([a-z0-9-]+)/?$          blog-single.php?slug=$1         [L,QSA]
 RewriteRule ^destination/([a-z0-9-]+)/?$   destination-detail.php?slug=$1  [L,QSA]
 
+# Shared itinerary link
+RewriteRule ^i/([a-zA-Z0-9]{16,64})/?$     itinerary-download.php?token=$1 [L,QSA]
+
 
 
 # Cache

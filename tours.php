@@ -144,7 +144,7 @@ function cardBadge(array $tour, int $idx): ?array {
   }
   </script>
   <?php endif; ?>
-  <link rel="preconnect" href="https://cdn.tailwindcss.com"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="dns-prefetch" href="https://images.unsplash.com"><script src="https://cdn.tailwindcss.com" fetchpriority="low"></script>
+  <link rel="preconnect" href="https://cdn.tailwindcss.com"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="dns-prefetch" href="https://images.unsplash.com"><script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: { extend: {
@@ -167,7 +167,7 @@ function cardBadge(array $tour, int $idx): ?array {
 
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
+    html{scroll-behavior:smooth;overflow-x:hidden}
     body{background:#23362f;color:#e5e7eb;font-family:'Inter',sans-serif;overflow-x:hidden}
     ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:#2c463d}::-webkit-scrollbar-thumb{background:#a05e22;border-radius:2px}
 
@@ -424,7 +424,7 @@ function cardBadge(array $tour, int $idx): ?array {
 
         <!-- Duration pill top-right -->
         <div style="position:absolute;top:.85rem;right:.85rem;z-index:2;display:flex;align-items:center;gap:.35rem;font-family:'Montserrat',sans-serif;font-size:.6rem;color:#fff;padding:.3rem .7rem;border-radius:999px;background:rgba(0,0,0,.55);backdrop-filter:blur(8px)">
-          <i class="fas fa-clock" style="color:#a05e22;font-size:.52rem"></i><?= e($tour['duration']) ?>
+          <i class="fas fa-clock" style="color:#a05e22;font-size:.52rem"></i><?= e(formatDuration($tour['duration'])) ?>
         </div>
 
         <!-- Rating bottom-right on image -->
@@ -490,7 +490,7 @@ function cardBadge(array $tour, int $idx): ?array {
           <div>
             <div style="font-family:'Montserrat',sans-serif;font-size:.55rem;color:rgba(255,255,255,.28);text-transform:uppercase;letter-spacing:.08em">From</div>
             <div style="font-family:'Nanum Myeongjo',serif;font-size:1.45rem;font-weight:700;color:#a05e22;line-height:1.1">
-              <?= formatPrice($tour['price']) ?>
+              <span class="js-price" data-price-usd="<?= (float)$tour['price'] ?>"><?= formatPrice($tour['price']) ?></span>
               <span style="font-family:'Montserrat',sans-serif;font-size:.55rem;font-weight:400;color:rgba(255,255,255,.3)">/person</span>
             </div>
           </div>

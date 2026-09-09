@@ -112,6 +112,17 @@ require_once 'includes/dark_header.php';
           <?php endforeach; ?>
         </div>
 
+        <!-- License badge -->
+        <div class="inline-flex items-center gap-3 glass-card px-4 py-3 mb-8">
+          <div class="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0" style="background:#10b98118">
+            <i class="fas fa-certificate text-emerald-400 text-base"></i>
+          </div>
+          <div>
+            <div class="text-white/80 text-[.82rem] font-semibold leading-tight">Licensed Tour Operator</div>
+            <div class="text-white/40 text-[.72rem] font-nav">License No. 035421</div>
+          </div>
+        </div>
+
         <div class="flex flex-wrap gap-3">
           <a href="<?= url('tours') ?>"   class="btn-em btn-em-primary"><i class="fas fa-compass text-xs"></i> Browse Safaris</a>
           <a href="<?= url('contact') ?>" class="btn-em btn-em-outline">Contact Us</a>

@@ -156,7 +156,7 @@ $waMsg = urlencode('Hi! I am interested in the ' . $tour['name'] . ' tour. Pleas
     }
   ]
   </script>
-  <link rel="preconnect" href="https://cdn.tailwindcss.com"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="dns-prefetch" href="https://images.unsplash.com"><script src="https://cdn.tailwindcss.com" fetchpriority="low"></script>
+  <link rel="preconnect" href="https://cdn.tailwindcss.com"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="dns-prefetch" href="https://images.unsplash.com"><script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: { extend: {
@@ -179,8 +179,16 @@ $waMsg = urlencode('Hi! I am interested in the ' . $tour['name'] . ' tour. Pleas
   <link rel="manifest" href="<?= e(SITE_URL) ?>/manifest.json">
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
-    body{background:#23362f;color:#e5e7eb;font-family:'Inter',sans-serif;overflow-x:hidden}
+    /* overflow-x:hidden on html OR body (even just the X axis) makes that
+       element establish a new scroll/clipping context, which breaks
+       position:sticky for every descendant on the page — that's why the
+       price sidebar stopped following scroll after the horizontal-scroll
+       fix. overflow-x:clip still stops the horizontal-scroll bug (the
+       mobile drawer sliding the page sideways) without taking over as a
+       scrolling ancestor, so sticky keeps working against the real
+       scrolling element (here, body, which already has overflow-y:auto). */
+    html{scroll-behavior:smooth;overflow-x:clip}
+    body{background:#23362f;color:#e5e7eb;font-family:'Inter',sans-serif;overflow-x:clip}
     ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:#2c463d}::-webkit-scrollbar-thumb{background:#a05e22;border-radius:2px}
     .glass-card{background:rgba(255,255,255,.04);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.08);border-radius:16px}
     .hero-grad{background:linear-gradient(135deg,#c17a3a,#7d4817,#a05e22);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
@@ -380,7 +388,7 @@ document.addEventListener('keydown', e => {
       <!-- Quick meta bar -->
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-10 reveal">
         <?php foreach ([
-          ['fa-clock',         '#c17a3a', 'Duration',    e($tour['duration'])],
+          ['fa-clock',         '#c17a3a', 'Duration',    e(formatDuration($tour['duration']))],
           ['fa-users',         '#fbbf24', 'Group Size',  'Max '.e($tour['max_travelers'])],
           ['fa-map-marker-alt','#60a5fa', 'Destination', e($tour['destination'])],
           ['fa-compass',       '#f97316', 'Type',        e($tour['tour_type'])],
@@ -539,6 +547,11 @@ document.addEventListener('keydown', e => {
             <?= count($dbItin) ?>-Day Itinerary
           </h3>
           <div style="display:flex;align-items:center;gap:.6rem">
+            <button onclick="openItineraryModal(<?= (int)$tour['id'] ?>)"
+                    class="inline-flex items-center gap-2 font-nav font-semibold text-[.7rem] px-3.5 py-2 rounded-lg transition-all"
+                    style="background:rgba(160,94,34,.12);color:#c17a3a;border:1px solid rgba(160,94,34,.25)">
+              <i class="fas fa-file-pdf" style="font-size:.7rem"></i> Download PDF
+            </button>
             <button id="itin-prev" onclick="itinGoTo(itinCur-1)"
                     class="w-8 h-8 rounded-lg flex items-center justify-center text-white/50 hover:text-white transition-all text-xs"
                     style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1)">&#8249;</button>
@@ -736,7 +749,7 @@ document.addEventListener('keydown', e => {
         <!-- Price -->
         <div class="text-center pb-5 mb-5 border-b border-white/[.07]">
           <p class="font-nav text-[.62rem] uppercase tracking-widest text-white/35 mb-1">Starting from</p>
-          <p class="font-heading font-bold text-white leading-none" style="font-size:2.8rem"><?= formatPrice($tour['price']) ?></p>
+          <p class="font-heading font-bold text-white leading-none js-price" style="font-size:2.8rem" data-price-usd="<?= (float)$tour['price'] ?>"><?= formatPrice($tour['price']) ?></p>
           <p class="text-white/35 text-xs mt-1 font-nav">per person</p>
         </div>
 
@@ -767,6 +780,11 @@ document.addEventListener('keydown', e => {
            style="color:#25D366;background:rgba(37,211,102,.08);border:1px solid rgba(37,211,102,.2)">
           <i class="fab fa-whatsapp text-base"></i> Chat on WhatsApp
         </a>
+        <button type="button" onclick="openItineraryModal(<?= (int)$tour['id'] ?>)"
+                class="flex items-center justify-center gap-2 font-nav font-semibold text-sm w-full py-3 rounded-xl mb-3 transition-all hover:scale-[1.02]"
+                style="color:#c17a3a;background:rgba(160,94,34,.1);border:1px solid rgba(160,94,34,.25)">
+          <i class="fas fa-file-pdf text-xs"></i> Download Itinerary PDF
+        </button>
         <a href="<?= url('contact') ?>"
            class="flex items-center justify-center gap-2 font-nav text-sm text-white/50 hover:text-white w-full py-2.5 rounded-xl transition-all"
            style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)">
@@ -868,7 +886,7 @@ document.addEventListener('keydown', e => {
               <div class="flex items-center justify-between pt-2.5" style="border-top:1px solid rgba(255,255,255,.06)">
                 <div>
                   <span class="text-white/30 text-[.62rem] font-nav">From </span>
-                  <span class="font-heading font-bold text-emerald-400" style="font-size:1rem"><?= formatPrice($r['price']) ?></span>
+                  <span class="font-heading font-bold text-emerald-400 js-price" style="font-size:1rem" data-price-usd="<?= (float)$r['price'] ?>"><?= formatPrice($r['price']) ?></span>
                 </div>
                 <span class="font-nav text-[.6rem] font-semibold text-white/40 group-hover:text-emerald-400 transition-colors flex items-center gap-1">
                   View <i class="fas fa-arrow-right text-[.5rem]"></i>
@@ -927,6 +945,8 @@ document.addEventListener('keydown', e => {
 <button id="back-top" aria-label="Back to top"><i class="fas fa-chevron-up text-sm"></i></button>
 
 <?php require_once 'includes/chatbot-widget.php'; ?>
+<?php require_once 'includes/itinerary-modal.php'; ?>
+<script>window.SITE_URL = "<?= SITE_URL ?>";</script>
 
 <script>
 (function(){
