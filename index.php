@@ -556,7 +556,7 @@ try {
             </a>
             <div class="grid grid-cols-2 gap-3 sm:contents">
               <a href="<?= url('booking') ?>"
-                 class="inline-flex items-center justify-center gap-2 font-nav font-semibold text-[.8rem] text-white px-7 py-3.5 rounded-xl transition-all hover:bg-white/10 w-full sm:w-auto"
+                 class="btn-shine inline-flex items-center justify-center gap-2 font-nav font-semibold text-[.8rem] text-white px-7 py-3.5 rounded-xl transition-all hover:bg-white/10 w-full sm:w-auto"
                  style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)">
                 <i class="fas fa-play text-emerald-400 text-xs"></i>
                 Book Safari

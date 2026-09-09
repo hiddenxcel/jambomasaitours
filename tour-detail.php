@@ -206,6 +206,12 @@ $waMsg = urlencode('Hi! I am interested in the ' . $tour['name'] . ' tour. Pleas
     .related-card:hover img{transform:scale(1.05)}
     .glow-orb{position:fixed;pointer-events:none;z-index:0}
     .glow-orb-1{top:68px;left:0;width:500px;height:500px;background:radial-gradient(circle,rgba(160,94,34,0.08) 0%,transparent 70%)}
+    /* Diagonal light sweep across CTA buttons, repeating every few seconds
+       to draw the eye without needing hover — position:relative+overflow:hidden
+       on the button clips the sweeping ::after to its own rounded corners. */
+    .brand-shine{position:relative;overflow:hidden}
+    .brand-shine::after{content:'';position:absolute;top:0;left:-60%;width:45%;height:100%;background:linear-gradient(115deg,transparent 0%,rgba(255,255,255,.35) 50%,transparent 100%);transform:skewX(-20deg);animation:brandShine 3.2s ease-in-out infinite}
+    @keyframes brandShine{0%{left:-60%}35%,100%{left:130%}}
   </style>
 
 </head>
@@ -771,7 +777,7 @@ document.addEventListener('keydown', e => {
 
         <!-- CTA buttons -->
         <a href="<?= url('booking?tour='.e($tour['slug'])) ?>"
-           class="flex items-center justify-center gap-2 font-nav font-bold text-sm text-white w-full py-3.5 rounded-xl mb-3 transition-all hover:scale-[1.02] hover:shadow-lg"
+           class="brand-shine flex items-center justify-center gap-2 font-nav font-bold text-sm text-white w-full py-3.5 rounded-xl mb-3 transition-all hover:scale-[1.02] hover:shadow-lg"
            style="background:linear-gradient(135deg,#7d4817,#a05e22);box-shadow:0 4px 18px rgba(160,94,34,.25)">
           <i class="fas fa-calendar-check text-xs"></i> Book This Safari
         </a>
@@ -781,7 +787,7 @@ document.addEventListener('keydown', e => {
           <i class="fab fa-whatsapp text-base"></i> Chat on WhatsApp
         </a>
         <button type="button" onclick="openItineraryModal(<?= (int)$tour['id'] ?>)"
-                class="flex items-center justify-center gap-2 font-nav font-semibold text-sm w-full py-3 rounded-xl mb-3 transition-all hover:scale-[1.02]"
+                class="brand-shine flex items-center justify-center gap-2 font-nav font-semibold text-sm w-full py-3 rounded-xl mb-3 transition-all hover:scale-[1.02]"
                 style="color:#c17a3a;background:rgba(160,94,34,.1);border:1px solid rgba(160,94,34,.25)">
           <i class="fas fa-file-pdf text-xs"></i> Download Itinerary PDF
         </button>
