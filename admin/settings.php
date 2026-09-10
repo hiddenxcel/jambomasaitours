@@ -9,7 +9,7 @@ require_once 'includes/upload_helper.php';
 $db = getDB();
 
 /* Ensure email settings exist in site_settings */
-$emailKeys = ['smtp_host'=>'','smtp_port'=>'587','smtp_user'=>'','smtp_pass'=>'','smtp_from_email'=>SITE_EMAIL,'smtp_from_name'=>SITE_NAME,'admin_notify_email'=>SITE_EMAIL,'notify_on_booking'=>'1','notify_on_contact'=>'1','notify_customer'=>'1','ga4_measurement_id'=>'','google_site_verification'=>'','favicon_url'=>'','social_facebook'=>'','social_instagram'=>'','social_twitter'=>'','social_youtube'=>'','social_tiktok'=>'','social_tripadvisor'=>'','tawkto_widget_id'=>'','groq_api_key'=>''];
+$emailKeys = ['smtp_host'=>'','smtp_port'=>'587','smtp_user'=>'','smtp_pass'=>'','smtp_from_email'=>SITE_EMAIL,'smtp_from_name'=>SITE_NAME,'admin_notify_email'=>SITE_EMAIL,'notify_on_booking'=>'1','notify_on_contact'=>'1','notify_customer'=>'1','ga4_measurement_id'=>'','google_site_verification'=>'','favicon_url'=>'','social_facebook'=>'','social_instagram'=>'','social_twitter'=>'','social_youtube'=>'','social_tiktok'=>'','social_tripadvisor'=>'','tawkto_widget_id'=>'','groq_api_key'=>'','google_review_url'=>''];
 $ins = $db->prepare("INSERT IGNORE INTO site_settings (setting_key,setting_value) VALUES (?,?)");
 foreach ($emailKeys as $k => $v) { try { $ins->execute([$k, $v]); } catch (\Throwable $e) {} }
 
@@ -47,6 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $socialYoutube      = trim($_POST['social_youtube']     ?? '');
     $socialTiktok       = trim($_POST['social_tiktok']      ?? '');
     $socialTripadvisor  = trim($_POST['social_tripadvisor'] ?? '');
+    $googleReviewUrl    = trim($_POST['google_review_url'] ?? '');
 
     $existingFavicon    = trim($_POST['existing_favicon'] ?? '');
     $urlFavicon         = trim($_POST['favicon_url_input'] ?? '');
@@ -103,6 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $upsert->execute(['social_youtube',     $socialYoutube]);
         $upsert->execute(['social_tiktok',      $socialTiktok]);
         $upsert->execute(['social_tripadvisor', $socialTripadvisor]);
+        $upsert->execute(['google_review_url',  $googleReviewUrl]);
 
         unset($_SESSION[CSRF_TOKEN_NAME]);
         header('Location: settings.php?saved=1');
@@ -142,6 +144,7 @@ $cSocialTwitter     = $rows['social_twitter']     ?? '';
 $cSocialYoutube     = $rows['social_youtube']     ?? '';
 $cSocialTiktok      = $rows['social_tiktok']      ?? '';
 $cSocialTripadvisor = $rows['social_tripadvisor'] ?? '';
+$cGoogleReviewUrl   = $rows['google_review_url']  ?? '';
 
 $csrf = generateCsrfToken();
 ?>
@@ -335,6 +338,11 @@ $csrf = generateCsrfToken();
           <div class="form-group">
             <label class="form-label"><i class="fas fa-star" style="color:#34e0a1;margin-right:.4rem"></i>TripAdvisor</label>
             <input type="url" class="form-control" name="social_tripadvisor" value="<?= e($cSocialTripadvisor) ?>" placeholder="https://tripadvisor.com/yourlisting">
+          </div>
+          <div class="form-group">
+            <label class="form-label"><i class="fab fa-google" style="color:#4285F4;margin-right:.4rem"></i>Google Reviews (Write a Review link)</label>
+            <input type="url" class="form-control" name="google_review_url" value="<?= e($cGoogleReviewUrl) ?>" placeholder="https://g.page/r/xxxxx/review">
+            <small style="color:var(--text-muted);font-size:.72rem">Get this from Google Business Profile → Ask for reviews → Copy link.</small>
           </div>
         </div>
       </div>

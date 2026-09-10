@@ -32,6 +32,7 @@ RewriteRule ^blog/?$                blog.php               [L]
 RewriteRule ^booking/?$             booking.php            [L]
 RewriteRule ^faq/?$                 faq.php                [L]
 RewriteRule ^destinations/?$        destinations.php       [L]
+RewriteRule ^reviews/?$             reviews.php             [L]
 RewriteRule ^mountain-trekking/?$   mountain-trekking.php  [L]
 RewriteRule ^migration/?$           migration.php          [L]
 

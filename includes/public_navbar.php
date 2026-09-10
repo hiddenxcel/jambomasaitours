@@ -264,6 +264,7 @@ $_name2      = $_nameParts[1] ?? 'Masai';
               <?php foreach ([
                 ['fa-mountain',      'Mountain Trekking','Kilimanjaro & beyond',    'mountain-trekking','#c17a3a','Machame, Lemosho, Marangu routes'],
                 ['fa-users',         'About Us',  'Our story, team & mission',    'about',  '#a05e22','Meet the team behind your safari'],
+                ['fa-star',          'Reviews',   'Google & TripAdvisor ratings', 'reviews','#34e0a1','See what our travellers say'],
                 ['fa-question-circle','FAQ',       'Safari questions answered',     'faq',    '#fbbf24','Visa, packing, best time & more'],
                 ['fa-newspaper',     'Blog',      'Tips, guides & wildlife news',  'blog',   '#f87171','Expert safari advice & stories'],
                 ['fa-envelope',      'Contact Us','Talk to our safari experts',    'contact','#60a5fa','We respond within 2 hours'],
@@ -300,6 +301,7 @@ $_name2      = $_nameParts[1] ?? 'Masai';
         .more-item:nth-child(2){transition-delay:50ms}
         .more-item:nth-child(3){transition-delay:80ms}
         .more-item:nth-child(4){transition-delay:110ms}
+        .more-item:nth-child(5){transition-delay:140ms}
         .more-item:hover{background:rgba(255,255,255,.08)!important}
         .more-wa-wrap{opacity:0;transform:translateY(6px);transition:all .3s cubic-bezier(.22,1,.36,1);transition-delay:160ms}
         .pnav-mega:hover .more-wa-wrap{opacity:1;transform:translateY(0)}
@@ -428,6 +430,7 @@ $_name2      = $_nameParts[1] ?? 'Masai';
       <?php foreach ([
         ['fa-mountain',      url('mountain-trekking'),   'Mountain Trekking','rgba(160,94,34,.15)', '#c17a3a'],
         ['fa-images',        url('gallery'),             'Gallery',  'rgba(249,115,22,.15)', '#f97316'],
+        ['fa-star',          url('reviews'),             'Reviews',  'rgba(52,224,161,.15)', '#34e0a1'],
         ['fa-question-circle',url('faq'),                'Safari FAQ','rgba(251,191,36,.15)','#fbbf24'],
         ['fa-info-circle',   url('about'),               'About Us', 'rgba(160,94,34,.15)', '#a05e22'],
       ] as $ml): ?>
