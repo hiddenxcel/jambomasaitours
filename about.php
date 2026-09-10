@@ -4,8 +4,8 @@ require_once 'includes/functions.php';
 require_once 'includes/security.php';
 require_once 'includes/db.php';
 
-$pageTitle       = 'About Us | Maasai-Led Safari Experts — Jambo Masai Tours';
-$pageDescription = 'Maasai-founded, award-winning safari operator in Arusha, Tanzania. 15+ years of luxury safari experiences and community-first tourism.';
+$pageTitle       = 'About Jambo Masai Tours | Local East Africa Safari Experts';
+$pageDescription = 'Meet the passionate team behind Jambo Masai Tours. Dedicated to sustainable tourism, authentic cultural connections, and unforgettable tailor-made African adventures.';
 $currentPage     = 'about';
 $ogImage         = IMG_ABOUT;
 $canonicalUrl    = SITE_URL . '/about';
