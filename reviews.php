@@ -117,7 +117,7 @@ require_once 'includes/dark_header.php';
       </div>
       <div class="rev-hero-badge">
         <div class="rev-platform-badge" style="background:#34e0a1">
-          <i class="fas fa-star text-black text-lg"></i>
+          <img src="<?= url('assets/images/tripadvisor-icon.svg') ?>" alt="" style="width:22px;height:22px;filter:brightness(0)">
         </div>
         <div class="flex-1">
           <div class="flex items-center gap-2 justify-center sm:justify-start">
@@ -126,13 +126,16 @@ require_once 'includes/dark_header.php';
           </div>
           <div class="text-white/40 text-[.75rem] font-nav mt-0.5">TripAdvisor · Certificate of Excellence</div>
         </div>
-        <?php if ($tripadvisorUrl): ?>
-        <a href="<?= e($tripadvisorUrl) ?>" target="_blank" rel="noopener"
-           class="inline-flex items-center gap-2 font-nav font-semibold text-[.65rem] px-4 py-2.5 rounded-lg transition-all hover:scale-105"
-           style="color:#34e0a1;background:rgba(52,224,161,.1);border:1px solid rgba(52,224,161,.25)">
-          Write a Review
-        </a>
-        <?php endif; ?>
+        <div id="TA_socialButtonBubbles617" class="TA_socialButtonBubbles">
+          <ul id="4NlwYtynPy" class="TA_links T3la4ds4k">
+            <li id="Aa6935" class="DKFnzV">
+              <a target="_blank" rel="noopener" href="https://www.tripadvisor.com/Attraction_Review-g297913-d34602506-Reviews-Jambo_Masai_Tours-Arusha_Arusha_Region.html">
+                <img src="https://static.tacdn.com/img2/brand_refresh/Tripadvisor_logomark.svg" alt="TripAdvisor" width="28" height="28">
+              </a>
+            </li>
+          </ul>
+        </div>
+        <script async src="https://www.jscache.com/wejs?wtype=socialButtonBubbles&amp;uniq=617&amp;locationId=34602506&amp;color=green&amp;size=rect&amp;lang=en_US&amp;display_version=2" data-loadtrk onload="this.loadtrk=true"></script>
       </div>
     </div>
   </div>
@@ -144,7 +147,7 @@ require_once 'includes/dark_header.php';
     <div class="flex flex-wrap items-center justify-center gap-2.5 mb-10 reveal">
       <button class="rev-filter-btn active" data-filter="all">All Reviews (<?= count($testimonials) ?>)</button>
       <button class="rev-filter-btn" data-filter="google"><i class="fab fa-google mr-1"></i> Google (<?= $googleCount ?>)</button>
-      <button class="rev-filter-btn" data-filter="tripadvisor"><i class="fas fa-star mr-1"></i> TripAdvisor (<?= $tripCount ?>)</button>
+      <button class="rev-filter-btn" data-filter="tripadvisor"><img src="<?= url('assets/images/tripadvisor-icon.svg') ?>" alt="" class="inline-block w-3 h-3 mr-1" style="vertical-align:-1px"> TripAdvisor (<?= $tripCount ?>)</button>
     </div>
   </div>
 </section>
@@ -162,7 +165,7 @@ require_once 'includes/dark_header.php';
           <?php if ($tSource === 'google'): ?>
           <span class="rev-source-chip google"><i class="fab fa-google"></i> Google</span>
           <?php elseif ($tSource === 'tripadvisor'): ?>
-          <span class="rev-source-chip tripadvisor"><i class="fas fa-star"></i> TripAdvisor</span>
+          <span class="rev-source-chip tripadvisor"><img src="<?= url('assets/images/tripadvisor-icon.svg') ?>" alt="" class="inline-block w-3 h-3" style="vertical-align:-1px"> TripAdvisor</span>
           <?php endif; ?>
         </div>
         <p class="text-white/70 text-sm leading-relaxed mb-6"><?= e($t['review']) ?></p>
@@ -196,11 +199,16 @@ require_once 'includes/dark_header.php';
         <i class="fab fa-google text-xs"></i> Review on Google
       </a>
       <?php endif; ?>
-      <?php if ($tripadvisorUrl): ?>
-      <a href="<?= e($tripadvisorUrl) ?>" target="_blank" rel="noopener" class="btn-em btn-em-outline">
-        <i class="fas fa-star text-xs"></i> Review on TripAdvisor
-      </a>
-      <?php endif; ?>
+      <div id="TA_cdswritereviewlg871" class="TA_cdswritereviewlg" style="display:inline-flex;align-items:center;height:44px">
+        <ul id="lRPGt5" class="TA_links khCDy8uf" style="margin:0;padding:0;list-style:none">
+          <li id="2J9YE7xxP" class="NGXR8SnPCDX8">
+            <a target="_blank" rel="noopener" href="https://www.tripadvisor.com/Attraction_Review-g297913-d34602506-Reviews-Jambo_Masai_Tours-Arusha_Arusha_Region.html" style="display:inline-flex">
+              <img src="https://static.tacdn.com/img2/brand_refresh/Tripadvisor_lockup_horizontal_secondary_registered.svg" alt="Write a review on TripAdvisor" style="height:44px;width:auto">
+            </a>
+          </li>
+        </ul>
+      </div>
+      <script async src="https://www.jscache.com/wejs?wtype=cdswritereviewlg&amp;uniq=871&amp;locationId=34602506&amp;lang=en_US&amp;display_version=2" data-loadtrk onload="this.loadtrk=true"></script>
       <a href="<?= url('tours') ?>" class="btn-em btn-em-outline">Browse Safaris</a>
     </div>
   </div>

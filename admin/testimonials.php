@@ -242,7 +242,7 @@ $sourceColors = ['site'=>'#a05e22','google'=>'#4285F4','tripadvisor'=>'#34e0a1']
                        class="src-option" <?= $curSource === $key ? 'checked' : '' ?>>
                 <label for="src-<?= $key ?>" class="src-label" style="<?= $curSource===$key?'border-color:rgba(16,185,129,.5);background:rgba(16,185,129,.12);color:#10b981':'' ?>">
                   <?php if ($key === 'google'): ?><i class="fab fa-google" style="font-size:.6rem"></i>
-                  <?php elseif ($key === 'tripadvisor'): ?><i class="fas fa-star" style="font-size:.6rem"></i>
+                  <?php elseif ($key === 'tripadvisor'): ?><img src="<?= SITE_URL ?>/assets/images/tripadvisor-icon.svg" alt="" style="width:.7rem;height:.7rem;vertical-align:-1px">
                   <?php else: ?><i class="fas fa-globe" style="font-size:.6rem"></i><?php endif; ?>
                   <?= $label ?>
                 </label>
@@ -298,10 +298,16 @@ $sourceColors = ['site'=>'#a05e22','google'=>'#4285F4','tripadvisor'=>'#34e0a1']
         ['fa-star',        'rgba(16,185,129,.15)','#10b981', $total,    'Total Reviews'],
         ['fa-check-circle','rgba(52,211,153,.15)','#34d399', $approved, 'Approved / Live'],
         ['fa-google',      'rgba(66,133,244,.15)','#8ab4f8', $googleC,  'From Google'],
-        ['fa-star',        'rgba(52,224,161,.15)','#34e0a1', $tripC,    'From TripAdvisor'],
+        ['img',            'rgba(52,224,161,.15)','#34e0a1', $tripC,    'From TripAdvisor'],
       ] as $w): ?>
       <div class="adm-stat">
-        <div class="adm-stat-icon" style="background:<?= $w[1] ?>"><i class="fas <?= $w[0] ?>" style="color:<?= $w[2] ?>;font-size:.9rem"></i></div>
+        <div class="adm-stat-icon" style="background:<?= $w[1] ?>">
+          <?php if ($w[0] === 'img'): ?>
+          <img src="<?= SITE_URL ?>/assets/images/tripadvisor-icon.svg" alt="" style="width:.9rem;height:.9rem">
+          <?php else: ?>
+          <i class="fas <?= $w[0] ?>" style="color:<?= $w[2] ?>;font-size:.9rem"></i>
+          <?php endif; ?>
+        </div>
         <div><div class="adm-stat-val"><?= $w[3] ?></div><div class="adm-stat-lbl"><?= $w[4] ?></div></div>
       </div>
       <?php endforeach; ?>

@@ -1400,7 +1400,7 @@ try {
               <?php if ($tSource === 'google'): ?>
               <span class="rev-source-chip google"><i class="fab fa-google"></i> Google</span>
               <?php elseif ($tSource === 'tripadvisor'): ?>
-              <span class="rev-source-chip tripadvisor"><i class="fas fa-star"></i> TripAdvisor</span>
+              <span class="rev-source-chip tripadvisor"><img src="<?= url('assets/images/tripadvisor-icon.svg') ?>" alt="" class="inline-block w-3 h-3" style="vertical-align:-1px"> TripAdvisor</span>
               <?php endif; ?>
             </div>
             <p class="text-white/70 text-sm leading-relaxed mb-6 flex-1"><?= e(truncate($t['review'], 200)) ?></p>
@@ -1439,7 +1439,7 @@ try {
       <a href="<?= e($tripadvisorUrl) ?>" target="_blank" rel="noopener"
          class="inline-flex items-center gap-2 font-nav font-semibold text-[.8rem] px-6 py-3 rounded-xl transition-all hover:scale-105"
          style="color:#34e0a1;background:rgba(52,224,161,.08);border:1px solid rgba(52,224,161,.25)">
-        <i class="fas fa-star text-xs"></i> Review us on TripAdvisor
+        <img src="<?= url('assets/images/tripadvisor-icon.svg') ?>" alt="" class="inline-block w-3 h-3"> Review us on TripAdvisor
       </a>
       <?php endif; ?>
     </div>
