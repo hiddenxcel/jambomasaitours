@@ -25,6 +25,8 @@ $reviewAvgRating = 4.9;
 $reviewTotalCount = max(count($testimonials), 120);
 $googleCount = count(array_filter($testimonials, fn($t) => ($t['source'] ?? '') === 'google'));
 $tripCount   = count(array_filter($testimonials, fn($t) => ($t['source'] ?? '') === 'tripadvisor'));
+$safariCount = count(array_filter($testimonials, fn($t) => ($t['source'] ?? '') === 'safaribookings'));
+$safariBookingsUrl = 'https://www.safaribookings.com/p6419';
 
 $_rFav = getSetting('favicon_url') ?: getSetting('logo_url') ?: (SITE_URL . '/uploads/logo-husika.png');
 $headExtra = '<link rel="icon" type="image/png" href="' . e($_rFav) . '">
@@ -69,6 +71,7 @@ require_once 'includes/dark_header.php';
   .rev-source-chip{display:inline-flex;align-items:center;gap:.35rem;font-family:'Montserrat',sans-serif;font-size:.62rem;font-weight:700;letter-spacing:.04em;padding:.3rem .6rem;border-radius:999px}
   .rev-source-chip.google{background:rgba(66,133,244,.12);color:#8ab4f8}
   .rev-source-chip.tripadvisor{background:rgba(52,224,161,.12);color:#34e0a1}
+  .rev-source-chip.safaribookings{background:rgba(249,115,22,.12);color:#f97316}
   .rev-write-btn{position:relative;overflow:hidden}
   .rev-write-btn::after{content:'';position:absolute;top:0;left:-60%;width:45%;height:100%;background:linear-gradient(115deg,transparent 0%,rgba(255,255,255,.35) 50%,transparent 100%);transform:skewX(-20deg);animation:revShine 3.4s ease-in-out infinite}
   @keyframes revShine{0%{left:-60%}35%,100%{left:130%}}
@@ -148,6 +151,9 @@ require_once 'includes/dark_header.php';
       <button class="rev-filter-btn active" data-filter="all">All Reviews (<?= count($testimonials) ?>)</button>
       <button class="rev-filter-btn" data-filter="google"><i class="fab fa-google mr-1"></i> Google (<?= $googleCount ?>)</button>
       <button class="rev-filter-btn" data-filter="tripadvisor"><img src="<?= url('assets/images/tripadvisor-icon.svg') ?>" alt="" class="inline-block w-3 h-3 mr-1" style="vertical-align:-1px"> TripAdvisor (<?= $tripCount ?>)</button>
+      <?php if ($safariCount): ?>
+      <button class="rev-filter-btn" data-filter="safaribookings"><img src="<?= url('assets/images/safaribookings-icon.png') ?>" alt="" class="inline-block w-3 h-3 mr-1" style="vertical-align:-1px"> SafariBookings (<?= $safariCount ?>)</button>
+      <?php endif; ?>
     </div>
   </div>
 </section>
@@ -166,6 +172,8 @@ require_once 'includes/dark_header.php';
           <span class="rev-source-chip google"><i class="fab fa-google"></i> Google</span>
           <?php elseif ($tSource === 'tripadvisor'): ?>
           <span class="rev-source-chip tripadvisor"><img src="<?= url('assets/images/tripadvisor-icon.svg') ?>" alt="" class="inline-block w-3 h-3" style="vertical-align:-1px"> TripAdvisor</span>
+          <?php elseif ($tSource === 'safaribookings'): ?>
+          <span class="rev-source-chip safaribookings"><img src="<?= url('assets/images/safaribookings-icon.png') ?>" alt="" class="inline-block w-3 h-3" style="vertical-align:-1px"> SafariBookings</span>
           <?php endif; ?>
         </div>
         <p class="text-white/70 text-sm leading-relaxed mb-6"><?= e($t['review']) ?></p>
@@ -209,6 +217,11 @@ require_once 'includes/dark_header.php';
         </ul>
       </div>
       <script async src="https://www.jscache.com/wejs?wtype=cdswritereviewlg&amp;uniq=871&amp;locationId=34602506&amp;lang=en_US&amp;display_version=2" data-loadtrk onload="this.loadtrk=true"></script>
+      <a href="<?= e($safariBookingsUrl) ?>" target="_blank" rel="noopener"
+         class="inline-flex items-center gap-2 font-nav font-semibold text-[.8rem] px-6 py-3 rounded-xl transition-all hover:scale-105"
+         style="color:#f97316;background:rgba(249,115,22,.08);border:1px solid rgba(249,115,22,.25)">
+        <img src="<?= url('assets/images/safaribookings-icon.png') ?>" alt="" class="inline-block w-3 h-3"> Review us on SafariBookings
+      </a>
       <a href="<?= url('tours') ?>" class="btn-em btn-em-outline">Browse Safaris</a>
     </div>
   </div>

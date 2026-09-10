@@ -11,7 +11,7 @@ try { $db->exec("ALTER TABLE testimonials ADD COLUMN IF NOT EXISTS source VARCHA
 try { $db->exec("ALTER TABLE testimonials ADD COLUMN IF NOT EXISTS source_url VARCHAR(500) NULL"); } catch (\Throwable $e) {}
 
 $errors = [];
-$sources = ['site' => 'Site', 'google' => 'Google', 'tripadvisor' => 'TripAdvisor'];
+$sources = ['site' => 'Site', 'google' => 'Google', 'tripadvisor' => 'TripAdvisor', 'safaribookings' => 'SafariBookings'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!validateCsrfToken($_POST[CSRF_TOKEN_NAME] ?? '')) {
@@ -75,7 +75,7 @@ if (isset($_GET['edit']) && $editId) {
 $reviews   = $db->query("SELECT * FROM testimonials ORDER BY created_at DESC")->fetchAll();
 $csrfToken = generateCsrfToken();
 
-$sourceColors = ['site'=>'#a05e22','google'=>'#4285F4','tripadvisor'=>'#34e0a1'];
+$sourceColors = ['site'=>'#a05e22','google'=>'#4285F4','tripadvisor'=>'#34e0a1','safaribookings'=>'#f97316'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -243,6 +243,7 @@ $sourceColors = ['site'=>'#a05e22','google'=>'#4285F4','tripadvisor'=>'#34e0a1']
                 <label for="src-<?= $key ?>" class="src-label" style="<?= $curSource===$key?'border-color:rgba(16,185,129,.5);background:rgba(16,185,129,.12);color:#10b981':'' ?>">
                   <?php if ($key === 'google'): ?><i class="fab fa-google" style="font-size:.6rem"></i>
                   <?php elseif ($key === 'tripadvisor'): ?><img src="<?= SITE_URL ?>/assets/images/tripadvisor-icon.svg" alt="" style="width:.7rem;height:.7rem;vertical-align:-1px">
+                  <?php elseif ($key === 'safaribookings'): ?><img src="<?= SITE_URL ?>/assets/images/safaribookings-icon.png" alt="" style="width:.7rem;height:.7rem;vertical-align:-1px">
                   <?php else: ?><i class="fas fa-globe" style="font-size:.6rem"></i><?php endif; ?>
                   <?= $label ?>
                 </label>
@@ -294,16 +295,20 @@ $sourceColors = ['site'=>'#a05e22','google'=>'#4285F4','tripadvisor'=>'#34e0a1']
       $approved = count(array_filter($reviews, fn($r) => $r['approved']));
       $googleC  = count(array_filter($reviews, fn($r) => ($r['source'] ?? '') === 'google'));
       $tripC    = count(array_filter($reviews, fn($r) => ($r['source'] ?? '') === 'tripadvisor'));
+      $safariC  = count(array_filter($reviews, fn($r) => ($r['source'] ?? '') === 'safaribookings'));
       foreach ([
         ['fa-star',        'rgba(16,185,129,.15)','#10b981', $total,    'Total Reviews'],
         ['fa-check-circle','rgba(52,211,153,.15)','#34d399', $approved, 'Approved / Live'],
         ['fa-google',      'rgba(66,133,244,.15)','#8ab4f8', $googleC,  'From Google'],
-        ['img',            'rgba(52,224,161,.15)','#34e0a1', $tripC,    'From TripAdvisor'],
+        ['img-ta',         'rgba(52,224,161,.15)','#34e0a1', $tripC,    'From TripAdvisor'],
+        ['img-sb',         'rgba(249,115,22,.15)', '#f97316', $safariC,  'From SafariBookings'],
       ] as $w): ?>
       <div class="adm-stat">
         <div class="adm-stat-icon" style="background:<?= $w[1] ?>">
-          <?php if ($w[0] === 'img'): ?>
+          <?php if ($w[0] === 'img-ta'): ?>
           <img src="<?= SITE_URL ?>/assets/images/tripadvisor-icon.svg" alt="" style="width:.9rem;height:.9rem">
+          <?php elseif ($w[0] === 'img-sb'): ?>
+          <img src="<?= SITE_URL ?>/assets/images/safaribookings-icon.png" alt="" style="width:.9rem;height:.9rem">
           <?php else: ?>
           <i class="fas <?= $w[0] ?>" style="color:<?= $w[2] ?>;font-size:.9rem"></i>
           <?php endif; ?>

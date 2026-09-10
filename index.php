@@ -343,6 +343,7 @@ $reviewTotalCount = max(count($testimonials), 120);
     .rev-source-chip{display:inline-flex;align-items:center;gap:.35rem;font-family:'Montserrat',sans-serif;font-size:.62rem;font-weight:700;letter-spacing:.04em;padding:.3rem .6rem;border-radius:999px}
     .rev-source-chip.google{background:rgba(66,133,244,.12);color:#8ab4f8}
     .rev-source-chip.tripadvisor{background:rgba(52,224,161,.12);color:#34e0a1}
+    .rev-source-chip.safaribookings{background:rgba(249,115,22,.12);color:#f97316}
     .rev-write-btn{position:relative;overflow:hidden}
     .rev-write-btn::after{content:'';position:absolute;top:0;left:-60%;width:45%;height:100%;background:linear-gradient(115deg,transparent 0%,rgba(255,255,255,.35) 50%,transparent 100%);transform:skewX(-20deg);animation:brandShine 3.4s ease-in-out infinite}
     @keyframes brandShine{0%{left:-60%}35%,100%{left:130%}}
@@ -1401,6 +1402,8 @@ try {
               <span class="rev-source-chip google"><i class="fab fa-google"></i> Google</span>
               <?php elseif ($tSource === 'tripadvisor'): ?>
               <span class="rev-source-chip tripadvisor"><img src="<?= url('assets/images/tripadvisor-icon.svg') ?>" alt="" class="inline-block w-3 h-3" style="vertical-align:-1px"> TripAdvisor</span>
+              <?php elseif ($tSource === 'safaribookings'): ?>
+              <span class="rev-source-chip safaribookings"><img src="<?= url('assets/images/safaribookings-icon.png') ?>" alt="" class="inline-block w-3 h-3" style="vertical-align:-1px"> SafariBookings</span>
               <?php endif; ?>
             </div>
             <p class="text-white/70 text-sm leading-relaxed mb-6 flex-1"><?= e(truncate($t['review'], 200)) ?></p>
@@ -1442,6 +1445,11 @@ try {
         <img src="<?= url('assets/images/tripadvisor-icon.svg') ?>" alt="" class="inline-block w-3 h-3"> Review us on TripAdvisor
       </a>
       <?php endif; ?>
+      <a href="https://www.safaribookings.com/p6419" target="_blank" rel="noopener"
+         class="inline-flex items-center gap-2 font-nav font-semibold text-[.8rem] px-6 py-3 rounded-xl transition-all hover:scale-105"
+         style="color:#f97316;background:rgba(249,115,22,.08);border:1px solid rgba(249,115,22,.25)">
+        <img src="<?= url('assets/images/safaribookings-icon.png') ?>" alt="" class="inline-block w-3 h-3"> Review us on SafariBookings
+      </a>
     </div>
   </div>
 </section>
