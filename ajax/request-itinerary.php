@@ -122,9 +122,12 @@ try {
         $imageLibrary = $db->query("SELECT id, image, caption, destination FROM tour_image_library WHERE caption != ''")->fetchAll();
     } catch (\Throwable $e) { /* table may not exist yet */ }
 
-    $tierStmt = $db->prepare("SELECT * FROM tour_discount_tiers WHERE tour_id = ? ORDER BY min_people ASC");
-    $tierStmt->execute([$tourId]);
-    $discountTiers = $tierStmt->fetchAll();
+    $discountTiers = [];
+    try {
+        $tierStmt = $db->prepare("SELECT * FROM tour_discount_tiers WHERE tour_id = ? ORDER BY min_people ASC");
+        $tierStmt->execute([$tourId]);
+        $discountTiers = $tierStmt->fetchAll();
+    } catch (\Throwable $e) { /* table may not exist yet */ }
 
     $addons = [];
     try {

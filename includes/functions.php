@@ -201,13 +201,17 @@ function inlineSafeHtml(string $text): string {
  * row with the highest min_people that still matches, or null.
  */
 function findDiscountTier(PDO $db, int $tourId, int $peopleCount): ?array {
-    $stmt = $db->prepare("SELECT * FROM tour_discount_tiers
-                           WHERE tour_id = ? AND min_people <= ?
-                             AND (max_people IS NULL OR max_people >= ?)
-                           ORDER BY min_people DESC LIMIT 1");
-    $stmt->execute([$tourId, $peopleCount, $peopleCount]);
-    $tier = $stmt->fetch();
-    return $tier ?: null;
+    try {
+        $stmt = $db->prepare("SELECT * FROM tour_discount_tiers
+                               WHERE tour_id = ? AND min_people <= ?
+                                 AND (max_people IS NULL OR max_people >= ?)
+                               ORDER BY min_people DESC LIMIT 1");
+        $stmt->execute([$tourId, $peopleCount, $peopleCount]);
+        $tier = $stmt->fetch();
+        return $tier ?: null;
+    } catch (\Throwable $e) {
+        return null; // table may not exist yet
+    }
 }
 
 /**
