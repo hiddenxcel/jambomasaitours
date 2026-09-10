@@ -76,6 +76,40 @@ require_once 'includes/dark_header.php';
   .rev-write-btn::after{content:'';position:absolute;top:0;left:-60%;width:45%;height:100%;background:linear-gradient(115deg,transparent 0%,rgba(255,255,255,.35) 50%,transparent 100%);transform:skewX(-20deg);animation:revShine 3.4s ease-in-out infinite}
   @keyframes revShine{0%{left:-60%}35%,100%{left:130%}}
   @media(max-width:640px){.rev-hero-badge{flex-direction:column;text-align:center}}
+
+  /* Card text clamp + read-more trigger */
+  .rev-card{display:flex;flex-direction:column;cursor:pointer}
+  .rev-card-text{display:-webkit-box;-webkit-line-clamp:5;line-clamp:5;-webkit-box-orient:vertical;overflow:hidden}
+  .rev-readmore{display:none;align-items:center;gap:.35rem;background:none;border:none;padding:0;margin-bottom:0;font-family:'Montserrat',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.03em;color:#c17f3f;cursor:pointer;transition:gap .2s,color .2s}
+  .rev-readmore:hover{gap:.55rem;color:#e0a468}
+  .rev-card.has-overflow .rev-readmore{display:inline-flex}
+
+  /* Modal */
+  .rev-modal-overlay{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:1.25rem;background:rgba(8,8,8,.72);backdrop-filter:blur(6px);opacity:0;pointer-events:none;transition:opacity .3s ease}
+  .rev-modal-overlay.open{opacity:1;pointer-events:auto}
+  .rev-modal-frame{display:flex;align-items:center;gap:1rem;width:100%;max-width:760px}
+  .rev-modal{position:relative;flex:1;min-width:0;width:100%;max-width:620px;max-height:85vh;overflow-y:auto;background:#171310;border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:2rem;transform:translateY(24px) scale(.97);opacity:0;transition:transform .38s cubic-bezier(.2,.9,.3,1.3),opacity .3s ease}
+  .rev-modal-overlay.open .rev-modal{transform:translateY(0) scale(1);opacity:1}
+  .rev-modal-close{position:absolute;top:1rem;right:1rem;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.6);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;font-size:.85rem}
+  .rev-modal-close:hover{background:rgba(255,255,255,.12);color:#fff;transform:rotate(90deg)}
+  .rev-modal-body{transition:opacity .18s ease}
+  .rev-modal-body.swapping{opacity:0}
+  .rev-modal-text{white-space:pre-line}
+  .rev-modal-nav{flex-shrink:0;width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;opacity:0;pointer-events:none}
+  .rev-modal-nav.open{opacity:1;pointer-events:auto}
+  .rev-modal-nav:hover{background:rgba(160,94,34,.5);border-color:transparent;transform:scale(1.08)}
+  @media(max-width:820px){
+    .rev-modal-frame{gap:.5rem}
+    .rev-modal-nav{width:40px;height:40px}
+  }
+  @media(max-width:640px){
+    .rev-modal-frame{position:relative}
+    .rev-modal-nav{position:absolute;top:.85rem;width:34px;height:34px;background:rgba(255,255,255,.1);z-index:2}
+    .rev-modal-nav.prev{left:1rem}
+    .rev-modal-nav.next{left:3.3rem;right:auto}
+    .rev-modal{padding:1.4rem;padding-top:3.6rem;max-height:80vh}
+  }
+  body.rev-modal-lock{overflow:hidden}
 </style>
 
 <!-- PAGE HERO -->
@@ -165,7 +199,7 @@ require_once 'includes/dark_header.php';
       <?php foreach ($testimonials as $ti => $t):
         $tSource = $t['source'] ?? 'site';
       ?>
-      <div class="rev-card" data-source="<?= e($tSource) ?>" style="transition-delay:<?= min($ti,8) * 60 ?>ms">
+      <div class="rev-card" data-source="<?= e($tSource) ?>" data-review-index="<?= $ti ?>" style="transition-delay:<?= min($ti,8) * 60 ?>ms">
         <div class="flex items-center justify-between mb-4">
           <div class="stars text-sm"><?= str_repeat('★',(int)$t['rating']) ?><?= str_repeat('☆',5-(int)$t['rating']) ?></div>
           <?php if ($tSource === 'google'): ?>
@@ -176,8 +210,9 @@ require_once 'includes/dark_header.php';
           <span class="rev-source-chip safaribookings"><img src="<?= url('assets/images/safaribookings-icon.png') ?>" alt="" class="inline-block w-3 h-3" style="vertical-align:-1px"> SafariBookings</span>
           <?php endif; ?>
         </div>
-        <p class="text-white/70 text-sm leading-relaxed mb-6"><?= e($t['review']) ?></p>
-        <div class="flex items-center gap-3">
+        <p class="rev-card-text text-white/70 text-sm leading-relaxed mb-2"><?= e($t['review']) ?></p>
+        <button type="button" class="rev-readmore" data-open-review="<?= $ti ?>">Read full review <i class="fas fa-arrow-right" style="font-size:.6rem"></i></button>
+        <div class="flex items-center gap-3 mt-4">
           <img src="<?= e($t['photo'] ?: 'https://ui-avatars.com/api/?name=' . urlencode($t['customer_name']) . '&background=10b981&color=fff') ?>"
                alt="<?= e($t['customer_name']) ?>" loading="lazy"
                class="w-11 h-11 rounded-full object-cover border-2 border-brand/30 flex-shrink-0">
@@ -192,6 +227,31 @@ require_once 'includes/dark_header.php';
     <p id="reviews-empty" class="text-center text-white/40 text-sm py-16" style="display:none">No reviews found for this filter yet.</p>
   </div>
 </section>
+
+<!-- REVIEW MODAL -->
+<div class="rev-modal-overlay" id="rev-modal-overlay">
+  <div class="rev-modal-frame">
+    <div class="rev-modal-nav prev" id="rev-modal-prev" aria-label="Previous review"><i class="fas fa-chevron-left"></i></div>
+    <div class="rev-modal" role="dialog" aria-modal="true" aria-labelledby="rev-modal-name">
+    <button type="button" class="rev-modal-close" id="rev-modal-close" aria-label="Close"><i class="fas fa-times"></i></button>
+    <div class="rev-modal-body" id="rev-modal-body">
+      <div class="flex items-center justify-between mb-4 pr-8">
+        <div class="stars text-base" id="rev-modal-stars"></div>
+        <span id="rev-modal-chip"></span>
+      </div>
+      <p class="rev-modal-text text-white/80 text-[.95rem] leading-relaxed mb-6" id="rev-modal-text"></p>
+      <div class="flex items-center gap-3">
+        <img id="rev-modal-photo" src="" alt="" class="w-12 h-12 rounded-full object-cover border-2 border-brand/30 flex-shrink-0">
+        <div class="min-w-0">
+          <div class="text-white font-semibold text-sm" id="rev-modal-name"></div>
+          <div class="text-white/40 text-xs" id="rev-modal-meta"></div>
+        </div>
+      </div>
+    </div>
+    </div>
+    <div class="rev-modal-nav next" id="rev-modal-next" aria-label="Next review"><i class="fas fa-chevron-right"></i></div>
+  </div>
+</div>
 
 <!-- CTA -->
 <section class="py-20 px-4 lg:px-0 text-center">
@@ -227,6 +287,18 @@ require_once 'includes/dark_header.php';
   </div>
 </section>
 
+<script type="application/json" id="reviews-data"><?= json_encode(array_map(function($t) {
+    return [
+        'name'    => strip_tags($t['customer_name']),
+        'country' => strip_tags($t['country']),
+        'rating'  => (int)$t['rating'],
+        'review'  => strip_tags($t['review']),
+        'tour'    => strip_tags($t['tour_name'] ?? ''),
+        'source'  => $t['source'] ?? 'site',
+        'photo'   => $t['photo'] ?: ('https://ui-avatars.com/api/?name=' . urlencode($t['customer_name']) . '&background=10b981&color=fff'),
+    ];
+}, $testimonials), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?></script>
+
 <?php
 $pageScript = <<<'JS'
 <script>
@@ -257,6 +329,102 @@ $pageScript = <<<'JS'
       });
       emptyMsg.style.display = visibleCount === 0 ? 'block' : 'none';
     });
+  });
+
+  /* Mark cards whose text is actually clamped so "Read full review" only shows when needed */
+  function markOverflow() {
+    document.querySelectorAll('.rev-card').forEach(card => {
+      const p = card.querySelector('.rev-card-text');
+      if (p && p.scrollHeight > p.clientHeight + 2) card.classList.add('has-overflow');
+      else card.classList.remove('has-overflow');
+    });
+  }
+  markOverflow();
+  window.addEventListener('resize', markOverflow);
+
+  /* ---- Review modal with prev/next navigation ---- */
+  const reviewsData = JSON.parse(document.getElementById('reviews-data').textContent || '[]');
+  const overlay   = document.getElementById('rev-modal-overlay');
+  const body      = document.getElementById('rev-modal-body');
+  const btnPrev   = document.getElementById('rev-modal-prev');
+  const btnNext   = document.getElementById('rev-modal-next');
+  const btnClose  = document.getElementById('rev-modal-close');
+  const sourceLabel = { google: 'Google', tripadvisor: 'TripAdvisor', safaribookings: 'SafariBookings' };
+  let currentIndex = 0;
+
+  function visibleIndices() {
+    const idxs = [];
+    cards.forEach(card => { if (card.style.display !== 'none') idxs.push(parseInt(card.dataset.reviewIndex, 10)); });
+    return idxs;
+  }
+
+  function renderModal(idx) {
+    const t = reviewsData[idx];
+    if (!t) return;
+    document.getElementById('rev-modal-stars').textContent = '★'.repeat(t.rating) + '☆'.repeat(5 - t.rating);
+    document.getElementById('rev-modal-text').textContent = t.review;
+    document.getElementById('rev-modal-photo').src = t.photo;
+    document.getElementById('rev-modal-photo').alt = t.name;
+    document.getElementById('rev-modal-name').textContent = t.name;
+    document.getElementById('rev-modal-meta').textContent = t.country + (t.tour ? ' · ' + t.tour : '');
+    const chipEl = document.getElementById('rev-modal-chip');
+    if (sourceLabel[t.source]) {
+      chipEl.innerHTML = '<span class="rev-source-chip ' + t.source + '">' + sourceLabel[t.source] + '</span>';
+    } else {
+      chipEl.innerHTML = '';
+    }
+  }
+
+  function goTo(idx) {
+    const idxs = visibleIndices();
+    if (!idxs.includes(idx)) idx = idxs[0] ?? idx;
+    currentIndex = idx;
+    body.classList.add('swapping');
+    setTimeout(() => { renderModal(currentIndex); body.classList.remove('swapping'); }, 140);
+  }
+
+  function step(dir) {
+    const idxs = visibleIndices();
+    if (!idxs.length) return;
+    const pos = idxs.indexOf(currentIndex);
+    const nextPos = (pos + dir + idxs.length) % idxs.length;
+    goTo(idxs[nextPos]);
+  }
+
+  function openModal(idx) {
+    currentIndex = idx;
+    renderModal(idx);
+    overlay.classList.add('open');
+    btnPrev.classList.add('open');
+    btnNext.classList.add('open');
+    document.body.classList.add('rev-modal-lock');
+  }
+  function closeModal() {
+    overlay.classList.remove('open');
+    btnPrev.classList.remove('open');
+    btnNext.classList.remove('open');
+    document.body.classList.remove('rev-modal-lock');
+  }
+
+  document.querySelectorAll('[data-open-review]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openModal(parseInt(btn.dataset.openReview, 10));
+    });
+  });
+  cards.forEach(card => {
+    card.addEventListener('click', () => openModal(parseInt(card.dataset.reviewIndex, 10)));
+  });
+
+  btnPrev.addEventListener('click', () => step(-1));
+  btnNext.addEventListener('click', () => step(1));
+  btnClose.addEventListener('click', closeModal);
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', (e) => {
+    if (!overlay.classList.contains('open')) return;
+    if (e.key === 'Escape') closeModal();
+    if (e.key === 'ArrowLeft') step(-1);
+    if (e.key === 'ArrowRight') step(1);
   });
 })();
 </script>
