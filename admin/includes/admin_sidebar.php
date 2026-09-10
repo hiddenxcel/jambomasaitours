@@ -89,6 +89,7 @@ try {
       ['gallery.php',           'fa-images',        'Gallery'],
       ['image-library.php',     'fa-photo-video',   'Image Library'],
       ['blog.php',              'fa-newspaper',     'Blog Posts'],
+      ['testimonials.php',      'fa-star',          'Guest Reviews'],
     ];
     foreach ($contentNav as $n):
       $isActive = $currentFile === $n[0];
