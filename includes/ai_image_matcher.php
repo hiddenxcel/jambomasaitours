@@ -58,7 +58,7 @@ function parseImageMatchResult(?array $parsed, array $library, int $perDay = 2):
  */
 function matchLibraryImagesForDays(array $days, array $library, int $perDay = 2): array {
     $apiKey = getGroqApiKey();
-    if (empty($apiKey)) return [];
+    if (empty($apiKey) || !defined('GROQ_API_URL') || !defined('GROQ_TEXT_MODEL')) return [];
     $prompt = buildImageMatchPrompt($days, $library, $perDay);
     if (!$prompt) return [];
 
@@ -149,7 +149,7 @@ function parseRouteCleanupResult(?array $parsed): array {
  */
 function cleanRouteLocations(array $days): array {
     $apiKey = getGroqApiKey();
-    if (empty($days) || empty($apiKey)) {
+    if (empty($days) || empty($apiKey) || !defined('GROQ_API_URL') || !defined('GROQ_TEXT_MODEL')) {
         return [];
     }
     $prompt = buildRouteCleanupPrompt($days);

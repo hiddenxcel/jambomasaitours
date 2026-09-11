@@ -62,7 +62,7 @@ function parseActivityPlanResult(?array $parsed): array {
  */
 function planDayActivities(array $days): array {
     $apiKey = getGroqApiKey();
-    if (empty($days) || empty($apiKey)) {
+    if (empty($days) || empty($apiKey) || !defined('GROQ_API_URL') || !defined('GROQ_TEXT_MODEL')) {
         return [];
     }
     $prompt = buildActivityPlanPrompt($days);

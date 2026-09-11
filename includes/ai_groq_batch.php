@@ -16,7 +16,7 @@
  */
 function runGroqBatch(array $requests): array {
     $apiKey = getGroqApiKey();
-    if (empty($requests) || empty($apiKey)) {
+    if (empty($requests) || empty($apiKey) || !defined('GROQ_API_URL') || !defined('GROQ_TEXT_MODEL')) {
         return array_fill_keys(array_keys($requests), null);
     }
 

@@ -182,5 +182,5 @@ try {
 } catch (\Throwable $e) {
     error_log('request-itinerary error: ' . $e->getMessage());
     http_response_code(500);
-    echo json_encode(['success' => false, 'message' => 'Something went wrong. Please try again or contact us on WhatsApp.', 'debug' => $e->getMessage() . ' @ ' . $e->getFile() . ':' . $e->getLine()]);
+    echo json_encode(['success' => false, 'message' => 'Something went wrong. Please try again or contact us on WhatsApp.']);
 }
