@@ -89,7 +89,7 @@ function buildDayBlock(array $day, array $galleryPhotos, int $dayIndex, array $a
     $imgs = pickDayImages($day, $galleryPhotos, $dayIndex, 3, $aiImageUrls);
     $photosHtml = '';
     foreach ($imgs as $img) {
-        $photosHtml .= '<div class="day-thumb"><img src="' . e($img) . '"></div>';
+        $photosHtml .= '<div class="day-thumb" style="background-image:url(\'' . e($img) . '\')"></div>';
     }
 
     return <<<HTML
@@ -417,7 +417,7 @@ function buildItineraryHtml(array $tour, array $days, array $galleryPhotos, arra
         <div class="contact-line">info@jambomasaitours.com · +255 659 667 271</div>
         <div class="contact-line">jambomasaitours.com</div>
       </div>
-      <div class="contact-photo"><img src="{$coverImg}"></div>
+      <div class="contact-photo" style="background-image:url('{$coverImg}')"></div>
     </div>
     HTML;
 
@@ -473,7 +473,7 @@ function buildItineraryHtml(array $tour, array $days, array $galleryPhotos, arra
         {$reviewsSection}
       </div>
       <div class="about-col-side">
-        <div class="about-photo-wrap"><img src="{$aboutPhoto}" class="about-photo"></div>
+        <div class="about-photo-wrap"><div class="about-photo" style="background-image:url('{$aboutPhoto}')"></div></div>
         <div class="about-block-label">Contact Us</div>
         <div class="about-contact-line"><strong>Address</strong> Arusha, Tanzania</div>
         <div class="about-contact-line"><strong>Phone</strong> +255 659 667 271</div>
@@ -535,7 +535,7 @@ function buildItineraryHtml(array $tour, array $days, array $galleryPhotos, arra
       .cover-lead-label { font-size: 9.5px; letter-spacing: 1px; text-transform: uppercase; color: #999; margin-bottom: 4px; }
       .cover-lead-value { font-size: 13px; font-weight: bold; color: #a05e22; }
       .cover-photo-wrap { border-radius: 6px; overflow: hidden; }
-      .cover-photo { width: 100%; height: 300px; object-fit: cover; display: block; }
+      .cover-photo { width: 100%; height: 300px; background-size: cover; background-position: center; background-repeat: no-repeat; }
       .cover-meta-grid { display: table; width: 100%; table-layout: fixed; border: 1px solid #eee; border-top: none; }
       .cover-meta-cell { display: table-cell; padding: 14px 18px; border-right: 1px solid #eee; }
       .cover-meta-cell:last-child { border-right: none; }
@@ -559,7 +559,7 @@ function buildItineraryHtml(array $tour, array $days, array $galleryPhotos, arra
       .glance-meta-label { font-size: 9.5px; letter-spacing: 1px; text-transform: uppercase; color: #a05e22; font-weight: bold; margin-bottom: 3px; }
       .glance-meta-value { font-size: 13px; font-weight: bold; color: #222; }
       .glance-photo-wrap { border-radius: 6px; overflow: hidden; margin-top: 30px; }
-      .glance-photo { width: 100%; height: 220px; object-fit: cover; display: block; }
+      .glance-photo { width: 100%; height: 220px; background-size: cover; background-position: center; background-repeat: no-repeat; }
 
       /* Summary table */
       .summary-table { width: calc(100% - 100px); margin: 0 50px 40px; border-collapse: collapse; }
@@ -591,11 +591,14 @@ function buildItineraryHtml(array $tour, array $days, array $galleryPhotos, arra
       .spread-header { padding: 108px 50px 0; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: #a05e22; font-weight: bold; }
       .day-block { padding: 14px 50px; display: table; width: calc(100% - 100px); margin: 0 auto; table-layout: fixed; }
       .day-photos { display: table-cell; width: 34%; vertical-align: top; padding-right: 16px; }
-      /* border-radius directly on an <img> with object-fit:cover renders
-         glitchy edges in Dompdf (the corner-cut artifact seen on larger
-         renders); rounding the overflow-hidden wrapper instead is reliable. */
-      .day-thumb { margin-bottom: 6px; border-radius: 4px; overflow: hidden; }
-      .day-thumb img { width: 100%; height: 76px; object-fit: cover; display: block; }
+      /* Dompdf does not reliably support object-fit:cover on <img> — it falls
+         back to stretching the image to fill the box, distorting the photo.
+         background-size:cover on a div is the mechanism Dompdf actually
+         supports, so every thumb/photo uses that instead of an <img> tag.
+         border-radius directly on an <img> with object-fit:cover also renders
+         glitchy edges in Dompdf (corner-cut artifact); rounding the wrapper
+         itself avoids that too. */
+      .day-thumb { margin-bottom: 6px; border-radius: 4px; overflow: hidden; width: 100%; height: 76px; background-size: cover; background-position: center; background-repeat: no-repeat; }
       .day-content { display: table-cell; width: 66%; vertical-align: top; }
       .day-tag { font-size: 9.5px; letter-spacing: 1.5px; text-transform: uppercase; color: #a05e22; font-weight: bold; margin-bottom: 4px; }
       .day-title { font-size: 15px; font-weight: bold; color: #1a1a1a; margin: 0 0 6px; }
@@ -655,8 +658,7 @@ function buildItineraryHtml(array $tour, array $days, array $galleryPhotos, arra
       .step-label { display: block; font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: #a05e22; font-weight: bold; margin-bottom: 5px; }
       .contact-strip { margin: 24px 50px 0; background: #1a1a1a; border-radius: 6px; padding: 20px 24px; display: table; width: calc(100% - 100px); table-layout: fixed; }
       .contact-strip > div { display: table-cell; vertical-align: middle; width: 62%; }
-      .contact-photo { display: table-cell; width: 38%; height: 90px; border-radius: 4px; overflow: hidden; }
-      .contact-photo img { width: 100%; height: 90px; object-fit: cover; display: block; }
+      .contact-photo { display: table-cell; width: 38%; height: 90px; border-radius: 4px; overflow: hidden; background-size: cover; background-position: center; background-repeat: no-repeat; }
       .contact-label { font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: #d99a53; font-weight: bold; margin-bottom: 8px; }
       .contact-line { font-size: 11px; color: #fff; margin-bottom: 3px; }
 
@@ -666,7 +668,7 @@ function buildItineraryHtml(array $tour, array $days, array $galleryPhotos, arra
       .about-col-side { display: table-cell; width: 40%; vertical-align: top; }
       .about-text { font-size: 11.5px; color: #444; line-height: 1.8; margin: 0 0 20px; }
       .about-photo-wrap { border-radius: 6px; overflow: hidden; margin-bottom: 20px; }
-      .about-photo { width: 100%; height: 150px; object-fit: cover; display: block; }
+      .about-photo { width: 100%; height: 150px; background-size: cover; background-position: center; background-repeat: no-repeat; }
       .about-block-label { font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: #a05e22; font-weight: bold; margin: 18px 0 8px; }
       .about-contact-line { font-size: 11px; color: #444; margin-bottom: 5px; }
       .about-contact-line strong { display: inline-block; width: 62px; color: #999; font-weight: normal; text-transform: uppercase; font-size: 9px; letter-spacing: .5px; }
@@ -724,7 +726,7 @@ function buildItineraryHtml(array $tour, array $days, array $galleryPhotos, arra
           {$travelDateBlock}
         </div>
 
-        <div class="cover-photo-wrap"><img class="cover-photo" src="{$coverImg}"></div>
+        <div class="cover-photo-wrap"><div class="cover-photo" style="background-image:url('{$coverImg}')"></div></div>
 
         <div class="cover-meta-grid">
           <div class="cover-meta-cell">
@@ -766,7 +768,7 @@ function buildItineraryHtml(array $tour, array $days, array $galleryPhotos, arra
             <div class="glance-meta-row" style="border-bottom:none"><div class="glance-meta-label">Season</div><div class="glance-meta-value">Flexible</div></div>
           </div>
         </div>
-        <div class="glance-photo-wrap"><img class="glance-photo" src="{$glanceImg}"></div>
+        <div class="glance-photo-wrap"><div class="glance-photo" style="background-image:url('{$glanceImg}')"></div></div>
       </div>
 
       <!-- Summary -->
