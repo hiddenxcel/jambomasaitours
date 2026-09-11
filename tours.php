@@ -4,7 +4,7 @@ require_once 'includes/functions.php';
 require_once 'includes/security.php';
 require_once 'includes/db.php';
 
-$pageTitle       = 'Tanzania Safari Tours & Packages | Prices ' . date('Y');
+$pageTitle       = 'Tanzania Safari Tours & Packages | Prices ' . date('Y') . ' & ' . (date('Y') + 1);
 $pageDescription = 'Browse all our luxury safari tours in Tanzania. Serengeti migration, Ngorongoro Crater, Kilimanjaro trekking, Zanzibar beach and cultural tours.';
 $currentPage     = 'tours';
 

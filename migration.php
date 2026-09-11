@@ -5,9 +5,9 @@ require_once 'includes/security.php';
 require_once 'includes/db.php';
 
 /* Kichwa kifupi (<60) ili kisikatwe kwenye matokeo ya Google */
-$pageTitle       = 'Great Migration Safari ' . date('Y') . ' | Serengeti Tanzania';
+$pageTitle       = 'Great Migration Safari ' . date('Y') . ' & ' . (date('Y') + 1) . ' | Serengeti';
 $pageDescription = 'Witness the Great Wildebeest Migration in the Serengeti — Mara River crossings (Jul–Oct) and calving season (Jan–Mar). Book with TATO-licensed guides.';
-$metaKeywords    = 'great migration safari, serengeti migration, wildebeest migration tanzania, mara river crossing safari, great migration ' . date('Y') . ', serengeti wildebeest migration, calving season serengeti, migration safari packages, best time great migration, tanzania migration safari, ngorongoro serengeti migration tour';
+$metaKeywords    = 'great migration safari, serengeti migration, wildebeest migration tanzania, mara river crossing safari, great migration ' . date('Y') . ', great migration ' . (date('Y') + 1) . ', serengeti wildebeest migration, calving season serengeti, migration safari packages, best time great migration, tanzania migration safari, ngorongoro serengeti migration tour';
 $currentPage     = 'migration';
 $ogImage         = IMG_SERENGETI;
 $canonicalUrl    = SITE_URL . '/migration';
