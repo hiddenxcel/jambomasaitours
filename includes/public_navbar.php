@@ -23,7 +23,7 @@ $_pNavItems = [
     'migration'    => ['url'=>url('migration'),          'desk'=>'Migration',   'mob'=>'Great Migration', 'icon'=>'fa-horse'],
     'destinations' => ['url'=>url('destinations'),       'desk'=>'Destinations','mob'=>'Destinations',     'icon'=>'fa-map-marker-alt'],
     'blog'         => ['url'=>url('blog'),               'desk'=>'Blog',        'mob'=>'Blog',             'icon'=>'fa-newspaper'],
-    'about'        => ['url'=>url('about'),               'desk'=>'About',       'mob'=>'About Us',         'icon'=>'fa-users'],
+    'about'        => ['url'=>url('about'),               'desk'=>'About Us',    'mob'=>'About Us',         'icon'=>'fa-users'],
     'contact'      => ['url'=>url('contact'),            'desk'=>'Contact',     'mob'=>'Contact',          'icon'=>'fa-envelope'],
     'more'         => ['url'=>'#',                       'desk'=>'More',        'mob'=>'More',             'icon'=>'fa-ellipsis-h',    'mega'=>'more'],
 ];
@@ -68,6 +68,15 @@ $_name2      = $_nameParts[1] ?? 'Masai';
   border-radius:999px;
   background:rgba(244,225,195,.78);backdrop-filter:blur(20px) saturate(1.3);-webkit-backdrop-filter:blur(20px) saturate(1.3);
   border:1px solid rgba(255,255,255,.4);box-shadow:0 10px 35px rgba(44,70,61,.18),inset 0 1px 0 rgba(255,255,255,.5)}
+/* Skrini pana (≥1280px): pill ya baada ya kuscroll inakuwa pana na ndefu zaidi, ili nembo, jina,
+   viungo na vitufe vipate nafasi. Skrini ndogo zinabaki na vipimo vya awali (zisifurike). */
+@media (min-width:1280px){
+  #p-nav.solid{padding-top:.85rem;padding-bottom:.85rem}
+  #p-nav.solid .pnav-inner{max-width:1232px;height:68px;padding:0 2.2rem}
+  #p-nav.solid .desk-nav li > a{height:68px !important;padding:0 1.05rem !important}
+  #p-nav.solid .pnav-inner > a:first-child{gap:.85rem !important}
+  #p-nav.solid .pnav-inner > div:last-child{gap:.65rem !important}
+}
 /* Logo swap: full logo at top, compact favicon + name when scrolled (pill) */
 #p-nav.solid #p-logo-full{display:none !important}
 #p-nav.solid #p-logo-icon{display:block !important}
@@ -478,6 +487,8 @@ $_name2      = $_nameParts[1] ?? 'Masai';
   #p-nav.solid #p-logo-text{display:none !important}
 }
 </style>
+<!-- Liquid-glass nav: lens, dock magnification, pill inayopumua -->
+<link rel="stylesheet" href="<?= SITE_URL ?>/assets/css/nav-liquid.css?v=<?= @filemtime(__DIR__ . '/../assets/css/nav-liquid.css') ?>">
 
 <script>window.JMT_CURRENCY_RATES = <?= json_encode($_pCurrencyRates) ?>;</script>
 <script src="<?= url('assets/js/currency.js') ?>"></script>
@@ -573,4 +584,5 @@ $_name2      = $_nameParts[1] ?? 'Masai';
 })();
 window.SITE_URL='<?= SITE_URL ?>';
 </script>
+<script src="<?= SITE_URL ?>/assets/js/nav-liquid.js?v=<?= @filemtime(__DIR__ . '/../assets/js/nav-liquid.js') ?>" defer></script>
 

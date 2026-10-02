@@ -14,7 +14,7 @@ $_navItems = [
     'destinations' => ['url'=>url('destinations'),      'desk'=>'Destinations','mob'=>'Destinations',   'icon'=>'fa-map-marker-alt'],
     'gallery'      => ['url'=>url('gallery'),           'desk'=>'Gallery',    'mob'=>'Gallery',          'icon'=>'fa-images'],
     'blog'         => ['url'=>url('blog'),              'desk'=>'Blog',       'mob'=>'Blog',             'icon'=>'fa-newspaper'],
-    'about'        => ['url'=>url('about'),             'desk'=>'About',      'mob'=>'About Us',         'icon'=>'fa-info-circle'],
+    'about'        => ['url'=>url('about'),             'desk'=>'About Us',   'mob'=>'About Us',         'icon'=>'fa-info-circle'],
     'faq'          => ['url'=>url('faq'),               'desk'=>'FAQ',        'mob'=>'Safari FAQ',       'icon'=>'fa-question-circle'],
     'contact'      => ['url'=>url('contact'),           'desk'=>'Contact',    'mob'=>'Contact',          'icon'=>'fa-envelope'],
 ];
@@ -45,6 +45,7 @@ try {
                ?: (SITE_URL . '/uploads/about-main.jpg');
   }
   ?>
+  <?php if (!empty($metaRobots)): ?><meta name="robots" content="<?= e($metaRobots) ?>"><?php endif; ?>
   <link rel="canonical" href="<?= e($canonicalUrl) ?>">
   <?php if (!empty($ogImage)): ?><meta property="og:image" content="<?= e($ogImage) ?>"><?php endif; ?>
   <meta property="og:title"       content="<?= e($pageTitle ?? '') ?>">
@@ -70,23 +71,11 @@ try {
   if ($_gv): ?><meta name="google-site-verification" content="<?= e($_gv) ?>"><?php endif; ?>
   <?php require __DIR__ . '/google-tags.php'; /* Google Ads + GA4 */ ?>
   <!-- Resource hints for faster CDN loading -->
-  <link rel="preconnect" href="https://cdn.tailwindcss.com">
+  
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="dns-prefetch" href="https://images.unsplash.com">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: { extend: {
-        colors:{ brand:'#a05e22', brandd:'#7d4817', safari:'#a05e22', dark:'#23362f' },
-        fontFamily:{
-          heading:['Nanum Myeongjo','Georgia','serif'],
-          sans:   ['Inter','Poppins','sans-serif'],
-          nav:    ['Montserrat','sans-serif'],
-        }
-      }}
-    }
-  </script>
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -195,6 +184,7 @@ try {
     <?= $extraCss ?? '' ?>
   </style>
   <?= $headExtra ?? '' ?>
+  <link rel="stylesheet" href="<?= SITE_URL ?>/assets/css/tailwind.css?v=<?= @filemtime(__DIR__ . '/../assets/css/tailwind.css') ?>">
 </head>
 <body class="bg-dark text-gray-200">
 

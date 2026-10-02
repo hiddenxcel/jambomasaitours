@@ -23,9 +23,30 @@ try {
 
 $prices   = array_filter(array_column($tours, 'price'));
 $minPrice = $prices ? min($prices) : 0;
-$pageTitle   = 'Kilimanjaro & Mt. Meru Trekking | Tanzania Routes';
-$pageDesc    = 'Conquer Africa\'s highest peaks. Expert-guided Kilimanjaro climbs, walking safaris and adventure tours. KINAPA certified guides.';
+$pageTitle   = 'Kilimanjaro & Mt Meru Climbs ' . seoYears() . ' | Jambo Masai';
+$pageDesc    = 'Climb Kilimanjaro (Machame, Lemosho, Marangu, Rongai) or Mt Meru with KINAPA-certified guides. Departures ' . seoYears() . ', expert acclimatisation, free quote.';
 $currentPage = 'trekking';
+
+/* FAQ inaonekana ukurasani NA inatumika kwenye schema (lazima zifanane) */
+$trekFaqs = [
+    ['What is the best time to climb Kilimanjaro?', 'January to March and June to October are the driest and most popular windows. April, May and November are wet on the mountain. Departures for ' . seoYears() . ' are available in both dry windows.'],
+    ['Which Kilimanjaro route has the highest success rate?', 'Longer routes with better acclimatisation, such as Lemosho (7 to 8 days) and Machame (6 to 7 days), generally give higher summit success than the shorter Marangu route.'],
+    ['Is Mount Meru a good warm-up for Kilimanjaro?', 'Yes. Mount Meru (4,562 m) in Arusha National Park is a 3 to 4 day climb that is a good acclimatisation trek before Kilimanjaro, and it passes through wildlife areas with an armed ranger.'],
+    ['How difficult is Mount Meru?', 'Meru is steeper than most Kilimanjaro routes and the final ridge to the summit is narrow, but it needs no technical climbing skills. Good fitness and a steady pace are enough.'],
+    ['Are your guides certified?', 'Yes. Our climbs are led by KINAPA-certified guides, with small groups, first aid and emergency oxygen carried on every trek.'],
+    ['Can I combine a climb with a safari or Zanzibar?', 'Yes. Many guests climb first and relax on a short safari or a Zanzibar beach extension afterwards. Ask us for a combined itinerary.'],
+];
+$trekLd = [
+    ['@context' => 'https://schema.org', '@type' => 'BreadcrumbList', 'itemListElement' => [
+        ['@type' => 'ListItem', 'position' => 1, 'name' => 'Home', 'item' => SITE_URL . '/'],
+        ['@type' => 'ListItem', 'position' => 2, 'name' => 'Kilimanjaro & Mt Meru Trekking', 'item' => SITE_URL . '/mountain-trekking'],
+    ]],
+    ['@context' => 'https://schema.org', '@type' => 'FAQPage', 'mainEntity' => array_map(fn($f) => ['@type' => 'Question', 'name' => $f[0], 'acceptedAnswer' => ['@type' => 'Answer', 'text' => $f[1]]], $trekFaqs)],
+];
+if (!empty($tours)) {
+    $trekLd[] = ['@context' => 'https://schema.org', '@type' => 'ItemList', 'name' => 'Trekking & adventure tours',
+        'itemListElement' => array_map(fn($t, $i) => ['@type' => 'ListItem', 'position' => $i + 1, 'url' => SITE_URL . '/tour/' . $t['slug'], 'name' => $t['name']], array_values($tours), array_keys(array_values($tours)))];
+}
 
 function ticon2(string $t): string {
     return match(strtolower($t)) {
@@ -62,10 +83,10 @@ function ticon2(string $t): string {
   <meta name="twitter:description" content="<?= e($pageDesc) ?>">
   <meta name="twitter:image" content="<?= e($_trekImg) ?>">
   <meta name="theme-color" content="#a05e22">
+  <script type="application/ld+json"><?= json_encode($trekLd, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?></script>
   <?php $_fav = getSetting('favicon_url') ?: getSetting('logo_url') ?: (SITE_URL . '/uploads/logo-husika.png'); ?>
   <link rel="icon" type="image/png" href="<?= e($_fav) ?>">
-  <link rel="preconnect" href="https://cdn.tailwindcss.com"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="dns-prefetch" href="https://images.unsplash.com"><script src="https://cdn.tailwindcss.com"></script>
-  <script>tailwind.config={theme:{extend:{colors:{brand:'#a05e22',dark:'#23362f'},fontFamily:{heading:['Nanum Myeongjo','Georgia','serif'],sans:['Inter','sans-serif'],nav:['Montserrat','sans-serif']}}}}</script>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="dns-prefetch" href="https://images.unsplash.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -97,6 +118,7 @@ function ticon2(string $t): string {
     .why-card{background:rgba(17,17,17,.8);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:1.5rem;transition:all .3s}
     .why-card:hover{border-color:rgba(160,94,34,.2);transform:translateY(-3px)}
   </style>
+  <link rel="stylesheet" href="<?= SITE_URL ?>/assets/css/tailwind.css?v=<?= @filemtime(__DIR__ . '/assets/css/tailwind.css') ?>">
 </head>
 <body>
 <div class="scroll-progress" id="scroll-progress" style="position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,#a05e22,#7d4817);z-index:9999;width:0;transition:width .1s"></div>
@@ -286,7 +308,7 @@ function ticon2(string $t): string {
         ['Marangu','fa-home','#fbbf24','5-6 days','Hut Route','Moderate','Hut accommodation. Shorter duration, lower success rate.'],
         ['Lemosho','fa-leaf','#60a5fa','7-8 days','Most Scenic','High','Long western approach through pristine rainforest.'],
         ['Rongai','fa-compass','#a78bfa','6-7 days','Northern Approach','High','Quiet northern route. Spectacular wilderness scenery.'],
-      ] as $r): ?>
+      ] as $r): $r[7] = SITE_URL . '/kilimanjaro/' . strtolower($r[0]) . '-route'; ?>
       <div class="route-card reveal">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem">
           <div style="width:42px;height:42px;border-radius:11px;background:<?= $r[2] ?>18;display:flex;align-items:center;justify-content:center">
@@ -294,7 +316,7 @@ function ticon2(string $t): string {
           </div>
           <span style="font-family:'Montserrat',sans-serif;font-size:.56rem;font-weight:700;padding:.2rem .6rem;border-radius:999px;background:<?= $r[2] ?>20;color:<?= $r[2] ?>"><?= $r[4] ?></span>
         </div>
-        <h3 style="font-family:'Nanum Myeongjo',serif;font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:.35rem"><?= $r[0] ?> Route</h3>
+        <h3 style="font-family:'Nanum Myeongjo',serif;font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:.35rem"><a href="<?= $r[7] ?>" style="color:inherit;text-decoration:none"><?= $r[0] ?> Route</a></h3>
         <div style="display:flex;gap:.75rem;margin-bottom:.75rem">
           <span style="font-family:'Montserrat',sans-serif;font-size:.6rem;color:rgba(255,255,255,.35);display:flex;align-items:center;gap:.25rem">
             <i class="fas fa-clock" style="color:<?= $r[2] ?>;font-size:.5rem"></i><?= $r[3] ?>
@@ -304,9 +326,43 @@ function ticon2(string $t): string {
           </span>
         </div>
         <p style="font-size:.75rem;color:rgba(255,255,255,.38);line-height:1.65"><?= $r[6] ?></p>
+        <a href="<?= $r[7] ?>" style="display:inline-block;margin-top:.7rem;font-size:.7rem;color:#c17a3a;font-weight:600;text-decoration:none">Full itinerary →</a>
       </div>
       <?php endforeach; ?>
     </div>
+  </div>
+</section>
+
+<!-- ---------- MT MERU ---------- -->
+<section id="mount-meru" style="padding:5rem 2rem;background:#23362f;border-top:1px solid rgba(255,255,255,.05)">
+  <div style="max-width:1100px;margin:0 auto">
+    <div style="text-align:center;margin-bottom:2.5rem" class="reveal">
+      <div class="section-tag"><i class="fas fa-mountain" style="font-size:.52rem"></i>Mount Meru</div>
+      <h2 style="font-family:'Nanum Myeongjo',serif;font-size:clamp(1.7rem,3vw,2.4rem);font-weight:700;color:#fff">
+        Climb <span class="hero-grad">Mount Meru</span> in Arusha National Park
+      </h2>
+      <p style="color:rgba(255,255,255,.5);max-width:720px;margin:1rem auto 0;line-height:1.7">
+        Mount Meru (4,562 m) rises above Arusha and is Tanzania's second-highest mountain. The 3 to 4 day trek climbs through forest where you may see buffalo, giraffe and monkeys, then follows a dramatic crater rim to Socialist Peak. It is a rewarding climb on its own and an ideal acclimatisation trek before Kilimanjaro.
+      </p>
+    </div>
+    <div class="why-card-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem">
+      <?php foreach ([
+        ['fa-clock', '3-4 days', 'Duration', 'Momella Gate to the summit and back, with an armed park ranger.'],
+        ['fa-mountain', '4,562 m', 'Summit', 'Socialist Peak, with views of Kilimanjaro at sunrise.'],
+        ['fa-paw', 'Wildlife', 'On the trail', 'Walk through Arusha National Park past buffalo, giraffe and colobus monkeys.'],
+        ['fa-calendar-alt', 'Jun-Oct, Dec-Feb', 'Best months', 'The drier windows give clearer skies and safer footing.'],
+      ] as $m): ?>
+      <div class="why-card reveal">
+        <i class="fas <?= $m[0] ?>" style="color:#c17a3a;font-size:1rem;margin-bottom:.6rem;display:block"></i>
+        <div style="font-family:'Nanum Myeongjo',serif;font-size:1.25rem;color:#fff;font-weight:700"><?= $m[1] ?></div>
+        <div style="font-family:'Montserrat',sans-serif;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4);margin:.2rem 0 .5rem"><?= $m[2] ?></div>
+        <p style="font-size:.78rem;color:rgba(255,255,255,.5);line-height:1.6"><?= $m[3] ?></p>
+      </div>
+      <?php endforeach; ?>
+    </div>
+    <p style="text-align:center;margin-top:1.8rem;color:rgba(255,255,255,.5);font-size:.9rem">
+      <a href="<?= SITE_URL ?>/mount-meru" style="color:#c17a3a;font-weight:600">Mount Meru itinerary</a> · <a href="<?= SITE_URL ?>/kilimanjaro" style="color:#c17a3a;font-weight:600">All Kilimanjaro routes</a><br>Want to climb Meru or combine it with Kilimanjaro? <a href="https://wa.me/255659667271?text=<?= urlencode('Hi! I am interested in climbing Mount Meru. Please share dates and prices.') ?>" target="_blank" rel="noopener" style="color:#c17a3a;font-weight:600">Ask us for a Mount Meru quote</a>.
+    </p>
   </div>
 </section>
 
@@ -361,6 +417,19 @@ function ticon2(string $t): string {
 </section>
 
 <!-- ---------- CTA ---------- -->
+<!-- ---------- FAQ ---------- -->
+<section style="padding:5rem 2rem;background:#23362f;border-top:1px solid rgba(255,255,255,.05)">
+  <div style="max-width:820px;margin:0 auto">
+    <h2 style="font-family:'Nanum Myeongjo',serif;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;color:#fff;margin-bottom:1.5rem;text-align:center">Kilimanjaro &amp; Mount Meru FAQ</h2>
+    <?php foreach ($trekFaqs as $f): ?>
+    <details style="background:rgba(17,17,17,.8);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:1rem 1.3rem;margin-bottom:.7rem">
+      <summary style="color:#fff;font-weight:600;cursor:pointer"><?= e($f[0]) ?></summary>
+      <p style="color:rgba(255,255,255,.55);margin-top:.8rem;font-size:.88rem;line-height:1.7"><?= e($f[1]) ?></p>
+    </details>
+    <?php endforeach; ?>
+  </div>
+</section>
+
 <section style="padding:5rem 2rem;background:linear-gradient(135deg,rgba(160,94,34,.06),rgba(5,150,105,.04));border-top:1px solid rgba(160,94,34,.12)">
   <div style="max-width:640px;margin:0 auto;text-align:center" class="reveal">
     <div class="section-tag"><i class="fas fa-mountain" style="font-size:.52rem"></i>Start Your Adventure</div>

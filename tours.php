@@ -4,8 +4,6 @@ require_once 'includes/functions.php';
 require_once 'includes/security.php';
 require_once 'includes/db.php';
 
-$pageTitle       = 'Tanzania Safari Tours & Packages | Prices ' . date('Y') . ' & ' . (date('Y') + 1);
-$pageDescription = 'Browse all our luxury safari tours in Tanzania. Serengeti migration, Ngorongoro Crater, Kilimanjaro trekking, Zanzibar beach and cultural tours.';
 $currentPage     = 'tours';
 
 $db        = getDB();
@@ -25,6 +23,10 @@ foreach ($tours as $t) {
 if ($minPrice === PHP_INT_MAX) $minPrice = 0;
 if ($minDur   === PHP_INT_MAX) $minDur   = 1;
 
+/* Bei ya chini halisi kutoka DB (si namba ya kudumu) — title haiwezi kudanganya */
+$pageTitle       = 'Tanzania Safari Packages ' . seoYears() . ' | Prices from $' . number_format($minPrice);
+$pageDescription = 'Tanzania safari packages ' . seoYears() . ': Serengeti Great Migration, Ndutu calving, Ngorongoro, Kilimanjaro & Meru treks, Zanzibar and Maasai cultural tours from $' . number_format($minPrice) . '. Free quote.';
+
 $logoUrl     = getSetting('logo_url');
 $logoWidth   = (int)(getSetting('logo_width', '160') ?: 160);
 $siteName    = getSetting('site_name', 'Jambo Masai Tours');
@@ -37,7 +39,7 @@ $navItems = [
     'destinations' => ['url'=>url('destinations'),      'desk'=>'Destinations','mob'=>'Destinations',     'icon'=>'fa-map-marker-alt'],
     'gallery'      => ['url'=>url('gallery'),           'desk'=>'Gallery',     'mob'=>'Gallery',          'icon'=>'fa-images'],
     'blog'         => ['url'=>url('blog'),              'desk'=>'Blog',        'mob'=>'Blog',             'icon'=>'fa-newspaper'],
-    'about'        => ['url'=>url('about'),             'desk'=>'About',       'mob'=>'About Us',         'icon'=>'fa-info-circle'],
+    'about'        => ['url'=>url('about'),             'desk'=>'About Us',    'mob'=>'About Us',         'icon'=>'fa-info-circle'],
     'contact'      => ['url'=>url('contact'),           'desk'=>'Contact',     'mob'=>'Contact',          'icon'=>'fa-envelope'],
 ];
 
@@ -144,19 +146,7 @@ function cardBadge(array $tour, int $idx): ?array {
   }
   </script>
   <?php endif; ?>
-  <link rel="preconnect" href="https://cdn.tailwindcss.com"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="dns-prefetch" href="https://images.unsplash.com"><script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: { extend: {
-        colors: { brand:'#a05e22', brandd:'#7d4817', safari:'#a05e22', dark:'#23362f' },
-        fontFamily: {
-          heading: ['Nanum Myeongjo','Georgia','serif'],
-          sans:    ['Inter','Poppins','sans-serif'],
-          nav:     ['Montserrat','sans-serif'],
-        }
-      }}
-    }
-  </script>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="dns-prefetch" href="https://images.unsplash.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -236,6 +226,7 @@ function cardBadge(array $tour, int $idx): ?array {
     /* Empty state */
     #empty-state{display:none}
   </style>
+  <link rel="stylesheet" href="<?= SITE_URL ?>/assets/css/tailwind.css?v=<?= @filemtime(__DIR__ . '/assets/css/tailwind.css') ?>">
 </head>
 <body class="bg-dark text-gray-200">
 

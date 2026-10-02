@@ -35,6 +35,21 @@ RewriteRule ^destinations/?$        destinations.php       [L]
 RewriteRule ^reviews/?$             reviews.php             [L]
 RewriteRule ^mountain-trekking/?$   mountain-trekking.php  [L]
 RewriteRule ^migration/?$           migration.php          [L]
+RewriteRule ^calving-season/?$      calving-season.php     [L]
+RewriteRule ^kilimanjaro/?$                    kilimanjaro.php              [L]
+RewriteRule ^kilimanjaro/([a-z0-9-]+)/?$       kilimanjaro.php?page=$1      [L,QSA]
+RewriteRule ^mount-meru/?$                     kilimanjaro.php?page=meru    [L]
+RewriteRule ^safari/?$                         safari.php?page=tanzania-safari-packages [L]
+RewriteRule ^safari/([a-z0-9-]+)/?$            safari.php?page=$1           [L,QSA]
+RewriteRule ^parks/([a-z0-9-]+)/?$             safari.php?page=park-$1      [L,QSA]
+RewriteRule ^(tanzania-safari-packages|tanzania-vs-kenya-safari|tanzania-safari-for-first-timers|how-to-choose-a-tanzania-safari-company)/?$ safari.php?page=$1 [L]
+RewriteRule ^cultural-tours/?$                 cultural.php                 [L]
+RewriteRule ^cultural-tours/([a-z0-9-]+)/?$    cultural.php?page=$1         [L,QSA]
+RewriteRule ^migration/river-crossings/?$            migration-river-crossings.php  [L]
+RewriteRule ^migration/where-is-the-migration-now/?$ migration-where-now.php  [L]
+RewriteRule ^best-time-to-visit-tanzania/?$   best-time-to-visit-tanzania.php [L]
+RewriteRule ^green-season-safari/?$          green-season-safari.php        [L]
+RewriteRule ^christmas-new-year-safari/?$    christmas-new-year-safari.php  [L]
 
 # Clean URLs — dynamic pages
 RewriteRule ^tour/([a-z0-9-]+)/?$          tour-detail.php?slug=$1         [L,QSA]
@@ -112,3 +127,6 @@ RedirectMatch 404 /\.git
 
 php_flag display_errors Off
 php_flag log_errors On
+
+# Real 404 page (keeps 404 status; noindex)
+ErrorDocument 404 /404.php

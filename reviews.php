@@ -4,7 +4,7 @@ require_once 'includes/functions.php';
 require_once 'includes/security.php';
 require_once 'includes/db.php';
 
-$pageTitle       = 'Guest Reviews — Google & TripAdvisor | Jambo Masai Tours';
+$pageTitle       = 'Guest Reviews: Google & TripAdvisor | Jambo Masai';
 $pageDescription = 'Read verified guest reviews of Jambo Masai Tours from Google and TripAdvisor. See what travellers say about our Tanzania safaris, and share your own experience.';
 $currentPage     = 'reviews';
 $ogImage         = IMG_HERO;

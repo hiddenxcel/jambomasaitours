@@ -1,4 +1,4 @@
-# Jambo Masai Tours — Luxury Safari Tanzania
+﻿# Jambo Masai Tours — Luxury Safari Tanzania
 > Award-winning, Maasai-founded luxury safari operator based in Arusha, Tanzania (est. 2010). Specializes in wildlife safaris, Kilimanjaro trekking, Zanzibar beach holidays, cultural tours, and custom East Africa itineraries. Rated 4.9/5 with 150+ reviews.
 
 ## Core pages
@@ -9,7 +9,15 @@
 - [Gallery](https://jambomasaitours.com/gallery): Photo gallery with categories — wildlife, landscapes, culture, safari-life, zanzibar, birds
 - [Blog](https://jambomasaitours.com/blog): Safari tips, wildlife guides, travel guides, conservation stories
 - [FAQ](https://jambomasaitours.com/faq): Frequently asked safari questions
-- [Mountain Trekking](https://jambomasaitours.com/mountain-trekking): Kilimanjaro and mountain trekking information
+- [Mountain Trekking](https://jambomasaitours.com/mountain-trekking): Kilimanjaro and Mt Meru climbs
+- [Calving Season](https://jambomasaitours.com/calving-season): Ndutu wildebeest calving season, Dec–Mar (2026/27 and 2027/28), peak in February
+- [Climb Kilimanjaro](https://jambomasaitours.com/kilimanjaro): Routes (Lemosho, Machame, Marangu, Rongai, Northern Circuit, Umbwe), best time, packing, training
+- [Mount Meru](https://jambomasaitours.com/mount-meru): 3-4 day trek in Arusha National Park, acclimatisation for Kilimanjaro
+- [Cultural Tours](https://jambomasaitours.com/cultural-tours): Maasai village visits, Hadzabe and Datoga at Lake Eyasi, Materuni Waterfalls and coffee tour, Kikuletwa hot springs
+- [Safari Packages by type and length](https://jambomasaitours.com/tanzania-safari-packages): Honeymoon, family, budget, camping, luxury, fly-in, balloon, Zanzibar and Kenya combinations, and 2 to 8 day safaris
+- [Tanzania vs Kenya Safari](https://jambomasaitours.com/tanzania-vs-kenya-safari): Comparison and combined itineraries
+- [Tanzania Safari for First-Timers](https://jambomasaitours.com/tanzania-safari-for-first-timers): How long, when to go, what to pack
+- [Great Migration](https://jambomasaitours.com/migration): Month-by-month migration calendar and river crossings, 2026 & 2027
 - [Contact](https://jambomasaitours.com/contact): Contact form, location, phone, email, WhatsApp
 - [Book a Safari](https://jambomasaitours.com/booking): Multi-step booking form — select tour, personal details, special requests
 

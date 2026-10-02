@@ -155,7 +155,7 @@ function destDetailSlug(string $title, string $slug = ''): string {
 }
 
 $pageTitle    = 'Tanzania Safari Destinations | Jambo Masai Tours';
-$pageDescription = 'Explore Tanzania\'s most breathtaking destinations: Serengeti, Ngorongoro Crater, Kilimanjaro, Zanzibar and more.';
+$pageDescription = 'Explore Tanzania\'s top safari destinations ' . seoYears() . ': Serengeti, Ngorongoro Crater, Kilimanjaro, Tarangire, Zanzibar and the Maasai Heartland, with best times to visit.';
 $currentPage  = 'destinations';
 $canonicalUrl = SITE_URL . '/destinations';
 
@@ -206,6 +206,7 @@ $extraCss = '
   .f-label{display:block;font-family:"Montserrat",sans-serif;font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.38);margin-bottom:.4rem}
   .f-label span{color:#f87171}
 ';
+$headExtra = schemaCollection('Tanzania Safari Destinations', SITE_URL . '/destinations', $pageDescription, array_map(fn($d) => ['name' => $d['title'], 'url' => SITE_URL . '/destination/' . $d['slug']], $destinations), 'Destinations');
 require_once 'includes/dark_header.php';
 ?>
 

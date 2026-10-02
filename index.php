@@ -146,7 +146,7 @@ $reviewTotalCount = max(count($testimonials), 120);
       "image": "<?= e(IMG_HERO) ?>",
       "description": "<?= addslashes($pageDescription) ?>",
       "telephone": "+255659667271",
-      "priceRange": "$$$$",
+      "priceRange": "$$-$$$$",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Arusha City Centre",
@@ -194,39 +194,7 @@ $reviewTotalCount = max(count($testimonials), 120);
   </script>
 
   <!-- Tailwind CSS CDN -->
-  <link rel="preconnect" href="https://cdn.tailwindcss.com"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="dns-prefetch" href="https://images.unsplash.com"><script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brand:  '#a05e22',   /* burnt orange - primary */
-            brandd: '#7d4817',   /* darker orange */
-            safari: '#3b5c51',   /* forest green */
-            forest: '#3b5c51',
-            forestd:'#2c463d',   /* deeper green */
-            cream:  '#f4e1c3',   /* warm light bg */
-            creaml: '#faf3e6',   /* near-white cream for cards */
-            dark:   '#23362f',   /* dark = deep forest now */
-            card:   '#2c463d',
-            glass:  'rgba(255,255,255,0.05)',
-            /* Re-map Tailwind's emerald scale to our burnt-orange brand so any
-               leftover emerald-* utility classes pick up the new palette. */
-            emerald: {
-              100:'#f1ddc4', 200:'#e6c39b', 300:'#d9a36f',
-              400:'#c17a3a', 500:'#a05e22', 600:'#7d4817', 700:'#5e3611',
-            },
-          },
-          fontFamily: {
-            heading: ['Nanum Myeongjo','Georgia','serif'],
-            sans:    ['Inter','Poppins','sans-serif'],
-            nav:     ['Montserrat','sans-serif'],
-          },
-        }
-      }
-    }
-  </script>
-
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="dns-prefetch" href="https://images.unsplash.com">
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -525,6 +493,7 @@ $reviewTotalCount = max(count($testimonials), 120);
     /* "Book Your Safari" secondary button on light ? outlined green */
     .section-light .hover\:bg-white\/10:hover{background:rgba(160,94,34,.1) !important}
   </style>
+  <link rel="stylesheet" href="<?= SITE_URL ?>/assets/css/tailwind-home.css?v=<?= @filemtime(__DIR__ . '/assets/css/tailwind-home.css') ?>">
 </head>
 <body class="bg-dark text-gray-200">
 
@@ -544,7 +513,7 @@ $navItems = [
   'destinations' => ['url'=>url('destinations'),      'desk'=>'Destinations','mob'=>'Destinations',    'icon'=>'fa-map-marker-alt'],
   'gallery'      => ['url'=>url('gallery'),           'desk'=>'Gallery',    'mob'=>'Gallery',          'icon'=>'fa-images'],
   'blog'         => ['url'=>url('blog'),              'desk'=>'Blog',       'mob'=>'Blog',             'icon'=>'fa-newspaper'],
-  'about'        => ['url'=>url('about'),             'desk'=>'About',      'mob'=>'About Us',         'icon'=>'fa-info-circle'],
+  'about'        => ['url'=>url('about'),             'desk'=>'About Us',   'mob'=>'About Us',         'icon'=>'fa-info-circle'],
   'contact'      => ['url'=>url('contact'),           'desk'=>'Contact',    'mob'=>'Contact',          'icon'=>'fa-envelope'],
 ];
 /* Fetch featured tours for mega menu */

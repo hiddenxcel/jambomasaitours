@@ -124,8 +124,7 @@ $navItems = [
   <link rel="shortcut icon" href="<?= e($_fav) ?>">
   <link rel="apple-touch-icon" href="<?= e($_fav) ?>">
   <link rel="manifest" href="<?= e(SITE_URL) ?>/manifest.json">
-  <link rel="preconnect" href="https://cdn.tailwindcss.com"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="dns-prefetch" href="https://images.unsplash.com"><script src="https://cdn.tailwindcss.com"></script>
-  <script>tailwind.config={theme:{extend:{colors:{brand:'#a05e22',safari:'#a05e22',dark:'#23362f'},fontFamily:{heading:['Nanum Myeongjo','Georgia','serif'],sans:['Inter','Poppins','sans-serif'],nav:['Montserrat','sans-serif']}}}}</script>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="dns-prefetch" href="https://images.unsplash.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -169,6 +168,7 @@ $navItems = [
     @keyframes kenBurns{0%{transform:scale(1)}50%{transform:scale(1.06)}100%{transform:scale(1)}}
     .ken-burns{animation:kenBurns 20s ease-in-out infinite}
   </style>
+  <link rel="stylesheet" href="<?= SITE_URL ?>/assets/css/tailwind.css?v=<?= @filemtime(__DIR__ . '/assets/css/tailwind.css') ?>">
 </head>
 <body class="bg-dark">
 

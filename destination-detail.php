@@ -265,7 +265,7 @@ $destinations = [
 ];
 
 if (!isset($destinations[$slug])) {
-    redirect(url('destinations'));
+    render404();
 }
 $dest = $destinations[$slug];
 $db = getDB();

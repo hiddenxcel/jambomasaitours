@@ -40,8 +40,10 @@
       <div>
         <h4 class="font-nav font-700 text-white text-sm uppercase tracking-widest mb-4">Safari Types</h4>
         <ul class="space-y-2.5">
-          <?php foreach (['Wildlife Safari','Cultural Tour','Trekking','Beach Holiday','Honeymoon Safari','Family Safari'] as $t): ?>
-          <li><a href="<?= url('tours?tour_type='.urlencode($t)) ?>" class="text-white/45 hover:text-emerald-400 text-sm transition-colors"><?= $t ?></a></li>
+          <?php foreach (['Wildlife Safari','Cultural Tour','Trekking','Beach Holiday','Honeymoon Safari','Family Safari'] as $t):
+              /* Utamaduni na milima zina kurasa zao za kina (SEO); zingine zinabaki kama kichujio cha tours */
+              $_fHref = $t === 'Cultural Tour' ? url('cultural-tours') : ($t === 'Trekking' ? url('kilimanjaro') : url('tours?tour_type='.urlencode($t))); ?>
+          <li><a href="<?= $_fHref ?>" class="text-white/45 hover:text-emerald-400 text-sm transition-colors"><?= $t ?></a></li>
           <?php endforeach; ?>
         </ul>
       </div>

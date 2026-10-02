@@ -5,9 +5,9 @@ require_once 'includes/security.php';
 require_once 'includes/db.php';
 
 /* Kichwa kifupi (<60) ili kisikatwe kwenye matokeo ya Google */
-$pageTitle       = 'Great Migration Safari ' . date('Y') . ' & ' . (date('Y') + 1) . ' | Serengeti';
-$pageDescription = 'Witness the Great Wildebeest Migration in the Serengeti — Mara River crossings (Jul–Oct) and calving season (Jan–Mar). Book with TATO-licensed guides.';
-$metaKeywords    = 'great migration safari, serengeti migration, wildebeest migration tanzania, mara river crossing safari, great migration ' . date('Y') . ', great migration ' . (date('Y') + 1) . ', serengeti wildebeest migration, calving season serengeti, migration safari packages, best time great migration, tanzania migration safari, ngorongoro serengeti migration tour';
+$pageTitle       = 'Great Migration Safari ' . seoYears() . ' | Serengeti';
+$pageDescription = 'Witness the Great Wildebeest Migration in the Serengeti — Mara River crossings (Jul–Oct) and calving season (Dec–Mar). Book with TATO-licensed guides.';
+$metaKeywords    = 'great migration safari, serengeti migration, wildebeest migration tanzania, mara river crossing safari, great migration ' . date('Y') . ', great migration ' . (date('Y') + 1) . ', ndutu calving season ' . calvingSeason() . ', serengeti wildebeest migration, calving season serengeti, migration safari packages, best time great migration, tanzania migration safari, ngorongoro serengeti migration tour';
 $currentPage     = 'migration';
 $ogImage         = IMG_SERENGETI;
 $canonicalUrl    = SITE_URL . '/migration';
@@ -162,7 +162,7 @@ require_once 'includes/dark_header.php';
         $stats = [
           ['fa-paw',    '1.5M+',    'Wildebeest & Zebra', 'The largest herd on Earth',   '#a05e22'],
           ['fa-water',  'Jun–Oct',  'River Crossings',    'Mara & Grumeti crossing window','#fbbf24'],
-          ['fa-baby',   'Jan–Mar',  'Calving Season',     '~8,000 calves born a day',    '#60a5fa'],
+          ['fa-baby',   'Dec–Mar',  'Calving Season',     '~8,000 calves born a day',    '#60a5fa'],
           ['fa-crown',  'Big Five', 'Guaranteed Territory','Lion, leopard, elephant & more','#c17a3a'],
         ];
         foreach ($stats as $s): ?>
@@ -176,6 +176,9 @@ require_once 'includes/dark_header.php';
         </div>
         <?php endforeach; ?>
       </div>
+      <p class="mig-fade" style="--d:.5s;margin-top:1rem;font-size:.85rem;color:rgba(255,255,255,.6)">
+        Planning for the calving season? See the <a href="<?= url('calving-season') ?>" style="color:#c17a3a;font-weight:600">Ndutu Calving Season <?= e(calvingSeason()) ?> &amp; <?= e(calvingSeason(1)) ?> guide</a>.
+      </p>
     </div>
   </div>
 

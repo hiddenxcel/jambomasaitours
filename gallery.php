@@ -5,7 +5,7 @@ require_once 'includes/security.php';
 require_once 'includes/db.php';
 
 $pageTitle       = 'Tanzania Safari Photo Gallery | Wildlife & Landscapes';
-$pageDescription = 'Stunning safari photography from our Tanzania tours. Wildlife, landscapes, Maasai culture, Zanzibar beaches and luxury camps.';
+$pageDescription = 'Stunning safari photos from our Tanzania tours: Great Migration wildlife, Serengeti landscapes, Maasai culture, Zanzibar beaches and safari camps.';
 $currentPage     = 'gallery';
 $canonicalUrl    = SITE_URL . '/gallery';
 
@@ -29,6 +29,7 @@ $extraCss = '
   #lb-close:hover{background:rgba(255,255,255,.2)}
   .filter-btn.active{background:linear-gradient(135deg,#5e3611,#a05e22) !important;color:#fff !important;border-color:transparent !important;box-shadow:0 4px 14px rgba(160,94,34,.3)}
 ';
+$headExtra = schemaCollection('Tanzania Safari Photo Gallery', SITE_URL . '/gallery', $pageDescription, [], 'Gallery');
 require_once 'includes/dark_header.php';
 ?>
 

@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $slugCheck = $db->prepare("SELECT id FROM tours WHERE slug = ? AND id != ? LIMIT 1");
             $slugCheck->execute([$slug, $id]);
             if ($slugCheck->fetch()) {
-                $slug .= '-' . time();
+                $errors[] = 'Slug "' . $slug . '" is already used by another tour. Change the slug or the name (duplicate tours hurt SEO).';
             }
         }
 

@@ -93,6 +93,7 @@ $extraCss = '
   .tpill{display:inline-flex;font-family:"Montserrat",sans-serif;font-size:.62rem;font-weight:600;padding:.28rem .75rem;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.45);text-decoration:none;transition:all .2s;cursor:pointer}
   .tpill:hover{background:rgba(160,94,34,.1);border-color:rgba(160,94,34,.25);color:#a05e22}
 ';
+$headExtra = schemaCollection('Safari Travel Blog', SITE_URL . '/blog', $pageDescription, array_map(fn($p) => ['name' => $p['title'], 'url' => SITE_URL . '/blog/' . $p['slug']], array_slice($posts, 0, 20)), 'Blog');
 require_once 'includes/dark_header.php';
 ?>
 

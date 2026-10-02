@@ -4,128 +4,55 @@ require_once __DIR__ . '/includes/functions.php';
 require_once __DIR__ . '/includes/db.php';
 
 header('Content-Type: application/xml; charset=UTF-8');
-header('X-Robots-Tag: noindex');
+header('Cache-Control: public, max-age=3600');
 
 $base = rtrim(SITE_URL, '/');
 
-/* Fetch published tours */
+/* Tours zote isipokuwa nakala zilizojirudia (slug + "-1784806941") ambazo zina 301 kwenda ya asili */
 $tours = [];
 try {
-    $tours = getDB()->query("SELECT slug, created_at FROM tours ORDER BY featured DESC, rating DESC")->fetchAll();
+    $tours = getDB()->query("SELECT slug, image, created_at FROM tours WHERE slug NOT REGEXP '-[0-9]{9,10}$' ORDER BY featured DESC, rating DESC")->fetchAll();
 } catch (\Throwable $e) {}
 
-/* Fetch published blog posts */
 $posts = [];
 try {
-    $posts = getDB()->query("SELECT slug, created_at FROM blog_posts WHERE published=1 ORDER BY created_at DESC")->fetchAll();
+    $posts = getDB()->query("SELECT slug, image, created_at FROM blog_posts WHERE published=1 ORDER BY created_at DESC")->fetchAll();
 } catch (\Throwable $e) {}
 
 function xmlDate(?string $d): string {
-    if (!$d) return date('Y-m-d');
-    return date('Y-m-d', strtotime($d));
+    return $d ? date('Y-m-d', strtotime($d)) : '';
+}
+function xmlUrl(string $loc, string $lastmod = '', string $image = ''): void {
+    echo "  <url>\n    <loc>" . htmlspecialchars($loc, ENT_XML1) . "</loc>\n";
+    if ($lastmod) echo "    <lastmod>" . $lastmod . "</lastmod>\n";
+    if ($image && preg_match('#^https?://#', $image)) {
+        echo "    <image:image><image:loc>" . htmlspecialchars($image, ENT_XML1) . "</image:loc></image:image>\n";
+    }
+    echo "  </url>\n";
 }
 
-echo '<?xml version="1.0" encoding="UTF-8"?>';
+/* Kurasa tuli: lastmod haijawekwa kwa makusudi — tarehe ya uongo (leo kila siku) inafanya Google ipuuze lastmod yote */
+$static = ['', 'tours', 'migration', 'calving-season', 'migration/river-crossings', 'migration/where-is-the-migration-now', 'best-time-to-visit-tanzania', 'green-season-safari', 'christmas-new-year-safari', 'mountain-trekking',
+           'kilimanjaro', 'kilimanjaro/lemosho-route', 'kilimanjaro/machame-route', 'kilimanjaro/marangu-route', 'kilimanjaro/rongai-route',
+           'kilimanjaro/northern-circuit', 'kilimanjaro/umbwe-route', 'kilimanjaro/best-time-to-climb', 'kilimanjaro/packing-list',
+           'kilimanjaro/success-rate-and-acclimatization', 'kilimanjaro/training-plan', 'kilimanjaro/cost-and-whats-included', 'mount-meru',
+           'tanzania-safari-packages', 'tanzania-vs-kenya-safari', 'tanzania-safari-for-first-timers', 'how-to-choose-a-tanzania-safari-company',
+           'safari/honeymoon', 'safari/family', 'safari/budget', 'safari/camping', 'safari/luxury', 'safari/fly-in', 'safari/balloon', 'safari/zanzibar-combo',
+           'safari/kenya-tanzania-combo', 'safari/group', 'safari/2-day', 'safari/3-day', 'safari/4-day', 'safari/5-day', 'safari/6-day', 'safari/7-day', 'safari/8-day',
+           'parks/manyara', 'parks/arusha-national-park', 'parks/northern-serengeti', 'parks/western-serengeti', 'parks/ruaha', 'parks/nyerere',
+           'cultural-tours', 'cultural-tours/maasai-village-visit', 'cultural-tours/hadzabe-datoga-lake-eyasi', 'cultural-tours/materuni-waterfalls-coffee-tour',
+           'cultural-tours/kikuletwa-hot-springs', 'cultural-tours/ethical-maasai-village-visit', 'cultural-tours/day-trips-from-arusha', 'destinations',
+           'destination/serengeti', 'destination/ngorongoro', 'destination/kilimanjaro',
+           'destination/zanzibar', 'destination/tarangire', 'destination/maasai-heartland',
+           'faq', 'blog', 'reviews', 'about', 'gallery', 'contact'];
+
+echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
 ?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
-
-  <!-- Static pages -->
-  <url>
-    <loc><?= $base ?>/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-    <lastmod><?= date('Y-m-d') ?></lastmod>
-  </url>
-  <url>
-    <loc><?= $base ?>/tours</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <lastmod><?= date('Y-m-d') ?></lastmod>
-  </url>
-  <url>
-    <loc><?= $base ?>/migration</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <lastmod><?= date('Y-m-d') ?></lastmod>
-  </url>
-  <url>
-    <loc><?= $base ?>/mountain-trekking</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-    <lastmod><?= date('Y-m-d') ?></lastmod>
-  </url>
-  <url>
-    <loc><?= $base ?>/destinations</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <lastmod><?= date('Y-m-d') ?></lastmod>
-  </url>
-
-  <!-- Individual destination pages -->
-  <?php foreach (['serengeti','ngorongoro','kilimanjaro','zanzibar','tarangire','maasai-heartland'] as $ds): ?>
-  <url>
-    <loc><?= $base ?>/destination/<?= $ds ?></loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-    <lastmod><?= date('Y-m-d') ?></lastmod>
-  </url>
-  <?php endforeach; ?>
-  <url>
-    <loc><?= $base ?>/faq</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-    <lastmod><?= date('Y-m-d') ?></lastmod>
-  </url>
-  <url>
-    <loc><?= $base ?>/blog</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <lastmod><?= date('Y-m-d') ?></lastmod>
-  </url>
-  <url>
-    <loc><?= $base ?>/booking</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-    <lastmod><?= date('Y-m-d') ?></lastmod>
-  </url>
-  <url>
-    <loc><?= $base ?>/about</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <lastmod><?= date('Y-m-d') ?></lastmod>
-  </url>
-  <url>
-    <loc><?= $base ?>/gallery</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-    <lastmod><?= date('Y-m-d') ?></lastmod>
-  </url>
-  <url>
-    <loc><?= $base ?>/contact</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <lastmod><?= date('Y-m-d') ?></lastmod>
-  </url>
-
-  <!-- Dynamic tour pages -->
-  <?php foreach ($tours as $tour): ?>
-  <url>
-    <loc><?= $base ?>/tour/<?= htmlspecialchars($tour['slug'], ENT_XML1) ?></loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-    <lastmod><?= xmlDate($tour['created_at']) ?></lastmod>
-  </url>
-  <?php endforeach; ?>
-
-  <!-- Dynamic blog posts -->
-  <?php foreach ($posts as $post): ?>
-  <url>
-    <loc><?= $base ?>/blog/<?= htmlspecialchars($post['slug'], ENT_XML1) ?></loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <lastmod><?= xmlDate($post['created_at']) ?></lastmod>
-  </url>
-  <?php endforeach; ?>
-
+<?php
+foreach ($static as $p) xmlUrl($base . '/' . $p);
+foreach ($tours as $t) xmlUrl($base . '/tour/' . $t['slug'], xmlDate($t['created_at']), $t['image'] ?? '');
+foreach ($posts as $p) xmlUrl($base . '/blog/' . $p['slug'], xmlDate($p['created_at']), $p['image'] ?? '');
+?>
 </urlset>

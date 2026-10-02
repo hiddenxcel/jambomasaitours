@@ -11,7 +11,7 @@ $db   = getDB();
 $stmt = $db->prepare("SELECT * FROM blog_posts WHERE slug = ? AND published = 1 LIMIT 1");
 $stmt->execute([$slug]);
 $post = $stmt->fetch();
-if (!$post) { http_response_code(404); redirect(url('blog')); }
+if (!$post) { render404(); }
 
 $relStmt = $db->prepare("SELECT id,title,slug,image,excerpt,created_at FROM blog_posts WHERE published=1 AND id != ? ORDER BY created_at DESC LIMIT 3");
 $relStmt->execute([$post['id']]);

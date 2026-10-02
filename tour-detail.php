@@ -11,7 +11,16 @@ $db   = getDB();
 $stmt = $db->prepare("SELECT * FROM tours WHERE slug = ? LIMIT 1");
 $stmt->execute([$slug]);
 $tour = $stmt->fetch();
-if (!$tour) { http_response_code(404); redirect(url('tours')); }
+/* Nakala zilizojirudia (slug + "-1784806941") → 301 kwenda tour ya asili */
+if ($tour && preg_match('/^(.+)-\d{9,10}$/', $tour["slug"], $dm0)) {
+    $baseChk = $db->prepare("SELECT slug FROM tours WHERE slug = ? LIMIT 1");
+    $baseChk->execute([$dm0[1]]);
+    if ($baseChk->fetch()) {
+        header("Location: " . SITE_URL . "/tour/" . $dm0[1], true, 301);
+        exit;
+    }
+}
+if (!$tour) { render404(); }
 
 $highlights  = $tour['highlights'] ? explode('|', $tour['highlights']) : [];
 /* Same destination first, then fill from all other tours up to 10 */
@@ -65,16 +74,16 @@ $waMsg = urlencode('Hi! I am interested in the ' . $tour['name'] . ' tour. Pleas
   <link rel="apple-touch-icon" href="<?= e($_fav) ?>">
   <?php
   $tourCanonical = SITE_URL . '/tour/' . $tour['slug'];
-  $tourDesc      = truncate(strip_tags($tour['description']), 160);
+  $tourDesc      = truncate(strip_tags($tour['description']), 152);
   $logoUrl_seo   = getSetting('logo_url') ?: (SITE_URL . '/uploads/logo-husika.png');
   ?>
   <?php
   /* Jina la tour peke yake ni refu; ukiongeza "Luxury Safari Tanzania —
      Jambo Masai Tours" kichwa kinafika herufi 98 na Google inakikata.
      Tunaongeza chapa pale tu nafasi inaruhusu (<60). */
-  $_tourTitle = mb_strlen($tour['name'], 'UTF-8') <= 42
-              ? $tour['name'] . ' | Jambo Masai Tours'
-              : truncate($tour['name'], 60);
+  $_tourYr    = $tour['name'] . ' ' . seoYears('/');
+$_tourTitle = mb_strlen($_tourYr . ' | Jambo Masai', 'UTF-8') <= 60 ? $_tourYr . ' | Jambo Masai'
+            : (mb_strlen($_tourYr, 'UTF-8') <= 60 ? $_tourYr : truncate($tour['name'], 60));
   ?>
   <title><?= e($_tourTitle) ?></title>
   <meta name="description" content="<?= e($tourDesc) ?>">
@@ -111,12 +120,12 @@ $waMsg = urlencode('Hi! I am interested in the ' . $tour['name'] . ' tour. Pleas
         "@type": "TravelAgency",
         "name": "Jambo Masai Tours",
         "url": "<?= SITE_URL ?>"
-      }<?php if (!empty($tour['rating'])): ?>,
+      }<?php if (!empty($tour['rating']) && (int)($tour['review_count'] ?? 0) > 0): ?>,
       "aggregateRating": {
         "@type": "AggregateRating",
         "ratingValue": "<?= e($tour['rating']) ?>",
         "bestRating": "5",
-        "ratingCount": "<?= (int)($tour['review_count'] ?? 25) ?>"
+        "ratingCount": "<?= (int)$tour['review_count'] ?>"
       }<?php endif; ?>
     },
     {
@@ -156,19 +165,7 @@ $waMsg = urlencode('Hi! I am interested in the ' . $tour['name'] . ' tour. Pleas
     }
   ]
   </script>
-  <link rel="preconnect" href="https://cdn.tailwindcss.com"><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="dns-prefetch" href="https://images.unsplash.com"><script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: { extend: {
-        colors:{ brand:'#a05e22', safari:'#a05e22', dark:'#23362f' },
-        fontFamily:{
-          heading:['Nanum Myeongjo','Georgia','serif'],
-          sans:   ['Inter','Poppins','sans-serif'],
-          nav:    ['Montserrat','sans-serif'],
-        }
-      }}
-    }
-  </script>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="dns-prefetch" href="https://images.unsplash.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -214,6 +211,7 @@ $waMsg = urlencode('Hi! I am interested in the ' . $tour['name'] . ' tour. Pleas
     @keyframes brandShine{0%{left:-60%}35%,100%{left:130%}}
   </style>
 
+  <link rel="stylesheet" href="<?= SITE_URL ?>/assets/css/tailwind.css?v=<?= @filemtime(__DIR__ . '/assets/css/tailwind.css') ?>">
 </head>
 <body class="bg-dark">
 

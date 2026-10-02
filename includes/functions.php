@@ -33,6 +33,70 @@ function redirect(string $url): void {
     exit;
 }
 
+/**
+ * Lugha aliyochagua mteja: en (msingi), sw, es.
+ * Inasoma kuki "jmt_lang" (kitufe cha lugha kikiongezwa kitaiweka). "?lang=sw" inaweka kuki hiyo kwa majaribio.
+ * Tovuti ni ya Kiingereza kwa sasa, kwa hiyo lugha isiyojulikana = Kiingereza.
+ */
+function currentLang(): string {
+    static $lang = null;
+    if ($lang !== null) return $lang;
+    $allowed = ['en', 'sw', 'es'];
+    $asked = strtolower((string)($_GET['lang'] ?? ''));
+    if (in_array($asked, $allowed, true)) {
+        if (!headers_sent()) setcookie('jmt_lang', $asked, ['expires' => time() + 31536000, 'path' => '/', 'samesite' => 'Lax']);
+        return $lang = $asked;
+    }
+    $c = strtolower((string)($_COOKIE['jmt_lang'] ?? 'en'));
+    return $lang = in_array($c, $allowed, true) ? $c : 'en';
+}
+currentLang(); /* iitwe mapema ili kuki iwekwe kabla ya ukurasa kuanza kutoa maandishi */
+
+/**
+ * Miaka ya SEO kwa title/meta: "2026 & 2027" sasa, "2027 & 2028" kuanzia Jan 2027.
+ * Wateja wanabook miezi 9–14 mbele, hivyo mwaka ujao lazima uonekane daima.
+ * $sep = ' & ' kwa title, '/' kwa misimu (mf. "2026/2027").
+ */
+function seoYears(string $sep = ' & '): string {
+    $y = (int)date('Y');
+    return $y . $sep . ($y + 1);
+}
+
+/** Msimu wa calving (Des–Mac) unavuka mwaka: "2026/27" kabla ya Aprili ni msimu wa (y-1)/y. */
+function calvingSeason(int $offset = 0): string {
+    $y = (int)date('Y');
+    $start = ((int)date('n') <= 3 ? $y - 1 : $y) + $offset;
+    return $start . '/' . substr((string)($start + 1), -2);
+}
+
+/** 404 halisi: status 404 + ukurasa wenye viungo (badala ya redirect inayofanya soft-404). */
+function render404(): void {
+    http_response_code(404);
+    require __DIR__ . '/../404.php';
+    exit;
+}
+
+/**
+ * JSON-LD kwa kurasa za orodha (CollectionPage + ItemList + BreadcrumbList).
+ * $items = [['name'=>..., 'url'=>...], ...]
+ */
+function schemaCollection(string $name, string $url, string $desc, array $items, string $crumb): string {
+    $list = [];
+    foreach (array_values($items) as $i => $it) {
+        $list[] = ['@type' => 'ListItem', 'position' => $i + 1, 'url' => $it['url'], 'name' => $it['name']];
+    }
+    $graph = [
+        ['@context' => 'https://schema.org', '@type' => 'CollectionPage', 'name' => $name, 'url' => $url, 'description' => $desc,
+         'isPartOf' => ['@type' => 'WebSite', 'name' => 'Jambo Masai Tours', 'url' => SITE_URL],
+         'mainEntity' => ['@type' => 'ItemList', 'numberOfItems' => count($list), 'itemListElement' => $list]],
+        ['@context' => 'https://schema.org', '@type' => 'BreadcrumbList', 'itemListElement' => [
+            ['@type' => 'ListItem', 'position' => 1, 'name' => 'Home', 'item' => SITE_URL],
+            ['@type' => 'ListItem', 'position' => 2, 'name' => $crumb, 'item' => $url],
+        ]],
+    ];
+    return '<script type="application/ld+json">' . json_encode($graph, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . '</script>';
+}
+
 function asset(string $path): string {
     return SITE_URL . '/assets/' . ltrim($path, '/');
 }
