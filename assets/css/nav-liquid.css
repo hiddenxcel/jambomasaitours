@@ -1,0 +1,76 @@
+/* ───────────────────────────────────────────────────────────────
+   Liquid-glass navigation (iOS-style) — inaongezwa juu ya #p-nav
+   (includes/public_navbar.php). JS: assets/js/nav-liquid.js
+   • "lens" ya glasi inayofuata mshale na kutulia kwenye ukurasa ulio wazi
+   • dock magnification: kiungo kilicho karibu na mshale kinakua, jirani zinasogea
+   • pill inatanuka kidogo ("inapumua") mshale ukiwa juu yake
+   • mwanga (specular) unaofuata mshale juu ya glasi
+   ─────────────────────────────────────────────────────────────── */
+:root{--nav-spring:cubic-bezier(.34,1.56,.64,1);--nav-smooth:cubic-bezier(.22,1,.36,1)}
+
+#p-nav-links{position:relative}
+#p-nav-links > li{position:relative;z-index:1}
+#p-nav-links > li > a{will-change:transform;transform-origin:50% 50%}
+
+/* Mstari wa chini wa zamani unabadilishwa na lens */
+#p-nav.pnav-liquid .desk-nav a > span{display:none !important}
+
+/* Majina ya viungo yasivunjike mistari miwili ("About Us" ni refu kuliko "About" ya zamani) */
+#p-nav .desk-nav li > a{white-space:nowrap}
+/* Laptop ndogo (1024–1179px): pill haina nafasi ya jina la kampuni, kwa hiyo linafichwa na viungo vinabana kidogo */
+@media (min-width:1024px) and (max-width:1179px){
+  #p-nav.solid #p-logo-text{display:none !important}
+  #p-nav.solid .desk-nav li > a{padding:0 .6rem !important}
+}
+
+/* ── Lens ── */
+.pnav-lens{position:absolute;left:0;top:50%;height:42px;margin-top:-21px;width:0;border-radius:999px;pointer-events:none;z-index:0;
+  opacity:0;will-change:transform,width;transition:opacity .28s ease,background .3s ease,box-shadow .3s ease,border-color .3s ease;
+  /* Hafifu sana: hakuna mpaka, kivuli wala athari ya kioo — kivuli laini tu kinachoonekana "kwa mbali" */
+  background:rgba(255,255,255,.055);border:0;box-shadow:none;
+  -webkit-backdrop-filter:none;backdrop-filter:none}
+.pnav-lens.on{opacity:1}
+/* Pill ya cream (baada ya kuscroll): kivuli hafifu cha rangi ya brand; ukurasa ulio wazi (rest) hafifu zaidi */
+#p-nav.solid .pnav-lens{background:rgba(160,94,34,.09)}
+#p-nav .pnav-lens.rest{background:rgba(255,255,255,.04)}
+#p-nav.solid .pnav-lens.rest{background:rgba(160,94,34,.06)}
+
+/* Kiungo kilicho karibu na mshale kinang'aa */
+#p-nav .desk-nav li.pnav-near > a{color:#fff !important}
+#p-nav.solid .desk-nav li.pnav-near > a{color:#5e3611 !important}
+
+/* ── Pill inapumua (inatanuka kidogo) ── */
+#p-nav.solid .pnav-inner::before{transition:background .4s,border-radius .4s,box-shadow .5s var(--nav-smooth),border-color .4s,transform .55s var(--nav-spring);transform-origin:50% 50%}
+#p-nav.solid.pnav-hot .pnav-inner::before{transform:scale(1.022,1.14);
+  box-shadow:0 18px 46px rgba(44,70,61,.28),0 0 0 1px rgba(255,255,255,.35),inset 0 1px 0 rgba(255,255,255,.7)}
+
+/* ── Mwanga unaofuata mshale ── */
+#p-nav.solid .pnav-inner::after{content:'';position:absolute;inset:0;z-index:-1;border-radius:999px;pointer-events:none;opacity:0;
+  background:radial-gradient(220px 70px at var(--mx,50%) 0%,rgba(255,255,255,.65),rgba(255,255,255,0) 70%);
+  transition:opacity .35s ease,transform .55s var(--nav-spring);transform-origin:50% 50%}
+#p-nav.solid.pnav-hot .pnav-inner::after{opacity:1;transform:scale(1.022,1.14)}
+
+/* Mega menu: safu za grid zisizuie ellipsis (majina marefu ya tours yalisukuma safu ya pili nje ya kadi) */
+.pnav-mega-grid > div{min-width:0}
+.pnav-m-item > div:last-child{min-width:0}
+
+/* ── Vitufe vya kulia: hover ya "kuinuka" ── */
+.jmt-cur-btn,#pnav-search-btn{transition:transform .38s var(--nav-spring),background .25s,border-color .25s,box-shadow .3s !important}
+.jmt-cur-btn:hover,#pnav-search-btn:hover{transform:translateY(-2px) scale(1.08);box-shadow:0 8px 20px rgba(0,0,0,.18)}
+.jmt-cur-btn:active,#pnav-search-btn:active{transform:scale(.94)}
+#p-book-btn{position:relative;overflow:hidden;transition:transform .38s var(--nav-spring),box-shadow .3s !important}
+#p-book-btn:hover{box-shadow:0 10px 26px rgba(160,94,34,.45) !important}
+#p-book-btn:active{transform:scale(.95) !important}
+#p-book-btn::after{content:'';position:absolute;top:0;left:-70%;width:45%;height:100%;pointer-events:none;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.4),transparent);transform:skewX(-20deg);transition:left .7s var(--nav-smooth)}
+#p-book-btn:hover::after{left:130%}
+
+/* Nembo inaitikia kwa upole */
+#p-nav .pnav-inner > a:first-child img{transition:transform .45s var(--nav-spring)}
+#p-nav .pnav-inner > a:first-child:hover img{transform:scale(1.06) rotate(-2deg)}
+
+@media (prefers-reduced-motion:reduce){
+  .pnav-lens{transition:opacity .2s}
+  #p-nav.solid.pnav-hot .pnav-inner::before,#p-nav.solid.pnav-hot .pnav-inner::after{transform:none}
+  #p-book-btn::after{display:none}
+}
