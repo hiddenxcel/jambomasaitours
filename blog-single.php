@@ -23,6 +23,12 @@ $pageTitle       = mb_strlen($post['title'], 'UTF-8') <= 38
                  ? $post['title'] . ' | Jambo Masai Tours'
                  : truncate($post['title'], 60);
 $pageDescription = truncate(strip_tags($post['excerpt']), 160);
+
+/* Sehemu za SEO za admin (SEO Title / Meta Description / Keywords) zilikuwepo kwenye fomu
+   lakini hazikutumika kwenye ukurasa. Zikijazwa, zinatumika; zikiwa tupu, tabia ya awali inabaki. */
+if (!empty(trim((string)($post['seo_title'] ?? ''))))        $pageTitle       = truncate(trim($post['seo_title']), 70);
+if (!empty(trim((string)($post['meta_description'] ?? '')))) $pageDescription = truncate(strip_tags(trim($post['meta_description'])), 160);
+$metaKeywords    = trim((string)($post['keywords'] ?? ''));
 $ogImage         = $post['image'];
 $currentPage     = 'blog';
 $canonicalUrl    = SITE_URL . '/blog/' . $post['slug'];
@@ -71,7 +77,7 @@ $headExtra = '
       },
       "datePublished": "' . $postDate . '",
       "url": "' . $canonicalUrl . '",
-      "keywords": ' . json_encode('safari, tanzania, ' . $postCat) . ',
+      "keywords": ' . json_encode($metaKeywords !== '' ? $metaKeywords : 'safari, tanzania, ' . $postCat) . ',
       "mainEntityOfPage": { "@type": "WebPage", "@id": "' . $canonicalUrl . '" }
     },
     {
