@@ -1,0 +1,190 @@
+/* ═══════════════════════════════════════════════════════════════════
+   JAMBO MASAI — Admin v2 (brand theme)
+   Inapakiwa kutoka includes/admin_sidebar.php baada ya admin.css, kwa hiyo
+   inabadilisha kurasa zote kwa pamoja. Ili kurudisha muundo wa zamani,
+   ondoa mstari wa <link> wa admin-v2.css kwenye admin_sidebar.php.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Tokens (rangi za brand: kahawia ya Maasai + kijani cha msitu) ── */
+:root{
+  --primary:#c17a3a; --primary-dark:#a05e22; --primary-light:#e0a46a;
+  --forest:#2c463d;  --forest-2:#3b5c51;
+  --bg-page:#0d1411; --bg-card:#141d19; --bg-card2:#1a2620; --bg-side:#0a100d;
+  --border:rgba(255,255,255,.075); --border-strong:rgba(255,255,255,.15);
+  --text:#e9eeeb; --text-muted:rgba(233,238,235,.62); --text-dim:rgba(233,238,235,.38);
+  --ok:#4ade80; --warn:#fbbf24; --danger:#f87171; --info:#60a5fa;
+  --ring:0 0 0 3px rgba(193,122,58,.28);
+  --radius:12px; --radius-sm:9px; --radius-md:11px; --radius-lg:15px; --radius-xl:18px;
+  --shadow:0 10px 30px rgba(0,0,0,.35); --shadow-sm:0 2px 10px rgba(0,0,0,.28); --shadow-md:0 6px 20px rgba(0,0,0,.32);
+  --font-ui:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  /* Majina ya zamani yaliyotumika kurasani lakini hayakuwa yamefafanuliwa (yalizalisha rangi zisizo sahihi) */
+  --font-heading:var(--font-ui); --font-body:var(--font-ui); --font-nav:var(--font-ui);
+  --color-brown:var(--primary-light); --color-brown-dark:var(--primary-dark); --color-orange:var(--primary);
+  --color-gold:var(--primary-light); --color-white:var(--bg-card); --color-black:var(--bg-page); --color-black-soft:var(--bg-page);
+  --color-beige:var(--bg-card2); --color-beige-dark:var(--border-strong); --color-gray-light:var(--text-dim);
+  --text-dark:var(--text);
+  --space-1:.25rem; --space-2:.5rem; --space-3:.75rem; --space-4:1rem; --space-5:1.25rem; --space-6:1.5rem; --space-8:2rem; --space-10:2.5rem;
+}
+
+/* ── Msingi ── */
+html,body{background:var(--bg-page)}
+body{color:var(--text);font-family:var(--font-ui);font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar-thumb{background:rgba(193,122,58,.55)}
+::selection{background:rgba(193,122,58,.35)}
+a{color:var(--primary-light)}
+.admin-main{background:var(--bg-page);min-width:0;max-width:100%}
+.adm-card,.adm-table-wrap{min-width:0;max-width:100%}
+.admin-layout{overflow-x:clip}
+.admin-layout{background:var(--bg-page)}
+
+/* ── Sidebar (kwa madarasa, si inline styles) ── */
+.adm-side{background:var(--bg-side);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;z-index:208;width:var(--sidebar-w,260px);overflow-y:auto;overflow-x:hidden;transition:transform .35s cubic-bezier(.4,0,.2,1)}
+.adm-side::-webkit-scrollbar{width:3px}
+.adm-side__brand{padding:1.15rem 1.15rem 1rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:.5rem}
+.adm-side__logo{display:flex;align-items:center;gap:.7rem;text-decoration:none;min-width:0}
+.adm-side__mark{width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg,var(--primary-dark),var(--primary));display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#fff;font-size:.9rem;box-shadow:0 4px 14px rgba(160,94,34,.35)}
+.adm-side__name{font-weight:700;color:#fff;font-size:.95rem;line-height:1.15;letter-spacing:-.01em}
+.adm-side__name small{display:block;font-size:.62rem;font-weight:600;color:var(--primary-light);letter-spacing:.14em;text-transform:uppercase;margin-top:.15rem}
+.adm-side__site{display:flex;align-items:center;gap:.5rem;margin:.7rem .8rem .2rem;padding:.5rem .65rem;border-radius:var(--radius-sm);font-size:.76rem;font-weight:600;color:var(--text-muted);text-decoration:none;border:1px solid var(--border);transition:all .2s}
+.adm-side__site:hover{color:#fff;border-color:var(--border-strong);background:rgba(255,255,255,.04)}
+.adm-side__nav{flex:1;padding:.4rem .8rem 1rem}
+.adm-side__label{font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--text-dim);padding:1rem .65rem .4rem}
+.adm-side__item{display:flex;align-items:center;gap:.7rem;padding:.58rem .7rem;border-radius:var(--radius-sm);text-decoration:none;color:var(--text-muted);font-size:.84rem;font-weight:500;margin-bottom:.1rem;position:relative;transition:background .2s,color .2s}
+.adm-side__item i{width:18px;text-align:center;font-size:.82rem;flex-shrink:0;color:var(--text-dim);transition:color .2s}
+.adm-side__item:hover{background:rgba(255,255,255,.05);color:#fff}
+.adm-side__item:hover i{color:var(--primary-light)}
+.adm-side__item.is-active{background:rgba(193,122,58,.14);color:#fff}
+.adm-side__item.is-active i{color:var(--primary-light)}
+.adm-side__item.is-active::before{content:'';position:absolute;left:-.8rem;top:20%;bottom:20%;width:3px;border-radius:0 3px 3px 0;background:var(--primary)}
+.adm-side__badge{margin-left:auto;background:rgba(251,191,36,.15);color:var(--warn);font-size:.64rem;font-weight:700;padding:.1rem .45rem;border-radius:999px}
+.adm-side__sub{margin:.1rem 0 .3rem 1.1rem;padding-left:.6rem;border-left:1px solid var(--border)}
+.adm-side__sub .adm-side__item{font-size:.78rem;padding:.45rem .6rem}
+.adm-side__foot{padding:.85rem 1.15rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:.5rem;font-size:.78rem}
+.adm-side__user{color:var(--text-muted);display:flex;align-items:center;gap:.5rem;min-width:0}
+.adm-side__user i{color:var(--text-dim)}
+.adm-side__logout{color:var(--text-dim);text-decoration:none;display:flex;align-items:center;gap:.35rem;transition:color .2s}
+.adm-side__logout:hover{color:var(--danger)}
+#adm-topbar{background:var(--bg-side) !important;border-bottom:1px solid var(--border) !important}
+
+/* ── Kichwa cha ukurasa (adm_pagehead) ── */
+.adm-pagehead{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem 1.5rem;flex-wrap:wrap;margin-bottom:1.25rem}
+.adm-pagehead__title{font-family:var(--font-ui);font-size:1.55rem;font-weight:700;color:#fff;letter-spacing:-.02em;line-height:1.2;display:flex;align-items:center;gap:.7rem;margin:0}
+.adm-pagehead__icon{width:38px;height:38px;border-radius:11px;background:rgba(193,122,58,.14);color:var(--primary-light);display:inline-flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0}
+.adm-pagehead__sub{margin-top:.35rem;color:var(--text-muted);font-size:.88rem;max-width:62ch}
+.adm-pagehead__actions{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center}
+
+/* Kurasa za zamani zisizobadilishwa bado zinafanana */
+.admin-header h1,.adm-page-title{font-family:var(--font-ui) !important;font-size:1.55rem !important;font-weight:700 !important;color:#fff !important;letter-spacing:-.02em;line-height:1.2}
+.admin-header p,.adm-page-sub{color:var(--text-muted) !important;font-family:var(--font-ui) !important;font-size:.88rem !important}
+
+/* ── Kisanduku cha maelekezo (adm_help) ── */
+.adm-help{background:linear-gradient(180deg,rgba(193,122,58,.09),rgba(193,122,58,.04));border:1px solid rgba(193,122,58,.26);border-radius:var(--radius-lg);margin-bottom:1.35rem;overflow:hidden}
+.adm-help>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:.75rem;padding:.8rem 1.1rem;font-weight:600;color:#fff;font-size:.9rem}
+.adm-help>summary::-webkit-details-marker{display:none}
+.adm-help__ico{width:30px;height:30px;border-radius:9px;background:rgba(193,122,58,.2);color:var(--primary-light);display:inline-flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0}
+.adm-help__hint{margin-left:auto;font-size:.76rem;font-weight:500;color:var(--text-muted);display:flex;align-items:center;gap:.4rem}
+.adm-help__hint i{transition:transform .25s}
+.adm-help[open] .adm-help__hint i{transform:rotate(180deg)}
+.adm-help__body{padding:.2rem 1.1rem 1.1rem;display:grid;gap:1rem 2rem;grid-template-columns:1.3fr 1fr}
+@media(max-width:900px){.adm-help__body{grid-template-columns:1fr}}
+.adm-help__h{font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--primary-light);margin:0 0 .55rem}
+.adm-steps{list-style:none;counter-reset:s;margin:0;padding:0;display:grid;gap:.55rem}
+.adm-steps li{counter-increment:s;position:relative;padding-left:2rem;color:var(--text-muted);font-size:.86rem;line-height:1.5}
+.adm-steps li::before{content:counter(s);position:absolute;left:0;top:.05rem;width:1.4rem;height:1.4rem;border-radius:50%;background:rgba(193,122,58,.2);color:var(--primary-light);font-size:.72rem;font-weight:700;display:flex;align-items:center;justify-content:center}
+.adm-steps strong,.adm-tips strong{color:#fff;font-weight:600}
+.adm-tips{list-style:none;margin:0;padding:0;display:grid;gap:.5rem}
+.adm-tips li{position:relative;padding-left:1.25rem;color:var(--text-muted);font-size:.84rem;line-height:1.5}
+.adm-tips li::before{content:'';position:absolute;left:.15rem;top:.55rem;width:5px;height:5px;border-radius:50%;background:var(--primary)}
+
+/* ── Maelezo mafupi (callouts) ── */
+.adm-tip{display:flex;gap:.75rem;align-items:flex-start;padding:.8rem 1rem;border-radius:var(--radius);border:1px solid var(--border);background:rgba(255,255,255,.03);color:var(--text-muted);font-size:.85rem;line-height:1.5;margin-bottom:1rem}
+.adm-tip>i{margin-top:.15rem;color:var(--info);flex-shrink:0}
+.adm-tip strong{color:#fff}
+.adm-tip--brand{border-color:rgba(193,122,58,.3);background:rgba(193,122,58,.07)}.adm-tip--brand>i{color:var(--primary-light)}
+.adm-tip--warn{border-color:rgba(251,191,36,.28);background:rgba(251,191,36,.06)}.adm-tip--warn>i{color:var(--warn)}
+.adm-tip--danger{border-color:rgba(248,113,113,.3);background:rgba(248,113,113,.07)}.adm-tip--danger>i{color:var(--danger)}
+.adm-tip--ok{border-color:rgba(74,222,128,.28);background:rgba(74,222,128,.06)}.adm-tip--ok>i{color:var(--ok)}
+.f-hint{color:var(--text-dim);font-size:.76rem;font-family:var(--font-ui);line-height:1.45;margin-top:.35rem}
+.f-hint strong{color:var(--text-muted)}
+
+/* ── Fomu za zamani (.form-control) zifanane na mpya ── */
+.form-control{background:rgba(255,255,255,.045);border:1px solid var(--border-strong);color:var(--text);border-radius:var(--radius-sm);font-family:var(--font-ui)}
+.form-control:focus{border-color:var(--primary);background:rgba(193,122,58,.05);box-shadow:var(--ring);outline:none}
+.form-label{font-family:var(--font-ui);font-size:.74rem;font-weight:600;letter-spacing:.01em;text-transform:none;color:var(--text);margin-bottom:.4rem;display:block}
+.form-control option{background:var(--bg-card2)}
+.alert--success{background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.28);color:var(--ok);padding:.8rem 1rem;border-radius:var(--radius);margin-bottom:1rem}
+.alert--error{background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.28);color:var(--danger);padding:.8rem 1rem;border-radius:var(--radius);margin-bottom:1rem}
+.badge--confirmed,.badge--completed{background:rgba(74,222,128,.12);color:var(--ok)}
+.badge--pending,.badge--unread{background:rgba(251,191,36,.12);color:var(--warn)}
+.badge--cancelled{background:rgba(248,113,113,.12);color:var(--danger)}
+
+/* ── Kadi ── */
+.adm-card,.card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg)}
+.adm-card-header{border-bottom:1px solid var(--border)}
+.adm-card-title,.card h3{font-family:var(--font-ui);font-weight:650;color:#fff;font-size:1rem;letter-spacing:-.01em}
+.card h3{color:#fff !important}
+.adm-stat,.stat-widget{background:var(--bg-card);border:1px solid var(--border)}
+.adm-stat:hover,.stat-widget:hover{border-color:rgba(193,122,58,.55);box-shadow:0 8px 28px rgba(160,94,34,.16)}
+.adm-stat-val{font-family:var(--font-ui);font-weight:700;letter-spacing:-.02em}
+.adm-stat-lbl{font-family:var(--font-ui);font-size:.68rem;font-weight:600;letter-spacing:.06em}
+
+/* ── Majedwali ── */
+.adm-table th,.data-table th{font-family:var(--font-ui);font-size:.68rem;font-weight:700;letter-spacing:.08em;color:var(--text-dim);background:transparent;border-bottom:1px solid var(--border)}
+.adm-table td,.data-table td{color:var(--text-muted);border-bottom:1px solid rgba(255,255,255,.045)}
+.adm-table tr:hover td,.data-table tr:hover td{background:rgba(255,255,255,.028)}
+
+/* ── Vitufe ── */
+.btn,.btn-adm{font-family:var(--font-ui);font-size:.8rem;font-weight:600;letter-spacing:0;text-transform:none;border-radius:var(--radius-sm);padding:.55rem 1rem}
+.btn-adm-sm,.btn--sm{padding:.38rem .75rem;font-size:.74rem}
+.btn-adm-primary,.btn--primary,.btn--gold,.btn-em-primary{background:linear-gradient(135deg,var(--primary-dark),var(--primary)) !important;color:#fff !important;border:0 !important;box-shadow:0 3px 12px rgba(160,94,34,.28)}
+.btn-adm-primary:hover,.btn--primary:hover,.btn--gold:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(160,94,34,.38) !important}
+.btn-adm-outline,.btn--outline{background:rgba(255,255,255,.05);color:var(--text);border:1px solid var(--border-strong)}
+.btn-adm-outline:hover,.btn--outline:hover{background:rgba(255,255,255,.09);color:#fff}
+.btn-adm-danger{background:rgba(248,113,113,.1);color:var(--danger);border:1px solid rgba(248,113,113,.22)}
+.btn-adm-gold{background:linear-gradient(135deg,#a05e22,#c17a3a);color:#fff}
+
+.btn--danger,.btn-delete{background:rgba(248,113,113,.12) !important;color:var(--danger) !important;border:1px solid rgba(248,113,113,.28) !important;border-radius:var(--radius-sm)}
+.btn--danger:hover,.btn-delete:hover{background:rgba(248,113,113,.22) !important}
+
+/* ── Fomu ── */
+.f-label,.field label,label.f-label{font-family:var(--font-ui);font-size:.74rem;font-weight:600;letter-spacing:.01em;text-transform:none;color:var(--text);margin-bottom:.4rem}
+.f-input,.f-select,.f-textarea{background:rgba(255,255,255,.045);border:1px solid var(--border-strong);color:var(--text);border-radius:var(--radius-sm);font-family:var(--font-ui)}
+.f-input::placeholder,.f-textarea::placeholder{color:var(--text-dim)}
+.f-input:focus,.f-select:focus,.f-textarea:focus{border-color:var(--primary);background:rgba(193,122,58,.05);box-shadow:var(--ring)}
+.f-select option{background:var(--bg-card2)}
+input[type=checkbox],input[type=radio]{accent-color:var(--primary)}
+.toggle input:checked + .toggle-slider{background:var(--primary)}
+.alert-success{background:rgba(74,222,128,.08);border-color:rgba(74,222,128,.28);color:var(--ok)}
+.badge{font-family:var(--font-ui);font-size:.64rem}
+.badge-confirmed{background:rgba(74,222,128,.12);color:var(--ok)}
+.adm-live-dot{background:var(--ok)}
+
+/* Rangi za zamani za emerald zilizoandikwa moja kwa moja kwenye vipengele vya kawaida */
+.adm-nav-item.active,.admin-nav__item.is-active{background:rgba(193,122,58,.14);color:#fff}
+.adm-nav-item.active::before{background:var(--primary)}
+
+/* ── Kuingia (login) ── */
+body .login-card,body .login-box{border-color:var(--border-strong)}
+
+/* ── Orodha ya kuanzia (dashboard) na vipimo vya SEO ── */
+.adm-check{display:grid;gap:.5rem}
+.adm-check__item{display:flex;align-items:center;gap:.75rem;padding:.65rem .85rem;border-radius:var(--radius);border:1px solid var(--border);background:rgba(255,255,255,.02);text-decoration:none;color:var(--text-muted);font-size:.86rem;transition:border-color .2s,background .2s}
+a.adm-check__item:hover{border-color:rgba(193,122,58,.45);background:rgba(193,122,58,.06);color:#fff}
+.adm-check__dot{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--border-strong);display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.62rem;color:transparent}
+.adm-check__item.is-done .adm-check__dot{background:rgba(74,222,128,.15);border-color:rgba(74,222,128,.5);color:var(--ok)}
+.adm-check__item.is-done{color:var(--text-dim)}
+.adm-check__item.is-done .adm-check__t{text-decoration:line-through;text-decoration-color:rgba(255,255,255,.2)}
+.adm-check__t{flex:1;min-width:0}
+.adm-check__go{color:var(--text-dim);font-size:.72rem}
+.adm-counter{font-size:.72rem;font-weight:600;color:var(--text-dim);font-variant-numeric:tabular-nums}
+.adm-counter.is-ok{color:var(--ok)}.adm-counter.is-warn{color:var(--warn)}.adm-counter.is-bad{color:var(--danger)}
+.adm-empty{padding:2.5rem 1rem;text-align:center;color:var(--text-muted)}
+.adm-empty i{font-size:1.6rem;color:var(--text-dim);margin-bottom:.7rem;display:block}
+.adm-empty strong{display:block;color:#fff;margin-bottom:.25rem}
+
+/* ── Menyu ya sehemu ndani ya ukurasa mrefu (Settings) ── */
+.adm-subnav{display:flex;gap:.4rem;flex-wrap:wrap;position:sticky;top:0;z-index:30;padding:.6rem 0;margin-bottom:1rem;background:linear-gradient(var(--bg-page) 80%,transparent)}
+.adm-subnav a{padding:.42rem .85rem;border-radius:999px;border:1px solid var(--border);color:var(--text-muted);text-decoration:none;font-size:.78rem;font-weight:600;background:var(--bg-card);transition:all .2s}
+.adm-subnav a:hover{color:#fff;border-color:rgba(193,122,58,.5);background:rgba(193,122,58,.1)}
+html{scroll-padding-top:70px}
+@media(max-width:1023px){.admin-main,.adm-main{padding-top:64px}}

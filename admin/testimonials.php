@@ -93,11 +93,11 @@ $sourceColors = ['site'=>'#a05e22','google'=>'#4285F4','tripadvisor'=>'#34e0a1',
     .preview-img{width:100%;height:150px;object-fit:cover;border-radius:10px;border:1px solid rgba(255,255,255,.08);display:block;margin-bottom:.75rem}
     .img-tabs{display:flex;gap:0;margin-bottom:.85rem;border-radius:8px;overflow:hidden;border:1px solid rgba(255,255,255,.1)}
     .img-tab{flex:1;padding:.42rem;text-align:center;font-family:'Montserrat',sans-serif;font-size:.68rem;font-weight:600;cursor:pointer;color:rgba(255,255,255,.4);background:rgba(255,255,255,.03);border:none;transition:all .2s}
-    .img-tab.active{background:rgba(16,185,129,.15);color:#10b981}
+    .img-tab.active{background:rgba(193,122,58,.15);color:#c17a3a}
     .img-panel{display:none}.img-panel.active{display:block}
     .src-option{display:none}
     .src-label{display:inline-flex;align-items:center;gap:.4rem;padding:.42rem .85rem;border-radius:999px;border:1.5px solid rgba(255,255,255,.1);cursor:pointer;font-family:'Montserrat',sans-serif;font-size:.67rem;font-weight:600;transition:all .22s;color:rgba(255,255,255,.4);background:rgba(255,255,255,.03)}
-    .src-option:checked + .src-label{border-color:rgba(16,185,129,.5);background:rgba(16,185,129,.12);color:#10b981}
+    .src-option:checked + .src-label{border-color:rgba(193,122,58,.5);background:rgba(193,122,58,.12);color:#c17a3a}
     .rating-option{display:none}
     .rating-label{padding:.45rem .8rem;border-radius:8px;border:1.5px solid rgba(255,255,255,.1);cursor:pointer;font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:700;color:rgba(255,255,255,.4);transition:all .2s}
     .rating-option:checked + .rating-label{border-color:rgba(251,191,36,.5);background:rgba(251,191,36,.12);color:#fbbf24}
@@ -109,28 +109,46 @@ $sourceColors = ['site'=>'#a05e22','google'=>'#4285F4','tripadvisor'=>'#34e0a1',
   <main class="admin-main">
 
     <!-- Header -->
-    <div class="admin-header">
-      <div>
-        <h1 style="font-family:'Nanum Myeongjo',serif;font-size:1.4rem;color:#fff;font-weight:700;display:flex;align-items:center;gap:.5rem">
-          <i class="fas fa-star" style="color:#10b981;font-size:1.1rem"></i>
-          <?= isset($_GET['edit']) ? ($editing ? 'Edit Review' : 'New Review') : 'Guest Reviews' ?>
-        </h1>
-        <p style="color:rgba(255,255,255,.4);font-size:.78rem;font-family:'Montserrat',sans-serif;margin-top:.15rem">
-          <?= isset($_GET['edit']) ? 'Add or edit a customer review shown on the homepage and /reviews page' : count($reviews).' reviews · shown on homepage & /reviews' ?>
-        </p>
-      </div>
-      <div style="display:flex;gap:.5rem">
-        <?php if (!isset($_GET['edit'])): ?>
-        <a href="testimonials.php?edit=0" class="btn btn--primary btn--sm" style="display:inline-flex;align-items:center;gap:.35rem">
-          <i class="fas fa-plus" style="font-size:.6rem"></i> New Review
-        </a>
-        <?php else: ?>
-        <a href="testimonials.php" class="btn btn--outline btn--sm" style="display:inline-flex;align-items:center;gap:.35rem">
-          <i class="fas fa-arrow-left" style="font-size:.6rem"></i> All Reviews
-        </a>
-        <?php endif; ?>
-      </div>
-    </div>
+    <?php
+if (isset($_GET['edit'])) {
+  adm_pagehead($editing ? 'Edit review' : 'New review', 'Add or edit a customer review shown on the homepage and the Reviews page.', [
+    'icon' => 'fa-star',
+    'actions' => [['label' => 'All reviews', 'href' => 'testimonials.php', 'icon' => 'fa-arrow-left']],
+    'help' => [
+      'key' => 'review-edit', 'title' => 'How to add a review',
+      'steps' => [
+        '<strong>Copy the review exactly</strong> as the customer wrote it, from Google, TripAdvisor or an email they sent you.',
+        'Fill in the customer name, country and the star rating. The tour name is optional.',
+        'Choose the <strong>source</strong> (Site, Google or TripAdvisor) and paste the link to the original review if you have it.',
+        'Add the customer photo if they gave permission, then press Save.',
+      ],
+      'tips' => [
+        'Only publish <strong>real</strong> reviews. Do not change the words or the rating.',
+        'Ask for permission before using a customer\'s photo.',
+        'Use the "Approved" switch to hide a review without deleting it.',
+      ],
+    ],
+  ]);
+} else {
+  adm_pagehead('Guest reviews', count($reviews) . ' reviews. They appear on the homepage and the Reviews page.', [
+    'icon' => 'fa-star',
+    'actions' => [['label' => 'New review', 'href' => 'testimonials.php?edit=0', 'icon' => 'fa-plus', 'kind' => 'primary']],
+    'help' => [
+      'key' => 'reviews', 'title' => 'How reviews work',
+      'steps' => [
+        '<strong>Add a review</strong> with the <em>New review</em> button.',
+        '<strong>Approved</strong> reviews are shown on the website. Switch one off to hide it without deleting it.',
+        '<strong>Edit</strong> with the pencil icon. <strong>Delete</strong> removes it permanently.',
+      ],
+      'tips' => [
+        'Reviews build trust: aim for a steady flow of new Google and TripAdvisor reviews.',
+        'The first five approved reviews are also shared with Google in the page data.',
+        'Send happy guests your Google review link. You can find it in Settings, Social &amp; reviews.',
+      ],
+    ],
+  ]);
+}
+?>
 
     <?php if ($msg): ?>
     <div class="alert alert-success" style="margin-bottom:1.25rem">
@@ -216,11 +234,11 @@ $sourceColors = ['site'=>'#a05e22','google'=>'#4285F4','tripadvisor'=>'#34e0a1',
                     <input type="checkbox" name="approved" value="1" id="app-toggle"
                            <?= ($editing['approved'] ?? 1) ? 'checked' : '' ?>
                            style="opacity:0;width:0;height:0;position:absolute"
-                           onchange="document.getElementById('app-slider').style.background=this.checked?'#10b981':'rgba(255,255,255,.12)';document.getElementById('app-thumb').style.transform=this.checked?'translateX(18px)':'';document.getElementById('app-label').textContent=this.checked?'Approved':'Hidden';document.getElementById('app-label').style.color=this.checked?'#10b981':'rgba(255,255,255,.4)'">
-                    <div id="app-slider" style="position:absolute;inset:0;border-radius:22px;background:<?= ($editing['approved']??1)?'#10b981':'rgba(255,255,255,.12)' ?>;cursor:pointer;transition:background .3s"></div>
+                           onchange="document.getElementById('app-slider').style.background=this.checked?'#c17a3a':'rgba(255,255,255,.12)';document.getElementById('app-thumb').style.transform=this.checked?'translateX(18px)':'';document.getElementById('app-label').textContent=this.checked?'Approved':'Hidden';document.getElementById('app-label').style.color=this.checked?'#c17a3a':'rgba(255,255,255,.4)'">
+                    <div id="app-slider" style="position:absolute;inset:0;border-radius:22px;background:<?= ($editing['approved']??1)?'#c17a3a':'rgba(255,255,255,.12)' ?>;cursor:pointer;transition:background .3s"></div>
                     <div id="app-thumb" style="position:absolute;width:16px;height:16px;left:3px;bottom:3px;background:#fff;border-radius:50%;transition:transform .3s;<?= ($editing['approved']??1)?'transform:translateX(18px)':'' ?>"></div>
                   </div>
-                  <span id="app-label" style="font-family:'Montserrat',sans-serif;font-size:.75rem;font-weight:600;color:<?= ($editing['approved']??1)?'#10b981':'rgba(255,255,255,.4)' ?>"><?= ($editing['approved']??1)?'Approved':'Hidden' ?></span>
+                  <span id="app-label" style="font-family:'Montserrat',sans-serif;font-size:.75rem;font-weight:600;color:<?= ($editing['approved']??1)?'#c17a3a':'rgba(255,255,255,.4)' ?>"><?= ($editing['approved']??1)?'Approved':'Hidden' ?></span>
                 </label>
               </div>
               <button type="submit" class="btn btn--primary w-full" style="display:flex;align-items:center;justify-content:center;gap:.4rem;padding:.8rem;font-size:.8rem">
@@ -240,7 +258,7 @@ $sourceColors = ['site'=>'#a05e22','google'=>'#4285F4','tripadvisor'=>'#34e0a1',
                 <?php $curSource = $editing['source'] ?? 'site'; foreach ($sources as $key => $label): ?>
                 <input type="radio" name="source" value="<?= $key ?>" id="src-<?= $key ?>"
                        class="src-option" <?= $curSource === $key ? 'checked' : '' ?>>
-                <label for="src-<?= $key ?>" class="src-label" style="<?= $curSource===$key?'border-color:rgba(16,185,129,.5);background:rgba(16,185,129,.12);color:#10b981':'' ?>">
+                <label for="src-<?= $key ?>" class="src-label" style="<?= $curSource===$key?'border-color:rgba(193,122,58,.5);background:rgba(193,122,58,.12);color:#c17a3a':'' ?>">
                   <?php if ($key === 'google'): ?><i class="fab fa-google" style="font-size:.6rem"></i>
                   <?php elseif ($key === 'tripadvisor'): ?><img src="<?= SITE_URL ?>/assets/images/tripadvisor-icon.svg" alt="" style="width:.7rem;height:.7rem;vertical-align:-1px">
                   <?php elseif ($key === 'safaribookings'): ?><img src="<?= SITE_URL ?>/assets/images/safaribookings-icon.png" alt="" style="width:.7rem;height:.7rem;vertical-align:-1px">
@@ -297,8 +315,8 @@ $sourceColors = ['site'=>'#a05e22','google'=>'#4285F4','tripadvisor'=>'#34e0a1',
       $tripC    = count(array_filter($reviews, fn($r) => ($r['source'] ?? '') === 'tripadvisor'));
       $safariC  = count(array_filter($reviews, fn($r) => ($r['source'] ?? '') === 'safaribookings'));
       foreach ([
-        ['fa-star',        'rgba(16,185,129,.15)','#10b981', $total,    'Total Reviews'],
-        ['fa-check-circle','rgba(52,211,153,.15)','#34d399', $approved, 'Approved / Live'],
+        ['fa-star',        'rgba(193,122,58,.15)','#c17a3a', $total,    'Total Reviews'],
+        ['fa-check-circle','rgba(224,164,106,.15)','#e0a46a', $approved, 'Approved / Live'],
         ['fa-google',      'rgba(66,133,244,.15)','#8ab4f8', $googleC,  'From Google'],
         ['img-ta',         'rgba(52,224,161,.15)','#34e0a1', $tripC,    'From TripAdvisor'],
         ['img-sb',         'rgba(249,115,22,.15)', '#f97316', $safariC,  'From SafariBookings'],
@@ -342,7 +360,7 @@ $sourceColors = ['site'=>'#a05e22','google'=>'#4285F4','tripadvisor'=>'#34e0a1',
             <?php if (empty($reviews)): ?>
             <tr><td colspan="7" style="text-align:center;padding:2.5rem;color:rgba(255,255,255,.25)">
               <i class="fas fa-star" style="font-size:2rem;display:block;margin-bottom:.65rem;color:rgba(255,255,255,.1)"></i>
-              No reviews yet. <a href="testimonials.php?edit=0" style="color:#10b981;text-decoration:none">Add your first review →</a>
+              No reviews yet. <a href="testimonials.php?edit=0" style="color:#c17a3a;text-decoration:none">Add your first review →</a>
             </td></tr>
             <?php else: foreach ($reviews as $r):
               $rSource = $r['source'] ?? 'site';

@@ -513,7 +513,7 @@ $navItems = [
   'destinations' => ['url'=>url('destinations'),      'desk'=>'Destinations','mob'=>'Destinations',    'icon'=>'fa-map-marker-alt'],
   'gallery'      => ['url'=>url('gallery'),           'desk'=>'Gallery',    'mob'=>'Gallery',          'icon'=>'fa-images'],
   'blog'         => ['url'=>url('blog'),              'desk'=>'Blog',       'mob'=>'Blog',             'icon'=>'fa-newspaper'],
-  'about'        => ['url'=>url('about'),             'desk'=>'About Us',   'mob'=>'About Us',         'icon'=>'fa-info-circle'],
+  'about'        => ['url'=>url('about-us'),             'desk'=>'About Us',   'mob'=>'About Us',         'icon'=>'fa-info-circle'],
   'contact'      => ['url'=>url('contact'),           'desk'=>'Contact',    'mob'=>'Contact',          'icon'=>'fa-envelope'],
 ];
 /* Fetch featured tours for mega menu */
@@ -924,7 +924,7 @@ try {
 
         <!-- CTA row -->
         <div class="flex flex-wrap gap-3 items-center">
-          <a href="<?= url('about') ?>"
+          <a href="<?= url('about-us') ?>"
              class="group inline-flex items-center gap-2 font-nav font-semibold text-[.78rem] px-6 py-3 rounded-xl transition-all hover:scale-105 hover:shadow-lg"
              style="background:linear-gradient(135deg,#7d4817,#a05e22);box-shadow:0 4px 18px rgba(160,94,34,.2);color:#fff">
             <i class="fas fa-compass text-xs" style="color:#fff"></i>
@@ -1866,6 +1866,8 @@ try {
       </div>
     </div>
   </div>
+
+  <?= guidemeetFooterBadge() ?>
 
   <!-- -- Bottom bar -- -->
   <div class="ftr-bottom" style="border-top:1px solid rgba(160,94,34,.15);background:linear-gradient(180deg,rgba(20,33,28,.5),rgba(28,44,38,.8))">

@@ -1,11 +1,11 @@
-﻿# Jambo Masai Tours — Luxury Safari Tanzania
+# Jambo Masai Tours — Luxury Safari Tanzania
 > Award-winning, Maasai-founded luxury safari operator based in Arusha, Tanzania (est. 2010). Specializes in wildlife safaris, Kilimanjaro trekking, Zanzibar beach holidays, cultural tours, and custom East Africa itineraries. Rated 4.9/5 with 150+ reviews.
 
 ## Core pages
 - [Home](https://jambomasaitours.com/): Hero video/slideshow, featured tours, testimonials, gallery preview, latest blog posts
 - [Safari Tours](https://jambomasaitours.com/tours): All tour listings with filtering by type, destination, price, duration, rating
 - [Destinations](https://jambomasaitours.com/destinations): Serengeti, Ngorongoro, Kilimanjaro, Zanzibar, Tarangire, Maasai Heartland — with wildlife, activities, seasonal calendars
-- [About Us](https://jambomasaitours.com/about): Brand story, founder (Raphael Salewa), stats, values, team
+- [About Us](https://jambomasaitours.com/about-us): Brand story, founder (Raphael Salewa), stats, values, team
 - [Gallery](https://jambomasaitours.com/gallery): Photo gallery with categories — wildlife, landscapes, culture, safari-life, zanzibar, birds
 - [Blog](https://jambomasaitours.com/blog): Safari tips, wildlife guides, travel guides, conservation stories
 - [FAQ](https://jambomasaitours.com/faq): Frequently asked safari questions

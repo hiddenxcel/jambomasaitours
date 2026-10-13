@@ -52,7 +52,7 @@ $navItems = [
     'home'         => ['url' => url(),                   'label' => 'Home'],
     'tours'        => ['url' => url('tours'),        'label' => 'Safari Tours'],
     'destinations' => ['url' => url('destinations'), 'label' => 'Destinations'],
-    'about'        => ['url' => url('about'),        'label' => 'About Us'],
+    'about'        => ['url' => url('about-us'),        'label' => 'About Us'],
     'gallery'      => ['url' => url('gallery'),      'label' => 'Gallery'],
     'blog'         => ['url' => url('blog'),         'label' => 'Blog'],
     'contact'      => ['url' => url('contact'),      'label' => 'Contact'],
@@ -943,6 +943,7 @@ document.addEventListener('keydown', e => {
       <a href="<?= url('booking?tour='.e($tour['slug'])) ?>" class="text-emerald-400 text-xs font-nav font-semibold transition-colors">Book Safari &rarr;</a>
     </div>
   </div>
+  <?= guidemeetFooterBadge() ?>
 </footer>
 
 <a href="https://wa.me/<?= e(WHATSAPP_NUMBER) ?>" id="wa-float" class="wa-float" target="_blank" rel="noopener"><i class="fab fa-whatsapp text-2xl relative z-10"></i></a>

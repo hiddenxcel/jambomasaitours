@@ -90,14 +90,24 @@ $missingCaption = count(array_filter($images, fn($i) => empty($i['caption'])));
   <?php include 'includes/admin_sidebar.php'; ?>
   <main class="admin-main">
 
-    <div class="admin-header">
-      <div>
-        <h1 style="font-family:'Nanum Myeongjo',serif;font-size:1.4rem;color:#fff;font-weight:700">Image Library</h1>
-        <p style="color:rgba(255,255,255,.4);font-size:.78rem;font-family:'Montserrat',sans-serif;margin-top:.1rem">
-          Shared photo pool used by AI to auto-pick matching images for itinerary PDFs — <?= count($images) ?> photo<?= count($images)!==1?'s':'' ?>, <?= $missingCaption ?> missing a caption
-        </p>
-      </div>
-    </div>
+    <?php
+adm_pagehead('Image library', count($images) . ' photo' . (count($images) !== 1 ? 's' : '') . ', ' . $missingCaption . ' without a caption.', [
+  'icon' => 'fa-photo-film',
+  'help' => [
+    'key' => 'image-library', 'title' => 'What the image library does',
+    'steps' => [
+      'Upload several photos at once with <strong>Add Photos</strong>.',
+      'Write a short <strong>caption</strong> for each one, such as "lions on the Serengeti plains" or "luxury tented camp room".',
+      'When a traveller downloads an itinerary PDF, the system reads your captions to pick matching pictures for each day.',
+    ],
+    'tips' => [
+      'No caption means the photo is never picked, so fill the captions.',
+      'Add the destination (for example Serengeti or Zanzibar) to narrow the matching.',
+      'This library is separate from the website Gallery.',
+    ],
+  ],
+]);
+?>
 
     <?php if ($msg): ?>
     <div class="alert alert-success" style="margin-bottom:1.25rem"><i class="fas fa-check-circle"></i> <?= e($msg) ?></div>

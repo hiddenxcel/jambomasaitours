@@ -61,15 +61,29 @@ $csrfToken = generateCsrfToken();
   <?php include 'includes/admin_sidebar.php'; ?>
   <main class="admin-main">
 
-    <div class="admin-header">
-      <div>
-        <h1 style="font-family:var(--font-heading);font-size:1.6rem;color:var(--color-brown);">Gallery</h1>
-        <p style="color:var(--text-muted);font-size:.9rem;"><?= count($gallery) ?> images</p>
-      </div>
-    </div>
+    <?php
+adm_pagehead('Gallery', count($gallery) . ' photos on the Gallery page.', [
+  'icon' => 'fa-images',
+  'actions' => [['label' => 'View gallery', 'href' => url('gallery'), 'icon' => 'fa-arrow-up-right-from-square', 'attrs' => 'target="_blank" rel="noopener"']],
+  'help' => [
+    'key' => 'gallery', 'title' => 'How to add photos',
+    'steps' => [
+      'Type a clear <strong>title</strong> that describes the photo, for example "Lion resting at sunset, Serengeti".',
+      'Choose the <strong>category</strong>. Visitors can filter the gallery by category.',
+      'Upload the file (or paste an image link) and press <strong>Add</strong>.',
+      'To remove a photo, use the delete button under it.',
+    ],
+    'tips' => [
+      'Use sharp photos from your own trips. JPG, PNG or WebP, up to 8 MB.',
+      'Descriptive titles help your photos appear in Google Images.',
+      'The Image Library is a different page: it feeds the itinerary PDF, not this gallery.',
+    ],
+  ],
+]);
+?>
 
     <?php if ($msg): ?>
-    <div style="background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);color:#166534;padding:var(--space-4) var(--space-6);border-radius:var(--radius-md);margin-bottom:var(--space-6);"><?= e($msg) ?></div>
+    <div style="background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);color:var(--ok);padding:var(--space-4) var(--space-6);border-radius:var(--radius-md);margin-bottom:var(--space-6);"><?= e($msg) ?></div>
     <?php endif; ?>
 
     <!-- Add Image Form -->
@@ -77,7 +91,7 @@ $csrfToken = generateCsrfToken();
       <h2 style="font-family:var(--font-heading);font-size:1.1rem;color:var(--color-brown);margin-bottom:var(--space-6);">Add Image</h2>
 
       <?php if (!empty($errors)): ?>
-      <div style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);color:#991b1b;padding:var(--space-4) var(--space-5);border-radius:var(--radius-md);margin-bottom:var(--space-5);">
+      <div style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);color:var(--danger);padding:var(--space-4) var(--space-5);border-radius:var(--radius-md);margin-bottom:var(--space-5);">
         <?php foreach ($errors as $e_): ?><div>— <?= e($e_) ?></div><?php endforeach; ?>
       </div>
       <?php endif; ?>
@@ -125,7 +139,7 @@ $csrfToken = generateCsrfToken();
             <input type="hidden" name="<?= CSRF_TOKEN_NAME ?>" value="<?= e($csrfToken) ?>">
             <input type="hidden" name="action" value="delete">
             <input type="hidden" name="id" value="<?= e($g['id']) ?>">
-            <button type="submit" class="btn btn--sm" style="background:#fee2e2;color:#dc2626;border:none;width:100%;" onclick="return confirm('Delete this image?')">Delete</button>
+            <button type="submit" class="btn btn--sm" style="background:#fee2e2;color:var(--danger);border:none;width:100%;" onclick="return confirm('Delete this image?')">Delete</button>
           </form>
         </div>
       </div>

@@ -23,7 +23,7 @@ function blogSlug(string $s): string {
 }
 
 $blogCategories = ['Safari Tips','Wildlife','Culture','Trekking','Conservation','Zanzibar'];
-$catColors = ['Safari Tips'=>'#fbbf24','Wildlife'=>'#34d399','Culture'=>'#a78bfa','Trekking'=>'#60a5fa','Conservation'=>'#4ade80','Zanzibar'=>'#38bdf8'];
+$catColors = ['Safari Tips'=>'#fbbf24','Wildlife'=>'#e0a46a','Culture'=>'#a78bfa','Trekking'=>'#60a5fa','Conservation'=>'#4ade80','Zanzibar'=>'#38bdf8'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!validateCsrfToken($_POST[CSRF_TOKEN_NAME] ?? '')) {
@@ -112,13 +112,13 @@ $siteHost  = parse_url(SITE_URL, PHP_URL_HOST) ?: 'jambomasaitours.com';
   <style>
     /* ── Content editor ── */
     .content-editor{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:#e5e7eb;border-radius:0 0 10px 10px;padding:.85rem 1rem;font-family:'Fira Code','Courier New',monospace;font-size:.83rem;outline:none;transition:border-color .2s;resize:vertical;min-height:340px;line-height:1.7;tab-size:2}
-    .content-editor:focus{border-color:rgba(16,185,129,.5);background:rgba(16,185,129,.03)}
+    .content-editor:focus{border-color:rgba(193,122,58,.5);background:rgba(193,122,58,.03)}
 
     /* ── Edit / Preview mode tabs ── */
     .editor-mode-tabs{display:flex;border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,.1)}
     .mode-tab{padding:.28rem .65rem;font-family:'Montserrat',sans-serif;font-size:.62rem;font-weight:700;cursor:pointer;color:rgba(255,255,255,.4);background:rgba(255,255,255,.03);border:none;display:flex;align-items:center;gap:.3rem;transition:all .2s}
     .mode-tab i{font-size:.62rem}
-    .mode-tab.active{background:rgba(16,185,129,.15);color:#10b981}
+    .mode-tab.active{background:rgba(193,122,58,.15);color:#c17a3a}
 
     /* ── Content live preview ──
        Preview ina darasa `.prose`, hivyo inarithi mtindo ULE ULE wa ukurasa wa
@@ -132,13 +132,13 @@ $siteHost  = parse_url(SITE_URL, PHP_URL_HOST) ?: 'jambomasaitours.com';
     .tb-sep{width:1px;background:rgba(255,255,255,.08);margin:0 .15rem;align-self:stretch}
     .tb-btn{padding:.3rem .48rem;border-radius:6px;background:transparent;border:1px solid transparent;color:rgba(255,255,255,.45);cursor:pointer;font-family:'Montserrat',sans-serif;font-size:.65rem;font-weight:700;transition:all .18s;white-space:nowrap;line-height:1;display:inline-flex;align-items:center;gap:.25rem}
     .tb-btn i{font-size:.7rem}
-    .tb-btn:hover{background:rgba(16,185,129,.1);border-color:rgba(16,185,129,.3);color:#10b981}
+    .tb-btn:hover{background:rgba(193,122,58,.1);border-color:rgba(193,122,58,.3);color:#c17a3a}
     .tb-btn.tb-text{font-size:.68rem;font-family:'Montserrat',sans-serif}
 
     /* ── Category badges ── */
     .cat-option{display:none}
     .cat-label{display:inline-flex;align-items:center;gap:.4rem;padding:.42rem .85rem;border-radius:999px;border:1.5px solid rgba(255,255,255,.1);cursor:pointer;font-family:'Montserrat',sans-serif;font-size:.67rem;font-weight:600;transition:all .22s;color:rgba(255,255,255,.4);background:rgba(255,255,255,.03)}
-    .cat-option:checked + .cat-label{border-color:rgba(16,185,129,.5);background:rgba(16,185,129,.12);color:#10b981}
+    .cat-option:checked + .cat-label{border-color:rgba(193,122,58,.5);background:rgba(193,122,58,.12);color:#c17a3a}
 
     /* ── SEO bar ── */
     .seo-bar{height:4px;border-radius:2px;background:rgba(255,255,255,.07);margin-top:.35rem;overflow:hidden}
@@ -154,7 +154,7 @@ $siteHost  = parse_url(SITE_URL, PHP_URL_HOST) ?: 'jambomasaitours.com';
     /* ── Image tabs ── */
     .img-tabs{display:flex;gap:0;margin-bottom:.85rem;border-radius:8px;overflow:hidden;border:1px solid rgba(255,255,255,.1)}
     .img-tab{flex:1;padding:.42rem;text-align:center;font-family:'Montserrat',sans-serif;font-size:.68rem;font-weight:600;cursor:pointer;color:rgba(255,255,255,.4);background:rgba(255,255,255,.03);border:none;transition:all .2s}
-    .img-tab.active{background:rgba(16,185,129,.15);color:#10b981}
+    .img-tab.active{background:rgba(193,122,58,.15);color:#c17a3a}
     .img-panel{display:none}.img-panel.active{display:block}
 
     /* ── Image preview ── */
@@ -162,7 +162,7 @@ $siteHost  = parse_url(SITE_URL, PHP_URL_HOST) ?: 'jambomasaitours.com';
 
     /* ── Post list card ── */
     .post-row{background:#1a1d27;border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:1rem 1.1rem;margin-bottom:.6rem;display:flex;align-items:center;gap:1rem;transition:border-color .2s}
-    .post-row:hover{border-color:rgba(16,185,129,.2)}
+    .post-row:hover{border-color:rgba(193,122,58,.2)}
 
     /* ── Two-column edit grid ── */
     .edit-grid{display:grid;grid-template-columns:1fr 300px;gap:1.25rem;align-items:start}
@@ -178,32 +178,50 @@ $siteHost  = parse_url(SITE_URL, PHP_URL_HOST) ?: 'jambomasaitours.com';
   <?php include 'includes/admin_sidebar.php'; ?>
   <main class="admin-main">
 
-    <!-- Header -->
-    <div class="admin-header">
-      <div>
-        <h1 style="font-family:'Nanum Myeongjo',serif;font-size:1.4rem;color:#fff;font-weight:700;display:flex;align-items:center;gap:.5rem">
-          <i class="fas fa-newspaper" style="color:#10b981;font-size:1.1rem"></i>
-          <?= isset($_GET['edit']) ? ($editing ? 'Edit Post' : 'New Blog Post') : 'Blog Posts' ?>
-        </h1>
-        <p style="color:rgba(255,255,255,.4);font-size:.78rem;font-family:'Montserrat',sans-serif;margin-top:.15rem">
-          <?= isset($_GET['edit']) ? 'Write and publish your article' : count($posts).' posts · click a post to edit' ?>
-        </p>
-      </div>
-      <div style="display:flex;gap:.5rem">
-        <?php if (isset($_GET['edit']) && $editing): ?>
-        <a href="<?= url('blog-single.php?slug='.e($editing['slug'])) ?>" target="_blank" class="btn btn--outline btn--sm" style="display:inline-flex;align-items:center;gap:.35rem">
-          <i class="fas fa-eye" style="font-size:.6rem"></i> Preview
-        </a>
-        <a href="blog.php" class="btn btn--outline btn--sm" style="display:inline-flex;align-items:center;gap:.35rem">
-          <i class="fas fa-arrow-left" style="font-size:.6rem"></i> All Posts
-        </a>
-        <?php else: ?>
-        <a href="blog.php?edit=0" class="btn btn--primary btn--sm" style="display:inline-flex;align-items:center;gap:.35rem">
-          <i class="fas fa-plus" style="font-size:.6rem"></i> New Post
-        </a>
-        <?php endif; ?>
-      </div>
-    </div>
+    <?php if (isset($_GET['edit'])):
+      adm_pagehead($editing ? 'Edit post' : 'New blog post', 'Write the article, check the SEO panel, then publish.', [
+        'icon' => 'fa-pen-nib',
+        'actions' => $editing ? [
+            ['label' => 'Preview', 'href' => url('blog/' . $editing['slug']), 'icon' => 'fa-eye', 'attrs' => 'target="_blank" rel="noopener"'],
+            ['label' => 'All posts', 'href' => 'blog.php', 'icon' => 'fa-arrow-left'],
+        ] : [['label' => 'All posts', 'href' => 'blog.php', 'icon' => 'fa-arrow-left']],
+        'help' => [
+          'key' => 'blog-edit', 'title' => 'How to write a post that brings customers',
+          'steps' => [
+            '<strong>Pick one question travellers ask</strong>, for example "How much does a Tanzania safari cost?". Put the main words in the <strong>Post Title</strong>.',
+            '<strong>Write the Excerpt</strong>: one or two sentences that answer the question. It is shown in the blog list.',
+            '<strong>Write the article</strong> with the toolbar. Use <strong>H2</strong> for section headings, bullet lists for steps, and add 3 or more links to your tours and guides.',
+            '<strong>Fill the SEO panel</strong>: SEO Title (up to 60 characters), Meta Description (about 150 characters) and Keywords. Watch the Google preview on the page.',
+            '<strong>Add a featured image</strong>, choose a category, switch the status to <strong>Published</strong> and press the button. Then check it with <strong>Preview</strong>.',
+          ],
+          'tips' => [
+            'Follow the <strong>Post checklist</strong> on the right: it turns green as your post gets better.',
+            'Write for people first. Do not repeat keywords again and again.',
+            'Never copy text from other websites. Use your own experience and photos.',
+            'Link to your own pages, for example <code>/tours</code>, <code>/kilimanjaro</code> or <code>/calving-season</code>.',
+            'A <strong>Draft</strong> is saved but hidden from the public until you publish it.',
+          ],
+        ],
+      ]);
+    else:
+      adm_pagehead('Blog posts', count($posts) . ' posts. Click a post to edit it.', [
+        'icon' => 'fa-newspaper',
+        'actions' => [['label' => 'New post', 'href' => 'blog.php?edit=0', 'icon' => 'fa-plus', 'kind' => 'primary']],
+        'help' => [
+          'key' => 'blog-list', 'title' => 'How this page works',
+          'steps' => [
+            '<strong>Write a new article</strong> with the <em>New post</em> button.',
+            '<strong>Edit</strong> with the pencil icon. The eye icon opens the live article.',
+            '<strong>Publish regularly.</strong> Two good articles a week for three months builds search traffic.',
+          ],
+          'tips' => [
+            'Write about questions customers really ask: prices, best time to go, what to pack, comparing parks.',
+            'Update old articles every year (for example the packing list and costs).',
+            'Posts without an SEO title or meta description show a warning on the Dashboard.',
+          ],
+        ],
+      ]);
+    endif; ?>
 
     <!-- Success message -->
     <?php if ($msg): ?>
@@ -316,7 +334,7 @@ $siteHost  = parse_url(SITE_URL, PHP_URL_HOST) ?: 'jambomasaitours.com';
                 No <code style="background:rgba(255,255,255,.07);border-radius:4px;padding:.05rem .3rem">&lt;p&gt;</code>/<code style="background:rgba(255,255,255,.07);border-radius:4px;padding:.05rem .3rem">&lt;h2&gt;</code> tags found, so this is being auto-split into paragraphs as <strong style="color:rgba(255,255,255,.6)">plain text</strong>. Inline formatting — <code style="background:rgba(255,255,255,.07);border-radius:4px;padding:.05rem .3rem">&lt;strong&gt;</code>, <code style="background:rgba(255,255,255,.07);border-radius:4px;padding:.05rem .3rem">&lt;em&gt;</code>, <code style="background:rgba(255,255,255,.07);border-radius:4px;padding:.05rem .3rem">&lt;u&gt;</code>, <code style="background:rgba(255,255,255,.07);border-radius:4px;padding:.05rem .3rem">&lt;a&gt;</code>, images — still renders fine. Other tags (e.g. <code style="background:rgba(255,255,255,.07);border-radius:4px;padding:.05rem .3rem">&lt;div&gt;</code>) would show as literal text. Wrap content in <code style="background:rgba(255,255,255,.07);border-radius:4px;padding:.05rem .3rem">&lt;p&gt;...&lt;/p&gt;</code> / use H2/H3 if you need full block-level HTML.
               </div>
               <div id="content-preview" class="prose"></div>
-              <div class="f-hint" style="margin-top:.4rem"><i class="fas fa-info-circle" style="color:rgba(16,185,129,.5);margin-right:.3rem"></i>Use toolbar buttons to insert HTML. <kbd style="background:rgba(255,255,255,.07);border-radius:4px;padding:.1rem .35rem;font-size:.6rem">Tab</kbd> inserts 2 spaces. Switch to <strong style="color:rgba(255,255,255,.6)">Preview</strong> to see how it will look on the blog.</div>
+              <div class="f-hint" style="margin-top:.4rem"><i class="fas fa-info-circle" style="color:rgba(193,122,58,.5);margin-right:.3rem"></i>Use toolbar buttons to insert HTML. <kbd style="background:rgba(255,255,255,.07);border-radius:4px;padding:.1rem .35rem;font-size:.6rem">Tab</kbd> inserts 2 spaces. Switch to <strong style="color:rgba(255,255,255,.6)">Preview</strong> to see how it will look on the blog.</div>
             </div>
           </div>
 
@@ -384,10 +402,10 @@ $siteHost  = parse_url(SITE_URL, PHP_URL_HOST) ?: 'jambomasaitours.com';
                     <input type="checkbox" name="published" value="1" id="pub-toggle"
                            <?= ($editing['published'] ?? 0) ? 'checked' : '' ?>
                            style="opacity:0;width:0;height:0;position:absolute">
-                    <div id="pub-slider" style="position:absolute;inset:0;border-radius:22px;background:<?= ($editing['published']??0)?'#10b981':'rgba(255,255,255,.12)' ?>;cursor:pointer;transition:background .3s"></div>
+                    <div id="pub-slider" style="position:absolute;inset:0;border-radius:22px;background:<?= ($editing['published']??0)?'#c17a3a':'rgba(255,255,255,.12)' ?>;cursor:pointer;transition:background .3s"></div>
                     <div id="pub-thumb" style="position:absolute;width:16px;height:16px;left:3px;bottom:3px;background:#fff;border-radius:50%;transition:transform .3s;<?= ($editing['published']??0)?'transform:translateX(18px)':'' ?>"></div>
                   </div>
-                  <span id="pub-label" style="font-family:'Montserrat',sans-serif;font-size:.75rem;font-weight:600;color:<?= ($editing['published']??0)?'#10b981':'rgba(255,255,255,.4)' ?>"><?= ($editing['published']??0)?'Published':'Draft' ?></span>
+                  <span id="pub-label" style="font-family:'Montserrat',sans-serif;font-size:.75rem;font-weight:600;color:<?= ($editing['published']??0)?'#c17a3a':'rgba(255,255,255,.4)' ?>"><?= ($editing['published']??0)?'Published':'Draft' ?></span>
                 </label>
               </div>
               <button type="submit" class="btn btn--primary w-full" style="display:flex;align-items:center;justify-content:center;gap:.4rem;padding:.8rem;font-size:.8rem">
@@ -399,6 +417,48 @@ $siteHost  = parse_url(SITE_URL, PHP_URL_HOST) ?: 'jambomasaitours.com';
               </a>
             </div>
           </div>
+
+          <!-- Post checklist (inasasishwa moja kwa moja) -->
+          <div class="adm-card" style="margin-bottom:1rem">
+            <div class="adm-card-header"><h2 class="adm-card-title">Post checklist</h2><span class="adm-counter" id="chk-score">0/9</span></div>
+            <div class="adm-card-body">
+              <div class="adm-check" id="post-checklist">
+                <div class="adm-check__item" data-k="title"><span class="adm-check__dot"><i class="fas fa-check"></i></span><span class="adm-check__t">Title is 30 to 60 characters</span></div>
+                <div class="adm-check__item" data-k="excerpt"><span class="adm-check__dot"><i class="fas fa-check"></i></span><span class="adm-check__t">Excerpt is 80 to 200 characters</span></div>
+                <div class="adm-check__item" data-k="words"><span class="adm-check__dot"><i class="fas fa-check"></i></span><span class="adm-check__t">Article has 700+ words <span id="chk-words" style="color:var(--text-dim)"></span></span></div>
+                <div class="adm-check__item" data-k="h2"><span class="adm-check__dot"><i class="fas fa-check"></i></span><span class="adm-check__t">3 or more H2 headings</span></div>
+                <div class="adm-check__item" data-k="links"><span class="adm-check__dot"><i class="fas fa-check"></i></span><span class="adm-check__t">3 or more links to your site</span></div>
+                <div class="adm-check__item" data-k="seotitle"><span class="adm-check__dot"><i class="fas fa-check"></i></span><span class="adm-check__t">SEO title is 30 to 60 characters</span></div>
+                <div class="adm-check__item" data-k="meta"><span class="adm-check__dot"><i class="fas fa-check"></i></span><span class="adm-check__t">Meta description is 120 to 160 characters</span></div>
+                <div class="adm-check__item" data-k="keywords"><span class="adm-check__dot"><i class="fas fa-check"></i></span><span class="adm-check__t">Keywords added</span></div>
+                <div class="adm-check__item" data-k="image"><span class="adm-check__dot"><i class="fas fa-check"></i></span><span class="adm-check__t">Featured image added</span></div>
+              </div>
+            </div>
+          </div>
+          <script>
+          (function(){
+            var $=function(id){return document.getElementById(id)};
+            var host=location.host;
+            function len(id){var el=$(id);return el?el.value.trim().length:0}
+            function check(){
+              var c=($('blog-content')||{}).value||'';
+              var words=(c.replace(/<[^>]*>/g,' ').trim().match(/\S+/g)||[]).length;
+              var h2=(c.match(/<h2[\s>]/gi)||[]).length;
+              var links=0,m,re=/href\s*=\s*["']([^"']+)["']/gi;
+              while((m=re.exec(c))){var u=m[1];if(u.charAt(0)==='/'||u.indexOf(host)>-1)links++}
+              var hasImg=len('blog-url')>0||(($('blog-file')||{}).files||[]).length>0;
+              var r={title:len('blog-title')>=30&&len('blog-title')<=60,excerpt:len('blog-excerpt')>=80&&len('blog-excerpt')<=200,
+                words:words>=700,h2:h2>=3,links:links>=3,seotitle:len('seo-title')>=30&&len('seo-title')<=60,
+                meta:len('meta-desc')>=120&&len('meta-desc')<=160,keywords:len('seo-keywords')>0,image:hasImg};
+              var done=0;
+              document.querySelectorAll('#post-checklist .adm-check__item').forEach(function(it){var ok=r[it.dataset.k];it.classList.toggle('is-done',!!ok);if(ok)done++;});
+              var s=$('chk-score');s.textContent=done+'/9';s.className='adm-counter '+(done>=8?'is-ok':done>=5?'is-warn':'is-bad');
+              var w=$('chk-words');if(w)w.textContent='('+words+')';
+            }
+            ['blog-title','blog-excerpt','blog-content','seo-title','meta-desc','seo-keywords','blog-url','blog-file'].forEach(function(id){var el=$(id);if(el){el.addEventListener('input',check);el.addEventListener('change',check);}});
+            check();
+          })();
+          </script>
 
           <!-- Category -->
           <div class="adm-card" style="margin-bottom:1rem">
@@ -413,7 +473,7 @@ $siteHost  = parse_url(SITE_URL, PHP_URL_HOST) ?: 'jambomasaitours.com';
                 ?>
                 <input type="radio" name="category" value="<?= e($cat) ?>" id="cat-<?= $ci ?>"
                        class="cat-option" <?= $isSel?'checked':'' ?>>
-                <label for="cat-<?= $ci ?>" class="cat-label" style="<?= $isSel?'border-color:rgba(16,185,129,.5);background:rgba(16,185,129,.12);color:#10b981':'' ?>">
+                <label for="cat-<?= $ci ?>" class="cat-label" style="<?= $isSel?'border-color:rgba(193,122,58,.5);background:rgba(193,122,58,.12);color:#c17a3a':'' ?>">
                   <i class="fas <?= $catIcons[$cat]??'fa-tag' ?>" style="font-size:.6rem"></i><?= $cat ?>
                 </label>
                 <?php endforeach; ?>
@@ -484,8 +544,8 @@ $siteHost  = parse_url(SITE_URL, PHP_URL_HOST) ?: 'jambomasaitours.com';
       $drafts    = $total - $published;
       $cats      = count(array_unique(array_column($posts, 'category')));
       foreach ([
-        ['fa-newspaper',   'rgba(16,185,129,.15)','#10b981', $total,     'Total Posts'],
-        ['fa-check-circle','rgba(52,211,153,.15)', '#34d399', $published, 'Published'],
+        ['fa-newspaper',   'rgba(193,122,58,.15)','#c17a3a', $total,     'Total Posts'],
+        ['fa-check-circle','rgba(224,164,106,.15)', '#e0a46a', $published, 'Published'],
         ['fa-edit',        'rgba(245,158,11,.15)', '#fbbf24', $drafts,    'Drafts'],
         ['fa-tags',        'rgba(96,165,250,.15)', '#60a5fa', $cats,      'Categories'],
       ] as $w): ?>
@@ -521,7 +581,7 @@ $siteHost  = parse_url(SITE_URL, PHP_URL_HOST) ?: 'jambomasaitours.com';
             <?php if (empty($posts)): ?>
             <tr><td colspan="7" style="text-align:center;padding:2.5rem;color:rgba(255,255,255,.25)">
               <i class="fas fa-newspaper" style="font-size:2rem;display:block;margin-bottom:.65rem;color:rgba(255,255,255,.1)"></i>
-              No posts yet. <a href="blog.php?edit=0" style="color:#10b981;text-decoration:none">Write your first article →</a>
+              No posts yet. <a href="blog.php?edit=0" style="color:#c17a3a;text-decoration:none">Write your first article →</a>
             </td></tr>
             <?php else: foreach ($posts as $p):
               $cat    = $p['category'] ?? 'Safari Tips';
@@ -763,7 +823,7 @@ function seoBar(inputId, fillId, countId, max){
   if (!inp) return;
   function update(){
     var len = inp.value.length, pct = Math.min(100, len/max*100);
-    var clr = len < Math.floor(max*0.4) ? '#f87171' : len <= max ? '#10b981' : '#fbbf24';
+    var clr = len < Math.floor(max*0.4) ? '#f87171' : len <= max ? '#c17a3a' : '#fbbf24';
     if (fill){ fill.style.width = pct+'%'; fill.style.background = clr; }
     if (cnt) cnt.textContent = len + ' / ' + max;
     if (inputId === 'seo-title' || inputId === 'meta-desc') updateSerp();
@@ -839,7 +899,7 @@ document.querySelectorAll('.cat-option').forEach(function(r){
       l.style.borderColor=''; l.style.background=''; l.style.color='';
     });
     var lbl = this.nextElementSibling;
-    if (lbl){ lbl.style.borderColor='rgba(16,185,129,.5)'; lbl.style.background='rgba(16,185,129,.12)'; lbl.style.color='#10b981'; }
+    if (lbl){ lbl.style.borderColor='rgba(193,122,58,.5)'; lbl.style.background='rgba(193,122,58,.12)'; lbl.style.color='#c17a3a'; }
   });
 });
 
@@ -850,9 +910,9 @@ var pubThumb  = document.getElementById('pub-thumb');
 var pubLabel  = document.getElementById('pub-label');
 if (pubToggle) {
   pubToggle.addEventListener('change', function(){
-    if (pubSlider) pubSlider.style.background = this.checked ? '#10b981' : 'rgba(255,255,255,.12)';
+    if (pubSlider) pubSlider.style.background = this.checked ? '#c17a3a' : 'rgba(255,255,255,.12)';
     if (pubThumb)  pubThumb.style.transform   = this.checked ? 'translateX(18px)' : '';
-    if (pubLabel){ pubLabel.textContent = this.checked ? 'Published' : 'Draft'; pubLabel.style.color = this.checked ? '#10b981' : 'rgba(255,255,255,.4)'; }
+    if (pubLabel){ pubLabel.textContent = this.checked ? 'Published' : 'Draft'; pubLabel.style.color = this.checked ? '#c17a3a' : 'rgba(255,255,255,.4)'; }
   });
 }
 </script>

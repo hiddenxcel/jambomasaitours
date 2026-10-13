@@ -19,6 +19,12 @@ try {
     $posts = getDB()->query("SELECT slug, image, created_at FROM blog_posts WHERE published=1 ORDER BY created_at DESC")->fetchAll();
 } catch (\Throwable $e) {}
 
+/* Kurasa za destinations zinazosimamiwa kwenye admin (Destination Pages) — zilikuwa hazimo kwenye sitemap */
+$destSlugs = [];
+try {
+    $destSlugs = getDB()->query("SELECT slug FROM destination_pages_full WHERE active=1 ORDER BY sort_order ASC, id ASC")->fetchAll(PDO::FETCH_COLUMN);
+} catch (\Throwable $e) {}
+
 function xmlDate(?string $d): string {
     return $d ? date('Y-m-d', strtotime($d)) : '';
 }
@@ -44,7 +50,7 @@ $static = ['', 'tours', 'migration', 'calving-season', 'migration/river-crossing
            'cultural-tours/kikuletwa-hot-springs', 'cultural-tours/ethical-maasai-village-visit', 'cultural-tours/day-trips-from-arusha', 'destinations',
            'destination/serengeti', 'destination/ngorongoro', 'destination/kilimanjaro',
            'destination/zanzibar', 'destination/tarangire', 'destination/maasai-heartland',
-           'faq', 'blog', 'reviews', 'about', 'gallery', 'contact'];
+           'faq', 'blog', 'reviews', 'about-us', 'gallery', 'contact'];
 
 echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
 ?>
@@ -52,6 +58,9 @@ echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 <?php
 foreach ($static as $p) xmlUrl($base . '/' . $p);
+foreach ($destSlugs as $ds) {
+    if (!in_array('destination/' . $ds, $static, true)) xmlUrl($base . '/destination/' . $ds);
+}
 foreach ($tours as $t) xmlUrl($base . '/tour/' . $t['slug'], xmlDate($t['created_at']), $t['image'] ?? '');
 foreach ($posts as $p) xmlUrl($base . '/blog/' . $p['slug'], xmlDate($p['created_at']), $p['image'] ?? '');
 ?>

@@ -135,11 +135,11 @@ $csrfToken = generateCsrfToken();
     .admin-main{padding:2rem}
     .card{background:#1a1d27;border:1px solid rgba(255,255,255,.08);border-radius:16px}
     .f-input,.f-textarea{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#e5e7eb;border-radius:10px;padding:.72rem 1rem;font-family:'Inter',sans-serif;font-size:.88rem;outline:none;transition:all .2s}
-    .f-input:focus,.f-textarea:focus{border-color:rgba(16,185,129,.5);background:rgba(16,185,129,.04)}
+    .f-input:focus,.f-textarea:focus{border-color:rgba(193,122,58,.5);background:rgba(193,122,58,.04)}
     .f-textarea{resize:vertical;min-height:80px}
     .f-label{display:block;font-family:'Montserrat',sans-serif;font-size:.6rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:.4rem}
     .ab{display:inline-flex;align-items:center;gap:.4rem;font-family:'Montserrat',sans-serif;font-weight:600;font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;padding:.5rem 1.1rem;border-radius:8px;border:none;cursor:pointer;transition:all .25s;text-decoration:none}
-    .ab-em{background:linear-gradient(135deg,#059669,#10b981);color:#fff;box-shadow:0 3px 10px rgba(16,185,129,.2)}
+    .ab-em{background:linear-gradient(135deg,#a05e22,#c17a3a);color:#fff;box-shadow:0 3px 10px rgba(193,122,58,.2)}
     .ab-em:hover{transform:translateY(-1px)}
     .ab-ol{background:rgba(255,255,255,.06);color:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.12)}
     .ab-ol:hover{background:rgba(255,255,255,.1);color:#fff}
@@ -150,21 +150,21 @@ $csrfToken = generateCsrfToken();
     .ab-sm{padding:.4rem .8rem;font-size:.65rem}
     .pg-header{background:#1a1d27;border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:1.4rem 1.6rem;margin-bottom:1.5rem;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem}
     .chip{display:inline-flex;align-items:center;gap:.3rem;font-size:.62rem;font-family:'Montserrat',sans-serif;font-weight:600;padding:.22rem .65rem;border-radius:999px}
-    .chip-em{background:rgba(16,185,129,.12);color:#34d399;border:1px solid rgba(16,185,129,.2)}
+    .chip-em{background:rgba(193,122,58,.12);color:#e0a46a;border:1px solid rgba(193,122,58,.2)}
     .chip-gray{background:rgba(255,255,255,.06);color:rgba(255,255,255,.45);border:1px solid rgba(255,255,255,.1)}
 
     /* Photo grid */
     .photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-top:1.5rem}
     .photo-card{background:#1a1d27;border:1px solid rgba(255,255,255,.07);border-radius:12px;overflow:hidden;transition:all .3s;position:relative}
-    .photo-card:hover{border-color:rgba(16,185,129,.25);box-shadow:0 8px 24px rgba(0,0,0,.4)}
+    .photo-card:hover{border-color:rgba(193,122,58,.25);box-shadow:0 8px 24px rgba(0,0,0,.4)}
     .photo-card img{width:100%;height:150px;object-fit:cover;display:block;transition:transform .4s}
     .photo-card:hover img{transform:scale(1.04)}
     .photo-actions{position:absolute;top:6px;right:6px;display:flex;gap:4px;opacity:0;transition:opacity .2s}
     .photo-card:hover .photo-actions{opacity:1}
 
     /* Drop zone */
-    .drop-zone{border:2px dashed rgba(16,185,129,.25);border-radius:12px;padding:2rem;text-align:center;transition:all .3s;background:rgba(16,185,129,.03);cursor:pointer}
-    .drop-zone:hover,.drop-zone.drag-over{border-color:rgba(16,185,129,.5);background:rgba(16,185,129,.07)}
+    .drop-zone{border:2px dashed rgba(193,122,58,.25);border-radius:12px;padding:2rem;text-align:center;transition:all .3s;background:rgba(193,122,58,.03);cursor:pointer}
+    .drop-zone:hover,.drop-zone.drag-over{border-color:rgba(193,122,58,.5);background:rgba(193,122,58,.07)}
     .drop-zone input[type=file]{display:none}
 
     /* Mosaic preview */
@@ -200,8 +200,23 @@ $csrfToken = generateCsrfToken();
       </div>
     </div>
 
+    <?php adm_help([
+      'key' => 'tour-photos', 'title' => 'How to manage tour photos',
+      'steps' => [
+        'Choose photo files (you can select many at once) or paste image links, one per line, then upload.',
+        'Add a short <strong>caption</strong> to each photo describing what it shows.',
+        'Use the arrows to change the order. The first photos are the ones visitors see first.',
+        '<strong>Delete</strong> removes one photo. "Delete all" removes every photo of this tour, so use it with care.',
+      ],
+      'tips' => [
+        'Use 4 or more sharp landscape photos (at least 1400 pixels wide) of real trips.',
+        'Mix wildlife, scenery, accommodation and people.',
+        'The main cover picture is set in the Tour Details tab, not here.',
+      ],
+    ]); ?>
+
     <?php if ($msg): ?>
-    <div style="background:rgba(16,185,129,.09);border:1px solid rgba(16,185,129,.22);color:#34d399;padding:.8rem 1.2rem;border-radius:10px;margin-bottom:1.2rem;font-size:.875rem;display:flex;align-items:center;gap:.65rem">
+    <div style="background:rgba(193,122,58,.09);border:1px solid rgba(193,122,58,.22);color:#e0a46a;padding:.8rem 1.2rem;border-radius:10px;margin-bottom:1.2rem;font-size:.875rem;display:flex;align-items:center;gap:.65rem">
       <i class="fas fa-check-circle"></i><?= e($msg) ?>
     </div>
     <?php endif; ?>
@@ -212,7 +227,7 @@ $csrfToken = generateCsrfToken();
       <div>
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem">
           <h2 style="font-family:'Nanum Myeongjo',serif;font-size:1.1rem;color:#fff">
-            <i class="fas fa-images text-emerald-400 mr-2" style="color:#34d399;font-size:.85rem"></i>
+            <i class="fas fa-images text-emerald-400 mr-2" style="color:#e0a46a;font-size:.85rem"></i>
             Tour Photos (<?= count($photos) ?>)
           </h2>
           <?php if (!empty($photos)): ?>
@@ -226,7 +241,7 @@ $csrfToken = generateCsrfToken();
 
         <?php if (empty($photos)): ?>
         <div style="text-align:center;padding:3rem 2rem;background:#1a1d27;border-radius:14px;border:2px dashed rgba(255,255,255,.07)">
-          <div style="font-size:2.5rem;margin-bottom:.75rem">??</div>
+          <div style="font-size:2.2rem;margin-bottom:.75rem;color:var(--text-dim)"><i class="fas fa-images" style=""></i></div>
           <h3 style="font-family:'Nanum Myeongjo',serif;font-size:1.1rem;color:#fff;margin-bottom:.4rem">No photos yet</h3>
           <p style="color:rgba(255,255,255,.3);font-size:.85rem">Upload photos to show visitors what this destination looks like.</p>
         </div>
@@ -261,11 +276,11 @@ $csrfToken = generateCsrfToken();
                 <input type="text" name="caption" value="<?= e($p['caption']) ?>"
                        placeholder="Add caption—"
                        style="flex:1;background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.6);font-size:.72rem;padding:.2rem .1rem;outline:none;font-family:'Inter',sans-serif"
-                       onfocus="this.style.borderColor='rgba(16,185,129,.5)'"
+                       onfocus="this.style.borderColor='rgba(193,122,58,.5)'"
                        onblur="this.style.borderColor='rgba(255,255,255,.1)'">
-                <button type="submit" style="background:transparent;border:none;color:#34d399;cursor:pointer;padding:.1rem .3rem;font-size:.65rem" title="Save"><i class="fas fa-check"></i></button>
+                <button type="submit" style="background:transparent;border:none;color:#e0a46a;cursor:pointer;padding:.1rem .3rem;font-size:.65rem" title="Save"><i class="fas fa-check"></i></button>
               </form>
-              <div style="font-size:.58rem;color:rgba(255,255,255,.2);margin-top:.25rem;font-family:'Montserrat',sans-serif">Photo #<?= $idx+1 ?> — <?= $idx===0?'<span style="color:#34d399">Main / Hero</span>':'Position '.$p['sort_order'] ?></div>
+              <div style="font-size:.58rem;color:rgba(255,255,255,.2);margin-top:.25rem;font-family:'Montserrat',sans-serif">Photo #<?= $idx+1 ?> — <?= $idx===0?'<span style="color:#e0a46a">Main / Hero</span>':'Position '.$p['sort_order'] ?></div>
             </div>
           </div>
           <?php endforeach; ?>
@@ -275,7 +290,7 @@ $csrfToken = generateCsrfToken();
         <?php if (count($photos) >= 2): ?>
         <div style="margin-top:1.5rem;background:#1a1d27;border-radius:14px;padding:1.25rem;border:1px solid rgba(255,255,255,.07)">
           <p style="font-family:'Montserrat',sans-serif;font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.3);margin-bottom:.85rem">
-            <i class="fas fa-eye" style="color:#34d399;margin-right:.4rem"></i>Hero Mosaic Preview (how it looks on the tour page)
+            <i class="fas fa-eye" style="color:#e0a46a;margin-right:.4rem"></i>Hero Mosaic Preview (how it looks on the tour page)
           </p>
           <div class="mosaic-preview">
             <div class="mosaic-main"><img src="<?= e($photos[0]['image']) ?>" alt="main"></div>
@@ -299,7 +314,7 @@ $csrfToken = generateCsrfToken();
       <div>
         <div class="card" style="padding:1.5rem">
           <h2 style="font-family:'Nanum Myeongjo',serif;font-size:1.05rem;color:#fff;margin-bottom:1.25rem;display:flex;align-items:center;gap:.6rem">
-            <span style="width:28px;height:28px;border-radius:50%;background:rgba(16,185,129,.13);color:#34d399;display:flex;align-items:center;justify-content:center;font-size:.7rem"><i class="fas fa-plus"></i></span>
+            <span style="width:28px;height:28px;border-radius:50%;background:rgba(193,122,58,.13);color:#e0a46a;display:flex;align-items:center;justify-content:center;font-size:.7rem"><i class="fas fa-plus"></i></span>
             Add Photos
           </h2>
 
@@ -309,7 +324,7 @@ $csrfToken = generateCsrfToken();
 
             <!-- Drop zone -->
             <div class="drop-zone" id="drop-zone" onclick="document.getElementById('file-input').click()">
-              <i class="fas fa-cloud-upload-alt" style="font-size:2rem;color:rgba(16,185,129,.5);margin-bottom:.65rem"></i>
+              <i class="fas fa-cloud-upload-alt" style="font-size:2rem;color:rgba(193,122,58,.5);margin-bottom:.65rem"></i>
               <p style="font-size:.85rem;color:rgba(255,255,255,.5);margin-bottom:.3rem">Click or drag & drop photos here</p>
               <p style="font-size:.72rem;color:rgba(255,255,255,.25)">JPG, PNG, WebP — Multiple allowed — Max 8MB each</p>
               <input type="file" name="photos[]" id="file-input" multiple accept="image/jpeg,image/png,image/webp">
@@ -336,8 +351,8 @@ $csrfToken = generateCsrfToken();
           </form>
 
           <!-- Tips -->
-          <div style="margin-top:1.25rem;padding:1rem;background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.12);border-radius:10px">
-            <p style="font-family:'Montserrat',sans-serif;font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#34d399;margin-bottom:.6rem">Tips</p>
+          <div style="margin-top:1.25rem;padding:1rem;background:rgba(193,122,58,.06);border:1px solid rgba(193,122,58,.12);border-radius:10px">
+            <p style="font-family:'Montserrat',sans-serif;font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#e0a46a;margin-bottom:.6rem">Tips</p>
             <ul style="space-y:0.3rem;color:rgba(255,255,255,.4);font-size:.75rem;line-height:1.7">
               <li>— First photo becomes the <strong style="color:rgba(255,255,255,.6)">hero image</strong> in the mosaic</li>
               <li>— Upload at least 5 photos for the full mosaic grid</li>

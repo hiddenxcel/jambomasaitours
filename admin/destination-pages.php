@@ -65,27 +65,27 @@ $csrfToken = generateCsrfToken();
   <?php include 'includes/admin_sidebar.php'; ?>
   <main class="admin-main">
 
-    <div class="admin-header">
-      <div>
-        <h1 style="font-family:'Nanum Myeongjo',serif;font-size:1.4rem;color:#fff;display:flex;align-items:center;gap:.5rem">
-          <i class="fas fa-map-marker-alt" style="color:#10b981;font-size:1.1rem"></i>
-          <?= $editSlug ? 'Edit: ' . e($destSlugs[$editSlug]) : 'Destination Pages' ?>
-        </h1>
-        <p style="color:rgba(255,255,255,.4);font-size:.78rem;font-family:'Montserrat',sans-serif;margin-top:.15rem">
-          <?= $editSlug ? 'Edit intro and description shown on the destination page' : 'Manage destination page content — intro and descriptions' ?>
-        </p>
-      </div>
-      <div style="display:flex;gap:.5rem">
-        <?php if ($editSlug): ?>
-        <a href="<?= url('destination/'.$editSlug) ?>" target="_blank" class="btn btn--outline btn--sm" style="display:inline-flex;align-items:center;gap:.35rem">
-          <i class="fas fa-eye" style="font-size:.6rem"></i> Preview
-        </a>
-        <a href="destination-pages.php" class="btn btn--outline btn--sm" style="display:inline-flex;align-items:center;gap:.35rem">
-          <i class="fas fa-arrow-left" style="font-size:.6rem"></i> All Destinations
-        </a>
-        <?php endif; ?>
-      </div>
-    </div>
+    <?php
+adm_pagehead($editSlug ? 'Edit: ' . $destSlugs[$editSlug] : 'Destination page text', $editSlug ? 'Edit the intro and description shown on this destination page.' : 'Extra intro and description text for the built-in destination pages.', [
+  'icon' => 'fa-map-marker-alt',
+  'actions' => $editSlug ? [
+    ['label' => 'Preview', 'href' => url('destination/' . $editSlug), 'icon' => 'fa-eye', 'attrs' => 'target="_blank" rel="noopener"'],
+    ['label' => 'All destinations', 'href' => 'destination-pages.php', 'icon' => 'fa-arrow-left'],
+  ] : [],
+  'help' => [
+    'key' => 'dest-text', 'title' => 'What this page is for',
+    'steps' => [
+      'Choose a destination from the list and press Edit.',
+      'Write the <strong>intro</strong> (one short paragraph) and the <strong>description</strong> (the longer text).',
+      'Save, then press Preview to see it on the website.',
+    ],
+    'tips' => [
+      'Full destination pages (with banner, facts and FAQs) are managed in <a href="destinations-manager.php">Destination Pages</a>.',
+      'Keep the text original and specific to the place.',
+    ],
+  ],
+]);
+?>
 
     <?php if ($msg): ?>
     <div class="alert alert-success" style="margin-bottom:1.25rem"><i class="fas fa-check-circle"></i> <?= e($msg) ?></div>
@@ -106,7 +106,7 @@ $csrfToken = generateCsrfToken();
           <textarea class="f-input" name="intro" id="intro-field" rows="4"
                     style="min-height:110px;resize:vertical;line-height:1.7"
                     placeholder="Short intro paragraph — 2-3 sentences, appears first on the page..."><?= e($editing['intro'] ?? '') ?></textarea>
-          <div class="f-hint"><i class="fas fa-info-circle" style="color:rgba(16,185,129,.5);margin-right:.3rem"></i>2–3 sentences. Keep it compelling and keyword-rich for SEO.</div>
+          <div class="f-hint"><i class="fas fa-info-circle" style="color:rgba(193,122,58,.5);margin-right:.3rem"></i>2–3 sentences. Keep it compelling and keyword-rich for SEO.</div>
         </div>
       </div>
 
@@ -116,7 +116,7 @@ $csrfToken = generateCsrfToken();
           <span style="font-family:'Montserrat',sans-serif;font-size:.62rem;color:rgba(255,255,255,.25)" id="desc-count">0 chars</span>
         </div>
         <div class="adm-card-body">
-          <div class="f-hint" style="margin-bottom:.65rem"><i class="fas fa-info-circle" style="color:rgba(16,185,129,.5);margin-right:.3rem"></i>HTML is allowed — use &lt;em&gt; for italics, &lt;strong&gt; for bold. 3–5 paragraphs recommended for SEO.</div>
+          <div class="f-hint" style="margin-bottom:.65rem"><i class="fas fa-info-circle" style="color:rgba(193,122,58,.5);margin-right:.3rem"></i>HTML is allowed — use &lt;em&gt; for italics, &lt;strong&gt; for bold. 3–5 paragraphs recommended for SEO.</div>
           <textarea class="f-input" name="description" id="desc-field" rows="10"
                     style="min-height:240px;resize:vertical;font-family:'Fira Code','Courier New',monospace;font-size:.82rem;line-height:1.7"
                     placeholder="Detailed description of the destination. HTML allowed..."><?= e($editing['description'] ?? '') ?></textarea>

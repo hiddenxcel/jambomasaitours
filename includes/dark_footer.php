@@ -62,6 +62,7 @@
         </a>
       </div>
     </div>
+    <?= guidemeetFooterBadge() ?>
     <div class="border-t border-white/[.07] pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
       <p class="text-white/25 text-xs font-nav">&copy; <?= date('Y') ?> <?= e($siteName) ?>. All rights reserved. &middot; Built by <span class="text-emerald-400/70">hiddenxcel</span></p>
       <div class="flex items-center gap-1.5">

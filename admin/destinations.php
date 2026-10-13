@@ -123,15 +123,15 @@ $pageTitle = 'Destinations — Admin';
   .field-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem}
   @media(max-width:639px){.field-grid,.field-grid-3{grid-template-columns:1fr}}
   .upload-area{border:2px dashed rgba(255,255,255,.1);border-radius:12px;padding:1.5rem;text-align:center;cursor:pointer;transition:all .25s;background:rgba(255,255,255,.02)}
-  .upload-area:hover{border-color:rgba(16,185,129,.4);background:rgba(16,185,129,.04)}
+  .upload-area:hover{border-color:rgba(193,122,58,.4);background:rgba(193,122,58,.04)}
   .thumb-preview{max-width:100%;max-height:160px;border-radius:10px;object-fit:cover;display:block;margin:.75rem auto 0;border:1px solid rgba(255,255,255,.08)}
   .dest-thumb{width:64px;height:44px;object-fit:cover;border-radius:8px;border:1px solid rgba(255,255,255,.08)}
   .hl-list{display:flex;flex-wrap:wrap;gap:4px}
-  .hl-pill{background:rgba(16,185,129,.1);color:#34d399;font-size:.62rem;padding:.18rem .55rem;border-radius:999px;font-family:'Montserrat',sans-serif;font-weight:600;border:1px solid rgba(16,185,129,.2)}
+  .hl-pill{background:rgba(193,122,58,.1);color:#e0a46a;font-size:.62rem;padding:.18rem .55rem;border-radius:999px;font-family:'Montserrat',sans-serif;font-weight:600;border:1px solid rgba(193,122,58,.2)}
   .btn-sm{padding:.35rem .85rem;font-size:.7rem;border-radius:8px;font-family:'Montserrat',sans-serif;font-weight:600;cursor:pointer;border:none;text-decoration:none;display:inline-flex;align-items:center;gap:.3rem;transition:all .2s;letter-spacing:.04em}
-  .btn-edit{background:rgba(16,185,129,.12);color:#10b981;border:1px solid rgba(16,185,129,.2)}
-  .btn-edit:hover{background:rgba(16,185,129,.22);color:#34d399}
-  .btn-toggle{background:rgba(34,197,94,.1);color:#34d399;border:1px solid rgba(34,197,94,.2)}
+  .btn-edit{background:rgba(193,122,58,.12);color:#c17a3a;border:1px solid rgba(193,122,58,.2)}
+  .btn-edit:hover{background:rgba(193,122,58,.22);color:#e0a46a}
+  .btn-toggle{background:rgba(34,197,94,.1);color:#e0a46a;border:1px solid rgba(34,197,94,.2)}
   .btn-toggle.inactive{background:rgba(107,114,128,.1);color:rgba(255,255,255,.35);border:1px solid rgba(255,255,255,.08)}
   .btn-delete{background:rgba(239,68,68,.1);color:#f87171;border:1px solid rgba(239,68,68,.18)}
   .btn-delete:hover{background:rgba(239,68,68,.2)}
@@ -139,9 +139,9 @@ $pageTitle = 'Destinations — Admin';
   .admin-alert--success{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.25);color:#34d399}
   .admin-alert--error{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.25);color:#f87171}
   .btn-delete:hover { background: #dc2626; color: #fff; }
-  .btn-primary { background: linear-gradient(135deg, #10b981, var(--color-orange)); color: var(--color-black); font-family: var(--font-nav); font-weight: 700; font-size: .82rem; padding: .7rem 1.5rem; border: none; border-radius: var(--radius-md); cursor: pointer; letter-spacing: .04em; }
-  .btn-secondary { background: rgba(255,255,255,.04); color: #10b981; font-family: var(--font-nav); font-weight: 600; font-size: .82rem; padding: .7rem 1.5rem; border: 2px solid rgba(255,255,255,.08); border-radius: var(--radius-md); cursor: pointer; text-decoration: none; }
-  .sort-num{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;background:rgba(16,185,129,.12);border-radius:8px;font-size:.8rem;font-weight:700;color:#10b981;font-family:'Montserrat',sans-serif}
+  .btn-primary { background: linear-gradient(135deg, #c17a3a, var(--color-orange)); color: var(--color-black); font-family: var(--font-nav); font-weight: 700; font-size: .82rem; padding: .7rem 1.5rem; border: none; border-radius: var(--radius-md); cursor: pointer; letter-spacing: .04em; }
+  .btn-secondary { background: rgba(255,255,255,.04); color: #c17a3a; font-family: var(--font-nav); font-weight: 600; font-size: .82rem; padding: .7rem 1.5rem; border: 2px solid rgba(255,255,255,.08); border-radius: var(--radius-md); cursor: pointer; text-decoration: none; }
+  .sort-num{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;background:rgba(193,122,58,.12);border-radius:8px;font-size:.8rem;font-weight:700;color:#c17a3a;font-family:'Montserrat',sans-serif}
 </style>
 </head>
 <body>
@@ -149,18 +149,13 @@ $pageTitle = 'Destinations — Admin';
   <?php include 'includes/admin_sidebar.php'; ?>
 
   <main class="admin-main">
-    <div class="admin-header">
-      <div>
-        <h1 style="font-family:'Nanum Myeongjo',serif;font-size:1.4rem;color:#fff;font-weight:700;display:flex;align-items:center;gap:.5rem">
-          <i class="fas fa-map-marked-alt" style="color:#10b981;font-size:1.1rem"></i>
-          Destinations
-        </h1>
-        <p style="color:rgba(255,255,255,.4);font-size:.78rem;font-family:'Montserrat',sans-serif;margin-top:.15rem">Manage the destinations shown on your website</p>
-      </div>
-      <a href="?add=1" class="btn btn--primary btn--sm" style="display:inline-flex;align-items:center;gap:.35rem;text-decoration:none">
-        <i class="fas fa-plus" style="font-size:.6rem"></i> Add Destination
-      </a>
-    </div>
+    <?php
+adm_pagehead('Destinations (older list)', 'This list is not used by the public website.', [
+  'icon' => 'fa-map-marked-alt',
+  'actions' => [['label' => 'Add destination', 'href' => '?add=1', 'icon' => 'fa-plus', 'kind' => 'primary']],
+]);
+adm_tip('<strong>Use "Destination Pages" instead.</strong> The destination pages visitors see on the website are managed in <a href="destinations-manager.php">Destination Pages</a>. Changes made on this older page do not appear on the website.', 'warn');
+?>
 
     <?= $msg ?>
 
@@ -253,7 +248,7 @@ $pageTitle = 'Destinations — Admin';
         <?php endif; ?>
         <label class="f-label">Upload New Image</label>
         <div class="upload-area" id="img-drop" onclick="document.getElementById('image_file').click()">
-          <div style="font-size:2rem;margin-bottom:var(--space-2);">??</div>
+          <div style="font-size:2rem;margin-bottom:var(--space-2);color:var(--text-dim)"><i class="fas fa-cloud-arrow-up" style=""></i></div>
           <p style="font-size:.85rem;color:rgba(255,255,255,.45);margin:0;">Click to upload or drag & drop</p>
           <p style="font-size:.75rem;color:rgba(255,255,255,.45);margin:var(--space-1) 0 0;">JPG, PNG, WebP — max 8MB</p>
           <img id="img-preview" src="" alt="" class="thumb-preview" style="display:none;">
@@ -281,7 +276,7 @@ $pageTitle = 'Destinations — Admin';
       <div style="padding:3rem;text-align:center;color:rgba(255,255,255,.3)">
         <i class="fas fa-map-marked-alt" style="font-size:2.5rem;margin-bottom:.75rem;display:block;color:rgba(255,255,255,.12)"></i>
         <p style="margin-bottom:.75rem">No destinations yet.</p>
-        <a href="?add=1" style="color:#10b981;font-weight:600;font-family:'Montserrat',sans-serif;font-size:.82rem">Add your first destination ?</a>
+        <a href="?add=1" style="color:#c17a3a;font-weight:600;font-family:'Montserrat',sans-serif;font-size:.82rem">Add your first destination ?</a>
       </div>
       <?php else: ?>
       <table class="adm-table" style="min-width:900px;">
@@ -309,12 +304,12 @@ $pageTitle = 'Destinations — Admin';
               <?php endif; ?>
             </td>
             <td>
-              <strong style="font-family:var(--font-heading);color:#10b981;"><?= e($dest['title']) ?></strong>
+              <strong style="font-family:var(--font-heading);color:#c17a3a;"><?= e($dest['title']) ?></strong>
               <div style="font-size:.75rem;color:rgba(255,255,255,.45);"><?= e($dest['country']) ?> <?= $dest['region'] ? '— '.e($dest['region']) : '' ?></div>
               <div style="font-size:.72rem;color:rgba(255,255,255,.45);font-family:var(--font-nav);">/<?= e($dest['slug']) ?></div>
             </td>
             <td style="font-size:.85rem;"><?= e($dest['region']) ?></td>
-            <td style="font-size:.82rem;color:#10b981;"><?= e($dest['best_season']) ?></td>
+            <td style="font-size:.82rem;color:#c17a3a;"><?= e($dest['best_season']) ?></td>
             <td>
               <div class="hl-list">
                 <?php foreach (array_slice(explode('|', $dest['highlights']), 0, 3) as $hl): ?>
@@ -344,7 +339,7 @@ $pageTitle = 'Destinations — Admin';
                   <input type="hidden" name="<?= CSRF_TOKEN_NAME ?>" value="<?= e($csrf) ?>">
                   <input type="hidden" name="action" value="delete">
                   <input type="hidden" name="id" value="<?= $dest['id'] ?>">
-                  <button type="submit" class="btn-sm btn-delete">??</button>
+                  <button type="submit" class="btn-sm btn-delete" title="Delete"><i class="fas fa-trash" style=""></i></button>
                 </form>
               </div>
             </td>
@@ -391,7 +386,7 @@ if (fileInput) {
 /* Drag and drop */
 const dropZone = document.getElementById('img-drop');
 if (dropZone && fileInput) {
-  dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.style.borderColor = '#10b981'; });
+  dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.style.borderColor = '#c17a3a'; });
   dropZone.addEventListener('dragleave', () => { dropZone.style.borderColor = ''; });
   dropZone.addEventListener('drop', e => {
     e.preventDefault();

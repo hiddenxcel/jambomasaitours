@@ -2052,6 +2052,10 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 }
 .footer-bottom a { color: var(--color-gold); transition: opacity var(--transition-fast); }
 .footer-bottom a:hover { opacity: .8; }
+.footer-badges { display: flex; justify-content: center; padding: var(--space-6) 0 0; border-top: 1px solid rgba(255,255,255,.08); }
+.footer-badges .guidemeet-badge { display: inline-block; line-height: 0; transition: opacity var(--transition-fast); }
+.footer-badges .guidemeet-badge:hover { opacity: .85; }
+.footer-badges img { width: 240px; max-width: 100%; height: auto; }
 
 /* ─── 24. WHATSAPP FLOAT BUTTON ─────────────────────── */
 .whatsapp-float {

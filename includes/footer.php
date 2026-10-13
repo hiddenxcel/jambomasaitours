@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newsletter_email'])) 
         <div class="footer-col__title">Quick Links</div>
         <ul class="footer-links">
           <li><a href="<?= url() ?>"               class="footer-link">Home</a></li>
-          <li><a href="<?= url('about') ?>"    class="footer-link">About Us</a></li>
+          <li><a href="<?= url('about-us') ?>"    class="footer-link">About Us</a></li>
           <li><a href="<?= url('tours') ?>"    class="footer-link">Safari Tours</a></li>
           <li><a href="<?= url('destinations') ?>" class="footer-link">Destinations</a></li>
           <li><a href="<?= url('gallery') ?>"  class="footer-link">Gallery</a></li>
@@ -95,6 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newsletter_email'])) 
 
     </div>
 
+    <?= guidemeetFooterBadge() ?>
     <div class="footer-bottom">
       <span>&copy; <?= date('Y') ?> <?= e(SITE_NAME) ?>. All rights reserved. &middot; Built by <span style="color:var(--color-gold)">hiddenxcel</span></span>
       <span>

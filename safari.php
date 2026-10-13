@@ -315,7 +315,7 @@ $pages['how-to-choose-a-tanzania-safari-company'] = [
   'tour_sql' => '1=1', 'tour_limit' => 6,
   'tour_heading' => 'Popular Tanzania safari packages',
   'faqs' => [['Is it better to book directly with a local operator?', 'Booking with a local operator often gives you direct access to the guides and more flexibility, and avoids middleman fees. Always check licensing and reviews.'], ['What is TATO?', 'The Tanzania Association of Tour Operators, the industry body for licensed operators. Ask any company for its licence details.'], ['Can I visit your office in Arusha?', 'Yes. Contact us to arrange a meeting when you arrive in Arusha.']],
-  'related' => [['About us', '/about'], ['Guest reviews', '/reviews'], ['All safari packages', '/tanzania-safari-packages'], ['Contact', '/contact']],
+  'related' => [['About us', '/about-us'], ['Guest reviews', '/reviews'], ['All safari packages', '/tanzania-safari-packages'], ['Contact', '/contact']],
   'current' => 'about',
 ];
 

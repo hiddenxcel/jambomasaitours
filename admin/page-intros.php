@@ -85,21 +85,32 @@ $knownPages = ['tours','destinations','about','gallery','blog','booking','contac
   <?php include 'includes/admin_sidebar.php'; ?>
 
   <main class="admin-main">
-    <div class="admin-header">
-      <div>
-        <h1 style="font-family:var(--font-heading);font-size:1.6rem;color:var(--color-brown);">Page Intros</h1>
-        <p style="color:var(--text-muted);font-size:.9rem;">Manage the cinematic banner at the top of each page</p>
-      </div>
-      <a href="<?= url() ?>" class="btn btn--outline btn--sm" target="_blank">View Site</a>
-    </div>
+    <?php
+adm_pagehead('Page intros', 'The banner image, title and subtitle at the top of each page.', [
+  'icon' => 'fa-image',
+  'actions' => [['label' => 'View website', 'href' => url(), 'icon' => 'fa-arrow-up-right-from-square', 'attrs' => 'target="_blank" rel="noopener"']],
+  'help' => [
+    'key' => 'page-intros', 'title' => 'How page intros work',
+    'steps' => [
+      'Pick the <strong>page</strong> (tours, about, blog, contact and so on) and write its title and subtitle.',
+      'Add a <strong>background image</strong>: upload one or paste a link.',
+      'Tick <strong>Active</strong> to show the banner, then Save.',
+    ],
+    'tips' => [
+      'Use wide, high-quality landscape photos (at least 1600 pixels wide).',
+      'Keep the title short. Search engines often use it as the page heading.',
+    ],
+  ],
+]);
+?>
 
     <?php if ($msg): ?>
-    <div style="background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);color:#166534;padding:var(--space-4) var(--space-6);border-radius:var(--radius-md);margin-bottom:var(--space-6);">
+    <div style="background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);color:var(--ok);padding:var(--space-4) var(--space-6);border-radius:var(--radius-md);margin-bottom:var(--space-6);">
       <?= e($msg) ?>
     </div>
     <?php endif; ?>
     <?php if ($errors): ?>
-    <div style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);color:#991b1b;padding:var(--space-4) var(--space-6);border-radius:var(--radius-md);margin-bottom:var(--space-6);">
+    <div style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);color:var(--danger);padding:var(--space-4) var(--space-6);border-radius:var(--radius-md);margin-bottom:var(--space-6);">
       <?php foreach ($errors as $err): ?><div>— <?= e($err) ?></div><?php endforeach; ?>
     </div>
     <?php endif; ?>

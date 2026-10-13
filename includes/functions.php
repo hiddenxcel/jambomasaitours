@@ -310,6 +310,40 @@ function getSetting(string $key, string $default = ''): string {
     return $cache[$key] ?? $default;
 }
 
+/* GuideMeet "Find me on GuideMeet" badge (Settings → Badges). The admin pastes the
+   code GuideMeet gives them; we never echo it raw, we only pull out the link and image
+   and rebuild the markup, accepting guidemeet.it https URLs only. Returns '' if invalid. */
+function guidemeetBadgeHtml(string $code): string {
+    $code = trim($code);
+    if ($code === '') return '';
+    $okHost = static function (string $u): bool {
+        $p = parse_url($u);
+        return $p && ($p['scheme'] ?? '') === 'https'
+            && in_array(strtolower($p['host'] ?? ''), ['guidemeet.it', 'www.guidemeet.it'], true);
+    };
+    $href = $src = '';
+    if (preg_match('~^https://\S+$~', $code)) {
+        $href = $code; /* only the profile link was pasted */
+    } else {
+        if (preg_match('~<a\b[^>]*\bhref\s*=\s*["\']([^"\']+)["\']~i', $code, $m)) $href = html_entity_decode($m[1]);
+        if (preg_match('~<img\b[^>]*\bsrc\s*=\s*["\']([^"\']+)["\']~i', $code, $m)) $src = html_entity_decode($m[1]);
+    }
+    if ($src === '') $src = 'https://www.guidemeet.it/badge/guidemeet-badge.svg';
+    if (!$okHost($href) || !$okHost($src)) return '';
+    return '<a href="' . e($href) . '" target="_blank" rel="noopener nofollow" class="guidemeet-badge">'
+         . '<img src="' . e($src) . '" alt="Find us on GuideMeet" width="240" height="88" loading="lazy"></a>';
+}
+
+/* Footer badge block used by every footer. Uses the admin's saved code (Settings → Badges);
+   until one is saved it falls back to the default GuideMeet profile badge. Empty = hidden. */
+function guidemeetFooterBadge(): string {
+    $html = guidemeetBadgeHtml(getSetting('guidemeet_badge_code',
+        '<a href="https://www.guidemeet.it/guides/FuCQuCvjxUNliDsZMy5fY51aZKs1?utm_source=badge&utm_medium=referral&utm_campaign=guide_badge"><img src="https://www.guidemeet.it/badge/guidemeet-badge.svg"></a>'));
+    if ($html === '') return '';
+    return '<div class="footer-badges" style="display:flex;justify-content:center;padding:1.5rem 1rem;max-width:100%">'
+         . str_replace('<img ', '<img style="width:240px;max-width:100%;height:auto" ', $html) . '</div>';
+}
+
 /* Admin-configurable Groq API key (Settings → AI) overrides the hardcoded
    fallback in config.php, so it can be rotated without touching code. */
 function getGroqApiKey(): string {

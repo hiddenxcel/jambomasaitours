@@ -25,6 +25,7 @@ RewriteRule ^sitemap\.xml$ sitemap.php [L]
 
 # Clean URLs — static pages
 RewriteRule ^tours/?$               tours.php              [L]
+RewriteRule ^about-us/?$            about.php              [L]
 RewriteRule ^about/?$               about.php              [L]
 RewriteRule ^contact/?$             contact.php            [L]
 RewriteRule ^gallery/?$             gallery.php            [L]

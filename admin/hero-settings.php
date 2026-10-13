@@ -110,21 +110,33 @@ $phpUploadLimit = ini_get('upload_max_filesize');
   <?php include 'includes/admin_sidebar.php'; ?>
 
   <main class="admin-main">
-    <div class="admin-header">
-      <div>
-        <h1 style="font-family:var(--font-heading);font-size:1.6rem;color:var(--color-brown);">Hero Video Settings</h1>
-        <p style="color:var(--text-muted);font-size:.9rem;">Upload or set the homepage hero background video and fallback image</p>
-      </div>
-      <a href="<?= url() ?>" class="btn btn--outline btn--sm" target="_blank">View Site</a>
-    </div>
+    <?php
+adm_pagehead('Hero video', 'The background video and fallback picture at the top of the homepage.', [
+  'icon' => 'fa-video',
+  'actions' => [['label' => 'View homepage', 'href' => url(), 'icon' => 'fa-arrow-up-right-from-square', 'attrs' => 'target="_blank" rel="noopener"']],
+  'help' => [
+    'key' => 'hero-video', 'title' => 'How to change the homepage video',
+    'steps' => [
+      'Upload an <strong>MP4</strong> video from your computer, or paste a direct link to an MP4 file.',
+      'Add a <strong>fallback image</strong>. It shows while the video loads and on slow connections.',
+      'Press Save and open the homepage to check.',
+    ],
+    'tips' => [
+      'Keep the video short (10 to 20 seconds), under 10 MB if possible, and muted. It loops by itself.',
+      'Large videos slow the website down, which hurts Google ranking and visitors.',
+      'If you have no video, the fallback image fills the whole area.',
+    ],
+  ],
+]);
+?>
 
     <?php if ($msg): ?>
-    <div style="background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);color:#166534;padding:var(--space-4) var(--space-6);border-radius:var(--radius-md);margin-bottom:var(--space-6);">
-      ? <?= e($msg) ?>
+    <div style="background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);color:var(--ok);padding:var(--space-4) var(--space-6);border-radius:var(--radius-md);margin-bottom:var(--space-6);">
+      <i class="fas fa-circle-check" style=""></i> <?= e($msg) ?>
     </div>
     <?php endif; ?>
     <?php if ($errors): ?>
-    <div style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);color:#991b1b;padding:var(--space-4) var(--space-6);border-radius:var(--radius-md);margin-bottom:var(--space-6);">
+    <div style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);color:var(--danger);padding:var(--space-4) var(--space-6);border-radius:var(--radius-md);margin-bottom:var(--space-6);">
       <?php foreach ($errors as $err): ?><div>— <?= e($err) ?></div><?php endforeach; ?>
     </div>
     <?php endif; ?>
@@ -156,7 +168,7 @@ $phpUploadLimit = ini_get('upload_max_filesize');
 
           <!-- Upload -->
           <div style="border:2px dashed rgba(201,168,76,.4);border-radius:var(--radius-lg);padding:var(--space-8);text-align:center;margin-bottom:var(--space-5);cursor:pointer;" id="video-drop-zone">
-            <div style="font-size:2rem;margin-bottom:var(--space-3);">??</div>
+            <div style="font-size:2rem;margin-bottom:var(--space-3);color:var(--text-dim)"><i class="fas fa-cloud-arrow-up" style=""></i></div>
             <div style="font-weight:600;color:var(--text-dark);margin-bottom:var(--space-2);">Upload video from your computer</div>
             <div style="font-size:.82rem;color:var(--text-muted);margin-bottom:var(--space-4);">MP4, WebM or MOV — Max <?= $phpUploadLimit ?></div>
             <input type="file" name="video_file" id="video-file-input"
@@ -188,7 +200,7 @@ $phpUploadLimit = ini_get('upload_max_filesize');
 
           <?php if (!empty($settings['video_url'])): ?>
           <div style="margin-top:var(--space-4);">
-            <label style="display:flex;align-items:center;gap:var(--space-2);cursor:pointer;font-size:.85rem;color:#dc2626;">
+            <label style="display:flex;align-items:center;gap:var(--space-2);cursor:pointer;font-size:.85rem;color:var(--danger);">
               <input type="checkbox" name="clear_video" value="1"> Remove current video (show image only)
             </label>
           </div>

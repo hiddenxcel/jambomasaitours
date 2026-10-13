@@ -14,7 +14,7 @@ $_navItems = [
     'destinations' => ['url'=>url('destinations'),      'desk'=>'Destinations','mob'=>'Destinations',   'icon'=>'fa-map-marker-alt'],
     'gallery'      => ['url'=>url('gallery'),           'desk'=>'Gallery',    'mob'=>'Gallery',          'icon'=>'fa-images'],
     'blog'         => ['url'=>url('blog'),              'desk'=>'Blog',       'mob'=>'Blog',             'icon'=>'fa-newspaper'],
-    'about'        => ['url'=>url('about'),             'desk'=>'About Us',   'mob'=>'About Us',         'icon'=>'fa-info-circle'],
+    'about'        => ['url'=>url('about-us'),             'desk'=>'About Us',   'mob'=>'About Us',         'icon'=>'fa-info-circle'],
     'faq'          => ['url'=>url('faq'),               'desk'=>'FAQ',        'mob'=>'Safari FAQ',       'icon'=>'fa-question-circle'],
     'contact'      => ['url'=>url('contact'),           'desk'=>'Contact',    'mob'=>'Contact',          'icon'=>'fa-envelope'],
 ];
@@ -68,6 +68,8 @@ try {
   <link rel="manifest" href="<?= e(SITE_URL) ?>/manifest.json">
   <?php
   $_gv = getSetting('google_site_verification');
+  /* Ikiwa admin alibandika <meta ...> nzima, chukua code (content="...") tu */
+  if ($_gv && preg_match('/content\s*=\s*["\']([^"\']+)["\']/i', $_gv, $_gvm)) { $_gv = $_gvm[1]; }
   if ($_gv): ?><meta name="google-site-verification" content="<?= e($_gv) ?>"><?php endif; ?>
   <?php require __DIR__ . '/google-tags.php'; /* Google Ads + GA4 */ ?>
   <!-- Resource hints for faster CDN loading -->

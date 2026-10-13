@@ -39,7 +39,7 @@ $navItems = [
     'destinations' => ['url'=>url('destinations'),      'desk'=>'Destinations','mob'=>'Destinations',     'icon'=>'fa-map-marker-alt'],
     'gallery'      => ['url'=>url('gallery'),           'desk'=>'Gallery',     'mob'=>'Gallery',          'icon'=>'fa-images'],
     'blog'         => ['url'=>url('blog'),              'desk'=>'Blog',        'mob'=>'Blog',             'icon'=>'fa-newspaper'],
-    'about'        => ['url'=>url('about'),             'desk'=>'About Us',    'mob'=>'About Us',         'icon'=>'fa-info-circle'],
+    'about'        => ['url'=>url('about-us'),             'desk'=>'About Us',    'mob'=>'About Us',         'icon'=>'fa-info-circle'],
     'contact'      => ['url'=>url('contact'),           'desk'=>'Contact',     'mob'=>'Contact',          'icon'=>'fa-envelope'],
 ];
 
@@ -666,6 +666,7 @@ function cardBadge(array $tour, int $idx): ?array {
       </div>
     </div>
   </div>
+  <?= guidemeetFooterBadge() ?>
 </footer>
 
 <?php require_once 'includes/booking-modal.php'; ?>

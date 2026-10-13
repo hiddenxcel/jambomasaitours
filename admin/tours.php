@@ -287,7 +287,7 @@ $tourTypes    = [
 ];
 
 /* Day colour helper */
-function dayClr(int $n):array{$c=[['#10b981','rgba(16,185,129,.15)'],['#f59e0b','rgba(245,158,11,.15)'],['#3b82f6','rgba(59,130,246,.15)'],['#8b5cf6','rgba(139,92,246,.15)'],['#f97316','rgba(249,115,22,.15)']];return $c[($n-1)%count($c)];}
+function dayClr(int $n):array{$c=[['#c17a3a','rgba(193,122,58,.15)'],['#f59e0b','rgba(245,158,11,.15)'],['#3b82f6','rgba(59,130,246,.15)'],['#8b5cf6','rgba(139,92,246,.15)'],['#f97316','rgba(249,115,22,.15)']];return $c[($n-1)%count($c)];}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -304,32 +304,55 @@ function dayClr(int $n):array{$c=[['#10b981','rgba(16,185,129,.15)'],['#f59e0b',
   <?php include 'includes/admin_sidebar.php'; ?>
   <main class="admin-main">
 
-    <!-- Page Header -->
-    <div class="admin-header">
-      <div>
-        <h1 style="font-family:'Nanum Myeongjo',serif;font-size:1.4rem;color:#fff;font-weight:700">
-          <?= isset($_GET['edit']) ? ($editing ? 'Edit: '.e($editing['name']) : 'Add New Tour') : 'Safari Tours' ?>
-        </h1>
-        <p style="color:rgba(255,255,255,.4);font-size:.78rem;font-family:'Montserrat',sans-serif;margin-top:.1rem">
-          <?= isset($_GET['edit']) ? ($editing ? 'Manage tour details, itinerary and photos in one place' : 'Fill in tour details below') : count($tours).' tours in database' ?>
-        </p>
-      </div>
-      <div style="display:flex;gap:.5rem;flex-wrap:wrap">
-        <?php if (isset($_GET['edit']) && $editing): ?>
-        <a href="<?= url('tour-detail.php?slug='.e($editing['slug'])) ?>" target="_blank" class="btn btn--outline btn--sm" style="display:inline-flex;align-items:center;gap:.35rem">
-          <i class="fas fa-eye" style="font-size:.6rem"></i> Preview
-        </a>
-        <a href="tours.php" class="btn btn--outline btn--sm" style="display:inline-flex;align-items:center;gap:.35rem">
-          <i class="fas fa-arrow-left" style="font-size:.6rem"></i> All Tours
-        </a>
-        <?php else: ?>
-        <a href="tours.php?edit=0" class="btn btn--primary btn--sm" style="display:inline-flex;align-items:center;gap:.35rem">
-          <i class="fas fa-plus" style="font-size:.6rem"></i> Add New Tour
-        </a>
-        <?php endif; ?>
-      </div>
-    </div>
-
+    <?php
+    $isEdit = isset($_GET['edit']);
+    if ($isEdit) {
+        adm_pagehead($editing ? 'Edit: ' . $editing['name'] : 'Add a new tour',
+            $editing ? 'Everything about this tour in one place: details, itinerary, photos, group prices and add-ons.' : 'Fill in the details below, then press Save. You can add the itinerary and photos after the first save.', [
+            'icon' => 'fa-compass',
+            'actions' => $editing ? [
+                ['label' => 'Preview', 'href' => url('tour/' . $editing['slug']), 'icon' => 'fa-eye', 'attrs' => 'target="_blank" rel="noopener"'],
+                ['label' => 'All tours', 'href' => 'tours.php', 'icon' => 'fa-arrow-left'],
+            ] : [['label' => 'All tours', 'href' => 'tours.php', 'icon' => 'fa-arrow-left']],
+            'help' => [
+                'key' => 'tour-edit', 'title' => 'How to add or edit a tour',
+                'steps' => [
+                    '<strong>Tour Details tab:</strong> fill in the name, destination, type, <strong>USD price</strong>, duration, description and cover image, then press <strong>Save</strong>.',
+                    '<strong>Itinerary tab:</strong> add one entry per day (title, route, meals, accommodation). This builds the day-by-day section and the PDF itinerary.',
+                    '<strong>Photos tab:</strong> add 4 or more extra photos for the tour page gallery.',
+                    '<strong>Group Pricing tab</strong> (optional): discounts for bigger groups, for example 4+ people. <strong>Add-ons tab</strong> (optional): extras customers can add, such as a balloon flight.',
+                    'Press <strong>Preview</strong> to see the live tour page in a new tab.',
+                ],
+                'tips' => [
+                    '<strong>Price is in USD.</strong> Type only the number (for example 2850), with no $ sign. Visitors can view other currencies, but USD is the real price.',
+                    '<strong>Name:</strong> start with the days, for example "6-Day Serengeti Migration Safari". Google shows this name.',
+                    '<strong>Description:</strong> the first 150 characters appear in Google results, so put the most appealing sentence first.',
+                    '<strong>Duration</strong> must follow the format "7 Days / 6 Nights". The website reads the first number as the number of days.',
+                    '<strong>Slug</strong> is the web address. Changing the slug of a live tour breaks old links and lowers your Google ranking.',
+                ],
+            ],
+        ]);
+    } else {
+        adm_pagehead('Safari tours', count($tours) . ' tours online. Click a tour to edit it.', [
+            'icon' => 'fa-compass',
+            'actions' => [['label' => 'Add new tour', 'href' => 'tours.php?edit=0', 'icon' => 'fa-plus', 'kind' => 'primary']],
+            'help' => [
+                'key' => 'tours-list', 'title' => 'How this page works',
+                'steps' => [
+                    '<strong>Add a tour:</strong> press <em>Add new tour</em>, fill in the form and Save.',
+                    '<strong>Edit a tour:</strong> use the pencil icon in the list. Itinerary, photos, group prices and add-ons are tabs inside the editor.',
+                    '<strong>Check the result:</strong> the eye icon opens the tour on the live website.',
+                    '<strong>Delete</strong> removes the tour permanently and cannot be undone. Use it only for mistakes or tours you no longer sell.',
+                ],
+                'tips' => [
+                    'Featured tours appear first on the homepage and in the Safaris menu.',
+                    'Each tour needs a unique name. Avoid copying a tour with the same name, because two similar pages compete with each other on Google.',
+                    'Great Migration tours also appear on the Migration page automatically when their type is "Great Migration Safari".',
+                ],
+            ],
+        ]);
+    }
+    ?>
     <!-- Message -->
     <?php if ($msg): ?>
     <div class="alert <?= str_contains($msg,'error')||str_contains($msg,'Error') ? 'alert-error' : 'alert-success' ?>" style="margin-bottom:1.25rem">
@@ -356,7 +379,7 @@ function dayClr(int $n):array{$c=[['#10b981','rgba(16,185,129,.15)'],['#f59e0b',
         foreach ($tabs as $tabKey => [$tabIcon,$tabLabel,$tabEnabled]): ?>
         <?php if ($tabEnabled): ?>
         <a href="tours.php?edit=<?= $editId ?>&tab=<?= $tabKey ?>"
-           style="display:inline-flex;align-items:center;gap:.45rem;padding:.85rem .9rem;font-family:'Montserrat',sans-serif;font-size:.72rem;font-weight:600;text-decoration:none;border-bottom:2px solid <?= $activeTab===$tabKey?'#10b981':'transparent' ?>;color:<?= $activeTab===$tabKey?'#10b981':'rgba(255,255,255,.45)' ?>;white-space:nowrap;transition:all .2s;margin-bottom:-1px">
+           style="display:inline-flex;align-items:center;gap:.45rem;padding:.85rem .9rem;font-family:'Montserrat',sans-serif;font-size:.72rem;font-weight:600;text-decoration:none;border-bottom:2px solid <?= $activeTab===$tabKey?'#c17a3a':'transparent' ?>;color:<?= $activeTab===$tabKey?'#c17a3a':'rgba(255,255,255,.45)' ?>;white-space:nowrap;transition:all .2s;margin-bottom:-1px">
           <i class="fas <?= $tabIcon ?>" style="font-size:.68rem"></i><?= $tabLabel ?>
         </a>
         <?php else: ?>
@@ -393,11 +416,13 @@ function dayClr(int $n):array{$c=[['#10b981','rgba(16,185,129,.15)'],['#f59e0b',
               <label class="f-label">Tour Name <span>*</span></label>
               <input type="text" class="f-input" name="name" id="tour-name" required
                      value="<?= e($editing['name'] ?? '') ?>" placeholder="Serengeti Great Migration Safari">
+              <div class="f-hint">Start with the days, for example "6-Day Serengeti Migration Safari". Keep it under about 55 characters.</div>
             </div>
             <div class="f-group">
               <label class="f-label">Slug (URL)</label>
               <input type="text" class="f-input" name="slug" id="tour-slug"
                      value="<?= e($editing['slug'] ?? '') ?>" placeholder="auto-generated from name">
+              <div class="f-hint">The web address, for example <code>6-day-serengeti-migration-safari</code>. Leave empty to create it automatically. Do not change it on a live tour, and it must be different from every other tour.</div>
             </div>
             <div class="f-group">
               <label class="f-label">Destination <span>*</span></label>
@@ -421,11 +446,13 @@ function dayClr(int $n):array{$c=[['#10b981','rgba(16,185,129,.15)'],['#f59e0b',
               <label class="f-label">Price (USD) <span>*</span></label>
               <input type="number" class="f-input" name="price" min="1" step="0.01"
                      value="<?= e($editing['price'] ?? '') ?>" placeholder="2500.00">
+              <div class="f-hint">Price per person in <strong>US dollars</strong>. Numbers only, no $ sign. This is the "from" price shown on the website.</div>
             </div>
             <div class="f-group">
               <label class="f-label">Duration <span>*</span></label>
               <input type="text" class="f-input" name="duration"
                      value="<?= e($editing['duration'] ?? '') ?>" placeholder="7 Days / 6 Nights">
+              <div class="f-hint">Use the format "7 Days / 6 Nights". The first number is used as the number of days.</div>
             </div>
             <div class="f-group">
               <label class="f-label">Max Travelers</label>
@@ -436,6 +463,7 @@ function dayClr(int $n):array{$c=[['#10b981','rgba(16,185,129,.15)'],['#f59e0b',
               <label class="f-label">Rating (0–5)</label>
               <input type="number" class="f-input" name="rating" min="0" max="5" step="0.1"
                      value="<?= e($editing['rating'] ?? '4.8') ?>">
+              <div class="f-hint">The star rating shown on the tour card. Keep it honest and consistent with your real reviews.</div>
             </div>
           </div>
 
@@ -443,6 +471,7 @@ function dayClr(int $n):array{$c=[['#10b981','rgba(16,185,129,.15)'],['#f59e0b',
             <label class="f-label">Description <span>*</span></label>
             <textarea class="f-textarea" name="description" rows="4"
                       placeholder="Full tour description..."><?= e($editing['description'] ?? '') ?></textarea>
+            <div class="f-hint">The first 150 characters are shown on Google, so open with the strongest sentence. Describe what the guest will see and do.</div>
           </div>
 
           <div class="f-group">
@@ -454,13 +483,13 @@ function dayClr(int $n):array{$c=[['#10b981','rgba(16,185,129,.15)'],['#f59e0b',
           <!-- What's Included / Not Included -->
           <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius-lg);padding:1.1rem;margin-bottom:1.1rem">
             <h4 style="font-family:'Montserrat',sans-serif;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.4);margin-bottom:.9rem;display:flex;align-items:center;gap:.5rem">
-              <i class="fas fa-list-check" style="color:#10b981;font-size:.72rem"></i>
+              <i class="fas fa-list-check" style="color:#c17a3a;font-size:.72rem"></i>
               What's Included / Not Included
             </h4>
             <div class="f-grid-2">
               <div class="f-group" style="margin-bottom:0">
                 <label class="f-label" style="display:flex;align-items:center;gap:.4rem">
-                  <i class="fas fa-check-circle" style="color:#34d399;font-size:.7rem"></i>
+                  <i class="fas fa-check-circle" style="color:#e0a46a;font-size:.7rem"></i>
                   What's Included <span class="f-hint" style="text-transform:none;letter-spacing:0">(one per line)</span>
                 </label>
                 <textarea class="f-textarea" name="included" rows="7"
@@ -475,7 +504,7 @@ function dayClr(int $n):array{$c=[['#10b981','rgba(16,185,129,.15)'],['#f59e0b',
                           placeholder="International flights&#10;Visa fees&#10;Travel insurance&#10;Personal expenses&#10;Gratuities&#10;Alcoholic beverages"><?= e(str_replace('|', "\n", $editing['not_included'] ?? "International flights\nVisa fees\nTravel insurance\nPersonal expenses\nGratuities\nAlcoholic beverages")) ?></textarea>
               </div>
             </div>
-            <div class="f-hint" style="margin-top:.5rem"><i class="fas fa-info-circle" style="color:rgba(16,185,129,.5);margin-right:.3rem"></i>These appear on the tour detail page under "What's Included"</div>
+            <div class="f-hint" style="margin-top:.5rem"><i class="fas fa-info-circle" style="color:rgba(193,122,58,.5);margin-right:.3rem"></i>These appear on the tour detail page under "What's Included"</div>
           </div>
 
           <!-- Image section -->
@@ -485,7 +514,7 @@ function dayClr(int $n):array{$c=[['#10b981','rgba(16,185,129,.15)'],['#f59e0b',
               <div>
                 <label class="f-label" style="font-size:.58rem">Upload file</label>
                 <input type="file" class="f-input" name="image_file" accept="image/jpeg,image/png,image/webp" id="img-file-input">
-                <div class="f-hint">JPG/PNG/WebP — Max 8MB</div>
+                <div class="f-hint">JPG, PNG or WebP, up to 8 MB. Best size: 1600 x 1000 pixels or larger, landscape. This is the main picture on the tour card and in Google sharing.</div>
               </div>
               <div>
                 <label class="f-label" style="font-size:.58rem">Or paste image URL</label>
@@ -523,6 +552,7 @@ function dayClr(int $n):array{$c=[['#10b981','rgba(16,185,129,.15)'],['#f59e0b',
 
         <!-- -- TAB: ITINERARY -- -->
         <?php elseif ($activeTab === 'itinerary' && $editing): ?>
+        <?php adm_tip('<strong>How to add the itinerary:</strong> press <em>Add Day</em>, give the day a clear title (for example "Arusha to Tarangire National Park"), describe what happens, and fill in meals and accommodation. Days are numbered in order. Use <em>Edit</em> on any day to change it. The same itinerary appears on the tour page and in the PDF customers can download.', 'brand'); ?>
 
         <!-- Add / Edit Day Form -->
         <?php $showDayForm = isset($_GET['add_day']) || $editingDay; ?>
@@ -540,9 +570,9 @@ function dayClr(int $n):array{$c=[['#10b981','rgba(16,185,129,.15)'],['#f59e0b',
         </div>
 
         <?php if ($showDayForm): ?>
-        <div style="background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.2);border-radius:var(--radius-lg);padding:1.25rem;margin-bottom:1.25rem">
+        <div style="background:rgba(193,122,58,.06);border:1px solid rgba(193,122,58,.2);border-radius:var(--radius-lg);padding:1.25rem;margin-bottom:1.25rem">
           <h4 style="font-family:'Nanum Myeongjo',serif;font-size:.95rem;color:#fff;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem">
-            <i class="fas <?= $editingDay ? 'fa-pen' : 'fa-plus' ?>" style="color:#10b981;font-size:.78rem"></i>
+            <i class="fas <?= $editingDay ? 'fa-pen' : 'fa-plus' ?>" style="color:#c17a3a;font-size:.78rem"></i>
             <?= $editingDay ? 'Edit Day '.$editingDay['day_number'] : 'Add Day '.$nextDay ?>
           </h4>
           <form method="POST" enctype="multipart/form-data">
@@ -654,7 +684,7 @@ function dayClr(int $n):array{$c=[['#10b981','rgba(16,185,129,.15)'],['#f59e0b',
             $hls = array_filter(explode('|',$day['highlights']??''));
             $isLast = $idx === count($itineraryDays)-1;
           ?>
-          <div style="background:#1f2333;border:1px solid rgba(255,255,255,.08);border-radius:var(--radius-lg);padding:1rem 1.1rem;position:relative;transition:border-color .2s" onmouseover="this.style.borderColor='rgba(16,185,129,.2)'" onmouseout="this.style.borderColor='rgba(255,255,255,.08)'">
+          <div style="background:#1f2333;border:1px solid rgba(255,255,255,.08);border-radius:var(--radius-lg);padding:1rem 1.1rem;position:relative;transition:border-color .2s" onmouseover="this.style.borderColor='rgba(193,122,58,.2)'" onmouseout="this.style.borderColor='rgba(255,255,255,.08)'">
             <div style="display:flex;align-items:flex-start;gap:.85rem">
               <!-- Day badge -->
               <div style="width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.78rem;flex-shrink:0;background:<?= $clrBg ?>;color:<?= $clr ?>;border:1.5px solid <?= $clr ?>35">
@@ -667,7 +697,7 @@ function dayClr(int $n):array{$c=[['#10b981','rgba(16,185,129,.15)'],['#f59e0b',
                   <?php if($day['departure_location']): ?><span style="font-family:'Montserrat',sans-serif;font-size:.62rem;color:rgba(255,255,255,.4);background:rgba(255,255,255,.06);padding:.18rem .55rem;border-radius:4px"><?= e($day['departure_location']) ?></span><span style="color:rgba(255,255,255,.2);font-size:.7rem">?</span><?php endif; ?>
                   <?php if($day['distance']): ?><span style="font-family:'Montserrat',sans-serif;font-size:.6rem;color:rgba(255,255,255,.3)"><?= e($day['distance']) ?></span><?php endif; ?>
                   <?php if($day['travel_time']): ?><span style="font-family:'Montserrat',sans-serif;font-size:.6rem;color:rgba(255,255,255,.3)">— <?= e($day['travel_time']) ?></span><?php endif; ?>
-                  <?php if($day['arrival_location']): ?><span style="font-size:.7rem;color:rgba(255,255,255,.2)">?</span><span style="font-family:'Montserrat',sans-serif;font-size:.62rem;color:<?= $clr ?>;background:<?= $clrBg ?>;padding:.18rem .55rem;border-radius:4px"><?= e($day['arrival_location']) ?></span><?php endif; ?>
+                  <?php if($day['arrival_location']): ?><span style="font-size:.7rem;color:rgba(255,255,255,.3)"><i class="fas fa-arrow-right" style="font-size:.6rem"></i></span><span style="font-family:'Montserrat',sans-serif;font-size:.62rem;color:<?= $clr ?>;background:<?= $clrBg ?>;padding:.18rem .55rem;border-radius:4px"><?= e($day['arrival_location']) ?></span><?php endif; ?>
                 </div>
                 <?php endif; ?>
                 <h4 style="font-family:'Nanum Myeongjo',serif;color:#fff;font-size:.95rem;font-weight:700;margin-bottom:.3rem"><?= e($day['title']) ?></h4>
@@ -686,7 +716,7 @@ function dayClr(int $n):array{$c=[['#10b981','rgba(16,185,129,.15)'],['#f59e0b',
                 <?php if(!empty($hls)): ?>
                 <div style="display:flex;flex-wrap:wrap;gap:.2rem">
                   <?php foreach(array_slice($hls,0,4) as $hl): ?>
-                  <span style="font-family:'Montserrat',sans-serif;font-size:.58rem;padding:.12rem .5rem;border-radius:999px;background:rgba(16,185,129,.08);color:#34d399"><?= e(trim($hl)) ?></span>
+                  <span style="font-family:'Montserrat',sans-serif;font-size:.58rem;padding:.12rem .5rem;border-radius:999px;background:rgba(193,122,58,.08);color:#e0a46a"><?= e(trim($hl)) ?></span>
                   <?php endforeach; ?>
                 </div>
                 <?php endif; ?>
@@ -727,8 +757,8 @@ function dayClr(int $n):array{$c=[['#10b981','rgba(16,185,129,.15)'],['#f59e0b',
           <?php endforeach; ?>
         </div>
         <!-- Add next day footer -->
-        <div style="margin-top:1rem;padding:.85rem;background:rgba(255,255,255,.02);border:1.5px dashed rgba(16,185,129,.18);border-radius:var(--radius-lg);text-align:center">
-          <a href="tours.php?edit=<?= $editId ?>&tab=itinerary&add_day=1" style="display:inline-flex;align-items:center;gap:.4rem;font-family:'Montserrat',sans-serif;font-size:.72rem;font-weight:600;color:#10b981;text-decoration:none">
+        <div style="margin-top:1rem;padding:.85rem;background:rgba(255,255,255,.02);border:1.5px dashed rgba(193,122,58,.18);border-radius:var(--radius-lg);text-align:center">
+          <a href="tours.php?edit=<?= $editId ?>&tab=itinerary&add_day=1" style="display:inline-flex;align-items:center;gap:.4rem;font-family:'Montserrat',sans-serif;font-size:.72rem;font-weight:600;color:#c17a3a;text-decoration:none">
             <i class="fas fa-plus" style="font-size:.6rem"></i> Add Day <?= $nextDay ?>
           </a>
         </div>
@@ -737,6 +767,7 @@ function dayClr(int $n):array{$c=[['#10b981','rgba(16,185,129,.15)'],['#f59e0b',
 
         <!-- -- TAB: PHOTOS -- -->
         <?php elseif ($activeTab === 'photos' && $editing): ?>
+        <?php adm_tip('<strong>Photo tips:</strong> use sharp, landscape photos of your own trips (at least 1400 pixels wide). Aim for 4 or more per tour: wildlife, landscape, camp or lodge, and people. Real photos from your guests build more trust than stock images.', 'brand'); ?>
 
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.1rem;flex-wrap:wrap;gap:.65rem">
           <h3 style="font-family:'Nanum Myeongjo',serif;font-size:1rem;color:#fff;font-weight:700">
@@ -782,7 +813,7 @@ function dayClr(int $n):array{$c=[['#10b981','rgba(16,185,129,.15)'],['#f59e0b',
             <img src="<?= e($p['image']) ?>" alt="" style="width:100%;height:110px;object-fit:cover;display:block">
             <div style="padding:.5rem .65rem">
               <div style="font-size:.62rem;color:rgba(255,255,255,.28);font-family:'Montserrat',sans-serif;margin-bottom:.3rem">
-                Photo #<?= $i+1 ?><?= $i===0?' — <span style="color:#10b981">Cover</span>':'' ?>
+                Photo #<?= $i+1 ?><?= $i===0?' — <span style="color:#c17a3a">Cover</span>':'' ?>
               </div>
               <form method="POST" style="display:inline">
                 <input type="hidden" name="<?= CSRF_TOKEN_NAME ?>" value="<?= e($csrfToken) ?>">
@@ -798,7 +829,7 @@ function dayClr(int $n):array{$c=[['#10b981','rgba(16,185,129,.15)'],['#f59e0b',
           <?php endforeach; ?>
         </div>
         <div style="margin-top:.75rem;font-family:'Montserrat',sans-serif;font-size:.68rem;color:rgba(255,255,255,.25)">
-          <i class="fas fa-info-circle" style="color:rgba(16,185,129,.5);margin-right:.3rem"></i>
+          <i class="fas fa-info-circle" style="color:rgba(193,122,58,.5);margin-right:.3rem"></i>
           First photo is used as the hero cover. Photos appear in the mosaic gallery on the tour detail page.
         </div>
         <?php endif; ?>
@@ -859,7 +890,7 @@ function dayClr(int $n):array{$c=[['#10b981','rgba(16,185,129,.15)'],['#f59e0b',
               <span style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:.8rem;color:#fff">
                 <?= (int)$tier['min_people'] ?><?= $tier['max_people'] ? '–'.(int)$tier['max_people'] : '+' ?> people
               </span>
-              <span style="display:inline-flex;align-items:center;gap:.3rem;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.75rem;color:#34d399;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.2);padding:.25rem .7rem;border-radius:999px">
+              <span style="display:inline-flex;align-items:center;gap:.3rem;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.75rem;color:#e0a46a;background:rgba(193,122,58,.1);border:1px solid rgba(193,122,58,.2);padding:.25rem .7rem;border-radius:999px">
                 <i class="fas fa-percent" style="font-size:.55rem"></i><?= rtrim(rtrim(number_format((float)$tier['discount_percent'],2),'0'),'.') ?>% off
               </span>
             </div>
@@ -939,7 +970,7 @@ function dayClr(int $n):array{$c=[['#10b981','rgba(16,185,129,.15)'],['#f59e0b',
             <div style="flex:1;min-width:0">
               <div style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:.8rem;color:#fff">
                 <?= e($addon['name']) ?>
-                <span style="font-weight:400;color:#34d399;margin-left:.5rem"><?= formatPrice((float)$addon['price']) ?> <?= $addon['price_unit']==='per_person'?'pp':'flat' ?></span>
+                <span style="font-weight:400;color:#e0a46a;margin-left:.5rem"><?= formatPrice((float)$addon['price']) ?> <?= $addon['price_unit']==='per_person'?'pp':'flat' ?></span>
               </div>
               <?php if ($addon['description']): ?>
               <div style="font-size:.72rem;color:rgba(255,255,255,.4);margin-top:.2rem"><?= e($addon['description']) ?></div>
@@ -1006,16 +1037,16 @@ function dayClr(int $n):array{$c=[['#10b981','rgba(16,185,129,.15)'],['#f59e0b',
                 </div>
               </td>
               <td style="font-size:.8rem"><?= e($t['destination']) ?></td>
-              <td><span class="badge" style="background:rgba(16,185,129,.1);color:#34d399"><?= e($t['tour_type']) ?></span></td>
+              <td><span class="badge" style="background:rgba(193,122,58,.1);color:#e0a46a"><?= e($t['tour_type']) ?></span></td>
               <td style="font-size:.8rem"><?= e($t['duration']) ?></td>
-              <td style="font-weight:600;color:#10b981"><?= formatPrice($t['price']) ?></td>
+              <td style="font-weight:600;color:#c17a3a"><?= formatPrice($t['price']) ?></td>
               <td>
                 <form method="POST" style="display:inline">
                   <input type="hidden" name="<?= CSRF_TOKEN_NAME ?>" value="<?= e($csrfToken) ?>">
                   <input type="hidden" name="action" value="toggle_featured">
                   <input type="hidden" name="id" value="<?= $t['id'] ?>">
                   <button type="submit" class="btn btn--sm" style="font-size:.62rem;padding:.28rem .65rem;background:<?= $t['featured']?'rgba(251,191,36,.15)':'rgba(255,255,255,.06)' ?>;color:<?= $t['featured']?'#fbbf24':'rgba(255,255,255,.4)' ?>;border:1px solid <?= $t['featured']?'rgba(251,191,36,.25)':'rgba(255,255,255,.1)' ?>">
-                    <?= $t['featured'] ? '? Featured' : '? Feature' ?>
+                    <i class="fas fa-star" style="font-size:.6rem"></i> <?= $t['featured'] ? 'Featured' : 'Feature' ?>
                   </button>
                 </form>
               </td>
@@ -1023,7 +1054,7 @@ function dayClr(int $n):array{$c=[['#10b981','rgba(16,185,129,.15)'],['#f59e0b',
                 <a href="tours.php?edit=<?= $t['id'] ?>&tab=details" class="btn btn--outline btn--sm" style="font-size:.62rem;padding:.28rem .6rem" title="Edit tour details">
                   <i class="fas fa-pen"></i>
                 </a>
-                <a href="tours.php?edit=<?= $t['id'] ?>&tab=itinerary" class="btn btn--sm" style="font-size:.62rem;padding:.28rem .6rem;background:rgba(16,185,129,.1);color:#10b981;border:1px solid rgba(16,185,129,.2)" title="Manage itinerary">
+                <a href="tours.php?edit=<?= $t['id'] ?>&tab=itinerary" class="btn btn--sm" style="font-size:.62rem;padding:.28rem .6rem;background:rgba(193,122,58,.1);color:#c17a3a;border:1px solid rgba(193,122,58,.2)" title="Manage itinerary">
                   <i class="fas fa-route"></i>
                 </a>
                 <a href="tours.php?edit=<?= $t['id'] ?>&tab=photos" class="btn btn--sm" style="font-size:.62rem;padding:.28rem .6rem;background:rgba(96,165,250,.1);color:#60a5fa;border:1px solid rgba(96,165,250,.2)" title="Manage photos">

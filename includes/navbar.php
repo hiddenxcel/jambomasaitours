@@ -3,7 +3,7 @@ $navItems = [
   'home'         => ['url' => url(),                   'label' => 'Home'],
   'tours'        => ['url' => url('tours'),        'label' => 'Safari Tours'],
   'destinations' => ['url' => url('destinations'), 'label' => 'Destinations'],
-  'about'        => ['url' => url('about'),        'label' => 'About Us'],
+  'about'        => ['url' => url('about-us'),        'label' => 'About Us'],
   'gallery'      => ['url' => url('gallery'),      'label' => 'Gallery'],
   'blog'         => ['url' => url('blog'),         'label' => 'Blog'],
   'contact'      => ['url' => url('contact'),      'label' => 'Contact'],

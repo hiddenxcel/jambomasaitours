@@ -23,7 +23,7 @@ $_pNavItems = [
     'migration'    => ['url'=>url('migration'),          'desk'=>'Migration',   'mob'=>'Great Migration', 'icon'=>'fa-horse'],
     'destinations' => ['url'=>url('destinations'),       'desk'=>'Destinations','mob'=>'Destinations',     'icon'=>'fa-map-marker-alt'],
     'blog'         => ['url'=>url('blog'),               'desk'=>'Blog',        'mob'=>'Blog',             'icon'=>'fa-newspaper'],
-    'about'        => ['url'=>url('about'),               'desk'=>'About Us',    'mob'=>'About Us',         'icon'=>'fa-users'],
+    'about'        => ['url'=>url('about-us'),               'desk'=>'About Us',    'mob'=>'About Us',         'icon'=>'fa-users'],
     'contact'      => ['url'=>url('contact'),            'desk'=>'Contact',     'mob'=>'Contact',          'icon'=>'fa-envelope'],
     'more'         => ['url'=>'#',                       'desk'=>'More',        'mob'=>'More',             'icon'=>'fa-ellipsis-h',    'mega'=>'more'],
 ];
@@ -272,7 +272,7 @@ $_name2      = $_nameParts[1] ?? 'Masai';
             <div style="padding:.5rem">
               <?php foreach ([
                 ['fa-mountain',      'Mountain Trekking','Kilimanjaro & beyond',    'mountain-trekking','#c17a3a','Machame, Lemosho, Marangu routes'],
-                ['fa-users',         'About Us',  'Our story, team & mission',    'about',  '#a05e22','Meet the team behind your safari'],
+                ['fa-users',         'About Us',  'Our story, team & mission',    'about-us',  '#a05e22','Meet the team behind your safari'],
                 ['fa-star',          'Reviews',   'Google & TripAdvisor ratings', 'reviews','#34e0a1','See what our travellers say'],
                 ['fa-question-circle','FAQ',       'Safari questions answered',     'faq',    '#fbbf24','Visa, packing, best time & more'],
                 ['fa-newspaper',     'Blog',      'Tips, guides & wildlife news',  'blog',   '#f87171','Expert safari advice & stories'],
@@ -441,7 +441,7 @@ $_name2      = $_nameParts[1] ?? 'Masai';
         ['fa-images',        url('gallery'),             'Gallery',  'rgba(249,115,22,.15)', '#f97316'],
         ['fa-star',          url('reviews'),             'Reviews',  'rgba(52,224,161,.15)', '#34e0a1'],
         ['fa-question-circle',url('faq'),                'Safari FAQ','rgba(251,191,36,.15)','#fbbf24'],
-        ['fa-info-circle',   url('about'),               'About Us', 'rgba(160,94,34,.15)', '#a05e22'],
+        ['fa-info-circle',   url('about-us'),               'About Us', 'rgba(160,94,34,.15)', '#a05e22'],
       ] as $ml): ?>
       <a href="<?= $ml[1] ?>" class="pmob-link" onclick="pnavCloseDrawer()">
         <span style="display:flex;align-items:center;gap:.7rem">

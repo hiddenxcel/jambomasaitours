@@ -194,7 +194,7 @@ while (count($editFaqs)       < 3) $editFaqs[]       = ['q'=>'','a'=>''];
   <link rel="stylesheet" href="<?= SITE_URL ?>/admin/assets/admin.css">
   <style>
     .dest-card{background:#1a1d27;border:1px solid rgba(255,255,255,.07);border-radius:14px;overflow:hidden;display:flex;align-items:stretch;transition:border-color .2s}
-    .dest-card:hover{border-color:rgba(16,185,129,.2)}
+    .dest-card:hover{border-color:rgba(193,122,58,.2)}
     .dest-img{width:110px;height:90px;object-fit:cover;flex-shrink:0}
     .dest-img-placeholder{width:110px;height:90px;flex-shrink:0;background:rgba(255,255,255,.04);display:flex;align-items:center;justify-content:center}
     .faq-row,.hl-row{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:.75rem;margin-bottom:.5rem}
@@ -205,33 +205,46 @@ while (count($editFaqs)       < 3) $editFaqs[]       = ['q'=>'','a'=>''];
   <?php include 'includes/admin_sidebar.php'; ?>
   <main class="admin-main">
 
-    <div class="admin-header">
-      <div>
-        <h1 style="font-family:'Nanum Myeongjo',serif;font-size:1.4rem;color:#fff;display:flex;align-items:center;gap:.5rem">
-          <i class="fas fa-map-marker-alt" style="color:#10b981"></i>
-          <?= isset($_GET['edit']) ? ($editing ? 'Edit: '.e($editing['title']) : 'New Destination') : 'Destinations Manager' ?>
-        </h1>
-        <p style="color:rgba(255,255,255,.4);font-size:.78rem;font-family:'Montserrat',sans-serif;margin-top:.15rem">
-          <?= isset($_GET['edit']) ? 'Fill in details — page goes live at /destination/'.(e($editing['slug']??'slug')) : count($destinations).' destinations' ?>
-        </p>
-      </div>
-      <div style="display:flex;gap:.5rem">
-        <?php if (isset($_GET['edit'])): ?>
-        <?php if ($editing): ?>
-        <a href="<?= url('destination/'.e($editing['slug'])) ?>" target="_blank" class="btn btn--outline btn--sm">
-          <i class="fas fa-eye" style="font-size:.6rem"></i> Preview
-        </a>
-        <?php endif; ?>
-        <a href="destinations-manager.php" class="btn btn--outline btn--sm">
-          <i class="fas fa-arrow-left" style="font-size:.6rem"></i> All
-        </a>
-        <?php else: ?>
-        <a href="destinations-manager.php?edit=0" class="btn btn--primary btn--sm">
-          <i class="fas fa-plus" style="font-size:.6rem"></i> Add Destination
-        </a>
-        <?php endif; ?>
-      </div>
-    </div>
+    <?php
+if (isset($_GET['edit'])) {
+  adm_pagehead($editing ? 'Edit: ' . $editing['title'] : 'New destination', 'This page goes live at /destination/' . e($editing['slug'] ?? 'your-slug') . '.', [
+    'icon' => 'fa-map-location-dot',
+    'actions' => array_merge($editing ? [['label' => 'Preview', 'href' => url('destination/' . $editing['slug']), 'icon' => 'fa-eye', 'attrs' => 'target="_blank" rel="noopener"']] : [], [['label' => 'All destinations', 'href' => 'destinations-manager.php', 'icon' => 'fa-arrow-left']]),
+    'help' => [
+      'key' => 'dest-edit', 'title' => 'How to fill a destination page',
+      'steps' => [
+        '<strong>Title and slug:</strong> the title is shown on the page; the slug is the web address (lowercase, with hyphens, for example <code>lake-manyara</code>).',
+        '<strong>Intro and full description:</strong> write what the place is, what visitors see and the best time to go. Short paragraphs read best.',
+        '<strong>Image:</strong> upload a wide landscape photo. It is the main banner.',
+        '<strong>Google fields:</strong> fill the page title and meta description (about 150 characters).',
+        'Tick <strong>Active</strong> to show the page on the website, then Save and use Preview.',
+      ],
+      'tips' => [
+        'The <strong>Sort order</strong> decides the order of destinations. The first six appear on the homepage.',
+        'Do not change the slug of a live page: old links would stop working.',
+        'Each destination should have its own unique text. Do not copy one description to several pages.',
+      ],
+    ],
+  ]);
+} else {
+  adm_pagehead('Destination pages', count($destinations) . ' destinations. Each one is a full page on the website.', [
+    'icon' => 'fa-map-location-dot',
+    'actions' => [['label' => 'Add destination', 'href' => 'destinations-manager.php?edit=0', 'icon' => 'fa-plus', 'kind' => 'primary']],
+    'help' => [
+      'key' => 'dest-list', 'title' => 'How this page works',
+      'steps' => [
+        '<strong>Add</strong> a destination, or <strong>edit</strong> one with the pencil icon.',
+        'Use the <strong>eye</strong> icon to open the live page.',
+        'Switch a destination <strong>off</strong> (Active) to hide it without deleting it.',
+      ],
+      'tips' => [
+        'Destination pages help people find you on Google, for example "Serengeti safari" or "Lake Manyara".',
+        'The first six destinations by sort order show on the homepage.',
+      ],
+    ],
+  ]);
+}
+?>
 
     <?php if ($msg): ?>
     <div class="alert alert-success" style="margin-bottom:1.25rem"><i class="fas fa-check-circle"></i> <?= e($msg) ?></div>
@@ -359,7 +372,7 @@ while (count($editFaqs)       < 3) $editFaqs[]       = ['q'=>'','a'=>''];
                 </div>
                 <?php endforeach; ?>
               </div>
-              <div class="f-hint"><i class="fas fa-info-circle" style="color:rgba(16,185,129,.5);margin-right:.3rem"></i>FA icons: fa-paw, fa-water, fa-mountain, fa-tree, fa-star, fa-camera, fa-fish...</div>
+              <div class="f-hint"><i class="fas fa-info-circle" style="color:rgba(193,122,58,.5);margin-right:.3rem"></i>FA icons: fa-paw, fa-water, fa-mountain, fa-tree, fa-star, fa-camera, fa-fish...</div>
             </div>
           </div>
 
@@ -441,10 +454,10 @@ while (count($editFaqs)       < 3) $editFaqs[]       = ['q'=>'','a'=>''];
                     <input type="checkbox" name="active" value="1" id="active-tog"
                            <?= ($editing['active'] ?? 1) ? 'checked' : '' ?>
                            style="opacity:0;width:0;height:0;position:absolute">
-                    <div id="act-slider" style="position:absolute;inset:0;border-radius:22px;background:<?= ($editing['active']??1)?'#10b981':'rgba(255,255,255,.12)' ?>;cursor:pointer;transition:background .3s"></div>
+                    <div id="act-slider" style="position:absolute;inset:0;border-radius:22px;background:<?= ($editing['active']??1)?'#c17a3a':'rgba(255,255,255,.12)' ?>;cursor:pointer;transition:background .3s"></div>
                     <div style="position:absolute;width:16px;height:16px;left:3px;bottom:3px;background:#fff;border-radius:50%;transition:transform .3s;<?= ($editing['active']??1)?'transform:translateX(18px)':'' ?>"></div>
                   </div>
-                  <span id="act-lbl" style="font-family:'Montserrat',sans-serif;font-size:.75rem;font-weight:600;color:<?= ($editing['active']??1)?'#10b981':'rgba(255,255,255,.4)' ?>"><?= ($editing['active']??1)?'Active':'Hidden' ?></span>
+                  <span id="act-lbl" style="font-family:'Montserrat',sans-serif;font-size:.75rem;font-weight:600;color:<?= ($editing['active']??1)?'#c17a3a':'rgba(255,255,255,.4)' ?>"><?= ($editing['active']??1)?'Active':'Hidden' ?></span>
                 </label>
               </div>
               <div class="f-group" style="margin-bottom:.75rem">
@@ -510,8 +523,8 @@ while (count($editFaqs)       < 3) $editFaqs[]       = ['q'=>'','a'=>''];
       $total  = count($destinations);
       $active = count(array_filter($destinations, fn($d) => $d['active']));
       foreach ([
-        ['fa-map-marker-alt','rgba(16,185,129,.15)','#10b981',$total,  'Total'],
-        ['fa-eye',           'rgba(52,211,153,.15)', '#34d399',$active, 'Active'],
+        ['fa-map-marker-alt','rgba(193,122,58,.15)','#c17a3a',$total,  'Total'],
+        ['fa-eye',           'rgba(224,164,106,.15)', '#e0a46a',$active, 'Active'],
         ['fa-eye-slash',     'rgba(245,158,11,.15)', '#fbbf24',$total-$active,'Hidden'],
       ] as $w): ?>
       <div class="adm-stat">
@@ -566,7 +579,7 @@ while (count($editFaqs)       < 3) $editFaqs[]       = ['q'=>'','a'=>''];
         <?php if (empty($destinations)): ?>
         <div style="text-align:center;padding:2.5rem;color:rgba(255,255,255,.25)">
           <i class="fas fa-map-marker-alt" style="font-size:2rem;display:block;margin-bottom:.65rem;color:rgba(255,255,255,.1)"></i>
-          No destinations yet. <a href="destinations-manager.php?edit=0" style="color:#10b981;text-decoration:none">Add your first →</a>
+          No destinations yet. <a href="destinations-manager.php?edit=0" style="color:#c17a3a;text-decoration:none">Add your first →</a>
         </div>
         <?php endif; ?>
       </div>
@@ -588,7 +601,7 @@ if(imgF)imgF.addEventListener('change',function(){if(this.files[0]){if(imgU)imgU
 if(imgU){var _t;imgU.addEventListener('input',function(){clearTimeout(_t);var v=this.value.trim();_t=setTimeout(function(){if(v){if(!imgP){imgP=document.createElement('img');imgP.id='img-prev';imgP.style='width:100%;height:130px;object-fit:cover;border-radius:10px;margin-bottom:.65rem';imgU.parentElement.insertAdjacentElement('beforebegin',imgP);}imgP.src=v;}},800);});}
 /* Toggle */
 var actTog=document.getElementById('active-tog'),actSlider=document.getElementById('act-slider'),actLbl=document.getElementById('act-lbl');
-if(actTog)actTog.addEventListener('change',function(){var th=document.querySelector('#act-slider+div');if(actSlider)actSlider.style.background=this.checked?'#10b981':'rgba(255,255,255,.12)';if(actLbl){actLbl.textContent=this.checked?'Active':'Hidden';actLbl.style.color=this.checked?'#10b981':'rgba(255,255,255,.4)';}if(th)th.style.transform=this.checked?'translateX(18px)':'';});
+if(actTog)actTog.addEventListener('change',function(){var th=document.querySelector('#act-slider+div');if(actSlider)actSlider.style.background=this.checked?'#c17a3a':'rgba(255,255,255,.12)';if(actLbl){actLbl.textContent=this.checked?'Active':'Hidden';actLbl.style.color=this.checked?'#c17a3a':'rgba(255,255,255,.4)';}if(th)th.style.transform=this.checked?'translateX(18px)':'';});
 /* Add highlight row */
 function addHighlight(){
   var wrap=document.getElementById('highlights-wrap');

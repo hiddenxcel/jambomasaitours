@@ -92,13 +92,26 @@ $csrfToken = generateCsrfToken();
 
   <!-- Main -->
   <main class="admin-main">
-    <div class="admin-header">
-      <div>
-        <h1 style="font-family:var(--font-heading);font-size:1.6rem;color:var(--color-brown);">Hero Slides</h1>
-        <p style="color:var(--text-muted);font-size:.9rem;">Manage homepage hero slideshow text and buttons</p>
-      </div>
-      <a href="<?= url() ?>" class="btn btn--outline btn--sm" target="_blank">View Site</a>
-    </div>
+    <?php
+adm_pagehead('Hero slides', 'The big text and buttons at the top of the homepage slideshow.', [
+  'icon' => 'fa-film',
+  'actions' => [['label' => 'View homepage', 'href' => url(), 'icon' => 'fa-arrow-up-right-from-square', 'attrs' => 'target="_blank" rel="noopener"']],
+  'help' => [
+    'key' => 'hero-slides', 'title' => 'How hero slides work',
+    'steps' => [
+      'Fill in the <strong>headline</strong> and a short <strong>subtitle</strong> on the right.',
+      'Add up to two <strong>buttons</strong>: the text customers see and the page they open (for example <code>tours</code> or <code>https://wa.me/...</code>).',
+      'Use <strong>Sort order</strong> to decide which slide comes first. Tick <strong>Active</strong> to show it.',
+      'Press Save, then open the homepage to check.',
+    ],
+    'tips' => [
+      'Keep headlines short: six words or fewer works best on phones.',
+      'Use 3 to 5 slides. Too many slows the page.',
+      'The background pictures and video come from <a href="hero-settings.php">Hero Video</a>.',
+    ],
+  ],
+]);
+?>
 
     <?php if ($msg): ?>
     <div class="alert alert--success" style="background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);color:#166534;padding:var(--space-4) var(--space-6);border-radius:var(--radius-md);margin-bottom:var(--space-6);">
@@ -106,7 +119,7 @@ $csrfToken = generateCsrfToken();
     </div>
     <?php endif; ?>
     <?php if ($errors): ?>
-    <div class="alert alert--error" style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);color:#991b1b;padding:var(--space-4) var(--space-6);border-radius:var(--radius-md);margin-bottom:var(--space-6);">
+    <div class="alert alert--error" style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);color:var(--danger);padding:var(--space-4) var(--space-6);border-radius:var(--radius-md);margin-bottom:var(--space-6);">
       <?php foreach ($errors as $err): ?><div>— <?= e($err) ?></div><?php endforeach; ?>
     </div>
     <?php endif; ?>
